@@ -1,16 +1,30 @@
 import React from "react";
 import styled from "styled-components";
 
-const Title = styled.h1`
-  font-size: 1.5em;
-  color: green;
+import Header from "./components/Header";
+import HabitDashboard from "./components/HabitDashboard";
+import "./App.css";
+
+const AppWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+`;
+
+const MainContent = styled.main`
+  display: flex;
+  flex: 1;
+  overflow: hidden;
 `;
 
 function App() {
   return (
-    <div className="App">
-      <Title>Sup</Title>
-    </div>
+    <AppWrapper>
+      <Header height="50px"></Header>
+      <MainContent>
+        <HabitDashboard></HabitDashboard>
+      </MainContent>
+    </AppWrapper>
   );
 }
 
