@@ -1,6 +1,8 @@
 import React from "react";
 import dayjs, { Dayjs } from "dayjs";
 
+type FormatDate = (date: Date, format: string) => string;
+
 export type DateContextProps = {
   date: Dayjs;
   day: number;
@@ -12,14 +14,7 @@ export type DateContextProps = {
     year: string;
     full: string;
   };
-  format: (date: Date, format: string) => string;
-};
-
-const formatDate: (date: Date, format: string) => string = (
-  date: Date,
-  format: string
-): string => {
-  return dayjs(date).format(format);
+  format: FormatDate;
 };
 
 const DateContext: React.Context<
@@ -58,6 +53,10 @@ export const useDate = () => {
     throw new Error("useDate must be used within a DateProvider");
   }
   return context;
+};
+
+const formatDate: FormatDate = (date: Date, format: string) => {
+  return dayjs(date).format(format);
 };
 
 export default DateContext;

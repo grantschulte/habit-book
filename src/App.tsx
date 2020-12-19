@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-
 import { DateProvider } from "./context/date-context";
 import Header from "./components/Header";
 import TodayView from "./components/TodayView";
