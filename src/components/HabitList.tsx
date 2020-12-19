@@ -6,12 +6,23 @@ const StyledHabitList = styled.div`
   margin: 1.5rem 0;
 `;
 
-const HabitList: React.FC<{ habits: Habit[] | [] }> = ({
+const HabitList: React.FC<{
+  habits: Habit[];
+  updateHabit: (habit: Habit) => void;
+}> = ({
   habits,
+  updateHabit,
 }: {
-  habits: Habit[] | [];
+  habits: Habit[];
+  updateHabit: (habit: Habit) => void;
 }) => {
-  return <StyledHabitList></StyledHabitList>;
+  return (
+    <StyledHabitList>
+      {habits.map((h) => {
+        return <div>{h.label}</div>;
+      })}
+    </StyledHabitList>
+  );
 };
 
 export default HabitList;

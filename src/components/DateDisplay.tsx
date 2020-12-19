@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { DateContextProps } from "../context/date-context";
+import { DateContextProps } from "../context/DateContext";
 
 type DateDisplayProps = {
   date: DateContextProps;

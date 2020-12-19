@@ -1,7 +1,8 @@
 import React from "react";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 
-import { DateProvider } from "./context/date-context";
+import { DateProvider } from "./context/DateContext";
+import { HabitProvider } from "./context/HabitContext";
 import theme from "./context/theme";
 import Header from "./components/Header";
 import TodayView from "./components/TodayView";
@@ -38,7 +39,9 @@ function App() {
         <DateProvider>
           <Header></Header>
           <MainContent>
-            <TodayView></TodayView>
+            <HabitProvider>
+              <TodayView></TodayView>
+            </HabitProvider>
           </MainContent>
         </DateProvider>
       </AppWrapper>

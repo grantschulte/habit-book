@@ -1,10 +1,10 @@
 import React from "react";
-import { useDate } from "../context/date-context";
+import { useDate } from "../context/DateContext";
 import styled from "styled-components";
 import DateDisplay from "./DateDisplay";
 import HabitList from "./HabitList";
 import { Container } from "./Container";
-import Habit from "../types/habit";
+import { useHabits } from "../context/HabitContext";
 
 const StyledTodayView = styled(Container)`
   display: flex;
@@ -15,12 +15,15 @@ const StyledTodayView = styled(Container)`
 
 const TodayView: React.FC = () => {
   const date = useDate();
-  const habits: Habit[] | [] = [];
+  const habits = useHabits();
 
   return (
     <StyledTodayView>
       <DateDisplay date={date}></DateDisplay>
-      <HabitList habits={habits}></HabitList>
+      <HabitList
+        habits={habits.data}
+        updateHabit={habits.updateHabit}
+      ></HabitList>
     </StyledTodayView>
   );
 };
