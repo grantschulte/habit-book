@@ -7,7 +7,7 @@ const StyledHeader = styled.header`
   display: flex;
   align-items: center;
   padding: 0 1rem;
-  height: 50px;
+  height: 60px;
   font-size: 1.5em;
 `;
 
@@ -21,7 +21,7 @@ const Header: React.FC = () => {
   return (
     <StyledHeader>
       <LogoText>ThreeHabits</LogoText>
-      <HeaderMenu>Menu</HeaderMenu>
+      <HeaderMenu></HeaderMenu>
     </StyledHeader>
   );
 };
