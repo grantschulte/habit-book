@@ -3,15 +3,11 @@ import styled from "styled-components";
 
 import HeaderMenu from "./HeaderMenu";
 
-interface HeaderProps {
-  height?: string;
-}
-
-const StyledHeader = styled.header<HeaderProps>`
+const StyledHeader = styled.header`
   display: flex;
   align-items: center;
-  padding: 1rem;
-  height: ${(props) => props.height || "80px"};
+  padding: 0 1rem;
+  height: 50px;
   font-size: 1.5em;
 `;
 
@@ -21,13 +17,13 @@ const LogoText = styled.span`
   color: var(--primary-color);
 `;
 
-function Header({ height }: HeaderProps): JSX.Element {
+const Header: React.FC = () => {
   return (
-    <StyledHeader height={height}>
+    <StyledHeader>
       <LogoText>HabitBook</LogoText>
       <HeaderMenu>Menu</HeaderMenu>
     </StyledHeader>
   );
-}
+};
 
 export default Header;

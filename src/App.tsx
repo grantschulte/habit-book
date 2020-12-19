@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
+import { DateProvider } from "./context/date-context";
 import Header from "./components/Header";
-import HabitDashboard from "./components/HabitDashboard";
+import TodayView from "./components/TodayView";
 import "./App.css";
 
 const AppWrapper = styled.div`
@@ -20,10 +21,12 @@ const MainContent = styled.main`
 function App() {
   return (
     <AppWrapper>
-      <Header height="50px"></Header>
-      <MainContent>
-        <HabitDashboard></HabitDashboard>
-      </MainContent>
+      <DateProvider>
+        <Header></Header>
+        <MainContent>
+          <TodayView></TodayView>
+        </MainContent>
+      </DateProvider>
     </AppWrapper>
   );
 }
