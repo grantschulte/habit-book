@@ -13,6 +13,8 @@ export type DateContextProps = {
     monthName: string;
     year: string;
     full: string;
+    short: string;
+    dayMonth: string;
   };
   format: FormatDate;
 };
@@ -33,6 +35,7 @@ export const DateProvider = ({ children }: { children: React.ReactNode }) => {
     year: date.format("YYYY"),
     full: date.format("dddd, MMMM D, YYYY"),
     short: date.format("D/M"),
+    dayMonth: date.format("ddd, MMM D"),
   };
 
   return (
