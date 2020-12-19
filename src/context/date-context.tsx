@@ -25,12 +25,14 @@ export const DateProvider = ({ children }: { children: React.ReactNode }) => {
   const date = dayjs();
   const day = date.day();
   const formatted = {
+    // https://day.js.org/docs/en/display/format
     day: date.format("D"),
     dayName: date.format("dddd"),
     month: date.format("M"),
     monthName: date.format("MMMM"),
     year: date.format("YYYY"),
     full: date.format("dddd, MMMM D, YYYY"),
+    short: date.format("D/M"),
   };
 
   return (

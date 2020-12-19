@@ -20,7 +20,7 @@ const LogoText = styled.span`
 const Header: React.FC = () => {
   return (
     <StyledHeader>
-      <LogoText>HabitBook</LogoText>
+      <LogoText>ThreeHabits</LogoText>
       <HeaderMenu>Menu</HeaderMenu>
     </StyledHeader>
   );

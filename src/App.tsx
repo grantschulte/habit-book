@@ -1,9 +1,22 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
+
 import { DateProvider } from "./context/date-context";
+import theme from "./context/theme";
 import Header from "./components/Header";
 import TodayView from "./components/TodayView";
-import "./App.css";
+
+const GlobalStyle = createGlobalStyle`
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-family: ${(props) => props.theme.font.body};
+    color: ${(props) => props.theme.color.bodyText};
+    background: ${(props) => props.theme.color.background};
+  }
+`;
 
 const AppWrapper = styled.div`
   display: flex;
@@ -19,14 +32,17 @@ const MainContent = styled.main`
 
 function App() {
   return (
-    <AppWrapper>
-      <DateProvider>
-        <Header></Header>
-        <MainContent>
-          <TodayView></TodayView>
-        </MainContent>
-      </DateProvider>
-    </AppWrapper>
+    <ThemeProvider theme={theme.light}>
+      <GlobalStyle />
+      <AppWrapper>
+        <DateProvider>
+          <Header></Header>
+          <MainContent>
+            <TodayView></TodayView>
+          </MainContent>
+        </DateProvider>
+      </AppWrapper>
+    </ThemeProvider>
   );
 }
 

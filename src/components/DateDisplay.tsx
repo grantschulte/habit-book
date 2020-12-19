@@ -1,8 +1,21 @@
 import React from "react";
 import styled from "styled-components";
+import { DateContextProps } from "../context/date-context";
 
-const DateDisplay: React.FC = () => {
-  return <div></div>;
+type DateDisplayProps = {
+  date: DateContextProps;
+};
+
+const StyledDateDisplay = styled.div``;
+
+const DateDisplay: React.FC<DateDisplayProps> = ({
+  date,
+}: DateDisplayProps) => {
+  return (
+    <StyledDateDisplay>
+      <div></div>
+    </StyledDateDisplay>
+  );
 };
 
 export default DateDisplay;
