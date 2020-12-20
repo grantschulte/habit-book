@@ -32,14 +32,14 @@ const StyledHabitListRow = styled.div<{ done: boolean }>`
   }
 `;
 
-const HabitLabel = styled.div`
+const HabitLabel = styled.div<{ done: boolean }>`
   margin-right: auto;
   margin-left: 1rem;
   font-weight: bold;
-
-  &svg {
-    stroke: ${(props) => props.theme.color.primary};
-  }
+  color: ${(props) =>
+    props.done
+      ? percentageColor(props.theme.color.background, -30)
+      : props.theme.color.bodyText};
 `;
 
 const StyledHabitStatus = styled.div`
@@ -47,22 +47,21 @@ const StyledHabitStatus = styled.div`
   margin-right: 1rem;
 `;
 
-const HabitStatus: React.FC<{ habit: Habit }> = ({
-  habit,
+const HabitStatus: React.FC<{ done: boolean }> = ({
+  done,
 }: {
-  habit: Habit;
+  done: boolean;
 }) => {
   const theme = React.useContext(ThemeContext);
-  const icon = habit.done ? (
-    <BiCheckCircle size="1.75rem" color={theme.color.primary} />
-  ) : (
-    <BiCheckCircle
-      size="1.75rem"
-      color={percentageColor(theme.color.background, -30)}
-    />
-  );
+  const color = done
+    ? theme.color.primary
+    : percentageColor(theme.color.background, -30);
 
-  return <StyledHabitStatus>{icon}</StyledHabitStatus>;
+  return (
+    <StyledHabitStatus>
+      <BiCheckCircle size="1.75rem" color={color} />
+    </StyledHabitStatus>
+  );
 };
 
 const HabitListRow: React.FC<{ habit: Habit }> = ({
@@ -73,19 +72,30 @@ const HabitListRow: React.FC<{ habit: Habit }> = ({
   const { updateHabit } = useHabits();
   return (
     <StyledHabitListRow done={habit.done} onClick={() => updateHabit(habit)}>
-      <HabitLabel>{habit.label}</HabitLabel>
-      <HabitStatus habit={habit} />
+      <HabitLabel done={habit.done}>{habit.label}</HabitLabel>
+      <HabitStatus done={habit.done} />
     </StyledHabitListRow>
   );
+};
+
+type SortHabitFn = (a: Habit, b: Habit) => number;
+
+const sortHabitsByDoneState: SortHabitFn = (a: Habit, b: Habit) => {
+  if (a.done) {
+    return 0;
+  } else {
+    return -1;
+  }
 };
 
 const HabitList: React.FC<{
   habits: Habit[];
 }> = ({ habits }: { habits: Habit[] }) => {
+  const sorted = habits.sort(sortHabitsByDoneState);
   return (
     <StyledHabitList>
-      {habits.map((h) => {
-        return <HabitListRow habit={h}></HabitListRow>;
+      {sorted.map((h) => {
+        return <HabitListRow habit={h} key={h.id.toString()}></HabitListRow>;
       })}
     </StyledHabitList>
   );

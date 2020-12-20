@@ -2,7 +2,7 @@ import React from "react";
 import Habit from "../types/habit";
 import mockData from "../data/mockHabits";
 
-type RequestStatus = "fetching" | "success" | "failed";
+type RequestStatus = "idle" | "fetching" | "success" | "failed";
 type RequestError = {
   error: string;
   message: string;
@@ -11,14 +11,23 @@ type RequestError = {
 type HabitContextProps = {
   data: Habit[] | [];
   updateHabit: (habit: Habit) => void;
+  message: string;
   status: RequestStatus;
-  error: RequestError | null;
+  error: RequestError | undefined;
 };
+
+const messages = [
+  "A single step is all it takes.",
+  "One more and you're on a roll.",
+  "Let's finish this thing off!",
+  "Well done! Tomorrow is a new day.",
+];
 
 export const HabitProvider = ({ children }: { children: React.ReactNode }) => {
   const [data, setData] = React.useState<Habit[]>(mockData);
-  const [error] = React.useState(null);
+  const [error] = React.useState<RequestError | undefined>(undefined);
   const [status] = React.useState<RequestStatus>("success");
+  const [message, setMessage] = React.useState<string>(messages[0]);
 
   const updateHabit = (habit: Habit) => {
     let updatedHabits: Habit[] = data.map((h: Habit) => {
@@ -32,11 +41,15 @@ export const HabitProvider = ({ children }: { children: React.ReactNode }) => {
       }
     });
 
+    const doneCount = updatedHabits.filter((h) => h.done).length;
     setData(updatedHabits);
+    setMessage(messages[doneCount]);
   };
 
   return (
-    <HabitContext.Provider value={{ data, updateHabit, status, error }}>
+    <HabitContext.Provider
+      value={{ data, updateHabit, message, status, error }}
+    >
       {children}
     </HabitContext.Provider>
   );

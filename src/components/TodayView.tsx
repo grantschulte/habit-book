@@ -14,6 +14,15 @@ const StyledTodayView = styled(Container)`
   width: 100%;
 `;
 
+const Subheading = styled.p`
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  font-style: italic;
+  padding: 1rem 0;
+  margin-bottom: 0;
+`;
+
 const TodayView: React.FC = () => {
   const date = useDate();
   const habits = useHabits();
@@ -21,6 +30,7 @@ const TodayView: React.FC = () => {
   return (
     <StyledTodayView>
       <DateDisplay date={date}></DateDisplay>
+      <Subheading>{habits.message}</Subheading>
       <HabitList habits={habits.data}></HabitList>
     </StyledTodayView>
   );
