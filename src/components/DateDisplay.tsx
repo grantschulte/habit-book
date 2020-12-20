@@ -8,8 +8,9 @@ type DateDisplayProps = {
 
 const StyledDateDisplay = styled.div`
   display: flex;
-  align-items: center;
   flex-direction: column;
+  width: 100%;
+  max-width: 400px;
 `;
 
 const StyledDate = styled.div`
@@ -17,6 +18,16 @@ const StyledDate = styled.div`
   font-weight: bold;
   color: ${(props) => props.theme.color.secondary};
   line-height: 1;
+  text-align: center;
+
+  @media screen and (max-width: 768px) {
+    font-size: 3rem;
+    text-align: left;
+
+    span {
+      display: block;
+    }
+  }
 `;
 
 const DateDisplay: React.FC<DateDisplayProps> = ({
@@ -24,7 +35,10 @@ const DateDisplay: React.FC<DateDisplayProps> = ({
 }: DateDisplayProps) => {
   return (
     <StyledDateDisplay>
-      <StyledDate>{date.formatted.dayMonth}</StyledDate>
+      <StyledDate>
+        <span>{date.date.format("ddd")}, </span>
+        <span>{date.date.format("MMM D")}</span>
+      </StyledDate>
     </StyledDateDisplay>
   );
 };
