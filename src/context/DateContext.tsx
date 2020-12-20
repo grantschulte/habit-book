@@ -23,6 +23,8 @@ const DateContext: React.Context<
   DateContextProps | undefined
 > = React.createContext<DateContextProps | undefined>(undefined);
 
+DateContext.displayName = "DateContext";
+
 export const DateProvider = ({ children }: { children: React.ReactNode }) => {
   const date = dayjs();
   const day = date.day();

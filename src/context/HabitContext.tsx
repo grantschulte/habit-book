@@ -54,4 +54,6 @@ const HabitContext: React.Context<
   HabitContextProps | undefined
 > = React.createContext<HabitContextProps | undefined>(undefined);
 
+HabitContext.displayName = "HabitContext";
+
 export default HabitContext;
