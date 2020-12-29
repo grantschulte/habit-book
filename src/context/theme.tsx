@@ -14,6 +14,8 @@ const theme: Theme = {
       tertiary: "#772E25",
       bodyText: "#283D3B",
       background: "#EDDDD4",
+      success: "#2BB67E",
+      error: "#BF1A2F",
     },
     font: {
       body: "'Montserrat', sans-serif",
@@ -27,6 +29,8 @@ const theme: Theme = {
       tertiary: "#772E25",
       bodyText: "#EDDDD4",
       background: "#283D3B",
+      success: "#2BB67E",
+      error: "#BF1A2F",
     },
     font: {
       body: "'Montserrat', sans-serif",

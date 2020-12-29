@@ -1,6 +1,7 @@
 import Habit from "../types/habit";
+import Score from "../types/score";
 
-const mockHabits: Habit[] = [
+export const mockHabits: Habit[] = [
   {
     id: 1,
     label: "Workout",
@@ -21,4 +22,7 @@ const mockHabits: Habit[] = [
   },
 ];
 
-export default mockHabits;
+export const mockScore: Score = {
+  completedPoints: 12,
+  possiblePointsInWeek: 21,
+};

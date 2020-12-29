@@ -1,5 +1,5 @@
 import React from "react";
-import { BiCheckCircle } from "react-icons/bi";
+import { BiLike } from "react-icons/bi";
 import styled, { ThemeContext } from "styled-components";
 import { useHabits } from "../context/HabitContext";
 import Habit from "../types/habit";
@@ -54,12 +54,12 @@ const HabitStatus: React.FC<{ done: boolean }> = ({
 }) => {
   const theme = React.useContext(ThemeContext);
   const color = done
-    ? theme.color.primary
+    ? theme.color.success
     : percentageColor(theme.color.background, -30);
 
   return (
     <StyledHabitStatus>
-      <BiCheckCircle size="1.75rem" color={color} />
+      <BiLike size="1.75rem" color={color} />
     </StyledHabitStatus>
   );
 };

@@ -8,6 +8,8 @@ declare module "styled-components" {
       tertiary: string;
       bodyText: string;
       background: string;
+      success: string;
+      error: string;
     };
     font: {
       body: string;

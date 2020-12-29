@@ -1,6 +1,7 @@
 import React from "react";
 import Habit from "../types/habit";
-import mockData from "../data/mockHabits";
+import { mockHabits, mockScore } from "../data/mockHabits";
+import Score from "../types/score";
 
 type RequestStatus = "idle" | "fetching" | "success" | "failed";
 type RequestError = {
@@ -10,6 +11,7 @@ type RequestError = {
 
 type HabitContextProps = {
   data: Habit[] | [];
+  score: Score;
   updateHabit: (habit: Habit) => void;
   message: string;
   status: RequestStatus;
@@ -24,12 +26,15 @@ const messages = [
 ];
 
 export const HabitProvider = ({ children }: { children: React.ReactNode }) => {
-  const [data, setData] = React.useState<Habit[]>(mockData);
+  const [data, setData] = React.useState<Habit[]>(mockHabits);
   const [error] = React.useState<RequestError | undefined>(undefined);
   const [status] = React.useState<RequestStatus>("success");
   const [message, setMessage] = React.useState<string>(messages[0]);
+  const [score, setScore] = React.useState<Score>(mockScore);
 
   const updateHabit = (habit: Habit) => {
+    const doneCount = data.filter((h) => h.done).length;
+
     let updatedHabits: Habit[] = data.map((h: Habit) => {
       if (h.id === habit.id) {
         return {
@@ -41,14 +46,28 @@ export const HabitProvider = ({ children }: { children: React.ReactNode }) => {
       }
     });
 
-    const doneCount = updatedHabits.filter((h) => h.done).length;
+    const updatedDoneCount = updatedHabits.filter((h) => h.done).length;
     setData(updatedHabits);
-    setMessage(messages[doneCount]);
+    setMessage(messages[updatedDoneCount]);
+    updateScore(doneCount, updatedDoneCount);
+  };
+
+  const updateScore = (doneCount: number, updatedDoneCount: number) => {
+    let completed =
+      updatedDoneCount - doneCount > 0
+        ? score.completedPoints + 1
+        : score.completedPoints - 1;
+
+    const newScore = {
+      ...score,
+      completedPoints: completed,
+    };
+    setScore(newScore);
   };
 
   return (
     <HabitContext.Provider
-      value={{ data, updateHabit, message, status, error }}
+      value={{ data, updateHabit, message, status, error, score }}
     >
       {children}
     </HabitContext.Provider>
