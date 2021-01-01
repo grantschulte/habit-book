@@ -14,7 +14,7 @@ const StyledDateDisplay = styled.div`
 `;
 
 const StyledDate = styled.div`
-  font-size: 4rem;
+  font-size: 3.75rem;
   font-weight: bold;
   color: ${(props) => props.theme.color.secondary};
   line-height: 1;
