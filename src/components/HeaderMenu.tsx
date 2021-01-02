@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
+import RouteConfig from "../route-config";
 
 const StyledHeaderMenu = styled.div`
   display: flex;
@@ -13,22 +15,24 @@ const StyledHeaderMenu = styled.div`
   }
 `;
 
-const StyledLink = styled.a<{ active?: boolean }>`
+const StyledLink = styled(NavLink)<{ active?: boolean }>`
   color: ${(props) => props.theme.color.bodyText};
-  color: ${(props) =>
-    props.active ? props.theme.color.primary : props.theme.color.bodyText};
-  text-decoration: ${(props) => (props.active ? "none" : "underline")};
-  font-weight: ${(props) => (props.active ? "bold" : "normal")};
+
+  &.active {
+    color: ${(props) => props.theme.color.primary};
+    text-decoration: none;
+    font-weight: bold;
+  }
 `;
 
 function HeaderMenu() {
   return (
     <StyledHeaderMenu>
-      <StyledLink href="/" active>
+      <StyledLink exact to={RouteConfig.home.path}>
         Today
       </StyledLink>
-      <StyledLink href="/">My Scores</StyledLink>
-      <StyledLink href="/">Settings</StyledLink>
+      <StyledLink to={RouteConfig.scores.path}>My Scores</StyledLink>
+      <StyledLink to={RouteConfig.settings.path}>Settings</StyledLink>
     </StyledHeaderMenu>
   );
 }

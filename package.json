@@ -13,6 +13,7 @@
     "@types/node": "^12.19.8",
     "@types/react": "^16.14.2",
     "@types/react-dom": "^16.9.10",
+    "@types/react-router-dom": "^5.1.7",
     "@types/styled-components": "^5.1.5",
     "@typescript-eslint/eslint-plugin": "^4.5.0",
     "@typescript-eslint/parser": "^4.5.0",
@@ -62,6 +63,7 @@
     "react-dom": "^17.0.1",
     "react-icons": "4.1.0",
     "react-refresh": "^0.8.3",
+    "react-router-dom": "^5.2.0",
     "resolve": "1.18.1",
     "resolve-url-loader": "^3.1.2",
     "sass-loader": "8.0.2",
@@ -81,7 +83,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "ts-coverage": "typescript-coverage-report"
   },
   "browserslist": {
     "production": [
@@ -97,7 +100,8 @@
   },
   "devDependencies": {
     "eslint-config-prettier": "^7.0.0",
-    "exact": "^0.8.0"
+    "exact": "^0.8.0",
+    "typescript-coverage-report": "^0.4.0"
   },
   "jest": {
     "roots": [

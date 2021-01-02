@@ -1,23 +1,14 @@
 import React from "react";
-import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import { DateProvider } from "./context/DateContext";
 import { HabitProvider } from "./context/HabitContext";
 import theme from "./context/theme";
 import Header from "./components/Header";
-import TodayView from "./components/TodayView";
-
-const GlobalStyle = createGlobalStyle`
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-    font-size: 16px;
-    font-family: ${(props) => props.theme.font.body};
-    color: ${(props) => props.theme.color.bodyText};
-    background: ${(props) => props.theme.color.background};
-  }
-`;
+import Routes from "./components/Routes";
+import GlobalStyle from "./GlobalStyle";
+import ScrollToTop from "./effects/ScrollToTop";
 
 const AppWrapper = styled.div`
   display: flex;
@@ -33,19 +24,22 @@ const MainContent = styled.main`
 
 function App() {
   return (
-    <ThemeProvider theme={theme.light}>
-      <GlobalStyle />
-      <AppWrapper>
-        <DateProvider>
-          <Header></Header>
-          <MainContent>
-            <HabitProvider>
-              <TodayView></TodayView>
-            </HabitProvider>
-          </MainContent>
-        </DateProvider>
-      </AppWrapper>
-    </ThemeProvider>
+    <Router>
+      <ScrollToTop />
+      <ThemeProvider theme={theme.light}>
+        <GlobalStyle />
+        <AppWrapper>
+          <DateProvider>
+            <Header></Header>
+            <MainContent>
+              <HabitProvider>
+                <Routes />
+              </HabitProvider>
+            </MainContent>
+          </DateProvider>
+        </AppWrapper>
+      </ThemeProvider>
+    </Router>
   );
 }
 
