@@ -9,12 +9,12 @@ type Theme = {
 const theme: Theme = {
   light: {
     color: {
-      primary: "#197278",
-      secondary: "#C44536",
-      tertiary: "#772E25",
-      bodyText: "#283D3B",
-      background: "#EDDDD4",
-      success: "#2BB67E",
+      primary: "#2AB7CA",
+      secondary: "#FE4A49",
+      tertiary: "#FED766",
+      bodyText: "#222222",
+      background: "#F4F4F8",
+      success: "#22D386",
       error: "#BF1A2F",
     },
     font: {
@@ -24,13 +24,13 @@ const theme: Theme = {
   },
   dark: {
     color: {
-      primary: "#197278",
-      secondary: "#C44536",
-      tertiary: "#772E25",
-      bodyText: "#EDDDD4",
-      background: "#283D3B",
-      success: "#2BB67E",
-      error: "#BF1A2F",
+      primary: "#FB8500",
+      secondary: "#219EBC",
+      tertiary: "#FFB703",
+      bodyText: "#8ECAE6",
+      background: "#023047",
+      success: "#26A96C",
+      error: "#DA1B2B",
     },
     font: {
       body: "'Montserrat', sans-serif",

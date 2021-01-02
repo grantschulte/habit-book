@@ -19,7 +19,7 @@ const BarInner = styled.div<{ width: string }>`
   top: 0;
   bottom: 0;
   left: 0;
-  background-color: ${(props) => props.theme.color.success};
+  background-color: ${(props) => props.theme.color.tertiary};
   transition: 200ms width ease-in-out;
 `;
 

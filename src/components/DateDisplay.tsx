@@ -11,12 +11,13 @@ const StyledDateDisplay = styled.div`
   flex-direction: column;
   width: 100%;
   max-width: 400px;
+  margin-bottom: 0.5rem;
 `;
 
 const StyledDate = styled.div`
   font-size: 3.75rem;
   font-weight: bold;
-  color: ${(props) => props.theme.color.secondary};
+  color: ${(props) => props.theme.color.primary};
   line-height: 1;
   text-align: center;
 

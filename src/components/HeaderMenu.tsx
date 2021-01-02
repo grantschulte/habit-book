@@ -6,22 +6,22 @@ import RouteConfig from "../route-config";
 const StyledHeaderMenu = styled.div`
   display: flex;
   align-items: center;
-  font-size: 0.8rem;
+  font-size: 1rem;
   margin-left: auto;
-  color: var(--text-color);
+  color: ${(props) => props.theme.color.bodyText};
 
   > * {
-    margin-left: 1rem;
+    margin-left: 1.5rem;
   }
 `;
 
 const StyledLink = styled(NavLink)<{ active?: boolean }>`
   color: ${(props) => props.theme.color.bodyText};
+  text-decoration: none;
 
   &.active {
     color: ${(props) => props.theme.color.primary};
     text-decoration: none;
-    font-weight: bold;
   }
 `;
 

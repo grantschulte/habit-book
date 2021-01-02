@@ -3,7 +3,7 @@ import { useDate } from "../context/DateContext";
 import styled from "styled-components";
 import DateDisplay from "./DateDisplay";
 import HabitList from "./HabitList";
-import { Container } from "./Container";
+import Container from "./Container";
 import { useHabits } from "../context/HabitContext";
 import StatusBar from "./StatusBar";
 
@@ -17,15 +17,13 @@ const StyledTodayView = styled(Container)`
 
 const Subheading = styled.p`
   width: 100%;
-  font-size: 0.75rem;
+  font-size: 1rem;
   max-width: 400px;
   text-align: center;
-  padding: 0.5rem 0;
-  margin-bottom: 0;
+  margin-bottom: 0.5em;
 
   span {
     font-weight: bold;
-    color: ${(props) => props.theme.color.success};
   }
 `;
 
