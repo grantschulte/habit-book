@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import { DateProvider } from "./context/DateContext";
 import { HabitProvider } from "./context/HabitContext";
+import { HabitHistoryProvider } from "./context/HabitHistoryContext";
 import theme from "./context/theme";
 import Header from "./components/Header";
 import Routes from "./components/Routes";
@@ -30,12 +31,14 @@ function App() {
         <GlobalStyle />
         <AppWrapper>
           <DateProvider>
-            <Header></Header>
-            <MainContent>
-              <HabitProvider>
-                <Routes />
-              </HabitProvider>
-            </MainContent>
+            <HabitHistoryProvider>
+              <Header></Header>
+              <MainContent>
+                <HabitProvider>
+                  <Routes />
+                </HabitProvider>
+              </MainContent>
+            </HabitHistoryProvider>
           </DateProvider>
         </AppWrapper>
       </ThemeProvider>

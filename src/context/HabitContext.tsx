@@ -2,12 +2,7 @@ import React from "react";
 import Habit from "../types/habit";
 import { mockHabits, mockScore } from "../data/mockHabits";
 import Score from "../types/score";
-
-type RequestStatus = "idle" | "fetching" | "success" | "failed";
-type RequestError = {
-  error: string;
-  message: string;
-};
+import { RequestStatus, RequestError } from "../types/request";
 
 type HabitContextProps = {
   data: Habit[] | [];
@@ -82,9 +77,9 @@ export const useHabits = () => {
   return context;
 };
 
-const HabitContext: React.Context<
-  HabitContextProps | undefined
-> = React.createContext<HabitContextProps | undefined>(undefined);
+const HabitContext = React.createContext<HabitContextProps | undefined>(
+  undefined
+);
 
 HabitContext.displayName = "HabitContext";
 

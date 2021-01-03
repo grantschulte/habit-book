@@ -20,7 +20,7 @@ const StyledLink = styled(NavLink)<{ active?: boolean }>`
   text-decoration: none;
 
   &.active {
-    color: ${(props) => props.theme.color.primary};
+    color: ${(props) => props.theme.color.secondary};
     text-decoration: none;
   }
 `;

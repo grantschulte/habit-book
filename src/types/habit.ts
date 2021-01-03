@@ -1,5 +1,5 @@
 type Habit = {
-  id: number;
+  id: string;
   label: string;
   done: boolean;
   order: number;

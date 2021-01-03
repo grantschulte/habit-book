@@ -1,15 +1,19 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import TodayView from "./TodayView";
+
 import RouteConfig from "../route-config";
+import TodayPage from "./TodayPage";
+import HistoryPage from "./HistoryPage";
 
 const Routes: React.FC = () => {
   return (
     <Switch>
       <Route exact path={RouteConfig.home.path}>
-        <TodayView></TodayView>
+        <TodayPage></TodayPage>
       </Route>
-      <Route path={RouteConfig.scores.path}>Scores</Route>
+      <Route path={RouteConfig.scores.path}>
+        <HistoryPage></HistoryPage>
+      </Route>
       <Route path={RouteConfig.settings.path}>Settings</Route>
     </Switch>
   );
