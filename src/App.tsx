@@ -20,7 +20,7 @@ const AppWrapper = styled.div`
 const MainContent = styled.main`
   display: flex;
   flex: 1;
-  overflow: hidden;
+  overflow-y: scroll;
 `;
 
 function App() {

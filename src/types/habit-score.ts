@@ -17,7 +17,7 @@ export type HabitHistoryDay = {
 // };
 
 export type HabitHistoryMonth = {
-  month: string;
+  name: string;
   days: HabitHistoryDay[];
   score: HabitHistoryScore;
 };
