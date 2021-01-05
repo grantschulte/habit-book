@@ -11,9 +11,10 @@ const Routes: React.FC = () => {
       <Route exact path={RouteConfig.home.path}>
         <TodayPage></TodayPage>
       </Route>
-      <Route path={RouteConfig.scores.path}>
+      <Route path={RouteConfig.scoreboard.path}>
         <HistoryPage></HistoryPage>
       </Route>
+      <Route path={RouteConfig.habits.path}>Habits</Route>
       <Route path={RouteConfig.settings.path}>Settings</Route>
     </Switch>
   );

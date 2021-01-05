@@ -1,9 +1,9 @@
 import React from "react";
-import { BiLike } from "react-icons/bi";
-import styled, { ThemeContext } from "styled-components";
+import styled from "styled-components";
 import { useHabits } from "../context/HabitContext";
 import Habit from "../types/habit";
 import { percentageColor } from "../utils/css.utils";
+import HabitStatus from "./HabitStatus";
 
 const StyledHabitList = styled.div`
   margin: 1.5rem 0;
@@ -41,28 +41,6 @@ const HabitLabel = styled.div<{ done: boolean }>`
       ? percentageColor(props.theme.color.background, -30)
       : props.theme.color.bodyText};
 `;
-
-const StyledHabitStatus = styled.div`
-  line-height: 0;
-  margin-right: 1rem;
-`;
-
-const HabitStatus: React.FC<{ done: boolean }> = ({
-  done,
-}: {
-  done: boolean;
-}) => {
-  const theme = React.useContext(ThemeContext);
-  const color = done
-    ? theme.color.success
-    : percentageColor(theme.color.background, -30);
-
-  return (
-    <StyledHabitStatus>
-      <BiLike size="1.75rem" color={color} />
-    </StyledHabitStatus>
-  );
-};
 
 const HabitListRow: React.FC<{ habit: Habit }> = ({
   habit,

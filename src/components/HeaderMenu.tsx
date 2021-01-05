@@ -31,7 +31,8 @@ function HeaderMenu() {
       <StyledLink exact to={RouteConfig.home.path}>
         Today
       </StyledLink>
-      <StyledLink to={RouteConfig.scores.path}>My Scores</StyledLink>
+      <StyledLink to={RouteConfig.scoreboard.path}>Scoreboard</StyledLink>
+      <StyledLink to={RouteConfig.habits.path}>Habits</StyledLink>
       <StyledLink to={RouteConfig.settings.path}>Settings</StyledLink>
     </StyledHeaderMenu>
   );

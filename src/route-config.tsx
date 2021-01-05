@@ -9,13 +9,17 @@ type RouteConfig = {
 };
 
 const routes: RouteConfig = {
+  habits: {
+    name: "habits",
+    path: "/habits",
+  },
   home: {
     name: "home",
     path: "/",
   },
-  scores: {
-    name: "scores",
-    path: "/scores",
+  scoreboard: {
+    name: "scoreboard",
+    path: "/scoreboard",
   },
   settings: {
     name: "settings",

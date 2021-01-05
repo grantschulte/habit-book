@@ -21,6 +21,7 @@ const MainContent = styled.main`
   display: flex;
   flex: 1;
   overflow-y: scroll;
+  margin-bottom: 2rem;
 `;
 
 function App() {
