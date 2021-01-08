@@ -7,21 +7,29 @@ import { HabitProvider } from "./context/HabitContext";
 import { HabitHistoryProvider } from "./context/HabitHistoryContext";
 import theme from "./context/theme";
 import Header from "./components/Header";
+import Menu from "./components/Menu";
 import Routes from "./components/Routes";
 import GlobalStyle from "./GlobalStyle";
 import ScrollToTop from "./effects/ScrollToTop";
 
 const AppWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 8fr;
+  grid-template-rows: 0.25fr 8fr 1fr;
   height: 100vh;
 `;
 
 const MainContent = styled.main`
   display: flex;
-  flex: 1;
+  flex-direction: column;
   overflow-y: scroll;
-  margin-bottom: 2rem;
+  grid-column: 2 / 3;
+  grid-row: 1 / 4;
+
+  @media screen and (max-width: 768px) {
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+  }
 `;
 
 function App() {
@@ -33,6 +41,7 @@ function App() {
         <AppWrapper>
           <DateProvider>
             <HabitHistoryProvider>
+              <Menu></Menu>
               <Header></Header>
               <MainContent>
                 <HabitProvider>

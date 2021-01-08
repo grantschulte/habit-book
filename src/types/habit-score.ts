@@ -24,6 +24,7 @@ export type HabitHistoryMonth = {
 
 export type HabitHistory = {
   year: number;
+  habits: Habit[];
   months: HabitHistoryMonth[];
   score: HabitHistoryScore;
 };

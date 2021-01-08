@@ -5,7 +5,6 @@ import { BiCheckCircle } from "react-icons/bi";
 
 const StyledHabitStatus = styled.div`
   line-height: 0;
-  margin-right: 1rem;
 `;
 
 const HabitStatus: React.FC<{ done: boolean; size?: string }> = ({

@@ -4,6 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import RouteConfig from "../route-config";
 import TodayPage from "./TodayPage";
 import HistoryPage from "./HistoryPage";
+import HabitPage from "./HabitPage";
 
 const Routes: React.FC = () => {
   return (
@@ -14,7 +15,9 @@ const Routes: React.FC = () => {
       <Route path={RouteConfig.scoreboard.path}>
         <HistoryPage></HistoryPage>
       </Route>
-      <Route path={RouteConfig.habits.path}>Habits</Route>
+      <Route path={RouteConfig.habits.path}>
+        <HabitPage></HabitPage>
+      </Route>
       <Route path={RouteConfig.settings.path}>Settings</Route>
     </Switch>
   );

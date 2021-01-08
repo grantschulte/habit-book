@@ -7,12 +7,20 @@ import HabitStatus from "./HabitStatus";
 
 const StyledHistoryPage = styled(Container)`
   width: 100%;
+
+  h2 {
+    margin-top: 0;
+  }
 `;
 
 const ContainerGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 2rem;
+
+  @media screen and (max-width: 480px) {
+    grid-gap: 1rem;
+  }
 `;
 
 const HeadingRow = styled.div`
@@ -36,36 +44,54 @@ const HistoryGrid = styled.div<{ habitCols: number }>`
 const HistorySection = styled.div`
   background-color: ${(props) =>
     percentageColor(props.theme.color.background, -7)};
-  padding: 0.5rem 1.5rem;
+  padding: 0.5rem 1.5rem 1.5rem;
   border-radius: 0.5rem;
 `;
 
 const HabitColHeading = styled.div`
-  font-size: 0.75rem;
-  transform: rotate(-45deg);
-  margin: 2rem 0 3.5rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-weight: bold;
+  margin: 2rem 0 3rem;
+
+  span {
+    display: block;
+    text-align: center;
+    font-size: 0.6rem;
+    transform: rotate(-45deg);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-weight: bold;
+  }
 `;
 
 const HabitDoneCol = styled.div`
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const DateCol = styled.div`
-  /* font-weight: bold */
+  font-weight: bold;
+  display: flex;
+  align-items: center;
 `;
 
 const HistoryPage: React.FC = () => {
   const habitHistory = useHabitHistory();
+
+  const habitHeadings = habitHistory.data.habits.map((h) => {
+    return (
+      <HabitColHeading>
+        <span>{h.label}</span>
+      </HabitColHeading>
+    );
+  });
 
   const months = habitHistory.data.months.map((m) => {
     const days = m.days.map((d) => {
       const habits = d.habits.map((h) => {
         return (
           <HabitDoneCol>
-            <HabitStatus done={h.done} size="1rem" />
+            <HabitStatus done={h.done} size="1.5rem" />
           </HabitDoneCol>
         );
       });
@@ -86,11 +112,9 @@ const HistoryPage: React.FC = () => {
         </HeadingRow>
         <HistoryGrid habitCols={3}>
           <div></div>
-          <HabitColHeading>Pushups</HabitColHeading>
-          <HabitColHeading>Meditation</HabitColHeading>
-          <HabitColHeading>Cooking</HabitColHeading>
+          {habitHeadings}
+          {days}
         </HistoryGrid>
-        <HistoryGrid habitCols={3}>{days}</HistoryGrid>
       </HistorySection>
     );
   });

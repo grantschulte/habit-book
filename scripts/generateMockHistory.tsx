@@ -1,9 +1,7 @@
 const fs = require("fs");
 const dayjs = require("dayjs");
 
-const fractions = [""];
-const percentages = [];
-const h = [
+const mockHabits = [
   {
     id: "1",
     label: "Pushups",
@@ -35,14 +33,6 @@ const generateScore = () => {
   };
 };
 
-const generateMonth = () => {
-  const weeks = [];
-
-  return {
-    weeks,
-  };
-};
-
 const generateMonthsData = () => {
   let monthData = [];
 
@@ -56,7 +46,7 @@ const generateMonthsData = () => {
     );
 
     monthData.push({
-      month: dayjs(d).format("MMMM"),
+      name: dayjs(d).format("MMMM"),
       days: generateDaysData(daysInMonth, m),
       score: {
         fraction: `${totalHabitsCompleted}/${totalHabitsPossible}`,
@@ -68,15 +58,8 @@ const generateMonthsData = () => {
   return monthData;
 };
 
-const generateWeeks = () => {
-  const days = [];
-  return {
-    days,
-  };
-};
-
 const generateDay = (month, day) => {
-  const habits = h.map((habit) => {
+  const habits = mockHabits.map((habit) => {
     return {
       ...habit,
       done: Math.random() < 0.5,
@@ -94,7 +77,7 @@ const generateDay = (month, day) => {
 const generateDaysData = (daysInMonth, m) => {
   let days = [];
 
-  for (let x = daysInMonth; x >= 0; x--) {
+  for (let x = daysInMonth; x >= 1; x--) {
     days.push(generateDay(m, x));
   }
 
@@ -107,8 +90,16 @@ const generateData = (data, filename) => {
 };
 
 const init = () => {
-  const data = generateMonthsData();
-  generateData(data, "months.json");
+  const data = {
+    year: 2021,
+    habits: mockHabits,
+    months: generateMonthsData(),
+    score: {
+      fraction: "657/1095",
+      percentage: "60%",
+    },
+  };
+  generateData(data, "mockHabitHistory.json");
 };
 
 init();

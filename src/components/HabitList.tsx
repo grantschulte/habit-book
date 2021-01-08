@@ -15,7 +15,6 @@ const StyledHabitListRow = styled.div<{ done: boolean }>`
   display: flex;
   width: 100%;
   height: 50px;
-  align-items: center;
   margin-bottom: 0.5rem;
   background-color: ${(props) =>
     percentageColor(props.theme.color.background, -7)};
@@ -34,12 +33,19 @@ const StyledHabitListRow = styled.div<{ done: boolean }>`
 
 const HabitLabel = styled.div<{ done: boolean }>`
   margin-right: auto;
-  margin-left: 1rem;
   font-weight: bold;
   color: ${(props) =>
     props.done
       ? percentageColor(props.theme.color.background, -30)
       : props.theme.color.bodyText};
+`;
+
+const ListContainer = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 0 1rem;
 `;
 
 const HabitListRow: React.FC<{ habit: Habit }> = ({
@@ -50,8 +56,10 @@ const HabitListRow: React.FC<{ habit: Habit }> = ({
   const { updateHabit } = useHabits();
   return (
     <StyledHabitListRow done={habit.done} onClick={() => updateHabit(habit)}>
-      <HabitLabel done={habit.done}>{habit.label}</HabitLabel>
-      <HabitStatus done={habit.done} />
+      <ListContainer>
+        <HabitLabel done={habit.done}>{habit.label}</HabitLabel>
+        <HabitStatus done={habit.done} />
+      </ListContainer>
     </StyledHabitListRow>
   );
 };

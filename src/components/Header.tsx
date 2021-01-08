@@ -1,14 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 
-import HeaderMenu from "./HeaderMenu";
 import Container from "./Container";
+import { percentageColor } from "../utils/css.utils";
 
 const StyledHeader = styled(Container)`
-  display: flex;
-  align-items: center;
-  height: 60px;
-  font-size: 1.5em;
+  grid-row: 1 / 2;
+  grid-column: 1 / 2;
+  background-color: ${(props) =>
+    percentageColor(props.theme.color.background, -10)};
+
+  @media screen and (max-width: 768px) {
+    grid-column: 1 / 3;
+  }
 `;
 
 const LogoText = styled.span`
@@ -21,7 +25,6 @@ const Header: React.FC = () => {
   return (
     <StyledHeader as="header">
       <LogoText>HabitBook</LogoText>
-      <HeaderMenu></HeaderMenu>
     </StyledHeader>
   );
 };
