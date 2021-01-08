@@ -8,13 +8,12 @@ import HabitStatus from "./HabitStatus";
 const StyledHabitList = styled.div`
   margin: 1.5rem 0;
   width: 100%;
-  max-width: 400px;
 `;
 
 const StyledHabitListRow = styled.div<{ done: boolean }>`
   display: flex;
   width: 100%;
-  height: 50px;
+  height: 60px;
   margin-bottom: 0.5rem;
   background-color: ${(props) =>
     percentageColor(props.theme.color.background, -7)};
@@ -33,6 +32,7 @@ const StyledHabitListRow = styled.div<{ done: boolean }>`
 
 const HabitLabel = styled.div<{ done: boolean }>`
   margin-right: auto;
+  font-size: clamp(1rem, 3vw, 1.25rem);
   font-weight: bold;
   color: ${(props) =>
     props.done
@@ -45,7 +45,7 @@ const ListContainer = styled.div`
   align-items: center;
   height: 100%;
   width: 100%;
-  padding: 0 1rem;
+  padding: 0 1.25rem;
 `;
 
 const HabitListRow: React.FC<{ habit: Habit }> = ({

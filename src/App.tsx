@@ -14,8 +14,8 @@ import ScrollToTop from "./effects/ScrollToTop";
 
 const AppWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 8fr;
-  grid-template-rows: 0.25fr 8fr 1fr;
+  grid-template-columns: minmax(240px, 1fr) 8fr;
+  grid-template-rows: 0.5fr 8fr 60px;
   height: 100vh;
 `;
 

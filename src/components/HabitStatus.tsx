@@ -9,7 +9,7 @@ const StyledHabitStatus = styled.div`
 
 const HabitStatus: React.FC<{ done: boolean; size?: string }> = ({
   done,
-  size = "1.75rem",
+  size = "clamp(1.75rem, 4vh, 2.5rem)",
 }: {
   done: boolean;
   size?: string;

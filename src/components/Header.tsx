@@ -7,8 +7,8 @@ import { percentageColor } from "../utils/css.utils";
 const StyledHeader = styled(Container)`
   grid-row: 1 / 2;
   grid-column: 1 / 2;
-  background-color: ${(props) =>
-    percentageColor(props.theme.color.background, -10)};
+  background-color: ${(props) => props.theme.color.black};
+  color: ${(props) => props.theme.color.white};
 
   @media screen and (max-width: 768px) {
     grid-column: 1 / 3;

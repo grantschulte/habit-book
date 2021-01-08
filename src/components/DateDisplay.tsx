@@ -10,25 +10,15 @@ const StyledDateDisplay = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 400px;
   margin-bottom: 0.5rem;
 `;
 
 const StyledDate = styled.div`
-  font-size: 3.75rem;
+  font-size: clamp(3rem, 6vw, 5rem);
   font-weight: bold;
-  color: ${(props) => props.theme.color.primary};
+  color: ${(props) => props.theme.color.secondary};
   line-height: 1;
   text-align: center;
-
-  @media screen and (max-width: 768px) {
-    font-size: 3rem;
-    text-align: left;
-
-    span {
-      display: block;
-    }
-  }
 `;
 
 const DateDisplay: React.FC<DateDisplayProps> = ({

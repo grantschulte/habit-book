@@ -16,6 +16,8 @@ const theme: Theme = {
       background: "#F4F4F8",
       success: "#22D386",
       error: "#BF1A2F",
+      black: "#222222",
+      white: "#f2f2f2",
     },
     font: {
       body: "'Montserrat', sans-serif",
@@ -31,6 +33,8 @@ const theme: Theme = {
       background: "#023047",
       success: "#26A96C",
       error: "#DA1B2B",
+      black: "#222222",
+      white: "#f2f2f2",
     },
     font: {
       body: "'Montserrat', sans-serif",

@@ -10,18 +10,17 @@ import StatusBar from "./StatusBar";
 const StyledTodayView = styled(Container)`
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  width: 100%;
+  align-self: center;
+  width: min(100%, 600px);
   height: 100%;
 `;
 
 const Subheading = styled.p`
   width: 100%;
-  font-size: 1rem;
-  max-width: 400px;
+  font-size: clamp(1rem, 1.75vh, 2rem);
   text-align: center;
-  margin-bottom: 0.5em;
+  margin-bottom: 1rem;
 
   span {
     font-weight: bold;

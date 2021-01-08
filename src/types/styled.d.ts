@@ -10,6 +10,8 @@ declare module "styled-components" {
       background: string;
       success: string;
       error: string;
+      black: string;
+      white: string;
     };
     font: {
       body: string;
