@@ -6,16 +6,17 @@ import { DateProvider } from "./context/DateContext";
 import { HabitProvider } from "./context/HabitContext";
 import { HabitHistoryProvider } from "./context/HabitHistoryContext";
 import theme from "./context/theme";
-import Header from "./components/Header";
+import Logo from "./components/Logo";
 import Menu from "./components/Menu";
 import Routes from "./components/Routes";
 import GlobalStyle from "./GlobalStyle";
 import ScrollToTop from "./effects/ScrollToTop";
+// import PageHeading from "./components/PageHeading";
 
 const AppWrapper = styled.div`
   display: grid;
   grid-template-columns: minmax(240px, 1fr) 8fr;
-  grid-template-rows: 0.5fr 8fr 60px;
+  grid-template-rows: 0.5fr 0.5fr 8fr 60px;
   height: 100vh;
 `;
 
@@ -24,11 +25,11 @@ const MainContent = styled.main`
   flex-direction: column;
   overflow-y: scroll;
   grid-column: 2 / 3;
-  grid-row: 1 / 4;
+  grid-row: 2 / 5;
 
   @media screen and (max-width: 768px) {
     grid-column: 1 / 3;
-    grid-row: 2 / 3;
+    grid-row: 2 / 4;
   }
 `;
 
@@ -41,8 +42,9 @@ function App() {
         <AppWrapper>
           <DateProvider>
             <HabitHistoryProvider>
-              <Menu></Menu>
-              <Header></Header>
+              <Menu />
+              <Logo />
+              {/* <PageHeading /> */}
               <MainContent>
                 <HabitProvider>
                   <Routes />

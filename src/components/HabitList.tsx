@@ -13,11 +13,12 @@ const StyledHabitList = styled.div`
 const StyledHabitListRow = styled.div<{ done: boolean }>`
   display: flex;
   width: 100%;
-  height: 60px;
+  height: 64px;
   margin-bottom: 0.5rem;
   background-color: ${(props) =>
     percentageColor(props.theme.color.background, -7)};
-  border-radius: 2px;
+  /* border: 3px solid ${(props) => props.theme.color.bodyText}; */
+  border-radius: 10px;
   cursor: pointer;
 
   &:last-child {
@@ -32,7 +33,7 @@ const StyledHabitListRow = styled.div<{ done: boolean }>`
 
 const HabitLabel = styled.div<{ done: boolean }>`
   margin-right: auto;
-  font-size: clamp(1rem, 3vw, 1.25rem);
+  font-size: clamp(1.25rem, 3vw, 1.25rem);
   font-weight: bold;
   color: ${(props) =>
     props.done
