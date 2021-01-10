@@ -17,5 +17,11 @@ declare module "styled-components" {
       body: string;
       heading: string;
     };
+    button: {
+      [buttonType: string]: {
+        background: string;
+        text: string;
+      };
+    };
   }
 }

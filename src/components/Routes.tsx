@@ -5,6 +5,7 @@ import RouteConfig from "../route-config";
 import TodayPage from "./TodayPage";
 import ScorecardPage from "./Scorecard/ScorecardPage";
 import HabitPage from "./HabitsPage";
+import PlaygroundPage from "./PlaygroundPage";
 
 const Routes: React.FC = () => {
   return (
@@ -22,6 +23,9 @@ const Routes: React.FC = () => {
         <HabitPage></HabitPage>
       </Route>
       <Route path={RouteConfig.settings.path}></Route>
+      <Route path="/playground">
+        <PlaygroundPage />
+      </Route>
     </Switch>
   );
 };

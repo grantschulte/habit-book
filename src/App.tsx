@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { DateProvider } from "./context/DateContext";
 import { HabitProvider } from "./context/HabitContext";
 import { HabitHistoryProvider } from "./context/HabitHistoryContext";
-import theme from "./context/theme";
+import theme from "./constants/theme";
 import Logo from "./components/Logo";
 import Menu from "./components/Menu";
 import Routes from "./components/Routes";

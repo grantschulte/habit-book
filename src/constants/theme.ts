@@ -17,11 +17,25 @@ const theme: Theme = {
       success: "#22D386",
       error: "#BF1A2F",
       black: "#222222",
-      white: "#f2f2f2",
+      white: "#F2F2F2",
     },
     font: {
       body: "'Montserrat', sans-serif",
       heading: "'Montserrat', sans-serif",
+    },
+    button: {
+      primary: {
+        background: "#2AB7CA",
+        text: "#F2F2F2",
+      },
+      secondary: {
+        background: "#FED766",
+        text: "#222222",
+      },
+      tertiary: {
+        background: "#222222",
+        text: "#F2F2F2",
+      },
     },
   },
   dark: {
@@ -34,11 +48,25 @@ const theme: Theme = {
       success: "#26A96C",
       error: "#DA1B2B",
       black: "#222222",
-      white: "#f2f2f2",
+      white: "#F2F2F2",
     },
     font: {
       body: "'Montserrat', sans-serif",
       heading: "'Montserrat', sans-serif",
+    },
+    button: {
+      primary: {
+        background: "#FB8500",
+        text: "#222222",
+      },
+      secondary: {
+        background: "#219EBC",
+        text: "#222222",
+      },
+      tertiary: {
+        background: "#219EBC",
+        text: "#222222",
+      },
     },
   },
 };
