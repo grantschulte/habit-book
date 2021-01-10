@@ -17,6 +17,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   font-size: ${(props) =>
     props.size ? BUTTON_FONT_SIZE[props.size] : BUTTON_FONT_SIZE.md};
   font-weight: normal;
+  text-decoration: none;
   color: ${(props) =>
     props.buttonType
       ? props.theme.button[props.buttonType].text
@@ -27,8 +28,9 @@ const StyledButton = styled.button<StyledButtonProps>`
       : props.theme.color.primary};
   padding: ${(props) =>
     props.size ? BUTTON_PADDING[props.size] : BUTTON_PADDING.md};
-  min-width: ${(props) => (props.size ? BUTTON_WIDTH[props.size] : "100%")};
-  max-width: 100%;
+  max-width: ${(props) =>
+    props.fullWidth ? "100%" : props.size ? BUTTON_WIDTH[props.size] : "100%"};
+  width: 100%;
   border-radius: 4px;
   cursor: pointer;
 
@@ -55,7 +57,12 @@ const StyledButtonIcon = styled.span`
 
 const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
   return (
-    <StyledButton size={props.size} buttonType={props.buttonType} as={props.as}>
+    <StyledButton
+      size={props.size}
+      buttonType={props.buttonType}
+      as={props.as}
+      href={props.href}
+    >
       {props.icon && <StyledButtonIcon as={props.icon} />}
       {props.children}
     </StyledButton>

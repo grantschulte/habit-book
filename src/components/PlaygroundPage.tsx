@@ -17,7 +17,7 @@ const PlaygroundPage: React.FC = () => {
       </div>
 
       <div style={{ marginBottom: "1rem" }}>
-        <Button size="sm" buttonType="secondary">
+        <Button size="sm" buttonType="secondary" as="a" href="/">
           Click Me
         </Button>
       </div>

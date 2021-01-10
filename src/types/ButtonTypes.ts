@@ -15,9 +15,13 @@ export type ButtonProps = {
   buttonType?: ButtonType;
   size?: ButtonSizes;
   icon?: IconType;
+  href?: string;
+  fullWidth?: boolean;
 };
 
 export type StyledButtonProps = {
   size?: ButtonSizes;
   buttonType?: ButtonType;
+  href?: string;
+  fullWidth?: boolean;
 };
