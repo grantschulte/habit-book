@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import HabitStatus from "../HabitStatus";
+import HabitDoneStatus from "../Today/HabitDoneStatus";
 import { HabitHistoryDay } from "../../types/habit-score";
 
 type DayRowProps = { day: HabitHistoryDay };
@@ -25,7 +25,7 @@ const DayRow: React.FC<DayRowProps> = ({ day }: DayRowProps): JSX.Element => {
       {day.habits.map((h) => {
         return (
           <HabitDoneCol key={h.id}>
-            <HabitStatus done={h.done} size="1.5rem" />
+            <HabitDoneStatus done={h.done} size="1.5rem" />
           </HabitDoneCol>
         );
       })}

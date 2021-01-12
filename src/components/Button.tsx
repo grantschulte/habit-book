@@ -5,7 +5,7 @@ import {
   BUTTON_FONT_SIZE,
   BUTTON_WIDTH,
 } from "../constants/button-sizes";
-import { StyledButtonProps, ButtonProps } from "../types/ButtonTypes";
+import { StyledButtonProps, ButtonProps } from "../types/button-types";
 import { percentageColor } from "../utils/css.utils";
 
 const StyledButton = styled.button<StyledButtonProps>`
@@ -21,7 +21,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   color: ${(props) =>
     props.buttonType
       ? props.theme.button[props.buttonType].text
-      : props.theme.color.white};
+      : props.theme.color.black};
   background-color: ${(props) =>
     props.buttonType
       ? props.theme.button[props.buttonType].background

@@ -1,7 +1,10 @@
 import React from "react";
 import { BiMouse } from "react-icons/bi";
 import Button from "./Button";
-import Container from "./Container";
+import Container from "./Layout/Container";
+import Input from "./Form/Input";
+import Label from "./Form/Label";
+import PasswordInput from "./Form/PasswordInput";
 
 const PlaygroundPage: React.FC = () => {
   return (
@@ -46,6 +49,14 @@ const PlaygroundPage: React.FC = () => {
         <Button size="lg" buttonType="tertiary" icon={BiMouse}>
           Click Me
         </Button>
+      </div>
+      <div style={{ marginBottom: "1rem" }}>
+        <Input />
+      </div>
+      <div style={{ marginBottom: "1rem" }}>
+        <Label for="pw" value="Password">
+          <PasswordInput id="pw" />
+        </Label>
       </div>
     </Container>
   );

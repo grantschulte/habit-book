@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Container from "./Container";
+import Container from "./Layout/Container";
 import usePageTitle from "../hooks/usePageTitle";
 
 const StyledPageHeading = styled(Container)`

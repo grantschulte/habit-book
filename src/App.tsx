@@ -7,7 +7,7 @@ import { HabitProvider } from "./context/HabitContext";
 import { HabitHistoryProvider } from "./context/HabitHistoryContext";
 import theme from "./constants/theme";
 import Logo from "./components/Logo";
-import Menu from "./components/Menu";
+import Menu from "./components/Menu/Menu";
 import Routes from "./components/Routes";
 import GlobalStyle from "./GlobalStyle";
 import ScrollToTop from "./effects/ScrollToTop";

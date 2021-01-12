@@ -26,7 +26,7 @@ const theme: Theme = {
     button: {
       primary: {
         background: "#2AB7CA",
-        text: "#F2F2F2",
+        text: "#222222",
       },
       secondary: {
         background: "#FED766",
@@ -36,6 +36,10 @@ const theme: Theme = {
         background: "#222222",
         text: "#F2F2F2",
       },
+    },
+    form: {
+      inputBorder: "#DDDDD",
+      inputBackground: "#F2F2F2",
     },
   },
   dark: {
@@ -67,6 +71,10 @@ const theme: Theme = {
         background: "#219EBC",
         text: "#222222",
       },
+    },
+    form: {
+      inputBorder: "",
+      inputBackground: "",
     },
   },
 };

@@ -23,5 +23,9 @@ declare module "styled-components" {
         text: string;
       };
     };
+    form: {
+      inputBorder: string;
+      inputBackground: string;
+    };
   }
 }

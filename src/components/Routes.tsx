@@ -2,7 +2,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 
 import RouteConfig from "../route-config";
-import TodayPage from "./TodayPage";
+import TodayPage from "./Today/TodayPage";
 import ScorecardPage from "./Scorecard/ScorecardPage";
 import HabitPage from "./HabitsPage";
 import PlaygroundPage from "./PlaygroundPage";

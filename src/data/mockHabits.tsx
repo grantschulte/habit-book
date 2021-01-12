@@ -1,5 +1,5 @@
 import Habit from "../types/habit";
-import Score from "../types/score";
+import { Score } from "../types/habit-score";
 
 export const mockHabits: Habit[] = [
   {

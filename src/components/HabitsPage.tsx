@@ -1,5 +1,5 @@
 import React from "react";
-import Container from "./Container";
+import Container from "./Layout/Container";
 
 const HabitsPage: React.FC = () => {
   return <Container></Container>;

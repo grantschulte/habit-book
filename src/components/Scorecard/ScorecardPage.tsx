@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useHabitHistory } from "../../context/HabitHistoryContext";
-import Container from "../Container";
+import Container from "../Layout/Container";
 import ScorecardMonth from "./ScorecardMonth";
 
 const StyledScorecardPage = styled(Container)`

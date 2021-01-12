@@ -1,4 +1,4 @@
-import { ButtonSizesConfig } from "../types/ButtonTypes";
+import { ButtonSizesConfig } from "../types/button-types";
 
 export const BUTTON_PADDING: ButtonSizesConfig = {
   sm: "0.5rem",

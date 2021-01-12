@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
-import RouteConfig from "../route-config";
-import { percentageColor } from "../utils/css.utils";
-import Container from "./Container";
+import RouteConfig from "../../route-config";
+import { percentageColor } from "../../utils/css.utils";
+import Container from "../Layout/Container";
 import {
   BiChart,
   BiCheckDouble,
@@ -11,6 +10,7 @@ import {
   BiCog,
   BiTachometer,
 } from "react-icons/bi";
+import StyledLink from "./StyledLink";
 
 const StyledMenu = styled(Container)`
   display: flex;
@@ -27,39 +27,6 @@ const StyledMenu = styled(Container)`
     grid-row: 4 / 5;
     flex-direction: row;
     padding: 0;
-  }
-`;
-
-const StyledLink = styled(NavLink)<{ active?: boolean }>`
-  display: flex;
-  align-items: center;
-  color: ${(props) => props.theme.color.bodyText};
-  text-decoration: none;
-  padding: 0.5rem 0;
-  font-weight: bold;
-
-  .menu-icon {
-    margin-right: 0.5rem;
-  }
-
-  &.active {
-    color: ${(props) => props.theme.color.secondary};
-    text-decoration: none;
-  }
-
-  @media screen and (max-width: 768px) {
-    flex-direction: column;
-    justify-content: center;
-    font-size: 0.75rem;
-    flex-grow: 1;
-    flex-basis: 0;
-
-    .menu-icon {
-      width: 2rem;
-      height: 2rem;
-      margin-right: 0;
-      margin-bottom: 0.25rem;
-    }
   }
 `;
 

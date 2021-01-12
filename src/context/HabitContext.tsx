@@ -1,7 +1,7 @@
 import React from "react";
 import Habit from "../types/habit";
 import { mockHabits, mockScore } from "../data/mockHabits";
-import Score from "../types/score";
+import { Score } from "../types/habit-score";
 import { RequestStatus, RequestError } from "../types/request";
 
 type HabitContextProps = {

@@ -28,3 +28,8 @@ export type HabitHistory = {
   months: HabitHistoryMonth[];
   score: HabitHistoryScore;
 };
+
+export type Score = {
+  completedPoints: number;
+  possiblePointsInWeek: number;
+};
