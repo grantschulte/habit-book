@@ -20,8 +20,9 @@ const theme: Theme = {
       white: "#F2F2F2",
     },
     font: {
-      body: "'Montserrat', sans-serif",
-      heading: "'Montserrat', sans-serif",
+      body: "'Raleway', sans-serif",
+      heading: "'Raleway', sans-serif",
+      display: "'Lobster', cursive",
     },
     button: {
       primary: {
@@ -55,8 +56,9 @@ const theme: Theme = {
       white: "#F2F2F2",
     },
     font: {
-      body: "'Montserrat', sans-serif",
-      heading: "'Montserrat', sans-serif",
+      body: "'Raleway', sans-serif",
+      heading: "'Raleway', sans-serif",
+      display: "'Lobster', cursive",
     },
     button: {
       primary: {

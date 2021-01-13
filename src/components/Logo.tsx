@@ -20,8 +20,9 @@ const StyledLogo = styled.div`
 `;
 
 const LogoText = styled.span`
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: bold;
+  font-family: ${(props) => props.theme.font.display};
   color: var(--primary-color);
 `;
 

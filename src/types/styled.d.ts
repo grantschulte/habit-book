@@ -16,6 +16,7 @@ declare module "styled-components" {
     font: {
       body: string;
       heading: string;
+      display: string;
     };
     button: {
       [buttonType: string]: {

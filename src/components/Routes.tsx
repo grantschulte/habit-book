@@ -5,7 +5,7 @@ import RouteConfig from "../route-config";
 import TodayPage from "./Today/TodayPage";
 import ScorecardPage from "./Scorecard/ScorecardPage";
 import HabitPage from "./HabitsPage";
-import PlaygroundPage from "./PlaygroundPage";
+import PlaygroundPage from "./Styleguide/StyleguidePage";
 
 const Routes: React.FC = () => {
   return (

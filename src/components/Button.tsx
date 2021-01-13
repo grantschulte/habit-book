@@ -16,7 +16,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   font-family: ${(props) => props.theme.font.heading};
   font-size: ${(props) =>
     props.size ? BUTTON_FONT_SIZE[props.size] : BUTTON_FONT_SIZE.md};
-  font-weight: normal;
+  font-weight: bold;
   text-decoration: none;
   color: ${(props) =>
     props.buttonType
