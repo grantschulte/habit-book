@@ -20,7 +20,7 @@ const StyledHabitItem = styled.div<{ done: boolean }>`
   margin-bottom: 0.5rem;
   background-color: ${(props) =>
     percentageColor(props.theme.color.background, -7)};
-  /* border: 3px solid ${(props) => props.theme.color.bodyText}; */
+  /* border: 3px solid ${(props) => props.theme.color.text}; */
   border-radius: 10px;
   cursor: pointer;
 
@@ -41,7 +41,7 @@ const HabitLabel = styled.div<{ done: boolean }>`
   color: ${(props) =>
     props.done
       ? percentageColor(props.theme.color.background, -30)
-      : props.theme.color.bodyText};
+      : props.theme.color.text};
 `;
 
 const HabitItem: React.FC<{ habit: Habit }> = ({ habit }: { habit: Habit }) => {

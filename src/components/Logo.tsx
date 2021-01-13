@@ -11,7 +11,7 @@ const StyledLogo = styled.div`
   grid-column: 1 / 2;
   background-color: ${(props) =>
     percentageColor(props.theme.color.background, -10)};
-  color: ${(props) => props.theme.color.bodyText};
+  color: ${(props) => props.theme.color.text};
 
   @media screen and (max-width: 768px) {
     grid-column: 1 / 3;

@@ -27,7 +27,12 @@ const PasswordVisibilityToggle: React.FC<PasswordVisibilityToggleProps> = ({
   );
 };
 
-const PasswordInput: React.FC<{ id: string }> = (props: { id: string }) => {
+type PasswordInputProps = { id: string; showVisibilityToggle?: boolean };
+
+const PasswordInput: React.FC<PasswordInputProps> = ({
+  id,
+  showVisibilityToggle,
+}: PasswordInputProps) => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
 
   const toggleInputType = () => {
@@ -40,11 +45,13 @@ const PasswordInput: React.FC<{ id: string }> = (props: { id: string }) => {
 
   return (
     <PasswordInputContainer>
-      <StyledPasswordInput type={getInputType()} id={props.id} />
-      <PasswordVisibilityToggle
-        onClick={toggleInputType}
-        passwordVisible={passwordVisible}
-      />
+      <StyledPasswordInput type={getInputType()} id={id} />
+      {showVisibilityToggle && (
+        <PasswordVisibilityToggle
+          onClick={toggleInputType}
+          passwordVisible={passwordVisible}
+        />
+      )}
     </PasswordInputContainer>
   );
 };

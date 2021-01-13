@@ -4,7 +4,7 @@ import styled from "styled-components";
 const StyledLink = styled(NavLink)<{ active?: boolean }>`
   display: flex;
   align-items: center;
-  color: ${(props) => props.theme.color.bodyText};
+  color: ${(props) => props.theme.color.text};
   text-decoration: none;
   padding: 0.5rem 0;
   font-weight: bold;
@@ -14,7 +14,7 @@ const StyledLink = styled(NavLink)<{ active?: boolean }>`
   }
 
   &.active {
-    color: ${(props) => props.theme.color.secondary};
+    color: ${(props) => props.theme.color.primary};
     text-decoration: none;
   }
 

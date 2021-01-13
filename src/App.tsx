@@ -25,7 +25,7 @@ const MainContent = styled.main`
   flex-direction: column;
   overflow-y: scroll;
   grid-column: 2 / 3;
-  grid-row: 2 / 5;
+  grid-row: 1 / 5;
 
   @media screen and (max-width: 768px) {
     grid-column: 1 / 3;
@@ -33,7 +33,7 @@ const MainContent = styled.main`
   }
 `;
 
-function App() {
+const App: React.FC = () => {
   return (
     <Router>
       <ScrollToTop />
@@ -56,6 +56,6 @@ function App() {
       </ThemeProvider>
     </Router>
   );
-}
+};
 
 export default App;

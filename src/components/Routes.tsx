@@ -5,7 +5,7 @@ import RouteConfig from "../route-config";
 import TodayPage from "./Today/TodayPage";
 import ScorecardPage from "./Scorecard/ScorecardPage";
 import HabitPage from "./HabitsPage";
-import PlaygroundPage from "./Styleguide/StyleguidePage";
+import StyleguidePage from "./Styleguide/StyleguidePage";
 
 const Routes: React.FC = () => {
   return (
@@ -23,8 +23,8 @@ const Routes: React.FC = () => {
         <HabitPage></HabitPage>
       </Route>
       <Route path={RouteConfig.settings.path}></Route>
-      <Route path="/playground">
-        <PlaygroundPage />
+      <Route path="/styleguide">
+        <StyleguidePage />
       </Route>
     </Switch>
   );

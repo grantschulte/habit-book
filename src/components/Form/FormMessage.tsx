@@ -1,7 +1,28 @@
-import React from "react";
+import styled from "styled-components";
+import { percentageColor } from "../../utils/css.utils";
 
-const Component: React.FC = () => {
-  return <div></div>;
-};
+type MessageType = "success" | "error" | "warning" | "info";
 
-export default Component;
+const FormMessage = styled.div<{ type: MessageType }>`
+  font-size: 1rem;
+  color: ${(props) => percentageColor(props.theme.color[props.type], -10)};
+  /* padding: 0.5rem; */
+  margin-bottom: 1rem;
+  border-radius: 0.25rem;
+`;
+
+export const WarningMessage = styled(FormMessage).attrs({
+  type: "warning",
+})``;
+
+export const SuccessMessage = styled(FormMessage).attrs({
+  type: "success",
+})``;
+
+export const ErrorMessage = styled(FormMessage).attrs({
+  type: "error",
+})``;
+
+export const InfoMessage = styled(FormMessage).attrs({
+  type: "info",
+})``;

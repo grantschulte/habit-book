@@ -6,10 +6,12 @@ declare module "styled-components" {
       primary: string;
       secondary: string;
       tertiary: string;
-      bodyText: string;
+      text: string;
       background: string;
       success: string;
       error: string;
+      warning: string;
+      info: string;
       black: string;
       white: string;
     };

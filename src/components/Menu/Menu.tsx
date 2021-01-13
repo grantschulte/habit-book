@@ -20,7 +20,7 @@ const StyledMenu = styled(Container)`
   font-size: 1rem;
   background-color: ${(props) =>
     percentageColor(props.theme.color.background, -10)};
-  color: ${(props) => props.theme.color.bodyText};
+  color: ${(props) => props.theme.color.text};
 
   @media screen and (max-width: 768px) {
     grid-column: 1 / 3;

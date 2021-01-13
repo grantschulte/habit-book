@@ -8,10 +8,12 @@ import { HabitHistoryMonth } from "../../types/habit-score";
 const ScorecardTop = styled.div`
   display: flex;
   align-items: center;
+  padding-bottom: 0.5rem;
   margin-bottom: 1rem;
-  border-bottom: 1px solid ${(props) => props.theme.color.bodyText};
+  border-bottom: 1px solid ${(props) => props.theme.color.text};
 
   .monthHeading {
+    margin: 0;
     margin-right: auto;
   }
 `;
@@ -26,7 +28,7 @@ const ScorecardGrid = styled.div<{ habitCols: number }>`
 const StyledScorecardMonth = styled.div`
   border: 2px solid
     ${(props) => percentageColor(props.theme.color.background, -10)};
-  padding: 0.5rem 1.5rem 1.5rem;
+  padding: 1.5rem;
   border-radius: 0.5rem;
 `;
 

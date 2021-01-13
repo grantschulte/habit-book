@@ -11,12 +11,15 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     font-size: 16px;
     font-family: ${(props) => props.theme.font.body};
-    color: ${(props) => props.theme.color.bodyText};
+    color: ${(props) => props.theme.color.text};
     background: ${(props) => props.theme.color.background};
   }
 
   h1, h2, h3, h4, h5, h6 {
     margin-top: 0;
+  }
+
+  p {
   }
 `;
 
