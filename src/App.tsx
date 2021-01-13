@@ -11,7 +11,6 @@ import Menu from "./components/Menu/Menu";
 import Routes from "./components/Routes";
 import GlobalStyle from "./GlobalStyle";
 import ScrollToTop from "./effects/ScrollToTop";
-// import PageHeading from "./components/PageHeading";
 
 const AppWrapper = styled.div`
   display: grid;
@@ -44,7 +43,6 @@ const App: React.FC = () => {
             <HabitHistoryProvider>
               <Menu />
               <Logo />
-              {/* <PageHeading /> */}
               <MainContent>
                 <HabitProvider>
                   <Routes />

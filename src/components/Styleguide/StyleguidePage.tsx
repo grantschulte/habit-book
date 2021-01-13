@@ -1,5 +1,5 @@
 import React from "react";
-import { BiMouse } from "react-icons/bi";
+import { BiCloud, BiMouse } from "react-icons/bi";
 import Button from "../Button";
 import Container from "../Layout/Container";
 import Section from "../Layout/Section";
@@ -14,6 +14,8 @@ import {
   SuccessMessage,
   WarningMessage,
 } from "../Form/FormMessage";
+import StyledLink from "../StyledLink";
+import MenuLink from "../Menu/MenuLink";
 
 const PlaygroundPage: React.FC = () => {
   return (
@@ -97,6 +99,15 @@ const PlaygroundPage: React.FC = () => {
         <WarningMessage>This is a warning message.</WarningMessage>
         <ErrorMessage>This is an error message.</ErrorMessage>
         <InfoMessage>This is an info message.</InfoMessage>
+      </Section>
+
+      <Section>
+        <StyleguideHeading as="h2">Links</StyleguideHeading>
+        <StyledLink to="/">Link</StyledLink>
+        <MenuLink to="/today">Menu Link</MenuLink>
+        <MenuLink to="/today" icon={BiCloud}>
+          Menu Link w/Icon
+        </MenuLink>
       </Section>
     </Container>
   );

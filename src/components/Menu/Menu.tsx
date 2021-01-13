@@ -10,7 +10,7 @@ import {
   BiCog,
   BiTachometer,
 } from "react-icons/bi";
-import StyledLink from "./StyledLink";
+import MenuLink from "./MenuLink";
 
 const StyledMenu = styled(Container)`
   display: flex;
@@ -33,26 +33,21 @@ const StyledMenu = styled(Container)`
 function Menu() {
   return (
     <StyledMenu>
-      <StyledLink exact to={RouteConfig.dashboard.path}>
-        <BiTachometer className="menu-icon"></BiTachometer>
-        <span>Dashboard</span>
-      </StyledLink>
-      <StyledLink exact to={RouteConfig.today.path}>
-        <BiCheckDouble className="menu-icon"></BiCheckDouble>
-        <span>Today</span>
-      </StyledLink>
-      <StyledLink to={RouteConfig.scorecard.path}>
-        <BiChart className="menu-icon"></BiChart>
-        <span>Scorecard</span>
-      </StyledLink>
-      <StyledLink to={RouteConfig.habits.path}>
-        <BiRecycle className="menu-icon"></BiRecycle>
-        <span>Habits</span>
-      </StyledLink>
-      <StyledLink to={RouteConfig.settings.path}>
-        <BiCog className="menu-icon"></BiCog>
-        <span>Settings</span>
-      </StyledLink>
+      <MenuLink exact to={RouteConfig.dashboard.path} icon={BiTachometer}>
+        Dashboard
+      </MenuLink>
+      <MenuLink to={RouteConfig.today.path} icon={BiCheckDouble}>
+        Today
+      </MenuLink>
+      <MenuLink to={RouteConfig.scorecard.path} icon={BiChart}>
+        Scorecard
+      </MenuLink>
+      <MenuLink to={RouteConfig.habits.path} icon={BiRecycle}>
+        Habits
+      </MenuLink>
+      <MenuLink to={RouteConfig.settings.path} icon={BiCog}>
+        Settings
+      </MenuLink>
     </StyledMenu>
   );
 }
