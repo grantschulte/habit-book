@@ -8,12 +8,7 @@ import Label from "../Form/Label";
 import PasswordInput from "../Form/PasswordInput";
 import Heading from "../Typography/Heading";
 import StyleguideHeading from "./StyleguideHeading";
-import {
-  ErrorMessage,
-  InfoMessage,
-  SuccessMessage,
-  WarningMessage,
-} from "../Form/FormMessage";
+import { ErrorAlert, InfoAlert, SuccessAlert, WarningAlert } from "../Alert";
 import StyledLink from "../StyledLink";
 import MenuLink from "../Menu/MenuLink";
 
@@ -95,10 +90,22 @@ const PlaygroundPage: React.FC = () => {
         <Heading as="h5">Heading 5</Heading>
         <Heading as="h6">Heading 6</Heading>
         <p>This is a regular paragraph.</p>
-        <SuccessMessage>This is a success message.</SuccessMessage>
-        <WarningMessage>This is a warning message.</WarningMessage>
-        <ErrorMessage>This is an error message.</ErrorMessage>
-        <InfoMessage>This is an info message.</InfoMessage>
+      </Section>
+
+      <Section>
+        <StyleguideHeading as="h2">Alert</StyleguideHeading>
+        <div>
+          <SuccessAlert>This is a success alert</SuccessAlert>
+        </div>
+        <div>
+          <WarningAlert>This is a warning alert</WarningAlert>
+        </div>
+        <div>
+          <ErrorAlert>This is an error alert</ErrorAlert>
+        </div>
+        <div>
+          <InfoAlert>This is an info alert</InfoAlert>
+        </div>
       </Section>
 
       <Section>
