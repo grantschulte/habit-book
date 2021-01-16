@@ -95,16 +95,25 @@ const PlaygroundPage: React.FC = () => {
       <Section>
         <StyleguideHeading as="h2">Alert</StyleguideHeading>
         <div>
-          <SuccessAlert>This is a success alert</SuccessAlert>
+          <SuccessAlert title="Great Job" message="This is a success alert" />
         </div>
         <div>
-          <WarningAlert>This is a warning alert</WarningAlert>
+          <WarningAlert
+            title="You need to look into this"
+            message="This is a warning alert"
+          ></WarningAlert>
         </div>
         <div>
-          <ErrorAlert>This is an error alert</ErrorAlert>
+          <ErrorAlert
+            title="Something went wrong"
+            message="This is an error alert"
+          ></ErrorAlert>
         </div>
         <div>
-          <InfoAlert>This is an info alert</InfoAlert>
+          <InfoAlert
+            title="We wanted to let you know"
+            message="This is an info alert"
+          ></InfoAlert>
         </div>
       </Section>
 
