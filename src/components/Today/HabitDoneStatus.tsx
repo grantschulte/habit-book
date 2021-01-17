@@ -16,7 +16,7 @@ const HabitDoneStatus: React.FC<{ done: boolean; size?: string }> = ({
 }) => {
   const theme = React.useContext(ThemeContext);
   const color = done
-    ? theme.color.success
+    ? theme.color.green["500"]
     : percentageColor(theme.color.background, -30);
 
   return (

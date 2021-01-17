@@ -20,7 +20,6 @@ const StyledHabitItem = styled.div<{ done: boolean }>`
   margin-bottom: 0.5rem;
   background-color: ${(props) =>
     percentageColor(props.theme.color.background, -7)};
-  /* border: 3px solid ${(props) => props.theme.color.text}; */
   border-radius: 10px;
   cursor: pointer;
 

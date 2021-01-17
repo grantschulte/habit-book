@@ -6,21 +6,22 @@ import TodayPage from "./Today/TodayPage";
 import ScorecardPage from "./Scorecard/ScorecardPage";
 import HabitPage from "./HabitsPage/HabitsPage";
 import StyleguidePage from "./Styleguide/StyleguidePage";
+import DashboardPage from "./Dashboard/DashboardPage";
 
 const Routes: React.FC = () => {
   return (
     <Switch>
       <Route exact path={RouteConfig.dashboard.path}>
-        {/* <TodayPage></TodayPage> */}
+        <DashboardPage />
       </Route>
       <Route path={RouteConfig.today.path}>
-        <TodayPage></TodayPage>
+        <TodayPage />
       </Route>
       <Route path={RouteConfig.scorecard.path}>
-        <ScorecardPage></ScorecardPage>
+        <ScorecardPage />
       </Route>
       <Route path={RouteConfig.habits.path}>
-        <HabitPage></HabitPage>
+        <HabitPage />
       </Route>
       <Route path={RouteConfig.settings.path}></Route>
       <Route path="/styleguide">
