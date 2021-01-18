@@ -1,6 +1,6 @@
-import React, { SyntheticEvent } from "react";
+import React from "react";
 import styled from "styled-components";
-import Habit from "../types/habit";
+import { HabitItemProps } from "../types/habit-item";
 import { percentageColor } from "../utils/css.utils";
 
 const HabitItemFlex = styled.div`
@@ -43,17 +43,6 @@ const HabitLabel = styled.div<{ done: boolean }>`
       : props.theme.color.text};
 `;
 
-type HabitItemProps = {
-  habit: Habit;
-  Icon?: React.ComponentType<HabitItemIconProps>;
-  onClick?: (e: SyntheticEvent) => void;
-};
-
-export type HabitItemIconProps = {
-  isDone?: boolean;
-  size?: string;
-};
-
 const HabitItem: React.FC<HabitItemProps> = ({
   habit,
   Icon,
@@ -63,7 +52,7 @@ const HabitItem: React.FC<HabitItemProps> = ({
     <StyledHabitItem done={habit.done} onClick={onClick}>
       <HabitItemFlex>
         <HabitLabel done={habit.done}>{habit.label}</HabitLabel>
-        {Icon && <Icon isDone={habit.done} />}
+        {Icon && <Icon $isDone={habit.done} />}
       </HabitItemFlex>
     </StyledHabitItem>
   );

@@ -25,7 +25,7 @@ const DayRow: React.FC<DayRowProps> = ({ day }: DayRowProps): JSX.Element => {
       {day.habits.map((h) => {
         return (
           <HabitDoneCol key={h.id}>
-            <DoneIcon isDone={h.done} size="1.5rem" />
+            <DoneIcon $isDone={h.done} size="1.5rem" />
           </HabitDoneCol>
         );
       })}

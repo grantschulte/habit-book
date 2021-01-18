@@ -1,9 +1,5 @@
 import styled, { CSSProperties } from "styled-components";
-
-type FlexRowProps = {
-  flexGrow?: number;
-  flexBasis?: number;
-};
+import { FlexRowProps } from "../../types/types";
 
 export const FlexRow = styled.div<CSSProperties>`
   display: flex;
