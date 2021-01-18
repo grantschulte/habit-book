@@ -7,7 +7,7 @@ const Input = styled.input.attrs((props) => ({
 }))<InputProps>`
   background-color: ${(props) => props.theme.color.background};
   border: 2px solid ${(props) => percentageColor(props.theme.color.black, 99)};
-  border-radius: 4px;
+  border-radius: ${(props) => props.theme.borderRadii[4]};
   height: 45px;
   width: 100%;
   padding: 0 0.5rem;

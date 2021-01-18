@@ -1,9 +1,7 @@
-import React from "react";
+import React, { SyntheticEvent } from "react";
 import styled from "styled-components";
-import { useHabits } from "../../context/HabitContext";
-import Habit from "../../types/habit";
-import { percentageColor } from "../../utils/css.utils";
-import HabitDoneStatus from "./HabitDoneStatus";
+import Habit from "../types/habit";
+import { percentageColor } from "../utils/css.utils";
 
 const HabitItemFlex = styled.div`
   display: flex;
@@ -20,7 +18,7 @@ const StyledHabitItem = styled.div<{ done: boolean }>`
   margin-bottom: 0.5rem;
   background-color: ${(props) =>
     percentageColor(props.theme.color.background, -7)};
-  border-radius: 10px;
+  border-radius: ${(props) => props.theme.borderRadii[4]};
   cursor: pointer;
 
   &:last-child {
@@ -29,7 +27,9 @@ const StyledHabitItem = styled.div<{ done: boolean }>`
 
   &:hover {
     background-color: ${(props) =>
-      percentageColor(props.theme.color.background, -15)};
+      props.onClick
+        ? percentageColor(props.theme.color.background, -15)
+        : percentageColor(props.theme.color.background, -7)};
   }
 `;
 
@@ -43,13 +43,27 @@ const HabitLabel = styled.div<{ done: boolean }>`
       : props.theme.color.text};
 `;
 
-const HabitItem: React.FC<{ habit: Habit }> = ({ habit }: { habit: Habit }) => {
-  const { updateHabit } = useHabits();
+type HabitItemProps = {
+  habit: Habit;
+  Icon?: React.ComponentType<HabitItemIconProps>;
+  onClick?: (e: SyntheticEvent) => void;
+};
+
+export type HabitItemIconProps = {
+  isDone?: boolean;
+  size?: string;
+};
+
+const HabitItem: React.FC<HabitItemProps> = ({
+  habit,
+  Icon,
+  onClick,
+}: HabitItemProps) => {
   return (
-    <StyledHabitItem done={habit.done} onClick={() => updateHabit(habit)}>
+    <StyledHabitItem done={habit.done} onClick={onClick}>
       <HabitItemFlex>
         <HabitLabel done={habit.done}>{habit.label}</HabitLabel>
-        <HabitDoneStatus done={habit.done} />
+        {Icon && <Icon isDone={habit.done} />}
       </HabitItemFlex>
     </StyledHabitItem>
   );

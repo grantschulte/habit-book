@@ -2,7 +2,7 @@ import React from "react";
 import { useDate } from "../../context/DateContext";
 import styled from "styled-components";
 import DateDisplay from "./DateDisplay";
-import HabitList from "./HabitList";
+import TodayHabitList from "./TodayHabitList";
 import Container from "../Layout/Container";
 import { useHabits } from "../../context/HabitContext";
 
@@ -21,7 +21,7 @@ const TodayView: React.FC = () => {
   return (
     <StyledTodayView>
       <DateDisplay date={date}></DateDisplay>
-      <HabitList habits={habits.data}></HabitList>
+      <TodayHabitList habits={habits.data}></TodayHabitList>
     </StyledTodayView>
   );
 };
