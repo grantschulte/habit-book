@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { HabitItemProps } from "../types/habit-item";
-import { percentageColor } from "../utils/css.utils";
+import { HabitItemProps } from "../../types/habit-item";
+import { percentageColor } from "../../utils/css.utils";
 
 const HabitItemFlex = styled.div`
   display: flex;
@@ -11,7 +11,7 @@ const HabitItemFlex = styled.div`
   padding: 0 1.25rem;
 `;
 
-const StyledHabitItem = styled.div<{ done: boolean }>`
+const StyledHabitItem = styled.div`
   display: flex;
   width: 100%;
   height: 64px;
@@ -33,27 +33,19 @@ const StyledHabitItem = styled.div<{ done: boolean }>`
   }
 `;
 
-const HabitLabel = styled.div<{ done: boolean }>`
-  margin-right: auto;
-  font-size: clamp(1.25rem, 3vw, 1.25rem);
-  font-weight: bold;
-  color: ${(props) =>
-    props.done
-      ? percentageColor(props.theme.color.background, -30)
-      : props.theme.color.text};
-`;
-
 const HabitItem: React.FC<HabitItemProps> = ({
-  habit,
+  isDone,
+  label,
   Icon,
+  IconSize = "1.5rem",
   onClick,
+  innerRef,
+  children,
+  ...props
 }: HabitItemProps) => {
   return (
-    <StyledHabitItem done={habit.done} onClick={onClick}>
-      <HabitItemFlex>
-        <HabitLabel done={habit.done}>{habit.label}</HabitLabel>
-        {Icon && <Icon $isDone={habit.done} />}
-      </HabitItemFlex>
+    <StyledHabitItem onClick={onClick} ref={innerRef} {...props}>
+      <HabitItemFlex>{children}</HabitItemFlex>
     </StyledHabitItem>
   );
 };

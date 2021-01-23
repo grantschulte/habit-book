@@ -1,5 +1,5 @@
 import React from "react";
-import { RequestStatus, RequestError } from "../types/request";
+import { RequestStatus, RequestError } from "../types/types";
 import { HabitHistory } from "../types/habit-score";
 import { mockHabitHistory } from "../data/mockHabitHistory";
 

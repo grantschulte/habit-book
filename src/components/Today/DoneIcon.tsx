@@ -7,7 +7,7 @@ const DoneIcon = styled(BiCheckCircle).attrs<HabitItemIconProps>((props) => ({
   color: props.$isDone
     ? props.theme.color.green["500"]
     : percentageColor(props.theme.color.background, -30),
-  size: props.size ?? "2rem",
+  size: "1.75rem",
 }))<HabitItemIconProps>``;
 
 export default DoneIcon;

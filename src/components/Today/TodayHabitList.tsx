@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { useHabits } from "../../context/HabitContext";
 import Habit from "../../types/habit";
-import HabitItem from "../HabitItem";
+import HabitItem from "../Habit/HabitItem";
+import { HabitLabel } from "../Habit/HabitLabel";
 import DoneIcon from "./DoneIcon";
 
 const StyledHabitList = styled.div`
@@ -10,34 +11,38 @@ const StyledHabitList = styled.div`
   width: 100%;
 `;
 
-type SortHabitFn = (a: Habit, b: Habit) => number;
+// type SortHabitFn = (a: Habit, b: Habit) => number;
 
-const sortHabitsByDoneState: SortHabitFn = (a: Habit, b: Habit) => {
-  if (a.done) {
-    return 0;
-  } else {
-    return -1;
-  }
-};
+// const sortHabitsByDoneState: SortHabitFn = (a: Habit, b: Habit) => {
+//   if (a.done) {
+//     return 0;
+//   } else {
+//     return -1;
+//   }
+// };
 
 const HabitList: React.FC<{
   habits: Habit[];
 }> = ({ habits }: { habits: Habit[] }) => {
-  const { updateHabit } = useHabits();
-  const sorted = habits.sort(sortHabitsByDoneState);
+  const { dispatch, toggleHabit } = useHabits();
+  // const sorted = habits.sort(sortHabitsByDoneState);
 
   return (
     <StyledHabitList>
-      {sorted.map((h) => {
+      {habits.map((h) => {
         return (
           <HabitItem
-            habit={h}
+            isDone={h.done}
+            label={h.label}
             key={h.id.toString()}
             Icon={DoneIcon}
             onClick={() => {
-              updateHabit(h);
+              dispatch(toggleHabit(h));
             }}
-          ></HabitItem>
+          >
+            <DoneIcon $isDone={h.done} size="1.75rem" />
+            <HabitLabel $isDone={h.done}>{h.label}</HabitLabel>
+          </HabitItem>
         );
       })}
     </StyledHabitList>

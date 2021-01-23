@@ -17,11 +17,11 @@ const StyledTodayView = styled(Container)`
 
 const TodayView: React.FC = () => {
   const date = useDate();
-  const habits = useHabits();
+  const { habitsState } = useHabits();
   return (
     <StyledTodayView>
       <DateDisplay date={date}></DateDisplay>
-      <TodayHabitList habits={habits.data}></TodayHabitList>
+      <TodayHabitList habits={habitsState.habits}></TodayHabitList>
     </StyledTodayView>
   );
 };

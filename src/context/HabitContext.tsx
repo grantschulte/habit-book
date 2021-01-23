@@ -1,68 +1,58 @@
-import React from "react";
+import React, { useReducer } from "react";
 import Habit from "../types/habit";
 import { mockHabits, mockScore } from "../data/mockHabits";
 import { Score } from "../types/habit-score";
-import { RequestStatus, RequestError } from "../types/request";
+import {
+  HabitActions,
+  ToggleHabit,
+  DeleteHabit,
+  ReorderHabits,
+  AddHabit,
+  EditHabit,
+  addHabit,
+  deleteHabit,
+  reorderHabits,
+  toggleHabit,
+  editHabit,
+} from "../state/habits/habitActions";
+import { HabitsState, habitsReducer } from "../state/habits/habitReducer";
 
-type HabitContextProps = {
-  data: Habit[] | [];
-  score: Score;
-  updateHabit: (habit: Habit) => void;
-  message: string;
-  status: RequestStatus;
-  error: RequestError | undefined;
+const initHabitsState: HabitsState = {
+  habits: mockHabits,
+  status: "success",
+  error: undefined,
 };
 
-const messages = [
-  "A single step is all it takes.",
-  "One more and you're on a roll.",
-  "Let's finish this thing off!",
-  "Well done! Tomorrow is a new day.",
-];
+export type HabitContextProps = {
+  habitsState: HabitsState;
+  dispatch: React.Dispatch<HabitActions>;
+  toggleHabit: (habit: Habit) => ToggleHabit;
+  deleteHabit: (habit: Habit) => DeleteHabit;
+  reorderHabits: (payload: {
+    source: number;
+    destination: number;
+    habit: Habit;
+  }) => ReorderHabits;
+  addHabit: (label: string) => AddHabit;
+  editHabit: (label: string, id: string) => EditHabit;
+  score: Score;
+};
 
 export const HabitProvider = ({ children }: { children: React.ReactNode }) => {
-  const [data, setData] = React.useState<Habit[]>(mockHabits);
-  const [error] = React.useState<RequestError | undefined>(undefined);
-  const [status] = React.useState<RequestStatus>("success");
-  const [message, setMessage] = React.useState<string>(messages[0]);
-  const [score, setScore] = React.useState<Score>(mockScore);
-
-  const updateHabit = (habit: Habit) => {
-    const doneCount = data.filter((h) => h.done).length;
-
-    let updatedHabits: Habit[] = data.map((h: Habit) => {
-      if (h.id === habit.id) {
-        return {
-          ...habit,
-          done: !habit.done,
-        };
-      } else {
-        return h;
-      }
-    });
-
-    const updatedDoneCount = updatedHabits.filter((h) => h.done).length;
-    setData(updatedHabits);
-    setMessage(messages[updatedDoneCount]);
-    updateScore(doneCount, updatedDoneCount);
-  };
-
-  const updateScore = (doneCount: number, updatedDoneCount: number) => {
-    let completed =
-      updatedDoneCount - doneCount > 0
-        ? score.completedPoints + 1
-        : score.completedPoints - 1;
-
-    const newScore = {
-      ...score,
-      completedPoints: completed,
-    };
-    setScore(newScore);
-  };
+  const [habitsState, dispatch] = useReducer(habitsReducer, initHabitsState);
 
   return (
     <HabitContext.Provider
-      value={{ data, updateHabit, message, status, error, score }}
+      value={{
+        habitsState,
+        dispatch,
+        toggleHabit,
+        deleteHabit,
+        editHabit,
+        addHabit,
+        reorderHabits,
+        score: mockScore,
+      }}
     >
       {children}
     </HabitContext.Provider>

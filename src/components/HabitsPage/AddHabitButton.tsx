@@ -5,7 +5,8 @@ const AddHabitButton = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  background-color: ${(props) => props.theme.color.green["400"]};
+  border: 2px solid;
+  border-color: ${(props) => props.theme.color.green["400"]};
   padding: 1rem;
   font-weight: bold;
   font-size: 1.25rem;

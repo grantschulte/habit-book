@@ -2,7 +2,7 @@ type Habit = {
   id: string;
   label: string;
   done: boolean;
-  order: number;
+  order?: number;
 };
 
 export default Habit;
