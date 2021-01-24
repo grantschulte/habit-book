@@ -16,6 +16,18 @@ import {
   editHabit,
 } from "../state/habits/habitActions";
 import { HabitsState, habitsReducer } from "../state/habits/habitReducer";
+import {
+  InlineEditActions,
+  InlineEditShow,
+  InlineEditUpdateInput,
+  inlineEditShow,
+  inlineEditUpdateInput,
+  InlineEditReset,
+  inlineEditReset,
+} from "../state/habits/inlineEditActions";
+import inlineEditReducer, {
+  InlineEditState,
+} from "../state/habits/inlineEditReducer";
 
 const initHabitsState: HabitsState = {
   habits: mockHabits,
@@ -23,9 +35,15 @@ const initHabitsState: HabitsState = {
   error: undefined,
 };
 
+export const initInlineEditState: InlineEditState = {
+  showEditInput: "",
+  editInputValue: "",
+};
+
 export type HabitContextProps = {
   habitsState: HabitsState;
-  dispatch: React.Dispatch<HabitActions>;
+  dispatchHabit: React.Dispatch<HabitActions>;
+  dispatchInlineEdit: React.Dispatch<InlineEditActions>;
   toggleHabit: (habit: Habit) => ToggleHabit;
   deleteHabit: (habit: Habit) => DeleteHabit;
   reorderHabits: (payload: {
@@ -35,22 +53,38 @@ export type HabitContextProps = {
   }) => ReorderHabits;
   addHabit: (label: string) => AddHabit;
   editHabit: (label: string, id: string) => EditHabit;
+  inlineEditState: InlineEditState;
+  inlineEditShow: (id: string) => InlineEditShow;
+  inlineEditUpdateInput: (value: string) => InlineEditUpdateInput;
+  inlineEditReset: () => InlineEditReset;
   score: Score;
 };
 
 export const HabitProvider = ({ children }: { children: React.ReactNode }) => {
-  const [habitsState, dispatch] = useReducer(habitsReducer, initHabitsState);
+  const [habitsState, dispatchHabit] = useReducer(
+    habitsReducer,
+    initHabitsState
+  );
+  const [inlineEditState, dispatchInlineEdit] = useReducer(
+    inlineEditReducer,
+    initInlineEditState
+  );
 
   return (
     <HabitContext.Provider
       value={{
         habitsState,
-        dispatch,
+        dispatchHabit,
+        dispatchInlineEdit,
         toggleHabit,
         deleteHabit,
         editHabit,
         addHabit,
         reorderHabits,
+        inlineEditState,
+        inlineEditShow,
+        inlineEditUpdateInput,
+        inlineEditReset,
         score: mockScore,
       }}
     >

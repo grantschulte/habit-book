@@ -24,7 +24,7 @@ const StyledHabitList = styled.div`
 const HabitList: React.FC<{
   habits: Habit[];
 }> = ({ habits }: { habits: Habit[] }) => {
-  const { dispatch, toggleHabit } = useHabits();
+  const { dispatchHabit, toggleHabit } = useHabits();
   // const sorted = habits.sort(sortHabitsByDoneState);
 
   return (
@@ -37,7 +37,7 @@ const HabitList: React.FC<{
             key={h.id.toString()}
             Icon={DoneIcon}
             onClick={() => {
-              dispatch(toggleHabit(h));
+              dispatchHabit(toggleHabit(h));
             }}
           >
             <DoneIcon $isDone={h.done} size="1.75rem" />

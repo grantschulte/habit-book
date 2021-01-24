@@ -10,7 +10,7 @@ import {
   DropResult,
 } from "react-beautiful-dnd";
 import HabitItem from "../Habit/HabitItem";
-import { BiEdit, BiPlusCircle } from "react-icons/bi";
+import { BiCheck, BiEdit, BiPlusCircle } from "react-icons/bi";
 import AddHabitButton from "./AddHabitButton";
 import AddHabitInput from "./AddHabitInput";
 import DraggableIcon from "./DraggableIcon";
@@ -41,6 +41,15 @@ const HabitListDraggableHabitItem = styled(HabitItem).attrs((props) => ({
   margin-bottom: 0.75rem;
 `;
 
+const EditInput = styled(Input)`
+  margin-right: auto;
+`;
+
+const SaveEditIcon = styled(BiCheck)`
+  margin-right: 0.5rem;
+  color: ${(props) => props.theme.color.green[500]};
+`;
+
 const HabitList: React.FC<HabitListProps> = ({
   children,
   innerRef,
@@ -48,18 +57,19 @@ const HabitList: React.FC<HabitListProps> = ({
   return <StyledHabitList ref={innerRef}>{children}</StyledHabitList>;
 };
 
-const handleHabitLabelInput = (event: React.FormEvent<HTMLDivElement>) => {
-  console.log(event.target);
-};
-
-const EditInput = styled(Input)`
-  margin-right: auto;
-`;
-
 const HabitListDraggable: React.FC = () => {
-  const { habitsState, addHabit, reorderHabits, dispatch } = useHabits();
+  const {
+    habitsState,
+    addHabit,
+    reorderHabits,
+    dispatchHabit,
+    dispatchInlineEdit,
+    inlineEditState,
+    inlineEditShow,
+    inlineEditUpdateInput,
+    inlineEditReset,
+  } = useHabits();
   const [habitInput, updateHabitInput] = useState<string>("");
-  const [showInlineEdit, setShowInlineEdit] = useState<string>("");
   const [addHabitInputVisible, showAddHabitInputVisible] = useState<boolean>(
     false
   );
@@ -70,7 +80,7 @@ const HabitListDraggable: React.FC = () => {
 
   const handleAddHabitEnter = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      dispatch(addHabit(habitInput));
+      dispatchHabit(addHabit(habitInput));
     }
   };
 
@@ -78,16 +88,22 @@ const HabitListDraggable: React.FC = () => {
     updateHabitInput(e.target.value);
   };
 
-  const handleEditHabit = (label: string, id: string) => {
-    dispatch(editHabit(label, id));
+  const handleSaveEditHabit = (id: string) => {
+    dispatchHabit(editHabit(inlineEditState.editInputValue, id));
+    dispatchInlineEdit(inlineEditReset());
   };
 
-  const handleEditToggle = (id: string) => {
-    let showId = showInlineEdit === id ? "" : id;
-    setShowInlineEdit(showId);
+  const handleEditToggle = (id: string, label: string) => {
+    let showId = inlineEditState.showEditInput === id ? "" : id;
+    dispatchInlineEdit(inlineEditUpdateInput(label));
+    dispatchInlineEdit(inlineEditShow(showId));
   };
 
-  const onDragEnd = ({ destination, source, draggableId }: DropResult) => {
+  const handleEditHabitInput = (e: ChangeEvent<HTMLInputElement>) => {
+    dispatchInlineEdit(inlineEditUpdateInput(e.target.value));
+  };
+
+  const onDragEnd = ({ destination, source }: DropResult) => {
     if (!destination) {
       return;
     }
@@ -100,7 +116,7 @@ const HabitListDraggable: React.FC = () => {
     }
 
     const h: Habit = habitsState.habits[source.index];
-    dispatch(
+    dispatchHabit(
       reorderHabits({
         source: source.index,
         destination: destination.index,
@@ -108,6 +124,57 @@ const HabitListDraggable: React.FC = () => {
       })
     );
   };
+
+  const itemInlineEdit = (habit: Habit) => (
+    <>
+      <EditInput
+        value={inlineEditState.editInputValue}
+        onChange={handleEditHabitInput}
+      />
+      <SaveEditIcon size="2rem" onClick={() => handleSaveEditHabit(habit.id)} />
+    </>
+  );
+
+  const itemMenu = (habit: Habit) => (
+    <div>
+      <BiEdit
+        size="1.5rem"
+        onClick={() => handleEditToggle(habit.id, habit.label)}
+      />
+    </div>
+  );
+
+  const itemLabel = (habit: Habit) => (
+    <>
+      <DraggableIcon size="1.5rem" />
+      <HabitLabel>{habit.label}</HabitLabel>
+    </>
+  );
+
+  const draggableItems = (
+    <div>
+      {habitsState.habits.map((habit, index) => {
+        return (
+          <Draggable draggableId={habit.id} index={index} key={habit.label}>
+            {(provided: DraggableProvided) => (
+              <HabitListDraggableHabitItem
+                {...provided.draggableProps}
+                {...provided.dragHandleProps}
+                innerRef={provided.innerRef}
+                label={habit.label}
+                Icon={DraggableIcon}
+              >
+                {inlineEditState.showEditInput === habit.id
+                  ? itemInlineEdit(habit)
+                  : itemLabel(habit)}
+                {itemMenu(habit)}
+              </HabitListDraggableHabitItem>
+            )}
+          </Draggable>
+        );
+      })}
+    </div>
+  );
 
   return (
     <StyledHabitListDraggable>
@@ -131,50 +198,7 @@ const HabitListDraggable: React.FC = () => {
               innerRef={provided.innerRef}
               {...provided.droppableProps}
             >
-              <div>
-                {habitsState.habits.map((habit, index) => {
-                  return (
-                    <Draggable
-                      draggableId={habit.id}
-                      index={index}
-                      key={habit.label}
-                    >
-                      {(provided: DraggableProvided) => (
-                        <HabitListDraggableHabitItem
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          innerRef={provided.innerRef}
-                          label={habit.label}
-                          Icon={DraggableIcon}
-                        >
-                          {showInlineEdit !== habit.id && (
-                            <>
-                              <DraggableIcon size="1.5rem" />
-                              <HabitLabel onInput={handleHabitLabelInput}>
-                                {habit.label}
-                              </HabitLabel>
-                            </>
-                          )}
-                          {showInlineEdit === habit.id && (
-                            <EditInput
-                              onChange={(e) =>
-                                handleEditHabit(e.target.value, habit.id)
-                              }
-                            />
-                          )}
-                          <div>
-                            <BiEdit
-                              size="1.5rem"
-                              onClick={() => handleEditToggle(habit.id)}
-                            />
-                          </div>
-                        </HabitListDraggableHabitItem>
-                      )}
-                    </Draggable>
-                  );
-                })}
-              </div>
-
+              {draggableItems}
               {provided.placeholder}
             </HabitList>
           )}

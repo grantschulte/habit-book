@@ -54,8 +54,6 @@ const reduceEditHabits = (state: HabitsState, action: EditHabit) => {
 };
 
 export const habitsReducer = (state: HabitsState, action: HabitActions) => {
-  console.log(action.type);
-
   switch (action.type) {
     case TOGGLE:
       return reduceToggleHabits(state, action);
