@@ -20,7 +20,7 @@ export type EditHabit = {
 
 export type DeleteHabit = {
   type: typeof DELETE;
-  habit: Habit;
+  id: string;
 };
 
 export type ReorderHabits = {
@@ -59,10 +59,10 @@ export const editHabit = (label: string, id: string): EditHabit => {
   };
 };
 
-export const deleteHabit = (habit: Habit): DeleteHabit => {
+export const deleteHabit = (id: string): DeleteHabit => {
   return {
     type: DELETE,
-    habit,
+    id,
   };
 };
 

@@ -45,7 +45,7 @@ export type HabitContextProps = {
   dispatchHabit: React.Dispatch<HabitActions>;
   dispatchInlineEdit: React.Dispatch<InlineEditActions>;
   toggleHabit: (habit: Habit) => ToggleHabit;
-  deleteHabit: (habit: Habit) => DeleteHabit;
+  deleteHabit: (id: string) => DeleteHabit;
   reorderHabits: (payload: {
     source: number;
     destination: number;

@@ -3,7 +3,7 @@ import { BiCheck, BiError, BiErrorCircle, BiInfoCircle } from "react-icons/bi";
 import { IconType } from "react-icons/lib";
 import styled from "styled-components";
 
-type AlertType = "success" | "error" | "warning" | "info";
+export type AlertType = "success" | "error" | "warning" | "info";
 
 const StyledAlert = styled.div<{ type: AlertType }>`
   display: flex;
@@ -13,7 +13,7 @@ const StyledAlert = styled.div<{ type: AlertType }>`
   margin-bottom: 1rem;
   border-radius: ${(props) => props.theme.borderRadii[2]};
   padding: ${(props) => {
-    return `${props.theme.spacing[2]}  ${props.theme.spacing[3]}`;
+    return `${props.theme.spacing[3]}  ${props.theme.spacing[3]}`;
   }};
 
   ${({ type, theme }) => {
@@ -70,7 +70,7 @@ export const Alert: React.FC<AlertProps> = ({
 }: AlertProps) => {
   return (
     <StyledAlert type={type}>
-      <Icon size="1.5rem" />
+      <Icon size="1.5rem" style={{ flexShrink: 0 }} />
       <StyledAlertBody>
         <StyledAlertTitle>{title}</StyledAlertTitle>
         <StyledAlertMessage>{message}</StyledAlertMessage>

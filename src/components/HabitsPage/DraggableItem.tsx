@@ -1,9 +1,9 @@
 import React, { ChangeEvent, KeyboardEvent } from "react";
 import { Draggable, DraggableProvided } from "react-beautiful-dnd";
-import { BiCheck, BiEdit } from "react-icons/bi";
+import { BiCheck, BiEdit, BiTrash } from "react-icons/bi";
 import styled from "styled-components";
 import { useHabits } from "../../context/HabitContext";
-import { editHabit } from "../../state/habits/habitActions";
+import { deleteHabit, editHabit } from "../../state/habits/habitActions";
 import Habit from "../../types/habit";
 import Input from "../Form/Input";
 import HabitItem from "../Habit/HabitItem";
@@ -22,8 +22,16 @@ const EditInput = styled(Input)`
 `;
 
 const SaveEditIcon = styled(BiCheck)`
-  margin-right: 0.5rem;
   color: ${(props) => props.theme.color.green[500]};
+`;
+
+const ItemMenuIcon = styled.span`
+  margin-left: 0.5rem;
+  display: flex;
+`;
+
+const ItemMenu = styled.div`
+  display: flex;
 `;
 
 type DraggableItemProps = { habit: Habit; index: number };
@@ -46,9 +54,9 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
     dispatchInlineEdit(inlineEditReset());
   };
 
-  const handleEditToggle = (label: string) => {
+  const handleEditToggle = () => {
     let showId = inlineEditState.showEditInput === habit.id ? "" : habit.id;
-    dispatchInlineEdit(inlineEditUpdateInput(label));
+    dispatchInlineEdit(inlineEditUpdateInput(habit.label));
     dispatchInlineEdit(inlineEditShow(showId));
   };
 
@@ -62,8 +70,12 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
     }
   };
 
+  const handleDeleteItem = () => {
+    dispatchHabit(deleteHabit(habit.id));
+  };
+
   return (
-    <Draggable draggableId={habit.id} index={index} key={habit.label}>
+    <Draggable draggableId={habit.id} index={index} key={habit.id}>
       {(provided: DraggableProvided) => (
         <HabitItemDraggable
           {...provided.draggableProps}
@@ -79,20 +91,22 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
                 onChange={handleEditHabitChange}
                 onKeyUp={handleEditHabitKeyUp}
               />
-              <SaveEditIcon size="2rem" onClick={handleSaveEditHabit} />
+              <SaveEditIcon size="2.5rem" onClick={handleSaveEditHabit} />
             </>
           ) : (
             <>
               <DraggableIcon size="1.5rem" />
               <HabitLabel>{habit.label}</HabitLabel>
+              <ItemMenu>
+                <ItemMenuIcon>
+                  <BiEdit size="1.5rem" onClick={handleEditToggle} />
+                </ItemMenuIcon>
+                <ItemMenuIcon>
+                  <BiTrash size="1.5rem" onClick={handleDeleteItem} />
+                </ItemMenuIcon>
+              </ItemMenu>
             </>
           )}
-          <div>
-            <BiEdit
-              size="1.5rem"
-              onClick={() => handleEditToggle(habit.label)}
-            />
-          </div>
         </HabitItemDraggable>
       )}
     </Draggable>

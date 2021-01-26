@@ -4,6 +4,7 @@ import { RequestError, RequestStatus } from "../../types/types";
 import {
   ADD,
   DELETE,
+  DeleteHabit,
   EDIT,
   EditHabit,
   HabitActions,
@@ -53,6 +54,14 @@ const reduceEditHabits = (state: HabitsState, action: EditHabit) => {
   });
 };
 
+const reduceDeleteHabit = (state: HabitsState, action: DeleteHabit) => {
+  let habits: Habit[] = state.habits.filter((habit) => habit.id !== action.id);
+
+  return Object.assign({}, state, {
+    habits,
+  });
+};
+
 export const habitsReducer = (state: HabitsState, action: HabitActions) => {
   switch (action.type) {
     case TOGGLE:
@@ -76,7 +85,7 @@ export const habitsReducer = (state: HabitsState, action: HabitActions) => {
       return reduceEditHabits(state, action);
 
     case DELETE:
-      return Object.assign({}, state);
+      return reduceDeleteHabit(state, action);
 
     case REORDER:
       const newHabits = [...state.habits];
