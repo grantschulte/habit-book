@@ -1,5 +1,5 @@
-import { useLocation } from "react-router-dom";
-import { PageTitleMappings } from "../route-config";
+import { useLocation } from "Router";
+import { PageTitleMappings } from "config/routes";
 
 export default function usePageTitle() {
   const location = useLocation();

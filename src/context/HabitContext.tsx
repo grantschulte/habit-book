@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
 import Habit from "../types/habit";
-import { mockHabits, mockScore } from "../data/mockHabits";
+import { mockScore } from "../data/mockHabits";
 import { Score } from "../types/habit-score";
 import {
   HabitActions,
@@ -15,35 +15,15 @@ import {
   toggleHabit,
   editHabit,
 } from "../state/habits/habitActions";
-import { HabitsState, habitsReducer } from "../state/habits/habitReducer";
 import {
-  InlineEditActions,
-  InlineEditShow,
-  InlineEditUpdateInput,
-  inlineEditShow,
-  inlineEditUpdateInput,
-  InlineEditReset,
-  inlineEditReset,
-} from "../state/habits/inlineEditActions";
-import inlineEditReducer, {
-  InlineEditState,
-} from "../state/habits/inlineEditReducer";
-
-const initHabitsState: HabitsState = {
-  habits: mockHabits,
-  status: "success",
-  error: undefined,
-};
-
-export const initInlineEditState: InlineEditState = {
-  showEditInput: "",
-  editInputValue: "",
-};
+  HabitsState,
+  habitsReducer,
+  initHabitsState,
+} from "../state/habits/habitReducer";
 
 export type HabitContextProps = {
   habitsState: HabitsState;
   dispatchHabit: React.Dispatch<HabitActions>;
-  dispatchInlineEdit: React.Dispatch<InlineEditActions>;
   toggleHabit: (habit: Habit) => ToggleHabit;
   deleteHabit: (id: string) => DeleteHabit;
   reorderHabits: (payload: {
@@ -53,10 +33,6 @@ export type HabitContextProps = {
   }) => ReorderHabits;
   addHabit: (label: string) => AddHabit;
   editHabit: (label: string, id: string) => EditHabit;
-  inlineEditState: InlineEditState;
-  inlineEditShow: (id: string) => InlineEditShow;
-  inlineEditUpdateInput: (value: string) => InlineEditUpdateInput;
-  inlineEditReset: () => InlineEditReset;
   score: Score;
 };
 
@@ -65,26 +41,17 @@ export const HabitProvider = ({ children }: { children: React.ReactNode }) => {
     habitsReducer,
     initHabitsState
   );
-  const [inlineEditState, dispatchInlineEdit] = useReducer(
-    inlineEditReducer,
-    initInlineEditState
-  );
 
   return (
     <HabitContext.Provider
       value={{
         habitsState,
         dispatchHabit,
-        dispatchInlineEdit,
         toggleHabit,
         deleteHabit,
         editHabit,
         addHabit,
         reorderHabits,
-        inlineEditState,
-        inlineEditShow,
-        inlineEditUpdateInput,
-        inlineEditReset,
         score: mockScore,
       }}
     >

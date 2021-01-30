@@ -1,3 +1,4 @@
+import { mockHabits } from "data/mockHabits";
 import Habit from "../../types/habit";
 import { Score } from "../../types/habit-score";
 import { RequestError, RequestStatus } from "../../types/types";
@@ -20,7 +21,14 @@ export type HabitsState = {
   score?: Score;
 };
 
+export const initHabitsState: HabitsState = {
+  habits: mockHabits,
+  status: "success",
+  error: undefined,
+};
+
 const reduceToggleHabits = (state: HabitsState, action: ToggleHabit) => {
+  console.log(action.habit);
   let habits: Habit[] = state.habits.map((h: Habit) => {
     if (h.id === action.habit.id) {
       return {
@@ -63,6 +71,8 @@ const reduceDeleteHabit = (state: HabitsState, action: DeleteHabit) => {
 };
 
 export const habitsReducer = (state: HabitsState, action: HabitActions) => {
+  // console.log(state, action);
+
   switch (action.type) {
     case TOGGLE:
       return reduceToggleHabits(state, action);
