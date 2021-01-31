@@ -1,3 +1,4 @@
+import AccountCreate from "modules/account/AccountCreate/AccountCreate";
 import Dashboard from "modules/dashboard";
 import Habits from "modules/habits";
 import Scorecard from "modules/scorecard";
@@ -17,6 +18,12 @@ type RouteConfig = {
 };
 
 const routes: RouteConfig = {
+  accountCreate: {
+    name: "account-create",
+    path: "/account/create",
+    title: "Create Account",
+    component: AccountCreate,
+  },
   dashboard: {
     name: "dashboard",
     path: "/",

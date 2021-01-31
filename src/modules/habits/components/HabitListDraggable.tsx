@@ -14,8 +14,8 @@ import { Alert, AlertType } from "modules/common/Alert";
 import DraggableItem from "./DraggableItem/DraggableItem";
 import AddHabitButton from "./AddHabitButton";
 import AddHabitInput from "./AddHabitInput";
-import { habitsReducer, initHabitsState } from "state/habits/habitReducer";
-import { addHabit, reorderHabits } from "state/habits/habitActions";
+import { habitsReducer, initHabitsState } from "state/habits/habit.reducer";
+import { addHabit, reorderHabits } from "state/habits/habit.actions";
 
 const StyledHabitListDraggable = styled.div`
   width: 100%;

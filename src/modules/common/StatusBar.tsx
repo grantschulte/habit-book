@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
 import styled from "styled-components";
 import { percentageColor } from "utils/css.utils";
-import { habitsReducer, initHabitsState } from "state/habits/habitReducer";
+import { habitsReducer, initHabitsState } from "state/habits/habit.reducer";
 
 const StyledStatusBar = styled.div`
   position: relative;

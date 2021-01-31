@@ -2,8 +2,8 @@ import React, { useReducer } from "react";
 import styled from "styled-components";
 import HabitItem from "modules/common/HabitItem/HabitItem";
 import { HabitLabel } from "modules/common/HabitItem/HabitLabel";
-import { toggleHabit } from "state/habits/habitActions";
-import { habitsReducer, initHabitsState } from "state/habits/habitReducer";
+import { toggleHabit } from "state/habits/habit.actions";
+import { habitsReducer, initHabitsState } from "state/habits/habit.reducer";
 import DoneIcon from "./DoneIcon";
 
 const StyledHabitList = styled.div`

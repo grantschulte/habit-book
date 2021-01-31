@@ -51,8 +51,6 @@ const StyledButton = styled.button<StyledButtonProps>`
 
 const StyledButtonIcon = styled.span`
   font-size: inherit;
-  margin-right: 0.25em;
-  margin-left: -0.25em;
 `;
 
 const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
@@ -63,7 +61,7 @@ const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
       as={props.as}
       href={props.href}
     >
-      {props.icon && <StyledButtonIcon as={props.icon} />}
+      {props.icon ? <StyledButtonIcon as={props.icon} /> : null}
       {props.children}
     </StyledButton>
   );

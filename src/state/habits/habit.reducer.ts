@@ -12,7 +12,7 @@ import {
   REORDER,
   TOGGLE,
   ToggleHabit,
-} from "./habitActions";
+} from "./habit.actions";
 
 export type HabitsState = {
   habits: Habit[];

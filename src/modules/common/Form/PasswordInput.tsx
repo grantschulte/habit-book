@@ -27,11 +27,16 @@ const PasswordVisibilityToggle: React.FC<PasswordVisibilityToggleProps> = ({
   );
 };
 
-type PasswordInputProps = { id: string; showVisibilityToggle?: boolean };
+type PasswordInputProps = {
+  id: string;
+  showVisibilityToggle?: boolean;
+  noMax?: boolean;
+};
 
 const PasswordInput: React.FC<PasswordInputProps> = ({
   id,
   showVisibilityToggle,
+  noMax,
 }: PasswordInputProps) => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
 
@@ -45,7 +50,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
 
   return (
     <PasswordInputContainer>
-      <StyledPasswordInput type={getInputType()} id={id} />
+      <StyledPasswordInput type={getInputType()} id={id} noMax={noMax} />
       {showVisibilityToggle && (
         <PasswordVisibilityToggle
           onClick={toggleInputType}

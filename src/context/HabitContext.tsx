@@ -14,12 +14,12 @@ import {
   reorderHabits,
   toggleHabit,
   editHabit,
-} from "../state/habits/habitActions";
+} from "../state/habits/habit.actions";
 import {
   HabitsState,
   habitsReducer,
   initHabitsState,
-} from "../state/habits/habitReducer";
+} from "../state/habits/habit.reducer";
 
 export type HabitContextProps = {
   habitsState: HabitsState;

@@ -1,6 +1,6 @@
 import React, { ChangeEvent, KeyboardEvent, useReducer } from "react";
 import styled from "styled-components";
-import { deleteHabit, editHabit } from "state/habits/habitActions";
+import { deleteHabit, editHabit } from "state/habits/habit.actions";
 import Habit from "types/habit";
 import { Draggable, DraggableProvided } from "modules/common/DragNDrop";
 import { BiCheck, BiEdit, BiTrash } from "modules/common/Icons";
@@ -16,7 +16,7 @@ import {
   inlineEditUpdateInput,
   inlineEditReset,
 } from "./DraggableItem.actions";
-import { habitsReducer, initHabitsState } from "state/habits/habitReducer";
+import { habitsReducer, initHabitsState } from "state/habits/habit.reducer";
 
 const HabitItemDraggable = styled(HabitItem).attrs((props) => ({
   $isDone: false,
