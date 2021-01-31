@@ -11,7 +11,7 @@ const Input = styled.input.attrs((props) => ({
   height: 45px;
   width: 100%;
   padding: 0 0.5rem;
-  max-width: ${(props) => (props.noMax ? "auto" : "400px")};
+  max-width: 400px;
   font-size: 1rem;
   font-family: ${(props) => props.theme.font.body};
 

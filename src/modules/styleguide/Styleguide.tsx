@@ -5,7 +5,7 @@ import Container from "modules/common/Container";
 import Section from "modules/common/Section";
 import Input from "modules/common/Form/Input";
 import Label from "modules/common/Form/Label";
-import PasswordInput from "modules/common/Form/PasswordInput";
+import InputPassword from "modules/common/PasswordInput/PasswordInput";
 import Heading from "modules/common/Heading";
 import StyleguideHeading from "./components/StyleguideHeading";
 import {
@@ -78,7 +78,7 @@ const Styleguide: React.FC = () => {
         </div>
         <div style={{ marginBottom: "1rem" }}>
           <Label for="pw" value="Password">
-            <PasswordInput id="pw" showVisibilityToggle />
+            <InputPassword id="pw" showVisibilityToggle />
           </Label>
         </div>
       </Section>

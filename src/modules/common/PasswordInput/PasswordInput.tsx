@@ -1,42 +1,27 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { PasswordVisibilityToggleProps } from "types/input";
-import { BiHide, BiShow } from "modules/common/Icons";
-import Input from "./Input";
-
-export const StyledPasswordInput = styled(Input)`
-  font-size: 1rem;
-  letter-spacing: 1px;
-  margin-right: 0.5rem;
-`;
+import Input from "../Form/Input";
+import PasswordVisibilityToggle from "./PasswordVisibilityToggle";
 
 const PasswordInputContainer = styled.div`
   display: flex;
   align-items: center;
+  position: relative;
 `;
 
-const PasswordVisibilityToggle: React.FC<PasswordVisibilityToggleProps> = ({
-  onClick,
-  passwordVisible,
-}: PasswordVisibilityToggleProps) => {
-  const Icon = passwordVisible ? BiHide : BiShow;
-  return (
-    <Icon onClick={onClick} size="1.5rem" style={{ cursor: "pointer" }}>
-      Toggle
-    </Icon>
-  );
-};
+const StyledPasswordInput = styled(Input)`
+  font-size: 1rem;
+  letter-spacing: 1px;
+`;
 
 type PasswordInputProps = {
   id: string;
   showVisibilityToggle?: boolean;
-  noMax?: boolean;
 };
 
 const PasswordInput: React.FC<PasswordInputProps> = ({
   id,
   showVisibilityToggle,
-  noMax,
 }: PasswordInputProps) => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
 
@@ -50,7 +35,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
 
   return (
     <PasswordInputContainer>
-      <StyledPasswordInput type={getInputType()} id={id} noMax={noMax} />
+      <StyledPasswordInput type={getInputType()} id={id} />
       {showVisibilityToggle && (
         <PasswordVisibilityToggle
           onClick={toggleInputType}
