@@ -25,6 +25,7 @@ type FormInput = {
   type: "email" | "password";
   placeholder: string;
   label: string;
+  required?: boolean;
   Component: any;
 };
 
@@ -34,6 +35,7 @@ const formInputs: FormInput[] = [
     type: "email",
     placeholder: "Email",
     label: "Email",
+    required: true,
     Component: Input,
   },
   {
@@ -41,6 +43,7 @@ const formInputs: FormInput[] = [
     type: "password",
     placeholder: "Password",
     label: "Password",
+    required: true,
     Component: PasswordInput,
   },
 ];
@@ -61,8 +64,6 @@ const AccountCreate = () => {
     dispatch(validateInput(e.target));
   };
 
-  console.log(state);
-
   return (
     <Page center>
       <Col xs sm={8} md={6} lg={4}>
@@ -74,22 +75,22 @@ const AccountCreate = () => {
 
         <Form onSubmit={handleSubmit}>
           {formInputs.map((input) => {
+            const field = state.fields[input.id];
             return (
               <div style={{ marginBottom: theme.spacing[4] }} key={input.id}>
                 <Label htmlFor={input.id} value={input.label}>
-                  {!state.fields[input.id].isValid && state.submitted ? (
-                    <InputErrorMessage>
-                      {state.fields[input.id].message}
-                    </InputErrorMessage>
+                  {!field.isValid && state.submitted ? (
+                    <InputErrorMessage>{field.message}</InputErrorMessage>
                   ) : null}
 
                   <input.Component
                     id={input.id}
                     type={input.type}
                     onChange={handleValidate}
-                    value={state.fields[input.id].v}
+                    value={field.v}
                     placeholder={input.placeholder}
-                    isValid={state.fields[input.id].isValid}
+                    isValid={field.isValid}
+                    required={input.required}
                   />
                 </Label>
               </div>

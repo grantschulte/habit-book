@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { InputProps } from "types/input";
 import Input from "../Form/Input";
 import PasswordVisibilityToggle from "./PasswordVisibilityToggle";
 
@@ -15,11 +16,10 @@ const StyledPasswordInput = styled(Input)`
 `;
 
 type PasswordInputProps = {
-  id: string;
-  isValid?: boolean;
   showVisibilityToggle?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-} & Partial<HTMLInputElement>;
+} & Partial<InputProps> &
+  Partial<HTMLInputElement>;
 
 const PasswordInput: React.FC<PasswordInputProps> = ({
   id,
@@ -28,6 +28,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
   value,
   placeholder,
   isValid,
+  required,
 }: PasswordInputProps) => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
 
@@ -47,7 +48,8 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
         onChange={onChange}
         value={value}
         placeholder={placeholder}
-        isValid
+        isValid={isValid}
+        required={required}
       />
       {showVisibilityToggle && (
         <PasswordVisibilityToggle

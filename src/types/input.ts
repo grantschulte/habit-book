@@ -4,6 +4,7 @@ export type InputProps = {
   id?: string;
   type: InputType;
   isValid?: boolean;
+  required?: boolean;
 };
 
 export type PasswordVisibilityToggleProps = {
