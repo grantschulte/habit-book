@@ -1,4 +1,4 @@
-import React, { FormEvent, useContext } from "react";
+import React, { ChangeEvent, FormEvent, useContext, useReducer } from "react";
 import { Col } from "react-styled-flexboxgrid";
 import Page from "modules/common/Page";
 import Heading from "modules/common/Heading";
@@ -8,17 +8,55 @@ import Form from "modules/common/Form";
 import { ThemeContext } from "styled-components";
 import PasswordInput from "modules/common/PasswordInput/PasswordInput";
 import Button from "modules/common/Button";
+import accountCreateReducer, {
+  initAccountCreateState,
+  CREATE_ACCOUNT_EMAIL,
+  CREATE_ACCOUNT_PASSWORD,
+} from "./AccountCreate.reducer";
+import {
+  validateInput,
+  validateForm,
+} from "modules/account/AccountCreate/AccountCreate.actions";
+
+type FormInput = {
+  id: string;
+  type: "email" | "password";
+  placeholder: string;
+  Component: any;
+};
+
+const formInputs: FormInput[] = [
+  {
+    id: CREATE_ACCOUNT_EMAIL,
+    type: "email",
+    placeholder: "Email",
+    Component: Input,
+  },
+  {
+    id: CREATE_ACCOUNT_PASSWORD,
+    type: "password",
+    placeholder: "Password",
+    Component: PasswordInput,
+  },
+];
 
 const AccountCreate = () => {
   const theme = useContext(ThemeContext);
+  const [state, dispatch] = useReducer(
+    accountCreateReducer,
+    initAccountCreateState
+  );
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    dispatch(validateForm());
   };
 
-  // const handleValidate = () => {
-  //   // dispatch form validation
-  // };
+  const handleValidate = (e: ChangeEvent<HTMLInputElement>) => {
+    dispatch(validateInput(e.target));
+  };
+
+  console.log(state);
 
   return (
     <Page center>
@@ -26,20 +64,26 @@ const AccountCreate = () => {
         <Heading as="h1">Create Account</Heading>
 
         <Form onSubmit={handleSubmit}>
-          <div style={{ marginBottom: theme.spacing[4] }}>
-            <Label for="create-account-email" value="Email">
-              <Input id="create-account-email" type="email" />
-            </Label>
-          </div>
+          {formInputs.map((input) => {
+            return (
+              <div style={{ marginBottom: theme.spacing[4] }} key={input.id}>
+                <Label for={input.id} value="Email">
+                  <input.Component
+                    id={input.id}
+                    type={input.type}
+                    onChange={handleValidate}
+                    value={state.fields[input.id].v}
+                    placeholder={input.placeholder}
+                    isValid={state.fields[input.id].isValid}
+                  />
+                </Label>
 
-          <div style={{ marginBottom: theme.spacing[6] }}>
-            <Label for="create-account-password" value="Password">
-              <PasswordInput
-                showVisibilityToggle
-                id="create-account-password"
-              />
-            </Label>
-          </div>
+                {state.fields[input.id].isValid
+                  ? null
+                  : state.fields[input.id].message}
+              </div>
+            );
+          })}
 
           <Button buttonType="secondary">Submit</Button>
         </Form>

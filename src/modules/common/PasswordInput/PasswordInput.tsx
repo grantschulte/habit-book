@@ -16,12 +16,18 @@ const StyledPasswordInput = styled(Input)`
 
 type PasswordInputProps = {
   id: string;
+  isValid?: boolean;
   showVisibilityToggle?: boolean;
-};
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+} & Partial<HTMLInputElement>;
 
 const PasswordInput: React.FC<PasswordInputProps> = ({
   id,
   showVisibilityToggle,
+  onChange,
+  value,
+  placeholder,
+  isValid,
 }: PasswordInputProps) => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
 
@@ -35,7 +41,14 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
 
   return (
     <PasswordInputContainer>
-      <StyledPasswordInput type={getInputType()} id={id} />
+      <StyledPasswordInput
+        type={getInputType()}
+        id={id}
+        onChange={onChange}
+        value={value}
+        placeholder={placeholder}
+        isValid
+      />
       {showVisibilityToggle && (
         <PasswordVisibilityToggle
           onClick={toggleInputType}

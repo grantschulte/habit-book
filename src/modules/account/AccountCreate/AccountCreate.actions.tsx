@@ -1,29 +1,38 @@
 export const VALIDATE_INPUT = "VALIDATE_INPUT";
+export const VALIDATE_FORM = "VALIDATE_FORM";
 export const CLEAR_FORM = "CLEAR_FORM";
 
 export type FormValidator = "email" | "password";
+export type FormInputValue = string | number;
 
 export type ValidateInput = {
   type: typeof VALIDATE_INPUT;
-  validator: FormValidator;
-  value: string | number;
+  id: string;
+  value: string;
+  inputType: string;
+};
+
+export type ValidateForm = {
+  type: typeof VALIDATE_FORM;
 };
 
 export type ClearForm = {
   type: typeof CLEAR_FORM;
 };
 
-export const validateInput = (
-  value: string,
-  validator: FormValidator
-): ValidateInput => ({
+export const validateInput = (target: HTMLInputElement): ValidateInput => ({
   type: VALIDATE_INPUT,
-  validator,
-  value,
+  id: target.id,
+  value: target.value,
+  inputType: target.type,
+});
+
+export const validateForm = (): ValidateForm => ({
+  type: VALIDATE_FORM,
 });
 
 export const clearForm = (): ClearForm => ({
   type: CLEAR_FORM,
 });
 
-export type AccountCreateActions = ValidateInput | ClearForm;
+export type AccountCreateActions = ValidateInput | ValidateForm | ClearForm;

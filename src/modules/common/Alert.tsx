@@ -63,7 +63,7 @@ export type AlertType = "success" | "error" | "warning" | "info";
 export type AlertProps = {
   Icon: IconType;
   type: AlertType;
-  title: string;
+  title?: string;
   message: string;
 };
 
@@ -77,7 +77,7 @@ export const Alert: React.FC<AlertProps> = ({
     <StyledAlert type={type}>
       <Icon size="1.5rem" style={{ flexShrink: 0 }} />
       <StyledAlertBody>
-        <StyledAlertTitle>{title}</StyledAlertTitle>
+        {title ? <StyledAlertTitle>{title}</StyledAlertTitle> : null}
         <StyledAlertMessage>{message}</StyledAlertMessage>
       </StyledAlertBody>
     </StyledAlert>
