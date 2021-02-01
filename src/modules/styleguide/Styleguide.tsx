@@ -72,12 +72,12 @@ const Styleguide: React.FC = () => {
           <Input placeholder="Enter your name" />
         </div>
         <div style={{ marginBottom: "1rem" }}>
-          <Label for="e" value="Email">
+          <Label htmlFor="e" value="Email">
             <Input id="e" type="email" />
           </Label>
         </div>
         <div style={{ marginBottom: "1rem" }}>
-          <Label for="pw" value="Password">
+          <Label htmlFor="pw" value="Password">
             <InputPassword id="pw" showVisibilityToggle />
           </Label>
         </div>

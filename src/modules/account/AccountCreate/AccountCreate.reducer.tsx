@@ -12,6 +12,9 @@ export type FormElementField = {
   message?: string;
 };
 
+export const CREATE_ACCOUNT_EMAIL = "create-account-email";
+export const CREATE_ACCOUNT_PASSWORD = "create-account-password";
+
 export type AccountCreateState = {
   fields: {
     [key: string]: any;
@@ -19,10 +22,8 @@ export type AccountCreateState = {
   isClean: boolean;
   isValid: boolean;
   message?: string;
+  submitted: boolean;
 };
-
-export const CREATE_ACCOUNT_EMAIL = "create-account-email";
-export const CREATE_ACCOUNT_PASSWORD = "create-account-password";
 
 export const accountCreateFields = {
   [CREATE_ACCOUNT_EMAIL]: {
@@ -38,6 +39,7 @@ export const initAccountCreateState = {
   isClean: true,
   isValid: false,
   message: undefined,
+  submitted: false,
 };
 
 const accountCreateReducer = (
@@ -78,6 +80,7 @@ const accountCreateReducer = (
       return Object.assign({}, state, {
         isValid: allFieldsValid,
         message: formMessage,
+        submitted: true,
       });
     default:
       return state;

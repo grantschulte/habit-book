@@ -17,11 +17,14 @@ import {
   validateInput,
   validateForm,
 } from "modules/account/AccountCreate/AccountCreate.actions";
+import InputErrorMessage from "modules/common/Form/Input/InputErrorMessage";
+import { ErrorAlert } from "modules/common/Alert";
 
 type FormInput = {
   id: string;
   type: "email" | "password";
   placeholder: string;
+  label: string;
   Component: any;
 };
 
@@ -30,12 +33,14 @@ const formInputs: FormInput[] = [
     id: CREATE_ACCOUNT_EMAIL,
     type: "email",
     placeholder: "Email",
+    label: "Email",
     Component: Input,
   },
   {
     id: CREATE_ACCOUNT_PASSWORD,
     type: "password",
     placeholder: "Password",
+    label: "Password",
     Component: PasswordInput,
   },
 ];
@@ -63,11 +68,21 @@ const AccountCreate = () => {
       <Col xs sm={8} md={6} lg={4}>
         <Heading as="h1">Create Account</Heading>
 
+        {!state.isValid && !state.isClean && state.submitted ? (
+          <ErrorAlert message={state.message ?? ""} />
+        ) : null}
+
         <Form onSubmit={handleSubmit}>
           {formInputs.map((input) => {
             return (
               <div style={{ marginBottom: theme.spacing[4] }} key={input.id}>
-                <Label for={input.id} value="Email">
+                <Label htmlFor={input.id} value={input.label}>
+                  {!state.fields[input.id].isValid && state.submitted ? (
+                    <InputErrorMessage>
+                      {state.fields[input.id].message}
+                    </InputErrorMessage>
+                  ) : null}
+
                   <input.Component
                     id={input.id}
                     type={input.type}
@@ -77,10 +92,6 @@ const AccountCreate = () => {
                     isValid={state.fields[input.id].isValid}
                   />
                 </Label>
-
-                {state.fields[input.id].isValid
-                  ? null
-                  : state.fields[input.id].message}
               </div>
             );
           })}

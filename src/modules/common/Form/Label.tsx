@@ -1,4 +1,4 @@
-import React, { ReactChild } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const StyledLabel = styled.label<{ htmlFor: string }>``;
@@ -9,15 +9,21 @@ const LabelText = styled.div`
   margin-bottom: 0.5rem;
 `;
 
-const Label: React.FC<{
-  children: ReactChild;
-  for: string;
+type LabelProps = {
+  children: React.ReactNode;
+  htmlFor: string;
   value: string;
-}> = (props: { children: ReactChild; for: string; value: string }) => {
+};
+
+const Label: React.FC<LabelProps> = ({
+  children,
+  htmlFor,
+  value,
+}: LabelProps) => {
   return (
-    <StyledLabel htmlFor={props.for}>
-      <LabelText>{props.value}</LabelText>
-      {props.children}
+    <StyledLabel htmlFor={htmlFor}>
+      <LabelText>{value}</LabelText>
+      {children}
     </StyledLabel>
   );
 };
