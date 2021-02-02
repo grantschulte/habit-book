@@ -2,7 +2,6 @@ import React, { ChangeEvent, KeyboardEvent, useReducer, useState } from "react";
 import styled from "styled-components";
 import Habit from "types/habit";
 import { percentageColor } from "utils/css.utils";
-import { IconType } from "modules/common/Icons";
 import {
   DragDropContext,
   Droppable,
@@ -10,7 +9,7 @@ import {
   DropResult,
 } from "modules/common/DragNDrop";
 import { BiError, BiPlusCircle } from "modules/common/Icons";
-import { Alert, AlertType } from "modules/common/Alert";
+import { Alert, AlertProps } from "modules/common/Alert";
 import DraggableItem from "./DraggableItem/DraggableItem";
 import AddHabitButton from "./AddHabitButton";
 import AddHabitInput from "./AddHabitInput";
@@ -18,8 +17,7 @@ import { habitsReducer, initHabitsState } from "state/habits/habit.reducer";
 import { addHabit, reorderHabits } from "state/habits/habit.actions";
 
 const StyledHabitListDraggable = styled.div`
-  width: 100%;
-  max-width: 500px;
+  /* width: 100%; */
 `;
 
 const HabitList = styled.div`
@@ -32,13 +30,6 @@ const HabitList = styled.div`
 const AlertContainer = styled.div`
   margin-top: 0.5rem;
 `;
-
-type AlertProps = {
-  type: AlertType;
-  Icon: IconType;
-  title: string;
-  message: string;
-};
 
 const HabitListDraggable: React.FC = () => {
   const [state, dispatch] = useReducer(habitsReducer, initHabitsState);

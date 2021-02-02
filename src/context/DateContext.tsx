@@ -1,5 +1,5 @@
 import React from "react";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs, { Dayjs } from "modules/common/Date";
 
 type FormatDate = (date: Date, format: string) => string;
 

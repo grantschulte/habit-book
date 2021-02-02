@@ -8,6 +8,15 @@ import {
 import { IconType } from "react-icons/lib";
 import styled from "styled-components";
 
+export type AlertType = "success" | "error" | "warning" | "info";
+
+export type AlertProps = {
+  Icon: IconType;
+  type: AlertType;
+  title?: string;
+  message: string;
+};
+
 const StyledAlert = styled.div<{ type: AlertType }>`
   display: flex;
   align-items: flex-start;
@@ -57,15 +66,6 @@ const StyledAlertMessage = styled.div`
 const StyledAlertBody = styled.div`
   margin-left: 0.5rem;
 `;
-
-export type AlertType = "success" | "error" | "warning" | "info";
-
-export type AlertProps = {
-  Icon: IconType;
-  type: AlertType;
-  title?: string;
-  message: string;
-};
 
 export const Alert: React.FC<AlertProps> = ({
   Icon,

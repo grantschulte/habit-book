@@ -1,19 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { useHabitHistory } from "context/HabitHistoryContext";
-import Container from "modules/common/Container";
 import ScorecardMonth from "./components/ScorecardMonth";
+import Page from "modules/common/Page";
 
-const StyledScorecard = styled(Container)`
-  width: 100%;
-
-  h2 {
-    margin-top: 0;
-    color: ${(props) => props.theme.color.secondary};
-  }
-`;
-
-const ContainerGrid = styled.div`
+const ScorecardGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   grid-gap: 2rem;
@@ -37,10 +28,10 @@ const Scorecard: React.FC = () => {
   });
 
   return (
-    <StyledScorecard>
+    <Page>
       <h2>{habitHistory.data.year}</h2>
-      <ContainerGrid>{scorecards}</ContainerGrid>
-    </StyledScorecard>
+      <ScorecardGrid>{scorecards}</ScorecardGrid>
+    </Page>
   );
 };
 
