@@ -1,4 +1,5 @@
 import AccountCreate from "modules/account/AccountCreate/AccountCreate";
+import AccountSignIn from "modules/account/AccountSignIn";
 import Dashboard from "modules/dashboard";
 import Habits from "modules/habits";
 import Scorecard from "modules/scorecard";
@@ -23,6 +24,12 @@ const routes: RouteConfig = {
     path: "/account/create",
     title: "Create Account",
     component: AccountCreate,
+  },
+  accountSignIn: {
+    name: "account-sign-in",
+    path: "/account/sign-in",
+    title: "Sign In",
+    component: AccountSignIn,
   },
   dashboard: {
     name: "dashboard",

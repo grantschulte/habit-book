@@ -1,29 +1,14 @@
 import {
-  AccountCreateActions,
+  AccountFormActions,
   CLEAR_FORM,
   VALIDATE_FORM,
   VALIDATE_INPUT,
-} from "modules/account/AccountCreate/AccountCreate.actions";
+} from "modules/account/accountForm.actions";
+import { AccountFormState } from "modules/account/accountForm.types";
 import validate from "utils/validation";
-
-export type FormElementField = {
-  v: string;
-  isValid?: boolean;
-  message?: string;
-};
 
 export const CREATE_ACCOUNT_EMAIL = "create-account-email";
 export const CREATE_ACCOUNT_PASSWORD = "create-account-password";
-
-export type AccountCreateState = {
-  fields: {
-    [key: string]: any;
-  };
-  isClean: boolean;
-  isValid: boolean;
-  message?: string;
-  submitted: boolean;
-};
 
 export const accountCreateFields = {
   [CREATE_ACCOUNT_EMAIL]: {
@@ -43,8 +28,8 @@ export const initAccountCreateState = {
 };
 
 const accountCreateReducer = (
-  state: AccountCreateState,
-  action: AccountCreateActions
+  state: AccountFormState,
+  action: AccountFormActions
 ) => {
   switch (action.type) {
     case CLEAR_FORM:

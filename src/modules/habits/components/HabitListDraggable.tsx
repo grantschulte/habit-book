@@ -100,7 +100,7 @@ const HabitListDraggable: React.FC = () => {
 
   return (
     <StyledHabitListDraggable>
-      <InputCombo style={{ marginBottom: "1rem" }}>
+      <InputCombo style={{ marginBottom: "1rem" }} size="lg">
         <Input onInput={handleAddHabitInput} value={addHabitInput} />
         <Button onClick={handleAddHabitButtonClick}>
           <BiPlusCircle size="1.5rem" />

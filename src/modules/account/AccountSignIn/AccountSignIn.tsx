@@ -1,28 +1,28 @@
 import React, { ChangeEvent, FormEvent, useContext, useReducer } from "react";
-import Label from "modules/common/Form/Label";
-import Input from "modules/common/Form/Input";
-import Form from "modules/common/Form";
-import { ThemeContext } from "styled-components";
-import PasswordInput from "modules/common/PasswordInput/PasswordInput";
-import Button from "modules/common/Button";
-import accountCreateReducer, {
-  initAccountCreateState,
-  CREATE_ACCOUNT_EMAIL,
-  CREATE_ACCOUNT_PASSWORD,
-} from "./AccountCreate.reducer";
-import {
-  validateInput,
-  validateForm,
-} from "modules/account/accountForm.actions";
-import InputErrorMessage from "modules/common/Form/Input/InputErrorMessage";
-import { ErrorAlert } from "modules/common/Alert";
 import AccountPage from "modules/account/AccountCreate/AccountPage";
 import Heading from "modules/common/Heading";
+import accountSignInReducer, {
+  CREATE_SIGN_IN_EMAIL,
+  CREATE_SIGN_IN_PASSWORD,
+  initAccountSignInState,
+} from "modules/account/AccountSignIn/AccountSignIn.reducer";
+import {
+  validateForm,
+  validateInput,
+} from "modules/account/accountForm.actions";
+import Input from "modules/common/Form/Input";
+import PasswordInput from "modules/common/PasswordInput/PasswordInput";
+import Button from "modules/common/Button";
+import Form from "modules/common/Form";
+import InputErrorMessage from "modules/common/Form/Input/InputErrorMessage";
+import Label from "modules/common/Form/Label";
 import { FormInput } from "modules/account/accountForm.types";
+import { ThemeContext } from "styled-components";
+import { ErrorAlert } from "modules/common/Alert";
 
 const formInputs: FormInput[] = [
   {
-    id: CREATE_ACCOUNT_EMAIL,
+    id: CREATE_SIGN_IN_EMAIL,
     type: "email",
     placeholder: "Email",
     label: "Email",
@@ -30,7 +30,7 @@ const formInputs: FormInput[] = [
     Component: Input,
   },
   {
-    id: CREATE_ACCOUNT_PASSWORD,
+    id: CREATE_SIGN_IN_PASSWORD,
     type: "password",
     placeholder: "Password",
     label: "Password",
@@ -39,11 +39,11 @@ const formInputs: FormInput[] = [
   },
 ];
 
-const AccountCreate = () => {
+const AccountSignIn = () => {
   const theme = useContext(ThemeContext);
   const [state, dispatch] = useReducer(
-    accountCreateReducer,
-    initAccountCreateState
+    accountSignInReducer,
+    initAccountSignInState
   );
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -57,7 +57,7 @@ const AccountCreate = () => {
 
   return (
     <AccountPage>
-      <Heading as="h1">Create Account</Heading>
+      <Heading as="h1">Sign In</Heading>
 
       {!state.isValid && !state.isClean && state.submitted ? (
         <ErrorAlert message={state.message ?? ""} />
@@ -93,4 +93,4 @@ const AccountCreate = () => {
   );
 };
 
-export default AccountCreate;
+export default AccountSignIn;

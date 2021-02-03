@@ -59,7 +59,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
     height: 100%;
     width: fit-content;
     padding: 0 1rem;
-    font-size: 1rem;
+    font-size: 1em;
     flex-shrink: 0;
   }
 `;

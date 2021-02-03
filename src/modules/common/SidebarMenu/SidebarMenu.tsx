@@ -36,7 +36,7 @@ function Menu() {
       <MenuLink exact to={RouteConfig.accountCreate.path}>
         Create Account
       </MenuLink>
-      <MenuLink exact to={RouteConfig.dashboard.path}>
+      <MenuLink exact to={RouteConfig.accountSignIn.path}>
         Sign In
       </MenuLink>
       <MenuLink exact to={RouteConfig.dashboard.path} icon={BiTachometer}>

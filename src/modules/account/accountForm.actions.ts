@@ -35,4 +35,4 @@ export const clearForm = (): ClearForm => ({
   type: CLEAR_FORM,
 });
 
-export type AccountCreateActions = ValidateInput | ValidateForm | ClearForm;
+export type AccountFormActions = ValidateInput | ValidateForm | ClearForm;
