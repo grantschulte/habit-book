@@ -7,8 +7,9 @@ import {
 } from "config/button-sizes";
 import { StyledButtonProps, ButtonProps } from "types/button-types";
 import { percentageColor } from "utils/css.utils";
+import InputCombo from "modules/common/InputCombo";
 
-const StyledButton = styled.button<StyledButtonProps>`
+export const StyledButton = styled.button<StyledButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,7 +32,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   max-width: ${(props) =>
     props.fullWidth ? "100%" : props.size ? BUTTON_WIDTH[props.size] : "100%"};
   width: 100%;
-  border-radius: 4px;
+  border-radius: ${(props) => props.theme.borderRadii[4]};
   cursor: pointer;
 
   &:hover {
@@ -46,6 +47,16 @@ const StyledButton = styled.button<StyledButtonProps>`
       props.buttonType
         ? percentageColor(props.theme.button[props.buttonType].background, -5)
         : percentageColor(props.theme.color.primary, -5)};
+  }
+
+  ${InputCombo} & {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    height: 45px;
+    width: auto;
+    max-width: auto;
+    padding: 0 1.5rem;
+    font-size: 1rem;
   }
 `;
 

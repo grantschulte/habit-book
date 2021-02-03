@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { percentageColor } from "utils/css.utils";
 import { InputProps } from "types/input";
+import InputCombo from "modules/common/InputCombo";
 
 const Input = styled.input.attrs((props) => ({
   type: props.type || "text",
@@ -17,6 +18,11 @@ const Input = styled.input.attrs((props) => ({
   &:focus {
     border-color: ${(props) => props.theme.color.primary};
     outline: ${(props) => props.theme.color.primary};
+  }
+
+  ${InputCombo} & {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
   }
 `;
 

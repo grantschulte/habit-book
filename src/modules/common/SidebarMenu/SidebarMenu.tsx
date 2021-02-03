@@ -3,7 +3,6 @@ import styled from "styled-components";
 import RouteConfig from "config/routes";
 import { percentageColor } from "utils/css.utils";
 import {
-  BiChart,
   BiCheckDouble,
   BiRecycle,
   BiCog,
@@ -34,20 +33,23 @@ const StyledMenu = styled.div`
 function Menu() {
   return (
     <StyledMenu>
+      <MenuLink exact to={RouteConfig.accountCreate.path}>
+        Create Account
+      </MenuLink>
+      <MenuLink exact to={RouteConfig.dashboard.path}>
+        Sign In
+      </MenuLink>
       <MenuLink exact to={RouteConfig.dashboard.path} icon={BiTachometer}>
         Dashboard
       </MenuLink>
       <MenuLink to={RouteConfig.today.path} icon={BiCheckDouble}>
         Today
       </MenuLink>
-      <MenuLink to={RouteConfig.scorecard.path} icon={BiChart}>
-        Scorecard
-      </MenuLink>
       <MenuLink to={RouteConfig.habits.path} icon={BiRecycle}>
         Habits
       </MenuLink>
       <MenuLink to={RouteConfig.settings.path} icon={BiCog}>
-        Settings
+        Account
       </MenuLink>
     </StyledMenu>
   );

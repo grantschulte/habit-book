@@ -16,6 +16,7 @@ import {
 import StyledLink from "../common/StyledLink";
 import MenuLink from "../common/SidebarMenu/SidebarMenuLink";
 import styled from "styled-components";
+import InputCombo from "modules/common/InputCombo";
 
 const StyledRow = styled(Row)`
   margin-top: 2rem;
@@ -24,7 +25,9 @@ const StyledRow = styled(Row)`
     margin-top: 0;
   }
   &:last-child {
-    margin-bottom: 2rem;
+    ${Col} {
+      margin-bottom: 2rem;
+    }
   }
 `;
 
@@ -100,6 +103,14 @@ const Styleguide: React.FC = () => {
           <div style={{ marginBottom: "1rem" }}>
             <Label htmlFor="pw" value="Password">
               <InputPassword id="pw" showVisibilityToggle />
+            </Label>
+          </div>
+          <div style={{ marginBottom: "1rem" }}>
+            <Label htmlFor="ice" value="Input Combo">
+              <InputCombo>
+                <Input id="ice" type="text" />
+                <Button buttonType="primary">Submit</Button>
+              </InputCombo>
             </Label>
           </div>
         </Col>
