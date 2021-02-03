@@ -49,14 +49,18 @@ export const StyledButton = styled.button<StyledButtonProps>`
         : percentageColor(props.theme.color.primary, -5)};
   }
 
+  & :first-of-type {
+    margin-right: 0.25rem;
+  }
+
   ${InputCombo} & {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    height: 45px;
-    width: auto;
-    max-width: auto;
-    padding: 0 1.5rem;
+    height: 100%;
+    width: fit-content;
+    padding: 0 1rem;
     font-size: 1rem;
+    flex-shrink: 0;
   }
 `;
 
@@ -71,6 +75,7 @@ const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
       buttonType={props.buttonType}
       as={props.as}
       href={props.href}
+      onClick={props.onClick}
     >
       {props.icon ? <StyledButtonIcon as={props.icon} /> : null}
       {props.children}

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, KeyboardEvent, useReducer, useState } from "react";
+import React, { ChangeEvent, useReducer, useState } from "react";
 import styled from "styled-components";
 import Habit from "types/habit";
 import { percentageColor } from "utils/css.utils";
@@ -11,14 +11,13 @@ import {
 import { BiError, BiPlusCircle } from "modules/common/Icons";
 import { Alert, AlertProps } from "modules/common/Alert";
 import DraggableItem from "./DraggableItem/DraggableItem";
-import AddHabitButton from "./AddHabitButton";
-import AddHabitInput from "./AddHabitInput";
 import { habitsReducer, initHabitsState } from "state/habits/habit.reducer";
 import { addHabit, reorderHabits } from "state/habits/habit.actions";
+import InputCombo from "modules/common/InputCombo";
+import Input from "modules/common/Form/Input";
+import Button from "modules/common/Button";
 
-const StyledHabitListDraggable = styled.div`
-  /* width: 100%; */
-`;
+const StyledHabitListDraggable = styled.div``;
 
 const HabitList = styled.div`
   background-color: ${(props) =>
@@ -35,48 +34,42 @@ const HabitListDraggable: React.FC = () => {
   const [state, dispatch] = useReducer(habitsReducer, initHabitsState);
   const [alert, setAlert] = useState<AlertProps | undefined>(undefined);
   const [addHabitInput, setAddHabitInput] = useState<string>("");
-  const [addHabitInputVisible, setAddHabitInputVisibility] = useState<boolean>(
-    false
-  );
+  // const [addHabitInputVisible, setAddHabitInputVisibility] = useState<boolean>(
+  //   false
+  // );
 
   const handleAddHabitButtonClick = () => {
-    setAddHabitInputVisibility(true);
-  };
-
-  const handleAddHabitEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      if (!addHabitInput) {
-        return;
-      }
-
-      const exists = state.habits.find(
-        (habit) => habit.label.toLowerCase() === addHabitInput.toLowerCase()
-      );
-
-      if (exists) {
-        setAlert({
-          type: "error",
-          Icon: BiError,
-          title: "Duplicate habit found",
-          message: "Only one habit of the same type can be added.",
-        });
-        return;
-      }
-
-      if (state.habits.length > 4) {
-        setAlert({
-          type: "error",
-          Icon: BiError,
-          title: "You can't have more than five habits...",
-          message:
-            "Research suggests that you are more likely to achieve goals that are attainable. If you want to add another habit, delete another one first. Don't worry, we'll still have your habit history.",
-        });
-        return;
-      }
-
-      setAlert(undefined);
-      dispatch(addHabit(addHabitInput));
+    if (!addHabitInput) {
+      return;
     }
+
+    const exists = state.habits.find(
+      (habit) => habit.label.toLowerCase() === addHabitInput.toLowerCase()
+    );
+
+    if (exists) {
+      setAlert({
+        type: "error",
+        Icon: BiError,
+        title: "Duplicate habit found",
+        message: "Only one habit of the same type can be added.",
+      });
+      return;
+    }
+
+    if (state.habits.length > 4) {
+      setAlert({
+        type: "error",
+        Icon: BiError,
+        title: "You can't have more than five habits...",
+        message:
+          "Research suggests you are more likely to achieve goals that are attainable. If you want to add another habit, delete one. Don't worry, we'll still have your habit history.",
+      });
+      return;
+    }
+
+    setAlert(undefined);
+    dispatch(addHabit(addHabitInput));
   };
 
   const handleAddHabitInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -107,18 +100,13 @@ const HabitListDraggable: React.FC = () => {
 
   return (
     <StyledHabitListDraggable>
-      <AddHabitButton onClick={handleAddHabitButtonClick}>
-        <BiPlusCircle size="1.75rem" />
-        <span>Add Habit</span>
-      </AddHabitButton>
-
-      {addHabitInputVisible && (
-        <AddHabitInput
-          onKeyUp={handleAddHabitEnter}
-          onInput={handleAddHabitInput}
-          value={addHabitInput}
-        />
-      )}
+      <InputCombo style={{ marginBottom: "1rem" }}>
+        <Input onInput={handleAddHabitInput} value={addHabitInput} />
+        <Button onClick={handleAddHabitButtonClick}>
+          <BiPlusCircle size="1.5rem" />
+          Add Habit
+        </Button>
+      </InputCombo>
 
       {alert && (
         <AlertContainer>

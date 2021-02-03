@@ -1,4 +1,3 @@
-import { ReactChild } from "react";
 import { IconType } from "react-icons/lib";
 
 export type ButtonSizes = "sm" | "md" | "lg";
@@ -11,12 +10,13 @@ export type ButtonSizesConfig = {
 
 export type ButtonProps = {
   as?: "button" | "a";
-  children?: ReactChild;
+  children?: React.ReactNode;
   buttonType?: ButtonType;
   size?: ButtonSizes;
   icon?: IconType;
   href?: string;
   fullWidth?: boolean;
+  onClick?: (e: React.SyntheticEvent) => void;
 };
 
 export type StyledButtonProps = {

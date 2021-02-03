@@ -9,7 +9,7 @@ const Habits: React.FC = () => {
   return (
     <Page center>
       <FullWidthRow center="xs">
-        <Col xs sm={12} md={6}>
+        <Col xs sm={12} md={8} lg={6}>
           <Heading as="h1">Habits</Heading>
           <HabitListDraggable />
         </Col>

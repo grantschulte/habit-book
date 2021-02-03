@@ -9,7 +9,7 @@ const Today: React.FC = () => {
   return (
     <Page center>
       <FullWidthRow center="xs">
-        <Col xs sm={8} md={6}>
+        <Col xs sm={12} md={8} lg={6}>
           <DateDisplay />
           <TodayHabitList />
         </Col>

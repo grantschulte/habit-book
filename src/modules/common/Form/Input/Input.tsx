@@ -21,6 +21,7 @@ const Input = styled.input.attrs((props) => ({
   }
 
   ${InputCombo} & {
+    height: 100%;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
