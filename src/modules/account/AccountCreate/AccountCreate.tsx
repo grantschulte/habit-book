@@ -48,7 +48,12 @@ const AccountCreate = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(validateForm());
+
+    if (!state.isValid) {
+      dispatch(validateForm());
+    } else {
+      // dispatch request
+    }
   };
 
   const handleValidate = (e: ChangeEvent<HTMLInputElement>) => {
@@ -59,9 +64,13 @@ const AccountCreate = () => {
     <AccountPage>
       <Heading as="h1">Create Account</Heading>
 
+      {/* validation alerts */}
+
       {!state.isValid && !state.isClean && state.submitted ? (
         <ErrorAlert message={state.message ?? ""} />
       ) : null}
+
+      {/* request error alerts */}
 
       <Form onSubmit={handleSubmit}>
         {formInputs.map((input) => {

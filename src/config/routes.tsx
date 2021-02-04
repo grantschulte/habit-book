@@ -1,5 +1,7 @@
 import AccountCreate from "modules/account/AccountCreate/AccountCreate";
 import AccountSignIn from "modules/account/AccountSignIn";
+import ForgotPassword from "modules/account/ForgotPassword/ForgotPassword";
+import ResetPassword from "modules/account/ResetPassword/ResetPassword";
 import Dashboard from "modules/dashboard";
 import Habits from "modules/habits";
 import Scorecard from "modules/scorecard";
@@ -24,6 +26,18 @@ const routes: RouteConfig = {
     path: "/account/create",
     title: "Create Account",
     component: AccountCreate,
+  },
+  accountForgotPassword: {
+    name: "account-forgot-password",
+    path: "/account/forgot-password",
+    title: "Forgot Password",
+    component: ForgotPassword,
+  },
+  accountResetPassword: {
+    name: "account-reset-password",
+    path: "/account/reset-password",
+    title: "Reset Password",
+    component: ResetPassword,
   },
   accountSignIn: {
     name: "account-sign-in",
