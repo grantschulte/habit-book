@@ -16,7 +16,7 @@ import {
   inlineEditUpdateInput,
   inlineEditReset,
 } from "./DraggableItem.actions";
-import { habitsReducer, initHabitsState } from "state/habits/habit.reducer";
+import { useHabits } from "context/HabitContext";
 
 const HabitItemDraggable = styled(HabitItem).attrs((props) => ({
   $isDone: false,
@@ -48,14 +48,14 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
   habit,
   index,
 }: DraggableItemProps) => {
-  const [, dispatchHabit] = useReducer(habitsReducer, initHabitsState);
+  const habitsContext = useHabits();
   const [state, dispatch] = useReducer(
     draggableItemsReducer,
     initDraggableItemState
   );
 
   const handleSaveEditHabit = () => {
-    dispatchHabit(editHabit(state.editInputValue, habit.id));
+    habitsContext.dispatch(editHabit(state.editInputValue, habit.id));
     dispatch(inlineEditReset());
   };
 
@@ -76,7 +76,7 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
   };
 
   const handleDeleteItem = () => {
-    dispatchHabit(deleteHabit(habit.id));
+    habitsContext.dispatch(deleteHabit(habit.id));
   };
 
   return (

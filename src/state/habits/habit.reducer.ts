@@ -28,7 +28,6 @@ export const initHabitsState: HabitsState = {
 };
 
 const reduceToggleHabits = (state: HabitsState, action: ToggleHabit) => {
-  console.log(action.habit);
   let habits: Habit[] = state.habits.map((h: Habit) => {
     if (h.id === action.habit.id) {
       return {

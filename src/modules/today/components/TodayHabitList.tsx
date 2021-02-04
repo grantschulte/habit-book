@@ -1,10 +1,10 @@
-import React, { useReducer } from "react";
+import React from "react";
 import styled from "styled-components";
 import HabitItem from "modules/common/HabitItem/HabitItem";
 import { HabitLabel } from "modules/common/HabitItem/HabitLabel";
 import { toggleHabit } from "state/habits/habit.actions";
-import { habitsReducer, initHabitsState } from "state/habits/habit.reducer";
 import DoneIcon from "./DoneIcon";
+import { useHabits } from "context/HabitContext";
 
 const StyledHabitList = styled.div`
   margin: 1.5rem 0;
@@ -22,7 +22,7 @@ const StyledHabitList = styled.div`
 // };
 
 const HabitList: React.FC = () => {
-  const [state, dispatch] = useReducer(habitsReducer, initHabitsState);
+  const { state, dispatch } = useHabits();
   // const sorted = habits.sort(sortHabitsByDoneState);
 
   return (

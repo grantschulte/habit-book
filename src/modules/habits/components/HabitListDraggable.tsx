@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useReducer, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import styled from "styled-components";
 import Habit from "types/habit";
 import { percentageColor } from "utils/css.utils";
@@ -11,11 +11,11 @@ import {
 import { BiError, BiPlusCircle } from "modules/common/Icons";
 import { Alert, AlertProps } from "modules/common/Alert";
 import DraggableItem from "./DraggableItem/DraggableItem";
-import { habitsReducer, initHabitsState } from "state/habits/habit.reducer";
 import { addHabit, reorderHabits } from "state/habits/habit.actions";
 import InputCombo from "modules/common/InputCombo";
 import Input from "modules/common/Form/Input";
 import Button from "modules/common/Button";
+import { useHabits } from "context/HabitContext";
 
 const StyledHabitListDraggable = styled.div``;
 
@@ -31,12 +31,9 @@ const AlertContainer = styled.div`
 `;
 
 const HabitListDraggable: React.FC = () => {
-  const [state, dispatch] = useReducer(habitsReducer, initHabitsState);
+  const { state, dispatch } = useHabits();
   const [alert, setAlert] = useState<AlertProps | undefined>(undefined);
   const [addHabitInput, setAddHabitInput] = useState<string>("");
-  // const [addHabitInputVisible, setAddHabitInputVisibility] = useState<boolean>(
-  //   false
-  // );
 
   const handleAddHabitButtonClick = () => {
     if (!addHabitInput) {
