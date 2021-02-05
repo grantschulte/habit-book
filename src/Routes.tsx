@@ -13,6 +13,7 @@ const Routes: React.FC = () => {
           key={route.name}
         />
       ))}
+      <Route path="*" component={routeConfig.notFound.component} />
     </Switch>
   );
 };

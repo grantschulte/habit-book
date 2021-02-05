@@ -4,6 +4,7 @@ import ForgotPassword from "modules/account/ForgotPassword/ForgotPassword";
 import ResetPassword from "modules/account/ResetPassword/ResetPassword";
 import Dashboard from "modules/dashboard";
 import Habits from "modules/habits";
+import NotFound from "modules/NotFound";
 import Scorecard from "modules/scorecard";
 import Styleguide from "modules/styleguide";
 import Today from "modules/today";
@@ -56,6 +57,12 @@ const routes: RouteConfig = {
     path: "/habits",
     title: "Habits",
     component: Habits,
+  },
+  notFound: {
+    name: "not-found",
+    path: "/not-found",
+    title: "Not Found",
+    component: NotFound,
   },
   today: {
     name: "today",
