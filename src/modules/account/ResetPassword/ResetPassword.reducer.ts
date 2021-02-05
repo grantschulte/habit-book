@@ -5,46 +5,55 @@ import {
   VALIDATE_INPUT,
 } from "modules/account/accountForm.actions";
 import { AccountFormState } from "modules/account/accountForm.types";
+import validate from "utils/validation";
 
-export const CREATE_SIGN_IN_EMAIL = "create-sign-in-email";
-export const CREATE_SIGN_IN_PASSWORD = "create-sign-in-password";
+export const PASSWORD = "reset-password-password";
+export const PASSWORD_CONFIRM = "reset-password-password-confirm";
 
-export const accountSignInFields = {
-  [CREATE_SIGN_IN_EMAIL]: {
+export const FIELD_NAMES = {
+  PASSWORD,
+  PASSWORD_CONFIRM,
+};
+
+const resetPasswordFormFields = {
+  [FIELD_NAMES.PASSWORD]: {
     v: "",
-    isValid: false,
-    message: "",
+    isValid: undefined,
+    message: undefined,
   },
-  [CREATE_SIGN_IN_PASSWORD]: {
+  [FIELD_NAMES.PASSWORD_CONFIRM]: {
     v: "",
-    isValid: false,
-    message: "",
+    isValid: undefined,
+    message: undefined,
   },
 };
 
-export const initAccountSignInState = {
-  fields: accountSignInFields,
-  isClean: true,
+export const initResetPasswordFormState = {
+  fields: resetPasswordFormFields,
+  message: "",
   isValid: false,
-  message: undefined,
+  isClean: true,
   submitted: false,
 };
 
-const accountSignInReducer = (
+const resetPasswordReducer = (
   state: AccountFormState,
   action: AccountFormActions
 ) => {
   switch (action.type) {
     case CLEAR_FORM:
-      return initAccountSignInState;
+      return initResetPasswordFormState;
 
     case VALIDATE_INPUT:
+      const { isValid, message } = validate(action.inputType, action.value);
+
       return Object.assign({}, state, {
         fields: {
           ...state.fields,
           [action.id]: {
             v: action.value,
-            isValid: true,
+            isValid,
+            message,
           },
         },
         isClean: false,
@@ -62,8 +71,16 @@ const accountSignInReducer = (
           "This submission contains errors. Please correct them to proceed.";
       }
 
+      const fieldsMatch =
+        state.fields[FIELD_NAMES.PASSWORD].v ===
+        state.fields[FIELD_NAMES.PASSWORD_CONFIRM].v;
+
+      if (!fieldsMatch) {
+        formMessage = "Passwords do not match. Please try again.";
+      }
+
       return Object.assign({}, state, {
-        isValid: allFieldsValid,
+        isValid: allFieldsValid && fieldsMatch,
         message: formMessage,
         submitted: true,
       });
@@ -72,4 +89,4 @@ const accountSignInReducer = (
   }
 };
 
-export default accountSignInReducer;
+export default resetPasswordReducer;

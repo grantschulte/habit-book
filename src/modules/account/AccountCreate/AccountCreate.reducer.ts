@@ -13,9 +13,13 @@ export const CREATE_ACCOUNT_PASSWORD = "create-account-password";
 export const accountCreateFields = {
   [CREATE_ACCOUNT_EMAIL]: {
     v: "",
+    isValid: false,
+    message: "",
   },
   [CREATE_ACCOUNT_PASSWORD]: {
     v: "",
+    isValid: false,
+    message: "",
   },
 };
 

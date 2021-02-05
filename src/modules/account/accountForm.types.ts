@@ -6,7 +6,7 @@ export type FormElementField = {
 
 export type AccountFormState = {
   fields: {
-    [key: string]: any;
+    [key: string]: FormElementField;
   };
   isClean: boolean;
   isValid: boolean;

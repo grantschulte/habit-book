@@ -9,6 +9,8 @@ import validate from "utils/validation";
 export const forgotPasswordFields = {
   "forgot-password-email": {
     v: "",
+    isValid: false,
+    message: "",
   },
 };
 
