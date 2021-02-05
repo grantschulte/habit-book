@@ -15,7 +15,8 @@ import {
   validateInput,
 } from "modules/account/accountForm.actions";
 import InputErrorMessage from "modules/common/Form/Input/InputErrorMessage";
-import { ErrorAlert } from "modules/common/Alert";
+import { ErrorAlert, SuccessAlert } from "modules/common/Alert";
+import useRequest from "hooks/useRequest";
 
 const inputs = [
   {
@@ -38,10 +39,14 @@ const inputs = [
 
 const ResetPassword = () => {
   const theme = useContext(ThemeContext);
+  const { request, makeRequest, status } = useRequest();
   const [state, dispatch] = useReducer(
     resetPasswordReducer,
     initResetPasswordFormState
   );
+
+  console.log(request);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -49,6 +54,7 @@ const ResetPassword = () => {
       dispatch(validateForm());
     } else {
       // dispatch form submit request
+      makeRequest("");
     }
   };
 
@@ -62,6 +68,14 @@ const ResetPassword = () => {
 
       {!state.isValid && state.message && state.submitted ? (
         <ErrorAlert message={state.message} />
+      ) : null}
+
+      {request.status === status.SUCCESS && request.data ? (
+        <SuccessAlert message="Success!" />
+      ) : null}
+
+      {request.status === status.ERROR && request.message ? (
+        <ErrorAlert message={request.message} />
       ) : null}
 
       <Form onSubmit={handleSubmit}>
@@ -87,6 +101,9 @@ const ResetPassword = () => {
             </div>
           );
         })}
+
+        {request.status === status.FETCHING ? <div>Fetching...</div> : null}
+
         <Button buttonType="secondary">Submit</Button>
       </Form>
     </AccountPage>
