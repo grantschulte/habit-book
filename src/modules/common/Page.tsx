@@ -7,14 +7,15 @@ type PageProps = {
 };
 
 const Page = styled.div<PageProps>`
-  padding: ${(props) => props.theme.spacing[4]};
-  height: 100%;
+  padding: clamp(1rem, 5vw, 1.5rem);
+  height: 100vh;
 
   ${({ center }) =>
     center && {
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
+      paddingTop: 0,
     }}
 
   ${({ direction }) =>

@@ -13,13 +13,13 @@ const StyledHeading = styled.h1`
   margin-top: 0;
 
   &.h1 {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 2rem, 3rem);
   }
   &.h2 {
-    font-size: 1.5rem;
+    font-size: clamp(1.25rem, 1.5rem, 2rem);
   }
   &.h3 {
-    font-size: 1.3rem;
+    font-size: clamp(1rem, 1.3rem, 1.5rem);
   }
   &.h4 {
     font-size: 1rem;

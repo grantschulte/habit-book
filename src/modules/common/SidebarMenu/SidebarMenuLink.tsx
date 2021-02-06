@@ -4,6 +4,12 @@ import { IconType } from "modules/common/Icons";
 import { NavLink } from "Router";
 import { percentageColor } from "utils/css.utils";
 
+const MenuIcon = styled.span<{ size?: string }>`
+  color: inherit;
+  font-size: ${(props) => props.size ?? "1rem"};
+  margin-right: 0.5rem;
+`;
+
 const StyledMenuLink = styled(NavLink)<{ active?: boolean }>`
   display: flex;
   align-items: center;
@@ -28,19 +34,13 @@ const StyledMenuLink = styled(NavLink)<{ active?: boolean }>`
     flex-grow: 1;
     flex-basis: 0;
 
-    .menu-icon {
+    ${MenuIcon} {
       width: 2rem;
       height: 2rem;
       margin-right: 0;
       margin-bottom: 0.25rem;
     }
   }
-`;
-
-const MenuIcon = styled.span<{ size?: string }>`
-  color: inherit;
-  font-size: ${(props) => props.size ?? "1rem"};
-  margin-right: 0.5rem;
 `;
 
 type MenuLinkProps = {

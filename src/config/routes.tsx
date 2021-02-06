@@ -6,6 +6,7 @@ import Dashboard from "modules/dashboard";
 import Habits from "modules/habits";
 import NotFound from "modules/NotFound";
 import Scorecard from "modules/scorecard";
+import Settings from "modules/settings/Settings";
 import Styleguide from "modules/styleguide";
 import Today from "modules/today";
 
@@ -80,6 +81,7 @@ const routes: RouteConfig = {
     name: "settings",
     path: "/settings",
     title: "Settings",
+    component: Settings,
   },
   styleguide: {
     name: "styleguide",

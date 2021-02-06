@@ -6,6 +6,7 @@ const MainContent = styled.main`
   overflow-y: scroll;
   grid-column: 2 / 3;
   grid-row: 1 / 5;
+  overflow-x: hidden;
 
   @media screen and (max-width: 768px) {
     grid-column: 1 / 3;

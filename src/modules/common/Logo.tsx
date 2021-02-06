@@ -5,7 +5,7 @@ import { percentageColor } from "utils/css.utils";
 const StyledLogo = styled.div`
   display: flex;
   align-items: center;
-  padding: 1rem 1.5rem;
+  padding: clamp(1rem, 5vw, 1.5rem);
   grid-row: 1 / 2;
   grid-column: 1 / 2;
   background-color: ${(props) =>
