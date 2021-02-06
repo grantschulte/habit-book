@@ -1,4 +1,11 @@
-import React, { ChangeEvent, FormEvent, useContext, useReducer } from "react";
+import React, {
+  ChangeEvent,
+  FormEvent,
+  useContext,
+  useEffect,
+  useReducer,
+} from "react";
+import routeConfig from "config/routes";
 import AccountPage from "modules/account/AccountCreate/AccountPage";
 import Heading from "modules/common/Heading";
 import accountSignInReducer, {
@@ -19,6 +26,8 @@ import Label from "modules/common/Form/Label";
 import { FormInput } from "modules/account/accountForm.types";
 import { ThemeContext } from "styled-components";
 import { ErrorAlert } from "modules/common/Alert";
+import useRequest from "hooks/useRequest";
+import { Redirect } from "react-router-dom";
 
 const formInputs: FormInput[] = [
   {
@@ -39,12 +48,21 @@ const formInputs: FormInput[] = [
   },
 ];
 
+const API_URL = "http://localhost:5000/habits";
+
 const AccountSignIn = () => {
   const theme = useContext(ThemeContext);
+  const { request, status, makeRequest } = useRequest();
   const [state, dispatch] = useReducer(
     accountSignInReducer,
     initAccountSignInState
   );
+
+  useEffect(() => {
+    if (state.isValid) {
+      makeRequest(API_URL);
+    }
+  }, [state.isValid, makeRequest]);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -59,36 +77,47 @@ const AccountSignIn = () => {
     <AccountPage>
       <Heading as="h1">Sign In</Heading>
 
+      {/* validation errors */}
       {!state.isValid && !state.isClean && state.submitted ? (
         <ErrorAlert message={state.message ?? ""} />
       ) : null}
 
-      <Form onSubmit={handleSubmit}>
-        {formInputs.map((input) => {
-          const field = state.fields[input.id];
-          return (
-            <div style={{ marginBottom: theme.spacing[4] }} key={input.id}>
-              <Label htmlFor={input.id} value={input.label}>
-                {!field.isValid && state.submitted ? (
-                  <InputErrorMessage>{field.message}</InputErrorMessage>
-                ) : null}
+      {/* request errors */}
 
-                <input.Component
-                  id={input.id}
-                  type={input.type}
-                  onChange={handleValidate}
-                  value={field.v}
-                  placeholder={input.placeholder}
-                  isValid={field.isValid}
-                  required={input.required}
-                />
-              </Label>
-            </div>
-          );
-        })}
+      {request.status === status.ERROR && request.message ? (
+        <ErrorAlert message={request.message} />
+      ) : null}
 
-        <Button buttonType="secondary">Submit</Button>
-      </Form>
+      {request.status === status.SUCCESS && request.data ? (
+        <Redirect to={routeConfig.today.path} />
+      ) : (
+        <Form onSubmit={handleSubmit}>
+          {formInputs.map((input) => {
+            const field = state.fields[input.id];
+            return (
+              <div style={{ marginBottom: theme.spacing[4] }} key={input.id}>
+                <Label htmlFor={input.id} value={input.label}>
+                  {!field.isValid && state.submitted ? (
+                    <InputErrorMessage>{field.message}</InputErrorMessage>
+                  ) : null}
+
+                  <input.Component
+                    id={input.id}
+                    type={input.type}
+                    onChange={handleValidate}
+                    value={field.v}
+                    placeholder={input.placeholder}
+                    isValid={field.isValid}
+                    required={input.required}
+                  />
+                </Label>
+              </div>
+            );
+          })}
+
+          <Button buttonType="secondary">Submit</Button>
+        </Form>
+      )}
     </AccountPage>
   );
 };

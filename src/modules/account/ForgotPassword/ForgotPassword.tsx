@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useContext, useReducer, useState } from "react";
+import React, { ChangeEvent, useContext, useEffect, useReducer } from "react";
 import Form from "modules/common/Form";
 import Heading from "modules/common/Heading";
 import Input from "modules/common/Form/Input";
@@ -14,36 +14,27 @@ import {
   validateInput,
 } from "modules/account/accountForm.actions";
 import { ErrorAlert, SuccessAlert } from "modules/common/Alert";
+import useRequest from "hooks/useRequest";
 
-type RequestState = {
-  status?: string;
-  message?: string;
-};
+const API_URL = "http://localhost:5000/habits";
 
 const ForgotPassword = () => {
   const theme = useContext(ThemeContext);
-  const [requestState, setRequestState] = useState<RequestState>({
-    status: "",
-    message: "",
-  });
+  const { request, status, makeRequest } = useRequest();
   const [state, dispatch] = useReducer(
     forgotPasswordReducer,
     initForgotPasswordFormState
   );
 
+  useEffect(() => {
+    if (state.isValid) {
+      makeRequest(API_URL);
+    }
+  }, [state.isValid, makeRequest]);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    if (!state.isValid) {
-      dispatch(validateForm());
-    } else {
-      // dispatch request
-      setRequestState({
-        status: "success",
-        message:
-          "An email has been sent to the address you've provided. Follow the instructions to reset your password.",
-      });
-    }
+    dispatch(validateForm());
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -54,18 +45,23 @@ const ForgotPassword = () => {
     <AccountPage>
       <Heading as="h1">Forgot Password</Heading>
 
-      {requestState.status === "success" && requestState.message ? (
-        <>
-          <SuccessAlert message={requestState.message} />
-          <Button size="sm">Open Email</Button>
-        </>
+      {/* validation errors */}
+      {!state.isValid && !state.isClean && state.submitted ? (
+        <ErrorAlert message={state.message ?? ""} />
       ) : null}
 
-      {requestState.status === "error" && requestState.message ? (
-        <ErrorAlert message={requestState.message} />
+      {/* request errors */}
+
+      {request.status === status.ERROR && request.message ? (
+        <ErrorAlert message={request.message} />
       ) : null}
 
-      {requestState.status !== "success" ? (
+      {request.status === status.SUCCESS && request.data ? (
+        <SuccessAlert
+          title="Success!"
+          message="An email has been sent to the address you've provided. Follow the instructions to reset your password."
+        />
+      ) : (
         <>
           <p>
             Enter your email address. We'll send an email to reset your
@@ -93,7 +89,7 @@ const ForgotPassword = () => {
             <Button buttonType="secondary">Submit</Button>
           </Form>
         </>
-      ) : null}
+      )}
     </AccountPage>
   );
 };

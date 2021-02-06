@@ -1,4 +1,5 @@
-import React, { useContext, useReducer } from "react";
+import React, { useContext, useEffect, useReducer } from "react";
+import routeConfig from "config/routes";
 import AccountPage from "modules/account/AccountCreate/AccountPage";
 import Heading from "modules/common/Heading";
 import Form from "modules/common/Form";
@@ -17,6 +18,7 @@ import {
 import InputErrorMessage from "modules/common/Form/Input/InputErrorMessage";
 import { ErrorAlert, SuccessAlert } from "modules/common/Alert";
 import useRequest from "hooks/useRequest";
+import StyledLink from "modules/common/StyledLink";
 
 const inputs = [
   {
@@ -37,6 +39,8 @@ const inputs = [
   },
 ];
 
+const API_URL = "http://localhost:5000/habits";
+
 const ResetPassword = () => {
   const theme = useContext(ThemeContext);
   const { request, makeRequest, status } = useRequest();
@@ -45,17 +49,17 @@ const ResetPassword = () => {
     initResetPasswordFormState
   );
 
-  console.log(request);
+  // submit form if valid
+
+  useEffect(() => {
+    if (state.isValid) {
+      makeRequest(API_URL);
+    }
+  }, [state.isValid, makeRequest]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    if (!state.isValid) {
-      dispatch(validateForm());
-    } else {
-      // dispatch form submit request
-      makeRequest("");
-    }
+    dispatch(validateForm());
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,42 +74,50 @@ const ResetPassword = () => {
         <ErrorAlert message={state.message} />
       ) : null}
 
-      {request.status === status.SUCCESS && request.data ? (
-        <SuccessAlert message="Success!" />
-      ) : null}
-
       {request.status === status.ERROR && request.message ? (
         <ErrorAlert message={request.message} />
       ) : null}
 
-      <Form onSubmit={handleSubmit}>
-        {inputs.map((input) => {
-          const field = state.fields[input.id];
+      {request.status === status.SUCCESS && request.data ? (
+        <>
+          <SuccessAlert
+            title="Success"
+            message="Your password has been updated"
+          />
+          <StyledLink to={routeConfig.today.path}>
+            View Today's Habits
+          </StyledLink>
+        </>
+      ) : (
+        <Form onSubmit={handleSubmit}>
+          {inputs.map((input) => {
+            const field = state.fields[input.id];
 
-          return (
-            <div style={{ marginBottom: theme.spacing[4] }} key={input.id}>
-              <Label htmlFor={input.id} value={input.label}>
-                {!field.isValid && field.message && state.submitted ? (
-                  <InputErrorMessage>{field.message}</InputErrorMessage>
-                ) : null}
+            return (
+              <div style={{ marginBottom: theme.spacing[4] }} key={input.id}>
+                <Label htmlFor={input.id} value={input.label}>
+                  {!field.isValid && field.message && state.submitted ? (
+                    <InputErrorMessage>{field.message}</InputErrorMessage>
+                  ) : null}
 
-                <input.Component
-                  id={input.id}
-                  placeholder={input.placeholder}
-                  required={input.required}
-                  onChange={handleChange}
-                  value={field.v}
-                  isValid={field.isValid}
-                />
-              </Label>
-            </div>
-          );
-        })}
+                  <input.Component
+                    id={input.id}
+                    placeholder={input.placeholder}
+                    required={input.required}
+                    onChange={handleChange}
+                    value={field.v}
+                    isValid={field.isValid}
+                  />
+                </Label>
+              </div>
+            );
+          })}
 
-        {request.status === status.FETCHING ? <div>Fetching...</div> : null}
+          {request.status === status.FETCHING ? <div>Fetching...</div> : null}
 
-        <Button buttonType="secondary">Submit</Button>
-      </Form>
+          <Button buttonType="secondary">Submit</Button>
+        </Form>
+      )}
     </AccountPage>
   );
 };
