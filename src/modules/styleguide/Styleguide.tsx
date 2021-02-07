@@ -14,7 +14,7 @@ import {
   WarningAlert,
 } from "../common/Alert";
 import StyledLink from "../common/StyledLink";
-import MenuLink from "../common/SidebarMenu/SidebarMenuLink";
+import MenuLink from "../common/Layout/SidebarMenu/SidebarMenuLink";
 import styled from "styled-components";
 import InputCombo from "modules/common/InputCombo";
 

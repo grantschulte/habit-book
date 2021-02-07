@@ -8,10 +8,6 @@ import { DateProvider } from "context/DateContext";
 import { HabitProvider } from "context/HabitContext";
 import { HabitHistoryProvider } from "context/HabitHistoryContext";
 import GlobalStyle from "modules/common/GlobalStyle";
-import Logo from "modules/common/Logo";
-import Menu from "modules/common/SidebarMenu/SidebarMenu";
-import MainContent from "modules/common/Layout/MainContent";
-import AppWrapper from "modules/common/Layout/AppWrapper";
 
 const App: React.FC = () => {
   return (
@@ -23,13 +19,7 @@ const App: React.FC = () => {
             <HabitProvider>
               <>
                 <GlobalStyle />
-                <AppWrapper>
-                  <Menu />
-                  <Logo />
-                  <MainContent>
-                    <Routes />
-                  </MainContent>
-                </AppWrapper>
+                <Routes />
               </>
             </HabitProvider>
           </HabitHistoryProvider>
