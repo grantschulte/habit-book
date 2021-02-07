@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { CalendarDatum } from "modules/common/Calendar";
 import Heading from "modules/common/Heading";
 import { Col } from "modules/common/Grid";
-import FullWidthRow from "modules/common/Layout/FullWidthRow";
+import FullWidthRow from "modules/common/FullWidthRow";
 import Calendar from "./components/Calendar";
 import Page from "modules/common/Page";
 

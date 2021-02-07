@@ -1,5 +1,5 @@
 import React from "react";
-import FullWidthRow from "modules/common/Layout/FullWidthRow";
+import FullWidthRow from "modules/common/FullWidthRow";
 import { Col } from "modules/common/Grid";
 import DateDisplay from "./components/DateDisplay";
 import TodayHabitList from "./components/TodayHabitList";

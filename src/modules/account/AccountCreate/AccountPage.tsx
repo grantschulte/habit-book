@@ -1,4 +1,4 @@
-import FullWidthRow from "modules/common/Layout/FullWidthRow";
+import FullWidthRow from "modules/common/FullWidthRow";
 import Page from "modules/common/Page";
 import React from "react";
 import { Col } from "react-styled-flexboxgrid";

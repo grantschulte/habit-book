@@ -1,7 +1,7 @@
 import React from "react";
 import Heading from "modules/common/Heading";
 import { Col } from "modules/common/Grid";
-import FullWidthRow from "modules/common/Layout/FullWidthRow";
+import FullWidthRow from "modules/common/FullWidthRow";
 import Page from "modules/common/Page";
 import HabitListDraggable from "./components/HabitListDraggable";
 

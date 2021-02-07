@@ -4,7 +4,7 @@ import Button from "modules/common/Button";
 import Heading from "modules/common/Heading";
 import Page from "modules/common/Page";
 import { Col } from "modules/common/Grid";
-import FullWidthRow from "modules/common/Layout/FullWidthRow";
+import FullWidthRow from "modules/common/FullWidthRow";
 import routes from "config/routes";
 
 const Homepage = () => {

@@ -3,7 +3,7 @@ import AccountSignIn from "modules/account/AccountSignIn";
 import ForgotPassword from "modules/account/ForgotPassword/ForgotPassword";
 import ResetPassword from "modules/account/ResetPassword/ResetPassword";
 import LayoutUser from "modules/common/Layout/LayoutUser";
-import DefaultLayout from "modules/common/Layout/Layout";
+import DefaultLayout from "modules/common/Layout";
 import Dashboard from "modules/dashboard";
 import Habits from "modules/habits";
 import Homepage from "modules/homepage";
