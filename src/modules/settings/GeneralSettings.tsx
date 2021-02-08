@@ -1,3 +1,4 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import useRequest from "hooks/useRequest";
 import {
   validateForm,
@@ -21,6 +22,7 @@ const API_URL = "http://localhost:5000/habits";
 
 const GeneralSettings = () => {
   const theme = useContext(ThemeContext);
+  const { logout } = useAuth0();
   const [state, dispatch] = useReducer(settingsReducer, initSettingsState);
   const { request, status, makeRequest } = useRequest();
 

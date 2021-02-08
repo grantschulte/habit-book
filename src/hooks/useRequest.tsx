@@ -16,12 +16,19 @@ const useRequest = () => {
   );
 
   const makeRequest = useCallback(
-    async (url: string, method: string = "get") => {
+    async (url: string, method: string = "get", token?: string) => {
       dispatch(requestFetch());
+
+      const headers = token
+        ? new Headers({
+            Authorization: `Bearer ${token}`,
+          })
+        : {};
 
       try {
         const response = await fetch(url, {
           method: method.toUpperCase(),
+          headers,
         });
         const json = await response.json();
         console.log(json);

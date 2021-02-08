@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 import { ThemeContext } from "styled-components";
 import Button from "modules/common/Button";
 import Heading from "modules/common/Heading";
@@ -9,6 +10,12 @@ import routes from "config/routes";
 
 const Homepage = () => {
   const theme = useContext(ThemeContext);
+  const { loginWithRedirect } = useAuth0();
+
+  const handleSignInClick = () => {
+    loginWithRedirect();
+  };
+
   return (
     <Page center>
       <FullWidthRow center="xs">
@@ -22,9 +29,7 @@ const Homepage = () => {
           </div>
 
           <div style={{ marginTop: theme.spacing[4] }}>
-            <Button as="a" href={routes.accountSignIn.path}>
-              Sign In
-            </Button>
+            <Button onClick={handleSignInClick}>Sign In</Button>
           </div>
         </Col>
         <Col></Col>
