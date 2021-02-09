@@ -1,4 +1,5 @@
 import useRequest from "hooks/useRequest";
+import { REQUEST_STATUS } from "hooks/useRequest.reducer";
 import {
   validateForm,
   validateInput,
@@ -21,7 +22,7 @@ const API_URL = "http://localhost:5000/habits";
 
 const UpdatePasswordSettings = () => {
   const theme = useContext(ThemeContext);
-  const { request, status, makeRequest } = useRequest();
+  const { request, makeRequest } = useRequest();
   const [state, dispatch] = useReducer(
     updatePasswordReducer,
     initUpdatePasswordState
@@ -62,13 +63,13 @@ const UpdatePasswordSettings = () => {
 
           {/* request error alerts */}
 
-          {request.status === status.ERROR && request.message ? (
-            <ErrorAlert message={request.message} />
+          {request.status === REQUEST_STATUS.ERROR && request.error ? (
+            <ErrorAlert message={request.error.message} />
           ) : null}
 
           {/* success */}
 
-          {request.status === status.SUCCESS && request.data ? (
+          {request.status === REQUEST_STATUS.SUCCESS && request.data ? (
             <SuccessAlert title="Success!" message="Password updated." />
           ) : null}
 

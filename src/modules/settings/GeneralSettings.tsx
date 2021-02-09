@@ -1,5 +1,5 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import useRequest from "hooks/useRequest";
+import { REQUEST_STATUS } from "hooks/useRequest.reducer";
 import {
   validateForm,
   validateInput,
@@ -22,9 +22,8 @@ const API_URL = "http://localhost:5000/habits";
 
 const GeneralSettings = () => {
   const theme = useContext(ThemeContext);
-  const { logout } = useAuth0();
   const [state, dispatch] = useReducer(settingsReducer, initSettingsState);
-  const { request, status, makeRequest } = useRequest();
+  const { request, makeRequest } = useRequest();
 
   // submit form if valid
 
@@ -60,13 +59,13 @@ const GeneralSettings = () => {
 
           {/* request error alerts */}
 
-          {request.status === status.ERROR && request.message ? (
-            <ErrorAlert message={request.message} />
+          {request.status === REQUEST_STATUS.ERROR && request.error ? (
+            <ErrorAlert message={request.error.message} />
           ) : null}
 
           {/* success */}
 
-          {request.status === status.SUCCESS && request.data ? (
+          {request.status === REQUEST_STATUS.SUCCESS && request.data ? (
             <SuccessAlert title="Success!" message="Settings updated." />
           ) : null}
 

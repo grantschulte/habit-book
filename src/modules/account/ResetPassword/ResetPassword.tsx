@@ -19,6 +19,7 @@ import InputErrorMessage from "modules/common/Form/Input/InputErrorMessage";
 import { ErrorAlert, SuccessAlert } from "modules/common/Alert";
 import useRequest from "hooks/useRequest";
 import StyledLink from "modules/common/StyledLink";
+import { REQUEST_STATUS } from "hooks/useRequest.reducer";
 
 const inputs = [
   {
@@ -43,7 +44,7 @@ const API_URL = "http://localhost:5000/habits";
 
 const ResetPassword = () => {
   const theme = useContext(ThemeContext);
-  const { request, makeRequest, status } = useRequest();
+  const { request, makeRequest } = useRequest();
   const [state, dispatch] = useReducer(
     resetPasswordReducer,
     initResetPasswordFormState
@@ -74,11 +75,11 @@ const ResetPassword = () => {
         <ErrorAlert message={state.message} />
       ) : null}
 
-      {request.status === status.ERROR && request.message ? (
-        <ErrorAlert message={request.message} />
+      {request.status === REQUEST_STATUS.ERROR && request.error ? (
+        <ErrorAlert message={request.error.message} />
       ) : null}
 
-      {request.status === status.SUCCESS && request.data ? (
+      {request.status === REQUEST_STATUS.SUCCESS && request.data ? (
         <>
           <SuccessAlert
             title="Success"
@@ -113,7 +114,9 @@ const ResetPassword = () => {
             );
           })}
 
-          {request.status === status.FETCHING ? <div>Fetching...</div> : null}
+          {request.status === REQUEST_STATUS.FETCHING ? (
+            <div>Fetching...</div>
+          ) : null}
 
           <Button buttonType="secondary">Submit</Button>
         </Form>

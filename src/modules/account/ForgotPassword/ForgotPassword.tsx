@@ -15,12 +15,13 @@ import {
 } from "modules/account/accountForm.actions";
 import { ErrorAlert, SuccessAlert } from "modules/common/Alert";
 import useRequest from "hooks/useRequest";
+import { REQUEST_STATUS } from "hooks/useRequest.reducer";
 
 const API_URL = "http://localhost:5000/habits";
 
 const ForgotPassword = () => {
   const theme = useContext(ThemeContext);
-  const { request, status, makeRequest } = useRequest();
+  const { request, makeRequest } = useRequest();
   const [state, dispatch] = useReducer(
     forgotPasswordReducer,
     initForgotPasswordFormState
@@ -52,11 +53,11 @@ const ForgotPassword = () => {
 
       {/* request errors */}
 
-      {request.status === status.ERROR && request.message ? (
-        <ErrorAlert message={request.message} />
+      {request.status === REQUEST_STATUS.ERROR && request.error ? (
+        <ErrorAlert message={request.error.message} />
       ) : null}
 
-      {request.status === status.SUCCESS && request.data ? (
+      {request.status === REQUEST_STATUS.SUCCESS && request.data ? (
         <SuccessAlert
           title="Success!"
           message="An email has been sent to the address you've provided. Follow the instructions to reset your password."

@@ -28,6 +28,7 @@ import AccountPage from "modules/account/AccountCreate/AccountPage";
 import Heading from "modules/common/Heading";
 import { FormInput } from "modules/account/accountForm.types";
 import useRequest from "hooks/useRequest";
+import { REQUEST_STATUS } from "hooks/useRequest.reducer";
 
 const formInputs: FormInput[] = [
   {
@@ -52,7 +53,7 @@ const API_URL = "http://localhost:5000/habits";
 
 const AccountCreate = () => {
   const theme = useContext(ThemeContext);
-  const { request, status, makeRequest } = useRequest();
+  const { request, makeRequest } = useRequest();
   const [state, dispatch] = useReducer(
     accountCreateReducer,
     initAccountCreateState
@@ -87,11 +88,11 @@ const AccountCreate = () => {
 
       {/* request error alerts */}
 
-      {request.status === status.ERROR && request.message ? (
-        <ErrorAlert message={request.message} />
+      {request.status === REQUEST_STATUS.ERROR && request.error ? (
+        <ErrorAlert message={request.error.message} />
       ) : null}
 
-      {request.status === status.SUCCESS && request.data ? (
+      {request.status === REQUEST_STATUS.SUCCESS && request.data ? (
         <Redirect to={routeConfig.today.path} />
       ) : (
         <Form onSubmit={handleSubmit}>

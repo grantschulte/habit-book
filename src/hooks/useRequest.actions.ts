@@ -13,7 +13,7 @@ type RequestSuccess = {
 
 type RequestError = {
   type: typeof REQUEST_ERROR;
-  message: string;
+  error: Error;
 };
 
 export type RequestAction = RequestFetch | RequestSuccess | RequestError;
@@ -27,7 +27,7 @@ export const requestSuccess = (data: any): RequestSuccess => ({
   data,
 });
 
-export const requestError = (message: string): RequestError => ({
+export const requestError = (error: any): RequestError => ({
   type: REQUEST_ERROR,
-  message,
+  error,
 });

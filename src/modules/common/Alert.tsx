@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  BiCheck,
+  BiCheckCircle,
   BiError,
   BiErrorCircle,
   BiInfoCircle,
@@ -91,7 +91,7 @@ export const WarningAlert = styled(Alert).attrs({
 
 export const SuccessAlert = styled(Alert).attrs({
   type: "success",
-  Icon: BiCheck,
+  Icon: BiCheckCircle,
 })``;
 
 export const ErrorAlert = styled(Alert).attrs({

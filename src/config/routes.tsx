@@ -1,17 +1,4 @@
-import AccountCreate from "modules/account/AccountCreate/AccountCreate";
-import AccountSignIn from "modules/account/AccountSignIn";
-import ForgotPassword from "modules/account/ForgotPassword/ForgotPassword";
-import ResetPassword from "modules/account/ResetPassword/ResetPassword";
-import LayoutUser from "modules/common/Layout/LayoutUser";
-import DefaultLayout from "modules/common/Layout";
-import Dashboard from "modules/dashboard";
-import Habits from "modules/habits";
-import Homepage from "modules/homepage";
-import NotFound from "modules/NotFound";
-import Scorecard from "modules/scorecard";
-import Settings from "modules/settings/Settings";
-import Styleguide from "modules/styleguide";
-import Today from "modules/today";
+import routeComponents from "./routes.pages";
 
 export type IRoute = {
   name: string;
@@ -28,89 +15,89 @@ export type RouteConfig = {
 };
 
 const routes: RouteConfig = {
-  accountCreate: {
-    name: "account-create",
-    path: "/account/create",
-    title: "Create Account",
-    component: AccountCreate,
-    layout: DefaultLayout,
-  },
-  accountForgotPassword: {
-    name: "account-forgot-password",
-    path: "/account/forgot-password",
-    title: "Forgot Password",
-    component: ForgotPassword,
-    layout: DefaultLayout,
-  },
-  accountResetPassword: {
-    name: "account-reset-password",
-    path: "/account/reset-password",
-    title: "Reset Password",
-    component: ResetPassword,
-    layout: DefaultLayout,
-  },
-  accountSignIn: {
-    name: "account-sign-in",
-    path: "/account/sign-in",
-    title: "Sign In",
-    component: AccountSignIn,
-    layout: DefaultLayout,
-  },
+  // accountCreate: {
+  //   name: "account-create",
+  //   path: "/account/create",
+  //   title: "Create Account",
+  //   component: AccountCreate,
+  //   layout: DefaultLayout,
+  // },
+  // accountForgotPassword: {
+  //   name: "account-forgot-password",
+  //   path: "/account/forgot-password",
+  //   title: "Forgot Password",
+  //   component: ForgotPassword,
+  //   layout: DefaultLayout,
+  // },
+  // accountResetPassword: {
+  //   name: "account-reset-password",
+  //   path: "/account/reset-password",
+  //   title: "Reset Password",
+  //   component: ResetPassword,
+  //   layout: DefaultLayout,
+  // },
+  // accountSignIn: {
+  //   name: "account-sign-in",
+  //   path: "/account/sign-in",
+  //   title: "Sign In",
+  //   component: AccountSignIn,
+  //   layout: DefaultLayout,
+  // },
   dashboard: {
     name: "dashboard",
     path: "/dashboard",
     title: "Dashboard",
-    component: Dashboard,
-    layout: LayoutUser,
+    component: routeComponents.Dashboard,
+    layout: routeComponents.LayoutUser,
   },
   habits: {
     name: "habits",
     path: "/habits",
     title: "Habits",
-    component: Habits,
-    layout: LayoutUser,
+    component: routeComponents.Habits,
+    layout: routeComponents.LayoutUser,
   },
   homepage: {
     name: "homepage",
     path: "/",
     title: "Home",
-    component: Homepage,
-    layout: DefaultLayout,
+    component: routeComponents.Homepage,
+    layout: routeComponents.DefaultLayout,
   },
   notFound: {
     name: "not-found",
     path: "/not-found",
     title: "Not Found",
-    component: NotFound,
-    layout: DefaultLayout,
+    component: routeComponents.NotFound,
+    layout: routeComponents.DefaultLayout,
   },
   today: {
     name: "today",
     path: "/today",
     title: "Today",
-    component: Today,
-    layout: LayoutUser,
+    component: routeComponents.Today,
+    layout: routeComponents.LayoutUser,
   },
   scorecard: {
     name: "scorecard",
     path: "/scorecard",
     title: "Scorecard",
-    component: Scorecard,
-    layout: LayoutUser,
+    component: routeComponents.Scorecard,
+    layout: routeComponents.LayoutUser,
   },
   settings: {
     name: "settings",
     path: "/settings",
     title: "Settings",
-    component: Settings,
-    layout: LayoutUser,
+    component: routeComponents.Settings,
+    layout: routeComponents.LayoutUser,
   },
   styleguide: {
     name: "styleguide",
     path: "/styleguide",
     title: "Styleguide",
-    component: Styleguide,
-    layout: DefaultLayout,
+    component: routeComponents.Styleguide,
+    layout: routeComponents.DefaultLayout,
   },
 };
 

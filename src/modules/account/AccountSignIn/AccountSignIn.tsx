@@ -5,6 +5,7 @@ import React, {
   useEffect,
   useReducer,
 } from "react";
+import { Redirect } from "Router";
 import routeConfig from "config/routes";
 import AccountPage from "modules/account/AccountCreate/AccountPage";
 import Heading from "modules/common/Heading";
@@ -27,7 +28,7 @@ import { FormInput } from "modules/account/accountForm.types";
 import { ThemeContext } from "styled-components";
 import { ErrorAlert } from "modules/common/Alert";
 import useRequest from "hooks/useRequest";
-import { Redirect } from "react-router-dom";
+import { REQUEST_STATUS } from "hooks/useRequest.reducer";
 
 const formInputs: FormInput[] = [
   {
@@ -52,7 +53,7 @@ const API_URL = "http://localhost:5000/habits";
 
 const AccountSignIn = () => {
   const theme = useContext(ThemeContext);
-  const { request, status, makeRequest } = useRequest();
+  const { request, makeRequest } = useRequest();
   const [state, dispatch] = useReducer(
     accountSignInReducer,
     initAccountSignInState
@@ -84,11 +85,11 @@ const AccountSignIn = () => {
 
       {/* request errors */}
 
-      {request.status === status.ERROR && request.message ? (
-        <ErrorAlert message={request.message} />
+      {request.status === REQUEST_STATUS.ERROR && request.error ? (
+        <ErrorAlert message={request.error.message} />
       ) : null}
 
-      {request.status === status.SUCCESS && request.data ? (
+      {request.status === REQUEST_STATUS.SUCCESS && request.data ? (
         <Redirect to={routeConfig.today.path} />
       ) : (
         <Form onSubmit={handleSubmit}>

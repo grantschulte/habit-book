@@ -18,14 +18,14 @@ type RequestState = {
     | typeof REQUEST_STATUS.ERROR
     | typeof REQUEST_STATUS.FETCHING
     | typeof REQUEST_STATUS.IDLE;
-  message?: string;
   data?: any;
+  error?: Error;
 };
 
 export const initUseRequestState = {
   status: REQUEST_STATUS.IDLE,
-  message: undefined,
   data: undefined,
+  error: undefined,
 };
 
 const useRequestReducer = (state: RequestState, action: RequestAction) => {
@@ -33,20 +33,18 @@ const useRequestReducer = (state: RequestState, action: RequestAction) => {
     case REQUEST_FETCH:
       return Object.assign({}, state, {
         status: REQUEST_STATUS.FETCHING,
-        message: undefined,
+        error: undefined,
         data: undefined,
       });
     case REQUEST_SUCCESS:
       return Object.assign({}, state, {
         status: REQUEST_STATUS.SUCCESS,
-        message: undefined,
         data: action.data,
       });
     case REQUEST_ERROR:
       return Object.assign({}, state, {
         status: REQUEST_STATUS.ERROR,
-        message: action.message,
-        data: undefined,
+        error: action.error,
       });
     default:
       return state;

@@ -1,9 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import Heading from "modules/common/Heading";
 import Page from "modules/common/Page";
 import styled, { ThemeContext } from "styled-components";
-// import GeneralSettings from "modules/settings/GeneralSettings";
-// import UpdatePasswordSettings from "modules/settings/UpdatePasswordSettings";
 import { Col, Row } from "modules/common/Grid";
 import { useAuth0 } from "@auth0/auth0-react";
 import useRequest from "hooks/useRequest";
@@ -23,42 +21,13 @@ const SettingsPage = styled(Page)`
 
 const Settings = () => {
   const theme = useContext(ThemeContext);
-  const { request, makeRequest } = useRequest();
-  const [token, setToken] = useState("");
-  const {
-    user,
-    isLoading,
-    isAuthenticated,
-    logout,
-    getAccessTokenSilently,
-  } = useAuth0();
-
-  useEffect(() => {
-    const getToken = async () => {
-      const audience = process.env.REACT_APP_AUTH0_AUDIENCE;
-      const accessToken = await getAccessTokenSilently({
-        audience,
-        scope: process.env.REACT_APP_AUTH0_SCOPE,
-      });
-      setToken(accessToken);
-    };
-
-    if (!isLoading && isAuthenticated) {
-      getToken();
-    }
-  }, [isLoading, isAuthenticated, getAccessTokenSilently]);
+  const { makeRequest } = useRequest();
+  const { user, isAuthenticated, logout } = useAuth0();
 
   useEffect(() => {
     const apiUrl = "http://localhost:8080/private";
-
-    if (token) {
-      makeRequest(apiUrl, "get", token);
-    }
-  }, [makeRequest, token]);
-
-  if (isLoading) {
-    return <div>Loading Template...</div>;
-  }
+    makeRequest(apiUrl);
+  }, [makeRequest]);
 
   const handleSignOut = () => {
     logout({ returnTo: `${window.location.origin}${routes.homepage.path}` });
@@ -93,9 +62,6 @@ const Settings = () => {
           </Button>
         </Col>
       </Row>
-
-      {/* <GeneralSettings /> */}
-      {/* <UpdatePasswordSettings /> */}
     </SettingsPage>
   ) : (
     <Redirect to={routes.homepage.path} />

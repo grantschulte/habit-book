@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { ThemeContext } from "styled-components";
 import Button from "modules/common/Button";
@@ -7,11 +7,9 @@ import Page from "modules/common/Page";
 import { Col } from "modules/common/Grid";
 import FullWidthRow from "modules/common/FullWidthRow";
 import routes from "config/routes";
-import { useHistory } from "react-router-dom";
 
 const Homepage = () => {
   const theme = useContext(ThemeContext);
-  // const history = useHistory();
   const { loginWithRedirect } = useAuth0();
 
   const handleSignInClick = () => {

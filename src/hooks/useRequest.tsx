@@ -6,41 +6,51 @@ import {
 } from "hooks/useRequest.actions";
 import useRequestReducer, {
   initUseRequestState,
-  REQUEST_STATUS,
 } from "hooks/useRequest.reducer";
+import { useAuth0 } from "@auth0/auth0-react";
+
+const logRequest = (json: any) => {
+  console.log(json);
+};
 
 const useRequest = () => {
   const [request, dispatch] = useReducer(
     useRequestReducer,
     initUseRequestState
   );
+  const { getAccessTokenSilently } = useAuth0();
 
   const makeRequest = useCallback(
-    async (url: string, method: string = "get", token?: string) => {
+    async (url: string, opts?: any) => {
       dispatch(requestFetch());
 
-      const headers = token
-        ? new Headers({
-            Authorization: `Bearer ${token}`,
-          })
-        : {};
-
       try {
-        const response = await fetch(url, {
-          method: method.toUpperCase(),
-          headers,
+        const token = await getAccessTokenSilently({
+          audience: process.env.REACT_APP_AUTH0_AUDIENCE,
+          scope: process.env.REACT_APP_AUTH0_SCOPE,
         });
+
+        const response = await fetch(url, {
+          ...opts,
+          headers: {
+            ...opts?.headers,
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
         const json = await response.json();
-        console.log(json);
+
+        logRequest(json);
+
         dispatch(requestSuccess(json));
       } catch (error) {
-        dispatch(requestError(error.toString()));
+        dispatch(requestError(error as Error));
       }
     },
-    [dispatch]
+    [dispatch, getAccessTokenSilently]
   );
 
-  return { request, makeRequest, status: REQUEST_STATUS };
+  return { request, makeRequest };
 };
 
 export default useRequest;
