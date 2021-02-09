@@ -1,7 +1,8 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
 import { AppState, Auth0Provider } from "@auth0/auth0-react";
-import { BrowserRouter as Router, useHistory } from "Router";
+import { Router } from "Router";
+import { createBrowserHistory } from "history";
 import theme from "config/theme";
 import ScrollToTop from "effects/ScrollToTop";
 import Routes from "./Routes";
@@ -11,25 +12,23 @@ import { HabitHistoryProvider } from "context/HabitHistoryContext";
 import GlobalStyle from "modules/common/GlobalStyle";
 import routes from "config/routes";
 
-const AUTH0_REDIRECT_URI = `${window.location.origin}${routes.today.path}`;
+export const history = createBrowserHistory();
+const AUTH0_REDIRECT_URI = `${window.location.origin}${routes.homepage.path}`;
 
 const App: React.FC = () => {
-  const history = useHistory();
-
   const onRedirectCallback = (appState: AppState) => {
-    // Use the router's history module to replace the url
-    history.replace(appState?.returnTo || window.location.pathname);
+    history.push(appState?.returnTo ?? routes.today.path);
   };
 
   return (
-    <Router>
+    <Router history={history}>
       <ScrollToTop />
       <Auth0Provider
         domain={process.env.REACT_APP_AUTH0_DOMAIN || ""}
         clientId={process.env.REACT_APP_AUTH0_CLIENT_ID || ""}
-        redirectUri={AUTH0_REDIRECT_URI}
         audience={process.env.REACT_APP_AUTH0_AUDIENCE}
         scope={process.env.REACT_APP_AUTH0_SCOPE}
+        redirectUri={AUTH0_REDIRECT_URI}
         onRedirectCallback={onRedirectCallback}
       >
         <ThemeProvider theme={theme.light}>
