@@ -25,7 +25,6 @@ const Settings = () => {
   const theme = useContext(ThemeContext);
   const { request, makeRequest } = useRequest();
   const [token, setToken] = useState("");
-
   const {
     user,
     isLoading,
@@ -33,10 +32,6 @@ const Settings = () => {
     logout,
     getAccessTokenSilently,
   } = useAuth0();
-
-  console.log(token);
-  console.log(request);
-  console.log(user);
 
   useEffect(() => {
     const getToken = async () => {

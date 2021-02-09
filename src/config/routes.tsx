@@ -18,7 +18,8 @@ export type IRoute = {
   path: string;
   isExternal?: boolean;
   title: string;
-  component?: React.FunctionComponent;
+  protected?: boolean;
+  component: React.FunctionComponent;
   layout?: React.FunctionComponent;
 };
 
