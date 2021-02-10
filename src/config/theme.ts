@@ -83,9 +83,12 @@ const lightTheme: DefaultTheme = {
     },
   },
   font: {
-    body: "'Raleway', sans-serif",
-    heading: "'Raleway', sans-serif",
-    display: "'Lobster', cursive",
+    body:
+      "-apple-system,system-ui,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif",
+    heading:
+      "-apple-system,system-ui,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif",
+    display:
+      "-apple-system,system-ui,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif",
   },
   fontWeight: {
     100: 100,
