@@ -7,6 +7,7 @@ const Calendar: React.FC<CalendarSvgProps> = ({
   data,
   to,
   from,
+  direction,
 }: CalendarSvgProps) => {
   const theme = useTheme();
 
@@ -16,6 +17,7 @@ const Calendar: React.FC<CalendarSvgProps> = ({
       from={from}
       to={to}
       align="top"
+      direction={direction}
       colors={[
         theme.color.green["100"],
         theme.color.green["200"],

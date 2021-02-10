@@ -15,13 +15,17 @@ const Page = styled.div<PageProps>`
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      paddingTop: 0,
     }}
 
   ${({ direction }) =>
     direction && {
       flexDirection: direction,
     }}
+
+  @media screen and (max-width: 768px) {
+    display: block;
+    height: auto;
+  }
 
   ${Row} {
     width: ${({ center }) => (center ? "100%" : "auto")};

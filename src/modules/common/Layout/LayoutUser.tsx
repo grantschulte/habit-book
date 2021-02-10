@@ -39,7 +39,6 @@ const LogoContainer = styled.div`
 
   @media screen and (max-width: 768px) {
     grid-column: 1 / 3;
-    padding: 1rem;
   }
 `;
 
