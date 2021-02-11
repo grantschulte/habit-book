@@ -9,8 +9,3 @@ export type FlexRowProps = {
   flexGrow?: number;
   flexBasis?: number;
 };
-
-export type HabitListProps = {
-  innerRef?: (element: HTMLElement | null) => any;
-  children: React.ReactNode;
-};

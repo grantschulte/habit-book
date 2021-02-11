@@ -18,6 +18,7 @@ declare module "styled-components" {
       infoBackground: string;
       white: string;
       black: string;
+      tableBackground: string;
       grey: {
         100: string;
         200: string;

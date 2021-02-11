@@ -21,6 +21,7 @@ const lightTheme: DefaultTheme = {
     infoBackground: "#E0E0E0",
     white: "#F2F2F2",
     black: "#222222",
+    tableBackground: "#EFEFEF",
     grey: {
       100: "#E0E0E0",
       200: "#D6D6D6",

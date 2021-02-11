@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { CalendarDatum } from "modules/common/Calendar";
 import Heading from "modules/common/Heading";
-import { Col } from "modules/common/Grid";
-import FullWidthRow from "modules/common/FullWidthRow";
+import { Col, Row } from "modules/common/Grid";
 import Calendar from "./components/Calendar";
 import Page from "modules/common/Page";
-import mockCalendarData from "data/calendar.json";
+import useMediaQuery from "hooks/useMediaQuery";
+import useCalendar from "hooks/useCalendar";
+import HistoryTable from "modules/dashboard/components/HistoryTable";
+import useHabitHistory from "hooks/useHabitHistory";
 
 const CalendarContainer = styled.div`
   height: 240px;
@@ -17,50 +18,31 @@ const CalendarContainer = styled.div`
 `;
 
 const DashboardPage: React.FC = () => {
-  const data: CalendarDatum[] = mockCalendarData;
-  const calendars = [{ from: "01/01/2021", to: "12/31/2021", data }];
-  let [direction, setDirection] = useState<"horizontal" | "vertical">(
-    "horizontal"
-  );
-
-  // update calendar direction on media query
-
-  useEffect(() => {
-    const mqstring = "(max-width: 768px)";
-    const mql = window.matchMedia(mqstring);
-
-    if (mql.matches) {
-      setDirection("vertical");
-    }
-
-    function onMediaQueryChange(this: MediaQueryList, ev: MediaQueryListEvent) {
-      const dir = ev.matches ? "vertical" : "horizontal";
-      setDirection(dir);
-    }
-
-    mql.addEventListener("change", onMediaQueryChange);
-  }, [setDirection]);
+  const mqlMatch = useMediaQuery("(max-width: 768px)");
+  const { cal, data, direction } = useCalendar(mqlMatch);
+  const habitHistory = useHabitHistory();
 
   return (
-    <Page center>
-      <FullWidthRow center="xs">
+    <Page>
+      <Row center="xs">
         <Col xs>
           <Heading as="h1">Dashboard</Heading>
+
+          <Heading as="h2">Report Card</Heading>
+          <HistoryTable data={habitHistory} />
+
+          <Heading as="h2">Frequency</Heading>
           <CalendarContainer>
-            {calendars.map((cal) => {
-              return (
-                <Calendar
-                  key={cal.from}
-                  data={cal.data}
-                  to={cal.to}
-                  from={cal.from}
-                  direction={direction}
-                />
-              );
-            })}
+            <Calendar
+              key={cal.from}
+              data={data}
+              to={cal.to}
+              from={cal.from}
+              direction={direction}
+            />
           </CalendarContainer>
         </Col>
-      </FullWidthRow>
+      </Row>
     </Page>
   );
 };
