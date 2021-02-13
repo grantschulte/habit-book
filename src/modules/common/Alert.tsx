@@ -28,30 +28,6 @@ const StyledAlert = styled.div<{ type: AlertType }>`
   padding: ${(props) => {
     return `${props.theme.spacing[3]}  ${props.theme.spacing[3]}`;
   }};
-
-  ${({ type, theme }) => {
-    if (type === "success") {
-      return `
-        background-color: ${theme.color.successBackground};
-      `;
-    } else if (type === "warning") {
-      return `
-        background-color: ${theme.color.warningBackground};
-      `;
-    } else if (type === "error") {
-      return `
-        background-color: ${theme.color.errorBackground};
-      `;
-    } else if (type === "info") {
-      return `
-        background-color: ${theme.color.infoBackground};
-      `;
-    } else {
-      return `
-        background-color: ${theme.color.infoBackground};
-      `;
-    }
-  }};
 `;
 
 const StyledAlertTitle = styled.div`

@@ -18,23 +18,25 @@ import {
 } from "./DraggableItem.actions";
 import { useHabits } from "context/HabitContext";
 
-const HabitItemDraggable = styled(HabitItem).attrs((props) => ({
+const HabitItemDraggable = styled(HabitItem).attrs({
   $isDone: false,
-}))`
+})`
   background-color: ${(props) => props.theme.color.background};
   margin-bottom: 0.75rem;
 `;
 
 const EditInput = styled(Input)`
-  margin-right: auto;
+  margin-right: 0.75rem;
+  border: 0;
+  background-color: ${({ theme }) => theme.color.backgroundAlt};
 `;
 
 const SaveEditIcon = styled(BiCheck)`
-  color: ${(props) => props.theme.color.green[500]};
+  color: ${({ theme }) => theme.color.primary};
 `;
 
 const ItemMenuIcon = styled.span`
-  margin-left: 0.5rem;
+  margin-left: 0.75rem;
   display: flex;
 `;
 

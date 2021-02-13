@@ -9,7 +9,9 @@ const Habits: React.FC = () => {
     <Page>
       <Row>
         <Col xs sm={12} md={8} lg={6}>
-          <Heading as="h2">Habits</Heading>
+          <Heading as="h1" styleAs="h2">
+            Habits
+          </Heading>
           <HabitListDraggable />
         </Col>
       </Row>

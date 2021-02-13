@@ -5,50 +5,25 @@ declare module "styled-components" {
     color: {
       primary: string;
       secondary: string;
-      tertiary: string;
+      primary: string;
       text: string;
+      textDisabled: string;
       background: string;
+      backgroundAlt: string;
       success: string;
-      successBackground: string;
       error: string;
-      errorBackground: string;
       warning: string;
-      warningBackground: string;
       info: string;
-      infoBackground: string;
       white: string;
       black: string;
-      tableBackground: string;
-      purple: {
-        100: string;
-        200: string;
-        300: string;
-        400: string;
-        500: string;
-        600: string;
-        700: string;
-        800: string;
+      button: {
+        [buttonType: string]: {
+          background: string;
+          text: string;
+          border: string;
+        };
       };
-      cyan: {
-        100: string;
-        200: string;
-        300: string;
-        400: string;
-        500: string;
-        600: string;
-        700: string;
-        800: string;
-      };
-      pink: {
-        100: string;
-        200: string;
-        300: string;
-        400: string;
-        500: string;
-        600: string;
-        700: string;
-        800: string;
-      };
+      border: string;
       grey: {
         100: string;
         200: string;
@@ -59,27 +34,7 @@ declare module "styled-components" {
         700: string;
         800: string;
       };
-      blue: {
-        100: string;
-        200: string;
-        300: string;
-        400: string;
-        500: string;
-        600: string;
-        700: string;
-        800: string;
-      };
       red: {
-        100: string;
-        200: string;
-        300: string;
-        400: string;
-        500: string;
-        600: string;
-        700: string;
-        800: string;
-      };
-      yellow: {
         100: string;
         200: string;
         300: string;
@@ -109,6 +64,16 @@ declare module "styled-components" {
         700: string;
         800: string;
       };
+      blue: {
+        100: string;
+        200: string;
+        300: string;
+        400: string;
+        500: string;
+        600: string;
+        700: string;
+        800: string;
+      };
     };
     font: {
       body: string;
@@ -126,11 +91,15 @@ declare module "styled-components" {
       800: number;
       900: number;
     };
-    button: {
-      [buttonType: string]: {
-        background: string;
-        text: string;
-      };
+    spacing: {
+      1: string;
+      2: string;
+      3: string;
+      4: string;
+      5: string;
+      6: string;
+      7: string;
+      8: string;
     };
     borderWidth: {
       1: string;
@@ -142,18 +111,8 @@ declare module "styled-components" {
       3: string;
       4: string;
     };
-    spacing: {
-      1: string;
-      2: string;
-      3: string;
-      4: string;
-      5: string;
-      6: string;
-      7: string;
-      8: string;
-    };
     borderWeight: {
-      solid: "solid";
+      solid: string;
     };
   }
 }

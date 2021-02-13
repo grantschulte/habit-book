@@ -1,7 +1,7 @@
 import { IconType } from "react-icons/lib";
 
 export type ButtonSizes = "sm" | "md" | "lg";
-export type ButtonType = "primary" | "secondary" | "tertiary";
+export type ButtonType = "primary" | "secondary" | "primary";
 export type ButtonSizesConfig = {
   sm: string;
   md: string;
@@ -21,7 +21,7 @@ export type ButtonProps = {
 
 export type StyledButtonProps = {
   size?: ButtonSizes;
-  buttonType?: ButtonType;
+  buttonType: ButtonType;
   href?: string;
   fullWidth?: boolean;
 };

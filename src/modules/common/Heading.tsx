@@ -32,13 +32,14 @@ const StyledHeading = styled.h1`
   }
 `;
 
-const Heading: React.FC<HeadingProps> = ({
+const Heading = ({
   styleAs,
   as,
   children,
-}: HeadingProps) => {
+  style,
+}: HeadingProps & React.HTMLProps<HTMLHeadingElement>) => {
   return (
-    <StyledHeading as={as} className={styleAs}>
+    <StyledHeading as={as} className={styleAs} style={style}>
       {children}
     </StyledHeading>
   );

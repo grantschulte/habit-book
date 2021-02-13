@@ -10,9 +10,13 @@ import routes from "config/routes";
 import Input from "modules/common/Form/Input";
 import Label from "modules/common/Form/Label";
 import Button from "modules/common/Button";
+import InputCombo from "modules/common/InputCombo";
 
-const SettingsPage = styled(Page)`
-  /* padding-top: 6rem; */
+const Section = styled.div`
+  background-color: ${(props) => props.theme.color.backgroundAlt};
+  border-radius: ${(props) => props.theme.borderRadii[4]};
+  margin-bottom: 2rem;
+  padding: 1.5rem;
 `;
 
 const Settings = () => {
@@ -30,35 +34,66 @@ const Settings = () => {
   };
 
   return isAuthenticated ? (
-    <SettingsPage>
+    <Page>
       <Row>
         <Col xs sm={12} md={8} lg={6}>
-          <Heading as="h2">Account Settings</Heading>
+          <Heading as="h1" styleAs="h2">
+            Account Settings
+          </Heading>
         </Col>
       </Row>
 
-      <Row style={{ marginBottom: theme.spacing[8] }}>
+      <Row>
         <Col xs sm={12} md={8} lg={6}>
-          <Label value="Update Email" htmlFor="settings-email">
-            <Input
-              id="settings-email"
-              name="settings-email"
-              type="text"
-              disabled
-              value={user.email}
-            />
-          </Label>
+          <Section>
+            <Heading as="h3">General</Heading>
+
+            <Row
+              style={{
+                marginBottom: theme.spacing[6],
+              }}
+            >
+              <Col xs>
+                <Label value="Update Email" htmlFor="settings-email">
+                  <InputCombo>
+                    <Input
+                      id="settings-email"
+                      name="settings-email"
+                      type="text"
+                      disabled
+                      value={user.email}
+                    />
+                    <Button buttonType="primary">Update</Button>
+                  </InputCombo>
+                </Label>
+              </Col>
+            </Row>
+
+            <Row>
+              <Col xs>
+                <Label value="Sign Out">
+                  <Button
+                    buttonType="primary"
+                    size="md"
+                    onClick={handleSignOut}
+                  >
+                    Click to sign out
+                  </Button>
+                </Label>
+              </Col>
+            </Row>
+          </Section>
         </Col>
       </Row>
 
-      <Row style={{ marginBottom: theme.spacing[8] }}>
+      {/* <Row>
         <Col xs sm={12} md={8} lg={6}>
-          <Button buttonType="secondary" size="md" onClick={handleSignOut}>
-            Sign Out
-          </Button>
+          <Section>
+            <Heading as="h3">Dashboard</Heading>
+          </Section>
         </Col>
-      </Row>
-    </SettingsPage>
+      </Row> */}
+    </Page>
   ) : (
     <Redirect to={routes.homepage.path} />
   );

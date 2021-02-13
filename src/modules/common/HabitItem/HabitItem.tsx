@@ -18,13 +18,11 @@ const StyledHabitItem = styled.div<{ done: boolean | undefined }>`
   margin-bottom: 0.5rem;
   background-color: ${(props) => props.theme.color.background};
   color: ${(props) =>
-    props.done ? props.theme.color.green[400] : props.theme.color.text};
+    props.done ? props.theme.color.success : props.theme.color.text};
   cursor: pointer;
 
-  ${border};
-
   border-color: ${(props) =>
-    props.done ? props.theme.color.green[400] : props.theme.color.black};
+    props.done ? props.theme.color.success : props.theme.color.border};
 
   &:last-child {
     margin-bottom: 0;

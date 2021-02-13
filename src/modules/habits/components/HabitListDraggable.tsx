@@ -1,14 +1,13 @@
 import React, { ChangeEvent, useState } from "react";
 import styled from "styled-components";
 import Habit from "types/habit";
-import { percentageColor } from "utils/css.utils";
 import {
   DragDropContext,
   Droppable,
   DroppableProvided,
   DropResult,
 } from "modules/common/DragNDrop";
-import { BiError, BiPlusCircle } from "modules/common/Icons";
+import { BiError, BiPlus } from "modules/common/Icons";
 import { Alert, AlertProps } from "modules/common/Alert";
 import DraggableItem from "./DraggableItem/DraggableItem";
 import { addHabit, reorderHabits } from "state/habits/habit.actions";
@@ -20,9 +19,8 @@ import { useHabits } from "context/HabitContext";
 const StyledHabitListDraggable = styled.div``;
 
 const HabitList = styled.div`
-  background-color: ${(props) =>
-    percentageColor(props.theme.color.background, -10)};
-  padding: 0.75rem;
+  background-color: ${(props) => props.theme.color.backgroundAlt};
+  padding: 0.5rem;
   border-radius: ${(props) => props.theme.borderRadii[4]};
 `;
 
@@ -60,7 +58,7 @@ const HabitListDraggable: React.FC = () => {
         Icon: BiError,
         title: "You can't have more than five habits...",
         message:
-          "Research suggests you are more likely to achieve goals that are attainable. If you want to add another habit, delete one. Don't worry, we'll still have your habit history.",
+          "Research suggests you are more likely to achieve attainable goals. If you want to add another habit, delete one first.",
       });
       return;
     }
@@ -112,14 +110,17 @@ const HabitListDraggable: React.FC = () => {
         <Droppable droppableId="habit-list-droppable">
           {(provided: DroppableProvided) => (
             <HabitList ref={provided.innerRef} {...provided.droppableProps}>
-              <InputCombo style={{ marginBottom: "1rem" }} size="lg">
+              <InputCombo style={{ marginBottom: "0.5rem" }} size="lg">
                 <Input
                   onInput={handleAddHabitInput}
                   value={addHabitInput}
                   placeholder="Add Habit"
                 />
-                <Button onClick={handleAddHabitButtonClick}>
-                  <BiPlusCircle size="1.75rem" />
+                <Button
+                  buttonType="primary"
+                  onClick={handleAddHabitButtonClick}
+                >
+                  <BiPlus size="1.75rem" />
                 </Button>
               </InputCombo>
               <div>

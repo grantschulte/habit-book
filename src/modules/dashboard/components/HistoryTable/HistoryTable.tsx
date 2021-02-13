@@ -6,6 +6,9 @@ import { HistoryTableProps } from "types/habit-history";
 
 const Container = styled.div`
   overflow-x: scroll;
+  background-color: ${({ theme }) => theme.color.backgroundAlt};
+  padding: 0.5rem;
+  border-radius: ${(props) => props.theme.borderRadii[4]};
 `;
 
 const Table = styled.table`
@@ -21,7 +24,7 @@ const THEAD = styled.thead``;
 const TBODY = styled.tbody`
   ${TR} {
     &:nth-child(odd) {
-      background-color: ${({ theme }) => theme.color.tableBackground};
+      background-color: ${({ theme }) => theme.color.background};
     }
   }
 `;

@@ -72,17 +72,17 @@ const Styleguide: React.FC = () => {
           </div>
 
           <div style={{ marginBottom: "1rem" }}>
-            <Button size="sm" buttonType="tertiary" icon={BiMouse}>
+            <Button size="sm" buttonType="primary" icon={BiMouse}>
               Click Me
             </Button>
           </div>
           <div style={{ marginBottom: "1rem" }}>
-            <Button size="md" buttonType="tertiary" icon={BiMouse}>
+            <Button size="md" buttonType="primary" icon={BiMouse}>
               Click Me
             </Button>
           </div>
           <div style={{ marginBottom: "1rem" }}>
-            <Button size="lg" buttonType="tertiary" icon={BiMouse}>
+            <Button size="lg" buttonType="primary" icon={BiMouse}>
               Click Me
             </Button>
           </div>
@@ -109,7 +109,7 @@ const Styleguide: React.FC = () => {
             <Label htmlFor="ice" value="Input Combo">
               <InputCombo>
                 <Input id="ice" type="text" />
-                <Button buttonType="primary">Submit</Button>
+                <Button buttonType="secondary">Submit</Button>
               </InputCombo>
             </Label>
           </div>

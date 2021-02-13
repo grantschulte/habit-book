@@ -28,8 +28,8 @@ const DashboardPage: React.FC = () => {
 
   return (
     <Page>
-      <Row center="xs">
-        <Col xs>
+      <Row>
+        <Col xs sm={12} md={10} lg={10}>
           <Section>
             <Heading as="h2">Report Card</Heading>
             <HistoryTable data={habitHistory} />

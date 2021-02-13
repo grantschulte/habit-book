@@ -16,14 +16,14 @@ const Calendar: React.FC<CalendarSvgProps> = ({
       data={data}
       from={from}
       to={to}
-      align="top"
+      align="top-left"
       direction={direction}
       colors={[
         theme.color.green["100"],
-        theme.color.green["200"],
         theme.color.green["300"],
-        theme.color.green["400"],
         theme.color.green["500"],
+        theme.color.green["700"],
+        theme.color.green["800"],
       ]}
       theme={{
         fontSize: 12,

@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { IconType } from "modules/common/Icons";
 import { NavLink } from "Router";
-import { percentageColor } from "utils/css.utils";
 
 const MenuIcon = styled.span<{ size?: string }>`
   color: inherit;
@@ -17,12 +16,8 @@ const StyledMenuLink = styled(NavLink)<{ active?: boolean }>`
   text-decoration: none;
   padding: 0.5rem 0;
 
-  &:hover {
-    color: ${(props) => percentageColor(props.theme.color.text, 70)};
-  }
-
   &.active {
-    color: ${(props) => props.theme.color.primary};
+    color: ${(props) => props.theme.color.secondary};
     text-decoration: none;
   }
 
