@@ -97,14 +97,6 @@ const HabitListDraggable: React.FC = () => {
 
   return (
     <StyledHabitListDraggable>
-      <InputCombo style={{ marginBottom: "1rem" }} size="lg">
-        <Input onInput={handleAddHabitInput} value={addHabitInput} />
-        <Button onClick={handleAddHabitButtonClick}>
-          <BiPlusCircle size="1.5rem" />
-          Add Habit
-        </Button>
-      </InputCombo>
-
       {alert && (
         <AlertContainer>
           <Alert
@@ -120,6 +112,16 @@ const HabitListDraggable: React.FC = () => {
         <Droppable droppableId="habit-list-droppable">
           {(provided: DroppableProvided) => (
             <HabitList ref={provided.innerRef} {...provided.droppableProps}>
+              <InputCombo style={{ marginBottom: "1rem" }} size="lg">
+                <Input
+                  onInput={handleAddHabitInput}
+                  value={addHabitInput}
+                  placeholder="Add Habit"
+                />
+                <Button onClick={handleAddHabitButtonClick}>
+                  <BiPlusCircle size="1.75rem" />
+                </Button>
+              </InputCombo>
               <div>
                 {state.habits.map((habit, index) => {
                   return (

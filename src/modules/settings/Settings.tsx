@@ -12,11 +12,7 @@ import Label from "modules/common/Form/Label";
 import Button from "modules/common/Button";
 
 const SettingsPage = styled(Page)`
-  padding-top: 6rem;
-
-  @media screen and (max-width: 768px) {
-    padding: clamp(1rem, 5vw, 1.5rem);
-  }
+  /* padding-top: 6rem; */
 `;
 
 const Settings = () => {
@@ -35,15 +31,15 @@ const Settings = () => {
 
   return isAuthenticated ? (
     <SettingsPage>
-      <Row center="xs">
-        <Col xs sm={8} md={6} lg={4}>
-          <Heading as="h1">Account Settings</Heading>
+      <Row>
+        <Col xs sm={12} md={8} lg={6}>
+          <Heading as="h2">Account Settings</Heading>
         </Col>
       </Row>
 
-      <Row center="xs" style={{ marginBottom: theme.spacing[8] }}>
-        <Col xs sm={8} md={6} lg={4}>
-          <Label value="Email" htmlFor="settings-email">
+      <Row style={{ marginBottom: theme.spacing[8] }}>
+        <Col xs sm={12} md={8} lg={6}>
+          <Label value="Update Email" htmlFor="settings-email">
             <Input
               id="settings-email"
               name="settings-email"
@@ -55,9 +51,9 @@ const Settings = () => {
         </Col>
       </Row>
 
-      <Row center="xs" style={{ marginBottom: theme.spacing[8] }}>
-        <Col xs sm={8} md={6} lg={4}>
-          <Button buttonType="secondary" onClick={handleSignOut}>
+      <Row style={{ marginBottom: theme.spacing[8] }}>
+        <Col xs sm={12} md={8} lg={6}>
+          <Button buttonType="secondary" size="md" onClick={handleSignOut}>
             Sign Out
           </Button>
         </Col>

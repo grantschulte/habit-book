@@ -30,16 +30,15 @@ const HabitList: React.FC = () => {
       {state.habits.map((h) => {
         return (
           <HabitItem
-            isDone={h.done}
+            done={h.done}
             label={h.label}
             key={h.id.toString()}
-            Icon={DoneIcon}
             onClick={() => {
               dispatch(toggleHabit(h));
             }}
           >
-            <DoneIcon $isDone={h.done} size="1.75rem" />
             <HabitLabel $isDone={h.done}>{h.label}</HabitLabel>
+            <DoneIcon $isDone={h.done} size="1.5rem" />
           </HabitItem>
         );
       })}

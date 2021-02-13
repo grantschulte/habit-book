@@ -17,6 +17,10 @@ const CalendarContainer = styled.div`
   }
 `;
 
+const Section = styled.div`
+  margin-bottom: ${({ theme }) => theme.spacing[8]};
+`;
+
 const DashboardPage: React.FC = () => {
   const mqlMatch = useMediaQuery("(max-width: 768px)");
   const { cal, data, direction } = useCalendar(mqlMatch);
@@ -26,21 +30,23 @@ const DashboardPage: React.FC = () => {
     <Page>
       <Row center="xs">
         <Col xs>
-          <Heading as="h1">Dashboard</Heading>
+          <Section>
+            <Heading as="h2">Report Card</Heading>
+            <HistoryTable data={habitHistory} />
+          </Section>
 
-          <Heading as="h2">Report Card</Heading>
-          <HistoryTable data={habitHistory} />
-
-          <Heading as="h2">Frequency</Heading>
-          <CalendarContainer>
-            <Calendar
-              key={cal.from}
-              data={data}
-              to={cal.to}
-              from={cal.from}
-              direction={direction}
-            />
-          </CalendarContainer>
+          <Section>
+            <Heading as="h2">Frequency</Heading>
+            <CalendarContainer>
+              <Calendar
+                key={cal.from}
+                data={data}
+                to={cal.to}
+                from={cal.from}
+                direction={direction}
+              />
+            </CalendarContainer>
+          </Section>
         </Col>
       </Row>
     </Page>

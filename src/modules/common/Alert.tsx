@@ -23,7 +23,8 @@ const StyledAlert = styled.div<{ type: AlertType }>`
   font-size: 1rem;
   color: ${(props) => props.theme.color[props.type]};
   margin-bottom: 1rem;
-  border-radius: ${(props) => props.theme.borderRadii[2]};
+  border: 2px solid;
+  border-color: ${(props) => props.theme.color[props.type]};
   padding: ${(props) => {
     return `${props.theme.spacing[3]}  ${props.theme.spacing[3]}`;
   }};

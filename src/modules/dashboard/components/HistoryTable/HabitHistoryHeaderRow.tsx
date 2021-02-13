@@ -20,7 +20,7 @@ const HistoryTableHeaderRow = ({ events }: { events: HistoryDay[] }) => (
   <TR>
     <TH></TH>
     {events.map((day) => (
-      <TH day={day} key={day.date} />
+      <TH day={day} key={day.id} />
     ))}
   </TR>
 );

@@ -16,7 +16,6 @@ const StyledMenuLink = styled(NavLink)<{ active?: boolean }>`
   color: ${(props) => props.theme.color.text};
   text-decoration: none;
   padding: 0.5rem 0;
-  font-weight: bold;
 
   &:hover {
     color: ${(props) => percentageColor(props.theme.color.text, 70)};
@@ -25,6 +24,10 @@ const StyledMenuLink = styled(NavLink)<{ active?: boolean }>`
   &.active {
     color: ${(props) => props.theme.color.primary};
     text-decoration: none;
+  }
+
+  &:first-child {
+    padding-top: 0;
   }
 
   @media screen and (max-width: 768px) {

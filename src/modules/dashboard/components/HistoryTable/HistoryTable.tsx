@@ -4,8 +4,11 @@ import React from "react";
 import styled from "styled-components";
 import { HistoryTableProps } from "types/habit-history";
 
+const Container = styled.div`
+  overflow-x: scroll;
+`;
+
 const Table = styled.table`
-  margin-bottom: ${({ theme }) => theme.spacing[8]};
   width: 100%;
   border: none;
   border-collapse: collapse;
@@ -25,16 +28,18 @@ const TBODY = styled.tbody`
 
 const HistoryTable = ({ data }: HistoryTableProps) => {
   return (
-    <Table>
-      <THEAD>
-        <HistoryTableHeaderRow events={data.events} />
-      </THEAD>
-      <TBODY>
-        {data.habits.map((habit) => (
-          <HistoryTableRow events={data.events} habit={habit} key={habit} />
-        ))}
-      </TBODY>
-    </Table>
+    <Container>
+      <Table>
+        <THEAD>
+          <HistoryTableHeaderRow events={data.events} />
+        </THEAD>
+        <TBODY>
+          {data.habits.map((habit) => (
+            <HistoryTableRow events={data.events} habit={habit} key={habit} />
+          ))}
+        </TBODY>
+      </Table>
+    </Container>
   );
 };
 

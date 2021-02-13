@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import RouteConfig from "config/routes";
-import { percentageColor } from "utils/css.utils";
 import {
   BiCheckDouble,
   BiRecycle,
@@ -16,8 +15,6 @@ const StyledMenu = styled.div`
   grid-column: 1 / 2;
   grid-row: 2 / 5;
   font-size: 1rem;
-  background-color: ${(props) =>
-    percentageColor(props.theme.color.background, -10)};
   color: ${(props) => props.theme.color.text};
   padding: 1.5rem;
 

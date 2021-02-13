@@ -1,19 +1,18 @@
 import React from "react";
 import Heading from "modules/common/Heading";
-import { Col } from "modules/common/Grid";
-import FullWidthRow from "modules/common/FullWidthRow";
+import { Col, Row } from "modules/common/Grid";
 import Page from "modules/common/Page";
 import HabitListDraggable from "./components/HabitListDraggable";
 
 const Habits: React.FC = () => {
   return (
-    <Page center>
-      <FullWidthRow center="xs">
+    <Page>
+      <Row>
         <Col xs sm={12} md={8} lg={6}>
-          <Heading as="h1">Habits</Heading>
+          <Heading as="h2">Habits</Heading>
           <HabitListDraggable />
         </Col>
-      </FullWidthRow>
+      </Row>
     </Page>
   );
 };

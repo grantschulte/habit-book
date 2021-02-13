@@ -87,7 +87,6 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
           {...provided.dragHandleProps}
           innerRef={provided.innerRef}
           label={habit.label}
-          Icon={DraggableIcon}
         >
           {state.showEditInput === habit.id ? (
             <>

@@ -27,11 +27,11 @@ const HistoryTableRow = ({
       const h = ev.habits.find((h) => h.name === habit);
 
       if (!h) {
-        return <TD>-</TD>;
+        return <TD key={`${habit}-${ev.id}`}>-</TD>;
       }
 
       return (
-        <TD>
+        <TD key={h.id}>
           <DoneIcon $isDone={h.done} size="1.25rem" />
         </TD>
       );

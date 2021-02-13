@@ -6,22 +6,52 @@ type Theme = {
 
 const lightTheme: DefaultTheme = {
   color: {
-    primary: "#2AB7CA",
-    secondary: "#FE4A49",
-    tertiary: "#FED766",
-    text: "#222222",
-    background: "#F4F4F8",
+    primary: "#7E5A9B",
+    secondary: "#EE4266",
+    tertiary: "#66CED6",
+    text: "#131516",
+    background: "#EFFAFB",
     success: "#176440",
     successBackground: "#CDF4E2",
     error: "#91121D",
     errorBackground: "#F8C9CD",
     warning: "#91121D",
     warningBackground: "#FFEEC2",
-    info: "#222222",
+    info: "#131516",
     infoBackground: "#E0E0E0",
-    white: "#F2F2F2",
-    black: "#222222",
-    tableBackground: "#EFEFEF",
+    white: "#EFFAFB",
+    black: "#131516",
+    tableBackground: "#EFFAFB",
+    purple: {
+      100: "#E0E0E0",
+      200: "#D6D6D6",
+      300: "#CCCCCC",
+      400: "#C2C2C2",
+      500: "#B8B8B8",
+      600: "#ADADAD",
+      700: "#A3A3A3",
+      800: "#999999",
+    },
+    cyan: {
+      100: "#E0E0E0",
+      200: "#D6D6D6",
+      300: "#CCCCCC",
+      400: "#C2C2C2",
+      500: "#B8B8B8",
+      600: "#ADADAD",
+      700: "#A3A3A3",
+      800: "#999999",
+    },
+    pink: {
+      100: "#E0E0E0",
+      200: "#D6D6D6",
+      300: "#CCCCCC",
+      400: "#C2C2C2",
+      500: "#B8B8B8",
+      600: "#ADADAD",
+      700: "#A3A3A3",
+      800: "#999999",
+    },
     grey: {
       100: "#E0E0E0",
       200: "#D6D6D6",
@@ -84,12 +114,9 @@ const lightTheme: DefaultTheme = {
     },
   },
   font: {
-    body:
-      "-apple-system,system-ui,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif",
-    heading:
-      "-apple-system,system-ui,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif",
-    display:
-      "-apple-system,system-ui,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif",
+    body: "'SFMono-Regular',Consolas, 'Liberation Mono', Menlo, Courier",
+    heading: "'SFMono-Regular',Consolas, 'Liberation Mono', Menlo, Courier",
+    display: "'SFMono-Regular',Consolas, 'Liberation Mono', Menlo, Courier",
   },
   fontWeight: {
     100: 100,
@@ -104,15 +131,15 @@ const lightTheme: DefaultTheme = {
   },
   button: {
     primary: {
-      background: "#2AB7CA",
+      background: "#7E5A9B",
       text: "#222222",
     },
     secondary: {
-      background: "#FED766",
+      background: "#EE4266",
       text: "#222222",
     },
     tertiary: {
-      background: "#222222",
+      background: "#66CED6",
       text: "#F2F2F2",
     },
   },
@@ -121,10 +148,13 @@ const lightTheme: DefaultTheme = {
     2: "2px",
   },
   borderRadii: {
-    1: "2px",
-    2: "4px",
-    3: "6px",
+    1: "1px",
+    2: "2px",
+    3: "4px",
     4: "8px",
+  },
+  borderWeight: {
+    solid: "solid",
   },
   spacing: {
     1: "0.25rem",
@@ -135,9 +165,6 @@ const lightTheme: DefaultTheme = {
     6: "1.5rem",
     7: "2rem",
     8: "2.5rem",
-  },
-  borderWeight: {
-    solid: "solid",
   },
 };
 

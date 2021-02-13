@@ -19,6 +19,36 @@ declare module "styled-components" {
       white: string;
       black: string;
       tableBackground: string;
+      purple: {
+        100: string;
+        200: string;
+        300: string;
+        400: string;
+        500: string;
+        600: string;
+        700: string;
+        800: string;
+      };
+      cyan: {
+        100: string;
+        200: string;
+        300: string;
+        400: string;
+        500: string;
+        600: string;
+        700: string;
+        800: string;
+      };
+      pink: {
+        100: string;
+        200: string;
+        300: string;
+        400: string;
+        500: string;
+        600: string;
+        700: string;
+        800: string;
+      };
       grey: {
         100: string;
         200: string;

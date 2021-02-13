@@ -4,7 +4,7 @@ import Heading from "modules/common/Heading";
 
 const DateDisplay: React.FC = () => {
   const { date } = useDate();
-  return <Heading as="h1">{date.format("dddd, MMMM DD")}</Heading>;
+  return <Heading as="h2">{date.format("dddd, MMMM DD")}</Heading>;
 };
 
 export default DateDisplay;

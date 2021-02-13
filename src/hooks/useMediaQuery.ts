@@ -16,6 +16,10 @@ const useMediaQuery = (query: string) => {
     }
 
     mql.addEventListener("change", onMediaQueryChange);
+
+    return () => {
+      mql.removeEventListener("change", onMediaQueryChange);
+    };
   }, [query]);
 
   return mqlMatch;
