@@ -1,3 +1,4 @@
+import { withAuthenticationRequired } from "@auth0/auth0-react";
 import LayoutUser from "modules/common/Layout/LayoutUser";
 import DefaultLayout from "modules/common/Layout";
 import Dashboard from "modules/dashboard";
@@ -10,7 +11,7 @@ import Styleguide from "modules/styleguide";
 import Today from "modules/today";
 
 const routeComponents = {
-  LayoutUser,
+  LayoutUser: withAuthenticationRequired(LayoutUser),
   DefaultLayout,
   Dashboard,
   Habits,

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { withAuthenticationRequired } from "@auth0/auth0-react";
+
 import Logo from "modules/common/Logo";
 import Menu from "./SidebarMenu/SidebarMenu";
 import routes from "config/routes";
@@ -47,4 +47,4 @@ const LayoutUser = ({ children }: { children?: React.ReactNode }) => {
   );
 };
 
-export default withAuthenticationRequired(LayoutUser);
+export default LayoutUser;
