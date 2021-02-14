@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { TR } from "modules/dashboard/components/HistoryTable/HistoryTable";
 import DoneIcon from "modules/today/components/DoneIcon";
-import { HistoryDay } from "types/habit-history";
+import { HistoryDay } from "../HistoryTable/HistoryTable";
 
 const TD = styled.td`
   padding: 0.5rem;

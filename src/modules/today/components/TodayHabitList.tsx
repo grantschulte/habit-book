@@ -6,12 +6,10 @@ import { toggleHabit } from "state/habits/habit.actions";
 import DoneIcon from "./DoneIcon";
 import { useHabits } from "context/HabitContext";
 import { InfoAlert } from "modules/common/Alert";
+import StatusBar from "modules/common/StatusBar";
 
 const StyledHabitList = styled.div`
   width: 100%;
-  background-color: ${(props) => props.theme.color.backgroundAlt};
-  padding: 0.5rem;
-  border-radius: ${(props) => props.theme.borderRadii[4]};
 `;
 
 const HabitList: React.FC = () => {
@@ -25,6 +23,7 @@ const HabitList: React.FC = () => {
 
   return (
     <>
+      <StatusBar />
       {alert && (
         <InfoAlert
           message="Congratulations. You've completed all of your habits today."

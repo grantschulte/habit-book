@@ -1,9 +1,9 @@
 import React from "react";
-import { BiCloud, BiMouse } from "modules/common/Icons";
+import { BiCloud, BiMouse } from "lib/Icons";
 import Button from "modules/common/Button";
-import { Row, Col } from "modules/common/Grid";
+import { Row, Col } from "lib/Grid";
 import Page from "modules/common/Page";
-import Input from "modules/common/Form/Input";
+import Input from "modules/common/Input";
 import Label from "modules/common/Form/Label";
 import InputPassword from "modules/common/PasswordInput/PasswordInput";
 import Heading from "modules/common/Heading";
@@ -17,6 +17,7 @@ import StyledLink from "../common/StyledLink";
 import MenuLink from "../common/Layout/SidebarMenu/SidebarMenuLink";
 import styled from "styled-components";
 import InputCombo from "modules/common/InputCombo";
+import Icon from "modules/common/Icon";
 
 const StyledRow = styled(Row)`
   margin-top: 2rem;
@@ -72,17 +73,20 @@ const Styleguide: React.FC = () => {
           </div>
 
           <div style={{ marginBottom: "1rem" }}>
-            <Button size="sm" buttonType="primary" icon={BiMouse}>
+            <Button size="sm" buttonType="primary">
+              <Icon component={BiMouse} />
               Click Me
             </Button>
           </div>
           <div style={{ marginBottom: "1rem" }}>
-            <Button size="md" buttonType="primary" icon={BiMouse}>
+            <Button size="md" buttonType="primary">
+              <Icon component={BiMouse} />
               Click Me
             </Button>
           </div>
           <div style={{ marginBottom: "1rem" }}>
-            <Button size="lg" buttonType="primary" icon={BiMouse}>
+            <Button size="lg" buttonType="primary">
+              <Icon component={BiMouse} />
               Click Me
             </Button>
           </div>

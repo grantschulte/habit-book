@@ -1,7 +1,7 @@
+import { InputProps } from "modules/common/Input/Input";
 import React, { useState } from "react";
 import styled from "styled-components";
-import { InputProps } from "types/input";
-import Input from "../Form/Input";
+import Input from "../Input";
 import PasswordVisibilityToggle from "./PasswordVisibilityToggle";
 
 const PasswordInputContainer = styled.div`

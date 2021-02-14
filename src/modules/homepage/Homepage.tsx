@@ -4,7 +4,7 @@ import { ThemeContext } from "styled-components";
 import Button from "modules/common/Button";
 import Heading from "modules/common/Heading";
 import Page from "modules/common/Page";
-import { Col, Row } from "modules/common/Grid";
+import { Col, Row } from "lib/Grid";
 
 const Homepage = () => {
   const theme = useContext(ThemeContext);

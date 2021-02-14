@@ -1,4 +1,4 @@
-import Habit from "../../types/habit";
+import { Habit } from "../../types";
 
 export const MARK_DONE = "MARK_HABIT_DONE";
 export const TOGGLE = "TOGGLE_HABIT";

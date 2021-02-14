@@ -1,10 +1,42 @@
 import React from "react";
 import styled from "styled-components";
-import { BUTTON_PADDING, BUTTON_FONT_SIZE } from "config/button-sizes";
-import { StyledButtonProps, ButtonProps } from "types/button-types";
 import { percentageColor } from "utils/css.utils";
 import InputCombo from "modules/common/InputCombo";
-import { border } from "styles/mixins";
+
+type ButtonSizes = "sm" | "md" | "lg";
+type ButtonType = "primary" | "secondary" | "primary";
+type ButtonSizesConfig = {
+  sm: string;
+  md: string;
+  lg: string;
+};
+
+const BUTTON_PADDING: ButtonSizesConfig = {
+  sm: "0.65rem 0.85rem",
+  md: "0.85rem 1rem",
+  lg: "1rem 1.5rem",
+};
+const BUTTON_FONT_SIZE: ButtonSizesConfig = {
+  sm: "0.85rem",
+  md: "1.10rem",
+  lg: "1.25rem",
+};
+
+export type ButtonProps = {
+  as?: "button" | "a";
+  buttonType?: ButtonType;
+  size?: ButtonSizes;
+  href?: string;
+  fullWidth?: boolean;
+  onClick?: (e: React.SyntheticEvent) => void;
+};
+
+export type StyledButtonProps = {
+  size?: ButtonSizes;
+  buttonType: ButtonType;
+  href?: string;
+  fullWidth?: boolean;
+};
 
 export const StyledButton = styled.button<StyledButtonProps>`
   display: flex;
@@ -17,7 +49,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   color: ${(props) =>
     props.buttonType
       ? props.theme.color.button[props.buttonType].text
-      : props.theme.color.black};
+      : props.theme.color.white};
   background-color: ${(props) =>
     props.buttonType
       ? props.theme.color.button[props.buttonType].background
@@ -26,7 +58,8 @@ export const StyledButton = styled.button<StyledButtonProps>`
     props.size ? BUTTON_PADDING[props.size] : BUTTON_PADDING.md};
   width: ${(props) => (props.fullWidth ? "100%" : "fit-content")};
   cursor: pointer;
-  border: none;
+  border: 2px solid;
+  border-color: ${(props) => props.theme.color.button[props.buttonType].border};
 
   &:hover {
     background-color: ${(props) =>
@@ -48,13 +81,12 @@ export const StyledButton = styled.button<StyledButtonProps>`
         : percentageColor(props.theme.color.primary, -5)};
   }
 
-  & :first-of-type {
-    margin-right: 0.25rem;
+  &:focus {
+    outline: 2px solid
+      ${(props) => props.theme.color.button[props.buttonType].outline};
   }
 
   ${InputCombo} & {
-    /* ${border}; */
-    border-left: none;
     height: 100%;
     width: fit-content;
     padding: 0 1rem;
@@ -63,17 +95,12 @@ export const StyledButton = styled.button<StyledButtonProps>`
   }
 `;
 
-const StyledButtonIcon = styled.span`
-  font-size: inherit;
-`;
-
 const Button: React.FC<ButtonProps> = ({
   buttonType = "primary",
   ...props
-}: ButtonProps) => {
+}) => {
   return (
     <StyledButton buttonType={buttonType} {...props}>
-      {props.icon ? <StyledButtonIcon as={props.icon} /> : null}
       {props.children}
     </StyledButton>
   );

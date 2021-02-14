@@ -1,10 +1,10 @@
 import React, { ChangeEvent, KeyboardEvent, useReducer } from "react";
 import styled from "styled-components";
 import { deleteHabit, editHabit } from "state/habits/habit.actions";
-import Habit from "types/habit";
-import { Draggable, DraggableProvided } from "modules/common/DragNDrop";
-import { BiCheck, BiEdit, BiTrash } from "modules/common/Icons";
-import Input from "modules/common/Form/Input";
+import { Habit } from "types";
+import { Draggable, DraggableProvided } from "lib/DragNDrop";
+import { BiCheck, BiEdit, BiTrash } from "lib/Icons";
+import Input from "modules/common/Input";
 import HabitItem from "modules/common/HabitItem/HabitItem";
 import { HabitLabel } from "modules/common/HabitItem/HabitLabel";
 import DraggableIcon from "../DraggableIcon";
@@ -22,7 +22,7 @@ const HabitItemDraggable = styled(HabitItem).attrs({
   $isDone: false,
 })`
   background-color: ${(props) => props.theme.color.background};
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 `;
 
 const EditInput = styled(Input)`

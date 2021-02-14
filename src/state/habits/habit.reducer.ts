@@ -1,7 +1,6 @@
 import { mockHabits } from "data/mockHabits";
-import Habit from "../../types/habit";
-import { Score } from "../../types/habit-score";
-import { RequestError, RequestStatus } from "../../types/types";
+import { Score } from "types";
+import { RequestError, RequestStatus, Habit } from "../../types";
 import {
   ADD,
   DELETE,

@@ -1,5 +1,5 @@
 import React from "react";
-import { Router } from "Router";
+import { Router } from "lib/Router";
 import { history } from "hocs/withAuthProvider";
 
 const withRouterProvider = <P extends object>(

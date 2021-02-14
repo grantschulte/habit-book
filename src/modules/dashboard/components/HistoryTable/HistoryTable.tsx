@@ -1,14 +1,40 @@
-import HistoryTableHeaderRow from "modules/dashboard/components/HistoryTable/HabitHistoryHeaderRow";
-import HistoryTableRow from "modules/dashboard/components/HistoryTable/HistoryTableRow";
 import React from "react";
 import styled from "styled-components";
-import { HistoryTableProps } from "types/habit-history";
+import HistoryTableHeaderRow from "modules/dashboard/components/HistoryTable/HabitHistoryHeaderRow";
+import HistoryTableRow from "modules/dashboard/components/HistoryTable/HistoryTableRow";
+
+export interface HistoryDay {
+  id: string;
+  date: string;
+  name: string;
+  habits: HabitEvent[];
+}
+
+export interface HabitEvent {
+  id: string;
+  date: string;
+  name: string;
+  done: boolean;
+}
+
+export interface HabitHistoryTable {
+  from: string;
+  to: string;
+  habits: Array<string>;
+  events: HistoryDay[];
+}
+
+export interface HistoryTableProps {
+  data: HabitHistoryTable;
+}
 
 const Container = styled.div`
   overflow-x: scroll;
   background-color: ${({ theme }) => theme.color.backgroundAlt};
-  padding: 0.5rem;
-  border-radius: ${(props) => props.theme.borderRadii[4]};
+  padding: 2px;
+  /* border: 2px solid; */
+  border-color: ${(props) => props.theme.color.border};
+  /* border-radius: ${(props) => props.theme.borderRadii[4]}; */
 `;
 
 const Table = styled.table`

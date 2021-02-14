@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useReducer,
 } from "react";
-import { Redirect } from "Router";
+import { Redirect } from "lib/Router";
 import routeConfig from "config/routes";
 import AccountPage from "modules/account/AccountCreate/AccountPage";
 import Heading from "modules/common/Heading";
@@ -18,11 +18,11 @@ import {
   validateForm,
   validateInput,
 } from "modules/account/accountForm.actions";
-import Input from "modules/common/Form/Input";
+import Input from "modules/common/Input";
 import PasswordInput from "modules/common/PasswordInput/PasswordInput";
 import Button from "modules/common/Button";
 import Form from "modules/common/Form";
-import InputErrorMessage from "modules/common/Form/Input/InputErrorMessage";
+import InputErrorMessage from "modules/common/Input/InputErrorMessage";
 import Label from "modules/common/Form/Label";
 import { FormInput } from "modules/account/accountForm.types";
 import { ThemeContext } from "styled-components";

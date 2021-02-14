@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { IconType } from "modules/common/Icons";
-import { NavLink } from "Router";
+import { IconType } from "lib/Icons";
+import { NavLink } from "lib/Router";
 
 const MenuIcon = styled.span<{ size?: string }>`
   color: inherit;

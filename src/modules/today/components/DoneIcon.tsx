@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { BiCheckCircle } from "modules/common/Icons";
-import { HabitItemIconProps } from "types/habit-item";
+import { BiCheckCircle } from "lib/Icons";
+import { HabitItemIconProps } from "modules/common/HabitItem/HabitItem";
 
 const DoneIcon = styled(BiCheckCircle).attrs<HabitItemIconProps>((props) => ({
   color: props.$isDone

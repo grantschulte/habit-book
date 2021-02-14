@@ -1,4 +1,4 @@
-import { Row } from "modules/common/Grid";
+import { Row } from "lib/Grid";
 import styled from "styled-components";
 
 type PageProps = {

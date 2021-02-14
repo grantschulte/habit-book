@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import DoneIcon from "modules/today/components/DoneIcon";
-import { HabitEvent } from "types/habit-history";
+import { HabitEvent } from "../HistoryTable/HistoryTable";
 
 const StyledCellData = styled.div`
   display: flex;

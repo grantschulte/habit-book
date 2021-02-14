@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, RouteComponentProps } from "Router";
+import { Switch, Route, RouteComponentProps } from "lib/Router";
 import routes from "config/routes";
 import DefaultLayout from "modules/common/Layout/Layout";
 

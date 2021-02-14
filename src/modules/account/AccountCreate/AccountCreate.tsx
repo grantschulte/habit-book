@@ -5,10 +5,10 @@ import React, {
   useEffect,
   useReducer,
 } from "react";
-import { Redirect } from "Router";
+import { Redirect } from "lib/Router";
 import routeConfig from "config/routes";
 import Label from "modules/common/Form/Label";
-import Input from "modules/common/Form/Input";
+import Input from "modules/common/Input";
 import Form from "modules/common/Form";
 import { ThemeContext } from "styled-components";
 import PasswordInput from "modules/common/PasswordInput/PasswordInput";
@@ -22,7 +22,7 @@ import {
   validateInput,
   validateForm,
 } from "modules/account/accountForm.actions";
-import InputErrorMessage from "modules/common/Form/Input/InputErrorMessage";
+import InputErrorMessage from "modules/common/Input/InputErrorMessage";
 import { ErrorAlert } from "modules/common/Alert";
 import AccountPage from "modules/account/AccountCreate/AccountPage";
 import Heading from "modules/common/Heading";

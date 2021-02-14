@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  BiCheckCircle,
-  BiError,
-  BiErrorCircle,
-  BiInfoCircle,
-} from "modules/common/Icons";
+import { BiCheckCircle, BiError, BiErrorCircle, BiInfoCircle } from "lib/Icons";
 import { IconType } from "react-icons/lib";
 import styled from "styled-components";
 

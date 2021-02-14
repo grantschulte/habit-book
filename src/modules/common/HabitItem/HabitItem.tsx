@@ -1,7 +1,24 @@
 import React from "react";
 import styled from "styled-components";
-import { border } from "styles/mixins";
-import { HabitItemProps } from "types/habit-item";
+import {
+  DraggableProvidedDraggableProps,
+  DraggableProvidedDragHandleProps,
+} from "lib/DragNDrop";
+
+export type HabitItemProps = {
+  done?: boolean;
+  label: string;
+  onClick?: (e: React.SyntheticEvent) => void;
+  innerRef?: (element?: HTMLElement | null | undefined) => any;
+  children: React.ReactNode;
+} & Partial<DraggableProvidedDraggableProps> &
+  Partial<DraggableProvidedDragHandleProps>;
+
+export type HabitItemIconProps = {
+  $isDone?: boolean;
+  size?: string;
+  $position?: "left" | "right";
+};
 
 const HabitItemFlex = styled.div`
   display: flex;
@@ -19,8 +36,7 @@ const StyledHabitItem = styled.div<{ done: boolean | undefined }>`
   background-color: ${(props) => props.theme.color.background};
   color: ${(props) =>
     props.done ? props.theme.color.success : props.theme.color.text};
-  cursor: pointer;
-
+  border: 2px solid;
   border-color: ${(props) =>
     props.done ? props.theme.color.success : props.theme.color.border};
 

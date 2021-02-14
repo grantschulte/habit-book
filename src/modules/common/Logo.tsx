@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from "Router";
+import { Link } from "lib/Router";
 
 const Logo = styled(Link)`
   font-size: 1.5rem;

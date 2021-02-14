@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Heading from "modules/common/Heading";
-import { Col, Row } from "modules/common/Grid";
+import { Col, Row } from "lib/Grid";
 import Calendar from "./components/Calendar";
 import Page from "modules/common/Page";
 import useMediaQuery from "hooks/useMediaQuery";
@@ -30,13 +30,21 @@ const DashboardPage: React.FC = () => {
     <Page>
       <Row>
         <Col xs sm={12} md={10} lg={10}>
+          <Heading as="h1" styleAs="h2">
+            Dashboard
+          </Heading>
+
           <Section>
-            <Heading as="h2">Report Card</Heading>
+            <Heading as="h3">Streaks</Heading>
+          </Section>
+
+          <Section>
+            <Heading as="h3">Report Card</Heading>
             <HistoryTable data={habitHistory} />
           </Section>
 
           <Section>
-            <Heading as="h2">Frequency</Heading>
+            <Heading as="h3">Frequency</Heading>
             <CalendarContainer>
               <Calendar
                 key={cal.from}

@@ -6,8 +6,8 @@ import {
 } from "modules/account/accountForm.actions";
 import { ErrorAlert, SuccessAlert } from "modules/common/Alert";
 import Button from "modules/common/Button";
-import Input from "modules/common/Form/Input";
-import InputErrorMessage from "modules/common/Form/Input/InputErrorMessage";
+import Input from "modules/common/Input";
+import InputErrorMessage from "modules/common/Input/InputErrorMessage";
 import Label from "modules/common/Form/Label";
 import Heading from "modules/common/Heading";
 import settingsReducer, {

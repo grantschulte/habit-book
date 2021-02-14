@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { TR } from "modules/dashboard/components/HistoryTable/HistoryTable";
-import { HistoryDay } from "types/habit-history";
+import { HistoryDay } from "../HistoryTable/HistoryTable";
 
 const StyledTH = styled.th`
   padding: 0.5rem;

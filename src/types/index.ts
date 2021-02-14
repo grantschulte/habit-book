@@ -1,4 +1,22 @@
-import Habit from "./habit";
+// Request
+
+export type RequestStatus = "idle" | "fetching" | "success" | "failed";
+
+export type RequestError = {
+  error: string;
+  message: string;
+};
+
+// Habit
+
+export type Habit = {
+  id: string;
+  label: string;
+  done: boolean;
+  order?: number;
+};
+
+// Habit History
 
 export type HabitHistoryScore = {
   fraction: string;
@@ -10,11 +28,11 @@ export type HabitHistoryDay = {
   habits: Habit[];
 };
 
-// export type HabitHistoryWeek = {
-//   weekNumber: number;
-//   days: HabitHistoryDay[];
-//   score: HabitHistoryScore;
-// };
+export type HabitHistoryWeek = {
+  weekNumber: number;
+  days: HabitHistoryDay[];
+  score: HabitHistoryScore;
+};
 
 export type HabitHistoryMonth = {
   name: string;

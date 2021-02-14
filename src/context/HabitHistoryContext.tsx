@@ -1,14 +1,13 @@
 import React from "react";
-import { RequestStatus, RequestError } from "../types/types";
-import { HabitHistory } from "../types/habit-score";
+import { RequestStatus, RequestError, HabitHistory } from "../types";
 import { mockHabitHistory } from "../data/mockHabitHistory";
 
-type HabitHistoryContextProps = {
+interface HabitHistoryContextProps {
   data: HabitHistory;
   message: string;
   error: RequestError | null;
   status: RequestStatus;
-};
+}
 
 const HabitHistoryContext = React.createContext<
   HabitHistoryContextProps | undefined

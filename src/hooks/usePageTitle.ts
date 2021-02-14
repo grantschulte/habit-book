@@ -1,4 +1,4 @@
-import { useLocation } from "Router";
+import { useLocation } from "lib/Router";
 import { PageTitleMappings } from "config/routes";
 
 export default function usePageTitle() {

@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import DoneIcon from "modules/today/components/DoneIcon";
-import { HabitHistoryDay } from "types/habit-score";
+import { HabitHistoryDay } from "types";
 
-type DayRowProps = { day: HabitHistoryDay };
+interface IDayRowProps {
+  day: HabitHistoryDay;
+}
 
 const DateCol = styled.div`
   font-weight: bold;
@@ -18,7 +20,7 @@ const HabitDoneCol = styled.div`
   justify-content: center;
 `;
 
-const DayRow: React.FC<DayRowProps> = ({ day }: DayRowProps): JSX.Element => {
+const DayRow: React.FC<IDayRowProps> = ({ day }: IDayRowProps): JSX.Element => {
   return (
     <>
       <DateCol>{day.date}</DateCol>

@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { percentageColor } from "utils/css.utils";
-import Habit from "types/habit";
-import { HabitHistoryMonth } from "types/habit-score";
+import { Habit, HabitHistoryMonth } from "types";
 import DayRow from "./DayRow";
 
 const ScorecardTop = styled.div`

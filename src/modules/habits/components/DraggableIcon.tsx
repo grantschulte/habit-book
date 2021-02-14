@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BiGridVertical } from "modules/common/Icons";
+import { BiGridVertical } from "lib/Icons";
 
 const DraggableIcon = styled(BiGridVertical).attrs((props) => ({
   size: "1.5rem",

@@ -1,16 +1,15 @@
-import FullWidthRow from "modules/common/FullWidthRow";
 import Page from "modules/common/Page";
 import React from "react";
-import { Col } from "react-styled-flexboxgrid";
+import { Row, Col } from "lib/Grid";
 
 const AccountPage = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Page center>
-      <FullWidthRow center="xs">
+    <Page>
+      <Row center="xs">
         <Col xs sm={8} md={6} lg={4}>
           {children}
         </Col>
-      </FullWidthRow>
+      </Row>
     </Page>
   );
 };

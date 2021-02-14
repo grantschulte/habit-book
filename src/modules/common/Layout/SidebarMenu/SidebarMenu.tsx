@@ -1,12 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import RouteConfig from "config/routes";
-import {
-  BiCheckDouble,
-  BiRecycle,
-  BiCog,
-  BiTachometer,
-} from "modules/common/Icons";
+import { BiCheckDouble, BiRecycle, BiCog, BiTachometer } from "lib/Icons";
 import MenuLink from "./SidebarMenuLink";
 
 const StyledMenu = styled.div`

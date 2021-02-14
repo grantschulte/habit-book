@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useContext, useEffect, useReducer } from "react";
 import Form from "modules/common/Form";
 import Heading from "modules/common/Heading";
-import Input from "modules/common/Form/Input";
+import Input from "modules/common/Input";
 import Label from "modules/common/Form/Label";
 import Button from "modules/common/Button";
 import { ThemeContext } from "styled-components";

@@ -2,21 +2,17 @@ import React, { useContext, useEffect } from "react";
 import Heading from "modules/common/Heading";
 import Page from "modules/common/Page";
 import styled, { ThemeContext } from "styled-components";
-import { Col, Row } from "modules/common/Grid";
+import { Col, Row } from "lib/Grid";
 import { useAuth0 } from "@auth0/auth0-react";
 import useRequest from "hooks/useRequest";
-import { Redirect } from "react-router-dom";
+import { Redirect } from "lib/Router";
 import routes from "config/routes";
-import Input from "modules/common/Form/Input";
+import Input from "modules/common/Input";
 import Label from "modules/common/Form/Label";
 import Button from "modules/common/Button";
-import InputCombo from "modules/common/InputCombo";
 
 const Section = styled.div`
-  background-color: ${(props) => props.theme.color.backgroundAlt};
-  border-radius: ${(props) => props.theme.borderRadii[4]};
   margin-bottom: 2rem;
-  padding: 1.5rem;
 `;
 
 const Settings = () => {
@@ -54,18 +50,20 @@ const Settings = () => {
               }}
             >
               <Col xs>
-                <Label value="Update Email" htmlFor="settings-email">
-                  <InputCombo>
-                    <Input
-                      id="settings-email"
-                      name="settings-email"
-                      type="text"
-                      disabled
-                      value={user.email}
-                    />
-                    <Button buttonType="primary">Update</Button>
-                  </InputCombo>
+                <Label
+                  value="Update Email"
+                  htmlFor="settings-email"
+                  style={{ marginBottom: theme.spacing[4] }}
+                >
+                  <Input
+                    id="settings-email"
+                    name="settings-email"
+                    type="text"
+                    value={user.email}
+                    disabled
+                  />
                 </Label>
+                <Button buttonType="primary">Update Email</Button>
               </Col>
             </Row>
 

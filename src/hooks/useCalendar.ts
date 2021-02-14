@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CalendarDatum } from "modules/common/Calendar";
+import { CalendarDatum } from "lib/Calendar";
 import mockCalendarData from "data/calendar.json";
 
 const initState = {

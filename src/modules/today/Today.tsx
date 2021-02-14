@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Row } from "modules/common/Grid";
+import { Col, Row } from "lib/Grid";
 import DateDisplay from "./components/DateDisplay";
 import TodayHabitList from "./components/TodayHabitList";
 import Page from "modules/common/Page";

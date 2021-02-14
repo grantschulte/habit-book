@@ -1,7 +1,11 @@
-import { BiHide, BiShow } from "modules/common/Icons";
 import React from "react";
 import styled from "styled-components";
-import { PasswordVisibilityToggleProps } from "types/input";
+import { BiHide, BiShow } from "lib/Icons";
+
+export type PasswordVisibilityToggleProps = {
+  onClick: () => void;
+  passwordVisible: boolean;
+};
 
 const StyledPasswordVisibilityToggle = styled.div`
   position: absolute;

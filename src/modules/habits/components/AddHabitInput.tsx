@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Input from "modules/common/Form/Input";
+import Input from "modules/common/Input";
 
 const AddHabitInput = styled(Input).attrs({
   type: "text",

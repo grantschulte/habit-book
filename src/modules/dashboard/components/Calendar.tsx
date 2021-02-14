@@ -1,5 +1,5 @@
 import React from "react";
-import { ResponsiveCalendar, CalendarSvgProps } from "modules/common/Calendar";
+import { ResponsiveCalendar, CalendarSvgProps } from "lib/Calendar";
 import { useTheme } from "styled-components";
 import { percentageColor } from "utils/css.utils";
 

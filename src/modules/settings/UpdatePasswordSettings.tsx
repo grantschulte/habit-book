@@ -6,7 +6,7 @@ import {
 } from "modules/account/accountForm.actions";
 import { ErrorAlert, SuccessAlert } from "modules/common/Alert";
 import Button from "modules/common/Button";
-import InputErrorMessage from "modules/common/Form/Input/InputErrorMessage";
+import InputErrorMessage from "modules/common/Input/InputErrorMessage";
 import Label from "modules/common/Form/Label";
 import Heading from "modules/common/Heading";
 import PasswordInput from "modules/common/PasswordInput/PasswordInput";

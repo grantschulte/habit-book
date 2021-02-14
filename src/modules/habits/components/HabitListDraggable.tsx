@@ -1,18 +1,18 @@
 import React, { ChangeEvent, useState } from "react";
 import styled from "styled-components";
-import Habit from "types/habit";
+import { Habit } from "types";
 import {
   DragDropContext,
   Droppable,
   DroppableProvided,
   DropResult,
-} from "modules/common/DragNDrop";
-import { BiError, BiPlus } from "modules/common/Icons";
+} from "lib/DragNDrop";
+import { BiError, BiPlus } from "lib/Icons";
 import { Alert, AlertProps } from "modules/common/Alert";
 import DraggableItem from "./DraggableItem/DraggableItem";
 import { addHabit, reorderHabits } from "state/habits/habit.actions";
 import InputCombo from "modules/common/InputCombo";
-import Input from "modules/common/Form/Input";
+import Input from "modules/common/Input";
 import Button from "modules/common/Button";
 import { useHabits } from "context/HabitContext";
 
@@ -25,7 +25,7 @@ const HabitList = styled.div`
 `;
 
 const AlertContainer = styled.div`
-  margin-top: 0.5rem;
+  margin-top: 1rem;
 `;
 
 const HabitListDraggable: React.FC = () => {
@@ -84,6 +84,7 @@ const HabitListDraggable: React.FC = () => {
     }
 
     const h: Habit = state.habits[source.index];
+
     dispatch(
       reorderHabits({
         source: source.index,
@@ -95,6 +96,17 @@ const HabitListDraggable: React.FC = () => {
 
   return (
     <StyledHabitListDraggable>
+      <InputCombo style={{ marginBottom: "0.5rem" }} size="lg">
+        <Input
+          onInput={handleAddHabitInput}
+          value={addHabitInput}
+          placeholder="Add Habit"
+        />
+        <Button buttonType="primary" onClick={handleAddHabitButtonClick}>
+          <BiPlus size="1.75rem" />
+        </Button>
+      </InputCombo>
+
       {alert && (
         <AlertContainer>
           <Alert
@@ -110,19 +122,6 @@ const HabitListDraggable: React.FC = () => {
         <Droppable droppableId="habit-list-droppable">
           {(provided: DroppableProvided) => (
             <HabitList ref={provided.innerRef} {...provided.droppableProps}>
-              <InputCombo style={{ marginBottom: "0.5rem" }} size="lg">
-                <Input
-                  onInput={handleAddHabitInput}
-                  value={addHabitInput}
-                  placeholder="Add Habit"
-                />
-                <Button
-                  buttonType="primary"
-                  onClick={handleAddHabitButtonClick}
-                >
-                  <BiPlus size="1.75rem" />
-                </Button>
-              </InputCombo>
               <div>
                 {state.habits.map((habit, index) => {
                   return (

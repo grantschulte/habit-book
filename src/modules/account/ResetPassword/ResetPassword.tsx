@@ -15,7 +15,7 @@ import {
   validateForm,
   validateInput,
 } from "modules/account/accountForm.actions";
-import InputErrorMessage from "modules/common/Form/Input/InputErrorMessage";
+import InputErrorMessage from "modules/common/Input/InputErrorMessage";
 import { ErrorAlert, SuccessAlert } from "modules/common/Alert";
 import useRequest from "hooks/useRequest";
 import StyledLink from "modules/common/StyledLink";
