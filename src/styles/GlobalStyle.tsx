@@ -13,6 +13,8 @@ const GlobalStyle = createGlobalStyle`
     font-family: ${(props) => props.theme.font.body};
     color: ${(props) => props.theme.color.text};
     background: ${(props) => props.theme.color.background};
+    transition: color 200ms;
+    transition: background 200ms;
   }
 
   h1, h2, h3, h4, h5, h6 {

@@ -57,7 +57,6 @@ export const StyledButton = styled.button<StyledButtonProps>`
   padding: ${(props) =>
     props.size ? BUTTON_PADDING[props.size] : BUTTON_PADDING.md};
   width: ${(props) => (props.fullWidth ? "100%" : "fit-content")};
-  cursor: pointer;
   border: 2px solid;
   border-color: ${(props) => props.theme.color.button[props.buttonType].border};
 
