@@ -78,13 +78,6 @@ const routes: RouteConfig = {
     component: routeComponents.Today,
     layout: routeComponents.LayoutUser,
   },
-  scorecard: {
-    name: "scorecard",
-    path: "/scorecard",
-    title: "Scorecard",
-    component: routeComponents.Scorecard,
-    layout: routeComponents.LayoutUser,
-  },
   settings: {
     name: "settings",
     path: "/settings",

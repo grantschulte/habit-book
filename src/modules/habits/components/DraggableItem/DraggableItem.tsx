@@ -1,6 +1,5 @@
 import React, { ChangeEvent, KeyboardEvent, useReducer } from "react";
 import styled from "styled-components";
-import { deleteHabit, editHabit } from "state/habits/habit.actions";
 import { Habit } from "types";
 import { Draggable, DraggableProvided } from "lib/DragNDrop";
 import { BiCheck, BiEdit, BiTrash } from "lib/Icons";
@@ -16,7 +15,8 @@ import {
   inlineEditUpdateInput,
   inlineEditReset,
 } from "./DraggableItem.actions";
-import { useHabits } from "context/HabitContext";
+import { useDispatch } from "react-redux";
+import { deleteHabit, editHabit } from "modules/habits/Habits.slice";
 
 const HabitItemDraggable = styled(HabitItem).attrs({
   $isDone: false,
@@ -50,25 +50,25 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
   habit,
   index,
 }: DraggableItemProps) => {
-  const habitsContext = useHabits();
-  const [state, dispatch] = useReducer(
+  const dispatch = useDispatch();
+  const [state, dispatchInlineEdit] = useReducer(
     draggableItemsReducer,
     initDraggableItemState
   );
 
   const handleSaveEditHabit = () => {
-    habitsContext.dispatch(editHabit(state.editInputValue, habit.id));
-    dispatch(inlineEditReset());
+    dispatch(editHabit({ id: habit.id, name: state.editInputValue }));
+    dispatchInlineEdit(inlineEditReset());
   };
 
   const handleEditToggle = () => {
     let showId = state.showEditInput === habit.id ? "" : habit.id;
-    dispatch(inlineEditUpdateInput(habit.label));
-    dispatch(inlineEditShow(showId));
+    dispatchInlineEdit(inlineEditUpdateInput(habit.label));
+    dispatchInlineEdit(inlineEditShow(showId));
   };
 
   const handleEditHabitChange = (e: ChangeEvent<HTMLInputElement>) => {
-    dispatch(inlineEditUpdateInput(e.target.value));
+    dispatchInlineEdit(inlineEditUpdateInput(e.target.value));
   };
 
   const handleEditHabitKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -78,7 +78,7 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
   };
 
   const handleDeleteItem = () => {
-    habitsContext.dispatch(deleteHabit(habit.id));
+    dispatch(deleteHabit({ id: habit.id }));
   };
 
   return (

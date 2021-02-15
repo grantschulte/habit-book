@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { useHabits } from "context/HabitContext";
 
 const StyledStatusBar = styled.div`
   position: relative;
@@ -21,17 +20,10 @@ const BarInner = styled.div<{ width: string }>`
   transition: 200ms width ease-out;
 `;
 
-const StatusBar = () => {
-  const { state } = useHabits();
-  const doneCount = state.habits.reduce((a, b) => {
-    return b.done ? a + 1 : a;
-  }, 0);
-  const percentageDone = Math.ceil((doneCount / state.habits.length) * 100);
-  const percentageDoneString = `${percentageDone}%`;
-
+const StatusBar: React.FC<{ width: string }> = ({ width }) => {
   return (
     <StyledStatusBar>
-      <BarInner width={percentageDoneString} />
+      <BarInner width={width} />
     </StyledStatusBar>
   );
 };

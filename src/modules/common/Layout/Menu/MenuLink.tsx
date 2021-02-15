@@ -3,9 +3,8 @@ import styled from "styled-components";
 import { IconType } from "lib/Icons";
 import { NavLink } from "lib/Router";
 
-const MenuIcon = styled.span<{ size?: string }>`
+const MenuIcon = styled.span`
   color: inherit;
-  font-size: ${(props) => props.size ?? "1rem"};
   margin-right: 0.5rem;
 `;
 
@@ -14,15 +13,10 @@ const StyledMenuLink = styled(NavLink)<{ active?: boolean }>`
   align-items: center;
   color: ${(props) => props.theme.color.text};
   text-decoration: none;
-  padding: 0.5rem 0;
 
   &.active {
     color: ${(props) => props.theme.color.secondary};
     text-decoration: none;
-  }
-
-  &:first-child {
-    padding-top: 0;
   }
 
   @media screen and (max-width: 768px) {
@@ -31,22 +25,23 @@ const StyledMenuLink = styled(NavLink)<{ active?: boolean }>`
     font-size: 0.75rem;
     flex-grow: 1;
     flex-basis: 0;
+    padding: 0.5rem 0;
 
     ${MenuIcon} {
-      width: 2rem;
-      height: 2rem;
+      width: 1.5rem;
+      height: 1.5rem;
       margin-right: 0;
       margin-bottom: 0.25rem;
     }
   }
 `;
 
-type MenuLinkProps = {
+interface MenuLinkProps {
   icon?: IconType;
   to: string;
   children?: React.ReactChild | React.ReactChild[];
   exact?: boolean;
-};
+}
 
 const MenuLink: React.FC<MenuLinkProps> = ({
   icon,

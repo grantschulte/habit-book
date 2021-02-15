@@ -1,4 +1,4 @@
-import { Habit, Score } from "types";
+import { Habit } from "types";
 
 export const mockHabits: Habit[] = [
   {
@@ -20,8 +20,3 @@ export const mockHabits: Habit[] = [
     done: false,
   },
 ];
-
-export const mockScore: Score = {
-  completedPoints: 12,
-  possiblePointsInWeek: 21,
-};

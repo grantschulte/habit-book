@@ -1,6 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
-import styled from "styled-components";
-import { Habit } from "types";
+import { RootState } from "app/rootReducer";
 import {
   DragDropContext,
   Droppable,
@@ -9,12 +7,19 @@ import {
 } from "lib/DragNDrop";
 import { BiError, BiPlus } from "lib/Icons";
 import { Alert, AlertProps } from "modules/common/Alert";
-import DraggableItem from "./DraggableItem/DraggableItem";
-import { addHabit, reorderHabits } from "state/habits/habit.actions";
-import InputCombo from "modules/common/InputCombo";
-import Input from "modules/common/Input";
 import Button from "modules/common/Button";
-import { useHabits } from "context/HabitContext";
+import Input from "modules/common/Input";
+import InputCombo from "modules/common/InputCombo";
+import {
+  addHabit,
+  fetchHabits,
+  reorderHabits,
+} from "modules/habits/Habits.slice";
+import React, { ChangeEvent, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
+import { Habit } from "types";
+import DraggableItem from "./DraggableItem/DraggableItem";
 
 const StyledHabitListDraggable = styled.div``;
 
@@ -29,16 +34,21 @@ const AlertContainer = styled.div`
 `;
 
 const HabitListDraggable: React.FC = () => {
-  const { state, dispatch } = useHabits();
+  const dispatch = useDispatch();
+  const { allHabits } = useSelector((state: RootState) => state.habits);
   const [alert, setAlert] = useState<AlertProps | undefined>(undefined);
   const [addHabitInput, setAddHabitInput] = useState<string>("");
 
-  const handleAddHabitButtonClick = () => {
+  useEffect(() => {
+    dispatch(fetchHabits());
+  }, [dispatch]);
+
+  const handleAddHabit = () => {
     if (!addHabitInput) {
       return;
     }
 
-    const exists = state.habits.find(
+    const exists = allHabits.find(
       (habit) => habit.label.toLowerCase() === addHabitInput.toLowerCase()
     );
 
@@ -52,7 +62,7 @@ const HabitListDraggable: React.FC = () => {
       return;
     }
 
-    if (state.habits.length > 4) {
+    if (allHabits.length > 4) {
       setAlert({
         type: "error",
         Icon: BiError,
@@ -64,11 +74,17 @@ const HabitListDraggable: React.FC = () => {
     }
 
     setAlert(undefined);
-    dispatch(addHabit(addHabitInput));
+    dispatch(addHabit({ name: addHabitInput }));
   };
 
   const handleAddHabitInput = (e: ChangeEvent<HTMLInputElement>) => {
     setAddHabitInput(e.target.value);
+  };
+
+  const handleAddHabitKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleAddHabit();
+    }
   };
 
   const onDragEnd = ({ destination, source }: DropResult) => {
@@ -83,7 +99,7 @@ const HabitListDraggable: React.FC = () => {
       return;
     }
 
-    const h: Habit = state.habits[source.index];
+    const h: Habit = allHabits[source.index];
 
     dispatch(
       reorderHabits({
@@ -98,11 +114,12 @@ const HabitListDraggable: React.FC = () => {
     <StyledHabitListDraggable>
       <InputCombo style={{ marginBottom: "0.5rem" }} size="lg">
         <Input
+          onKeyUp={handleAddHabitKeyUp}
           onInput={handleAddHabitInput}
           value={addHabitInput}
           placeholder="Add Habit"
         />
-        <Button buttonType="primary" onClick={handleAddHabitButtonClick}>
+        <Button buttonType="primary" onClick={handleAddHabit}>
           <BiPlus size="1.75rem" />
         </Button>
       </InputCombo>
@@ -123,7 +140,7 @@ const HabitListDraggable: React.FC = () => {
           {(provided: DroppableProvided) => (
             <HabitList ref={provided.innerRef} {...provided.droppableProps}>
               <div>
-                {state.habits.map((habit, index) => {
+                {allHabits.map((habit, index) => {
                   return (
                     <DraggableItem habit={habit} index={index} key={habit.id} />
                   );

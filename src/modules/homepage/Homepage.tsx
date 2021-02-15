@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { ThemeContext } from "styled-components";
+import { Col, Row } from "lib/Grid";
 import Button from "modules/common/Button";
 import Heading from "modules/common/Heading";
 import Page from "modules/common/Page";
-import { Col, Row } from "lib/Grid";
+import React, { useContext } from "react";
+import { ThemeContext } from "styled-components";
 
 const Homepage = () => {
   const theme = useContext(ThemeContext);
