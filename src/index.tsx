@@ -1,15 +1,26 @@
+import store from "app/store";
+import "normalize.css";
 import React from "react";
 import ReactDOM from "react-dom";
-import "normalize.css";
-import App from "./App";
+import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+const render = () => {
+  const App = require("./app/App").default;
+
+  ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.getElementById("root")
+  );
+};
+
+render();
+
+if (process.env.NODE_ENV === "development" && module.hot) {
+  module.hot.accept("./app/App", render);
+}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

@@ -4,7 +4,7 @@ import Heading from "modules/common/Heading";
 import Page from "modules/common/Page";
 import { Col, Row } from "lib/Grid";
 import useRequest from "hooks/useRequest";
-import ThemeRow from "modules/settings/ThemeRow";
+import ThemeSelector from "modules/settings/ThemeSelector/ThemeSelector";
 import EmailRow from "modules/settings/EmailRow";
 import SignOutRow from "modules/settings/SignOutRow";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -37,7 +37,7 @@ const Settings = () => {
           <Section>
             <Heading as="h3">General</Heading>
             <EmailRow user={user} />
-            <ThemeRow />
+            <ThemeSelector />
             <SignOutRow />
           </Section>
         </Col>
