@@ -15,7 +15,7 @@ const SignOutRow = () => {
     <Row>
       <Col xs>
         <Label value="Sign Out">
-          <Button buttonType="primary" size="md" onClick={handleSignOut}>
+          <Button buttonType="primary" size="sm" onClick={handleSignOut}>
             Click to sign out
           </Button>
         </Label>

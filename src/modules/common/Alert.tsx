@@ -1,18 +1,28 @@
 import React from "react";
 import { BiCheckCircle, BiError, BiErrorCircle, BiInfoCircle } from "lib/Icons";
-import { IconType } from "react-icons/lib";
 import styled from "styled-components";
 
-export type AlertType = "success" | "error" | "warning" | "info";
+export enum AlertType {
+  "Error" = "error",
+  "Success" = "success",
+  "Warning" = "warning",
+  "Info" = "info",
+}
 
-export type AlertProps = {
-  Icon: IconType;
+export interface AlertProps {
   type: AlertType;
   title?: string;
   message: string;
+}
+
+const ICON_MAP = {
+  error: BiErrorCircle,
+  info: BiInfoCircle,
+  success: BiCheckCircle,
+  warning: BiError,
 };
 
-const StyledAlert = styled.div<{ type: AlertType }>`
+const AlertContainer = styled.div<{ type: AlertType }>`
   display: flex;
   align-items: flex-start;
   font-size: 1rem;
@@ -40,38 +50,39 @@ const StyledAlertBody = styled.div`
 `;
 
 export const Alert: React.FC<AlertProps> = ({
-  Icon,
   type,
   title,
   message,
 }: AlertProps) => {
+  const Icon = ICON_MAP[type];
+
   return (
-    <StyledAlert type={type}>
+    <AlertContainer type={type}>
       <Icon size="1.5rem" style={{ flexShrink: 0 }} />
       <StyledAlertBody>
         {title ? <StyledAlertTitle>{title}</StyledAlertTitle> : null}
         <StyledAlertMessage>{message}</StyledAlertMessage>
       </StyledAlertBody>
-    </StyledAlert>
+    </AlertContainer>
   );
 };
 
 export const WarningAlert = styled(Alert).attrs({
-  type: "warning",
+  type: AlertType.Warning,
   Icon: BiError,
 })``;
 
 export const SuccessAlert = styled(Alert).attrs({
-  type: "success",
+  type: AlertType.Success,
   Icon: BiCheckCircle,
 })``;
 
 export const ErrorAlert = styled(Alert).attrs({
-  type: "error",
+  type: AlertType.Error,
   Icon: BiErrorCircle,
 })``;
 
 export const InfoAlert = styled(Alert).attrs({
-  type: "info",
+  type: AlertType.Info,
   Icon: BiInfoCircle,
 })``;

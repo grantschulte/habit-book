@@ -11,7 +11,15 @@ export type RequestError = {
 
 export type Habit = {
   id: string;
-  label: string;
+  name: string;
   done: boolean;
+  active: boolean;
   order?: number;
 };
+
+export interface HabitEvent {
+  id: string;
+  date: string;
+  done: boolean;
+  habit: Habit;
+}

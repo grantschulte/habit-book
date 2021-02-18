@@ -5,12 +5,13 @@ import DoneIcon from "modules/today/components/DoneIcon";
 import { HistoryDay } from "../HistoryTable/HistoryTable";
 
 const TD = styled.td`
-  padding: 0.5rem;
+  padding: 0.5rem 0.25rem;
   text-align: center;
   width: calc(100% / 9);
 
   &:first-child {
     text-align: left;
+    padding-left: 0.5rem;
   }
 `;
 
@@ -32,7 +33,7 @@ const HistoryTableRow = ({
 
       return (
         <TD key={h.id}>
-          <DoneIcon $isDone={h.done} size="1.25rem" />
+          <DoneIcon $isDone={h.done} size="1rem" />
         </TD>
       );
     })}

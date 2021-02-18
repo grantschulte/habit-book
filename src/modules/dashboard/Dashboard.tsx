@@ -34,9 +34,9 @@ const DashboardPage: React.FC = () => {
             Dashboard
           </Heading>
 
-          <Section>
+          {/* <Section>
             <Heading as="h3">Streaks</Heading>
-          </Section>
+          </Section> */}
 
           <Section>
             <Heading as="h3">Report Card</Heading>
@@ -44,7 +44,7 @@ const DashboardPage: React.FC = () => {
           </Section>
 
           <Section>
-            <Heading as="h3">Frequency</Heading>
+            <Heading as="h3">History</Heading>
             <CalendarContainer>
               <Calendar
                 key={cal.from}

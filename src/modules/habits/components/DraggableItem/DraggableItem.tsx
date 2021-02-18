@@ -1,29 +1,71 @@
+import {
+  Draggable,
+  DraggableProvided,
+  DraggableProvidedDraggableProps,
+  DraggableProvidedDragHandleProps,
+} from "lib/DragNDrop";
+import { BiCheck, BiEdit, BiTrash } from "lib/Icons";
+import { HabitLabel } from "modules/common/HabitItem/HabitLabel";
+import Input from "modules/common/Input";
+import {
+  fetchMakeHabitInactive,
+  fetchEditHabit,
+} from "modules/habits/Habits.slice";
 import React, { ChangeEvent, KeyboardEvent, useReducer } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Habit } from "types";
-import { Draggable, DraggableProvided } from "lib/DragNDrop";
-import { BiCheck, BiEdit, BiTrash } from "lib/Icons";
-import Input from "modules/common/Input";
-import HabitItem from "modules/common/HabitItem/HabitItem";
-import { HabitLabel } from "modules/common/HabitItem/HabitLabel";
 import DraggableIcon from "../DraggableIcon";
+import {
+  inlineEditReset,
+  inlineEditShow,
+  inlineEditUpdateInput,
+} from "./DraggableItem.actions";
 import draggableItemsReducer, {
   initDraggableItemState,
 } from "./DraggableItem.reducer";
-import {
-  inlineEditShow,
-  inlineEditUpdateInput,
-  inlineEditReset,
-} from "./DraggableItem.actions";
-import { useDispatch } from "react-redux";
-import { deleteHabit, editHabit } from "modules/habits/Habits.slice";
 
-const HabitItemDraggable = styled(HabitItem).attrs({
-  $isDone: false,
-})`
-  background-color: ${(props) => props.theme.color.background};
-  margin-bottom: 0.5rem;
+type HabitItemProps = {
+  innerRef?: (element?: HTMLElement | null | undefined) => any;
+  children: React.ReactNode;
+} & Partial<DraggableProvidedDraggableProps> &
+  Partial<DraggableProvidedDragHandleProps>;
+
+const HabitItemDraggableInner = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 0 1rem;
 `;
+
+const HabitItemDraggableContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 64px;
+  margin-bottom: 0.5rem;
+  background-color: ${(props) => props.theme.color.background};
+  color: ${(props) => props.theme.color.text};
+  border: 2px solid;
+  border-color: ${(props) => props.theme.color.border};
+  transition: border-color 200ms ease, color 200ms ease;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+const HabitItemDraggable: React.FC<HabitItemProps> = ({
+  innerRef,
+  children,
+  ...props
+}: HabitItemProps) => {
+  return (
+    <HabitItemDraggableContainer ref={innerRef} {...props}>
+      <HabitItemDraggableInner>{children}</HabitItemDraggableInner>
+    </HabitItemDraggableContainer>
+  );
+};
 
 const EditInput = styled(Input)`
   margin-right: 0.75rem;
@@ -57,13 +99,13 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
   );
 
   const handleSaveEditHabit = () => {
-    dispatch(editHabit({ id: habit.id, name: state.editInputValue }));
+    dispatch(fetchEditHabit(habit.id, state.editInputValue));
     dispatchInlineEdit(inlineEditReset());
   };
 
   const handleEditToggle = () => {
     let showId = state.showEditInput === habit.id ? "" : habit.id;
-    dispatchInlineEdit(inlineEditUpdateInput(habit.label));
+    dispatchInlineEdit(inlineEditUpdateInput(habit.name));
     dispatchInlineEdit(inlineEditShow(showId));
   };
 
@@ -78,17 +120,20 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
   };
 
   const handleDeleteItem = () => {
-    dispatch(deleteHabit({ id: habit.id }));
+    dispatch(fetchMakeHabitInactive(habit.id));
   };
 
   return (
-    <Draggable draggableId={habit.id} index={index} key={habit.id}>
+    <Draggable
+      draggableId={habit.id.toString()}
+      index={index}
+      key={habit.id.toString()}
+    >
       {(provided: DraggableProvided) => (
         <HabitItemDraggable
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           innerRef={provided.innerRef}
-          label={habit.label}
         >
           {state.showEditInput === habit.id ? (
             <>
@@ -102,7 +147,7 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
           ) : (
             <>
               <DraggableIcon size="1.5rem" />
-              <HabitLabel>{habit.label}</HabitLabel>
+              <HabitLabel>{habit.name}</HabitLabel>
               <ItemMenu>
                 <ItemMenuIcon>
                   <BiEdit size="1.5rem" onClick={handleEditToggle} />

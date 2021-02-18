@@ -29,7 +29,9 @@ const EmailRow = ({ user }: { user: User }) => {
             disabled
           />
         </Label>
-        <Button buttonType="primary">Update Email</Button>
+        <Button buttonType="primary" size="sm">
+          Update Email
+        </Button>
       </Col>
     </Row>
   );

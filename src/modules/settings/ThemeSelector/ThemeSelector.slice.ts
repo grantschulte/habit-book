@@ -31,10 +31,8 @@ export default themeSlice.reducer;
 
 export const getThemeFromStorage = (): AppThunk => {
   return (dispatch) => {
-    console.log("dispatched");
     const { getItem } = useLocalStorage();
     const theme = getItem(LOCAL_STORAGE_THEME_KEY) || DEFAULT_THEME;
-    console.log("theme from storage", theme);
     dispatch(setTheme({ currentTheme: theme }));
   };
 };

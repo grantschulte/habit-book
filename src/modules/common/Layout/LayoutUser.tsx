@@ -29,7 +29,7 @@ const Main = styled.main`
 const LogoContainer = styled.div`
   display: flex;
   align-items: center;
-  padding: clamp(1.5rem, 5vw, 2rem) clamp(1rem, 5vw, 1.5rem);
+  padding: clamp(1rem, 5vw, 1.5rem);
   grid-row: 1 / 2;
   grid-column: 1 / 3;
   color: ${(props) => props.theme.color.text};
@@ -40,7 +40,7 @@ const LayoutUser = ({ children }: { children?: React.ReactNode }) => {
   return (
     <Grid>
       <LogoContainer>
-        <Logo to={routes.today.path}>HabitBook</Logo>
+        <Logo to={routes.today.path}>Streaksta</Logo>
       </LogoContainer>
       <Menu />
       <Main>{children}</Main>

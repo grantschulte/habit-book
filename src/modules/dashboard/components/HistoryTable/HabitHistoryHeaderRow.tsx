@@ -4,9 +4,8 @@ import { TR } from "modules/dashboard/components/HistoryTable/HistoryTable";
 import { HistoryDay } from "../HistoryTable/HistoryTable";
 
 const StyledTH = styled.th`
-  padding: 0.5rem;
+  padding: 0.5rem 0.25rem;
   text-align: center;
-  font-size: 0.875rem;
 `;
 const TH = ({
   day,
@@ -14,7 +13,7 @@ const TH = ({
 }: {
   day?: HistoryDay;
   children?: React.ReactNode;
-}) => <StyledTH>{day ? day.name : children}</StyledTH>;
+}) => <StyledTH>{day ? day.name.slice(0, 1) : children}</StyledTH>;
 
 const HistoryTableHeaderRow = ({ events }: { events: HistoryDay[] }) => (
   <TR>

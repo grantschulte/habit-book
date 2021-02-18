@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppThunk } from "app/store";
-import { mockHabits } from "data/mockHabits";
-import { Habit } from "types";
+import { REQUEST_DATE_FORMAT } from "config/constants";
+import dayjs from "modules/common/Date";
+import { Habit, HabitEvent, RequestStatus } from "types";
 
 interface RequestState {
-  isLoading: boolean;
-  error?: string | null;
+  status: RequestStatus;
+  error: Error | string | null;
 }
 
 type HabitsState = {
@@ -22,95 +23,217 @@ interface ReorderPayload {
 const initialState = {
   habitsById: {},
   allHabits: [],
-  isLoading: false,
+  status: "idle",
   error: null,
 } as HabitsState;
+
+const fetchFailure = (
+  state: HabitsState,
+  action: PayloadAction<{ error: string }>
+) => {
+  state.status = "failed";
+  state.error = action.payload.error;
+};
+
+const fetchStart = (state: HabitsState) => {
+  state.status = "fetching";
+};
 
 const habits = createSlice({
   name: "habits",
   initialState,
   reducers: {
-    addHabit: (state, action: PayloadAction<{ name: string }>) => {
-      const id = (Math.random() * 100).toString();
-      const habit = {
-        id,
-        label: action.payload.name,
-        done: false,
-      };
+    addHabitFailure: fetchFailure,
+    addHabitStart: fetchStart,
+    addHabitSuccess: (state, action: PayloadAction<{ habit: Habit }>) => {
+      const { habit } = action.payload;
       state.allHabits.push(habit);
-      state.habitsById[id] = habit;
+      state.habitsById[habit.id] = habit;
     },
-    deleteHabit: (state, action: PayloadAction<{ id: string }>) => {
-      const { id } = action.payload;
-      state.allHabits = state.allHabits.filter((h) => h.id !== id);
-      delete state.habitsById[id];
+    makeHabitInactiveFailure: fetchFailure,
+    makeHabitInactiveStart: fetchStart,
+    makeHabitInactiveSuccess: (
+      state,
+      action: PayloadAction<{ habit: Habit }>
+    ) => {
+      const { habit } = action.payload;
+      const index = state.allHabits.findIndex((h) => h.id === habit.id);
+      if (index !== -1) state.allHabits.splice(index, 1);
+      delete state.habitsById[habit.id];
     },
-    editHabit: (state, action: PayloadAction<{ id: string; name: string }>) => {
-      const { name, id } = action.payload;
-      let habit = state.allHabits.find((h) => h.id === id);
-      if (habit) {
-        habit.label = name;
+    editHabitFailure: fetchFailure,
+    editHabitStart: fetchStart,
+    editHabitSuccess: (state, action: PayloadAction<{ habit: Habit }>) => {
+      const { habit } = action.payload;
+      let h = state.allHabits.find((h) => h.id === habit.id);
+      if (h) {
+        h.name = habit.name;
+        state.habitsById[habit.id].name = habit.name;
       }
-      state.habitsById[id].label = name;
     },
-    getHabitsStart: (state) => {
-      state.isLoading = true;
-    },
+    getHabitsStart: fetchStart,
     getHabitsSuccess: (state, action: PayloadAction<{ habits: Habit[] }>) => {
       const { habits } = action.payload;
-      state.isLoading = false;
+      state.status = "success";
       state.allHabits = habits;
       habits.forEach((h) => {
         state.habitsById[h.id] = h;
       });
     },
-    getHabitsFailure: (state, action: PayloadAction<{ error: string }>) => {
-      state.isLoading = false;
-      state.error = action.payload.error;
-    },
+    getHabitsFailure: fetchFailure,
     reorderHabits: (state, action: PayloadAction<ReorderPayload>) => {
       const { source, destination, habit } = action.payload;
       state.allHabits.splice(source, 1);
       state.allHabits.splice(destination, 0, habit);
     },
-    toggleHabitDone: (state, action: PayloadAction<{ id: string }>) => {
-      const { id } = action.payload;
-      const habit = state.allHabits.find((h) => h.id === id);
-      if (habit) {
-        habit.done = !habit.done;
-      }
-      state.habitsById[id].done = !state.habitsById[id].done;
+    updateHabit: (state, action: PayloadAction<{ habit: HabitEvent }>) => {
+      state.allHabits.find((h) => h.id === action.payload.habit.id);
     },
   },
 });
 
 export const {
-  addHabit,
-  deleteHabit,
-  editHabit,
+  addHabitFailure,
+  addHabitStart,
+  addHabitSuccess,
+  makeHabitInactiveFailure,
+  makeHabitInactiveStart,
+  makeHabitInactiveSuccess,
+  editHabitFailure,
+  editHabitStart,
+  editHabitSuccess,
   getHabitsStart,
   getHabitsSuccess,
   getHabitsFailure,
   reorderHabits,
-  toggleHabitDone,
+  updateHabit,
 } = habits.actions;
+
+export default habits.reducer;
 
 export const fetchHabits = (): AppThunk => {
   return async (dispatch, getState) => {
+    const { token } = getState().app;
     dispatch(getHabitsStart());
-    const { allHabits } = getState().habits;
 
-    let habits: Habit[] = allHabits.length > 0 ? allHabits : mockHabits;
-    // try {
-    //   const res = await fetch("http://localhost:3000/mockHabits.json");
-    //   habits = await res.json();
-    // } catch (error) {
-    //   dispatch(getHabitsFailure(error.toString()));
-    //   return;
-    // }
+    let habits;
+
+    try {
+      const res = await fetch("http://localhost:8080/api/v1/habits", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      habits = await res.json();
+
+      if (habits.error) {
+        dispatch(getHabitsFailure({ error: "error" }));
+        return;
+      }
+    } catch (error) {
+      dispatch(getHabitsFailure(error.toString()));
+      return;
+    }
 
     dispatch(getHabitsSuccess({ habits }));
   };
 };
 
-export default habits.reducer;
+export const fetchAddHabit = (name: string): AppThunk => {
+  return async (dispatch, getState) => {
+    const { token } = getState().app;
+    dispatch(addHabitStart());
+
+    let habit;
+
+    const date = dayjs().format(REQUEST_DATE_FORMAT);
+
+    try {
+      const res = await fetch("http://localhost:8080/api/v1/habits", {
+        method: "POST",
+        body: JSON.stringify({
+          date,
+          name,
+        }),
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      habit = await res.json();
+
+      if (!habit || habit.error) {
+        dispatch(addHabitFailure({ error: "error" }));
+        return;
+      }
+    } catch (error) {
+      dispatch(addHabitFailure(error.toString()));
+      return;
+    }
+
+    dispatch(addHabitSuccess({ habit }));
+  };
+};
+
+export const fetchEditHabit = (id: string, name: string): AppThunk => {
+  return async (dispatch, getState) => {
+    const { token } = getState().app;
+
+    let habit;
+
+    try {
+      const res = await fetch(`http://localhost:8080/api/v1/habits/${id}`, {
+        method: "PUT",
+        body: JSON.stringify({
+          name,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      habit = await res.json();
+
+      if (!habit || habit.error) {
+        dispatch(editHabitFailure({ error: "error" }));
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+      return;
+    }
+
+    dispatch(editHabitSuccess({ habit }));
+  };
+};
+
+export const fetchMakeHabitInactive = (id: string): AppThunk => {
+  return async (dispatch, getState) => {
+    const { token } = getState().app;
+
+    let habit;
+
+    try {
+      const res = await fetch(`http://localhost:8080/api/v1/habits/${id}`, {
+        method: "PUT",
+        body: JSON.stringify({
+          active: false,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      habit = await res.json();
+
+      if (!habit || habit.error) {
+        dispatch(makeHabitInactiveFailure({ error: "error" }));
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+      return;
+    }
+
+    dispatch(makeHabitInactiveSuccess({ habit }));
+  };
+};

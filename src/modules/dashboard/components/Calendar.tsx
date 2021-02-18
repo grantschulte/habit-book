@@ -1,14 +1,13 @@
 import React from "react";
 import { ResponsiveCalendar, CalendarSvgProps } from "lib/Calendar";
 import { useTheme } from "styled-components";
-import { percentageColor } from "utils/css.utils";
 
 const Calendar: React.FC<CalendarSvgProps> = ({
   data,
   to,
   from,
   direction,
-}: CalendarSvgProps) => {
+}) => {
   const theme = useTheme();
 
   return (
@@ -16,7 +15,7 @@ const Calendar: React.FC<CalendarSvgProps> = ({
       data={data}
       from={from}
       to={to}
-      align="top-left"
+      align="top"
       direction={direction}
       colors={[
         theme.color.green["100"],
@@ -35,7 +34,7 @@ const Calendar: React.FC<CalendarSvgProps> = ({
           },
         },
       }}
-      emptyColor={percentageColor(theme.color.background, -10)}
+      emptyColor={theme.color.backgroundAlt}
       margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
       yearSpacing={40}
       monthBorderColor={theme.color.background}

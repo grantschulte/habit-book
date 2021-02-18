@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import DoneIcon from "modules/today/components/DoneIcon";
-import { HabitEvent } from "../HistoryTable/HistoryTable";
+import { HabitDayEvent } from "../HistoryTable/HistoryTable";
 
 const StyledCellData = styled.div`
   display: flex;
@@ -12,7 +12,7 @@ const CellItem = styled.div`
   font-size: 0.75rem;
 `;
 
-const CellData = ({ name, done }: HabitEvent) => (
+const CellData = ({ name, done }: HabitDayEvent) => (
   <StyledCellData>
     <CellItem>{name}</CellItem>
     <CellItem>

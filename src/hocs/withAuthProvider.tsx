@@ -6,7 +6,7 @@ import routes from "config/routes";
 export const history = createBrowserHistory();
 const AUTH0_REDIRECT_URI = `${window.location.origin}${routes.homepage.path}`;
 
-const withAuthProvider = <P extends object>(
+const WithAuthProvider = <P extends object>(
   WrappedComponent: React.FunctionComponent<P>
 ) => {
   const onRedirectCallback = (appState: AppState) => {
@@ -27,4 +27,4 @@ const withAuthProvider = <P extends object>(
   );
 };
 
-export default withAuthProvider;
+export default WithAuthProvider;

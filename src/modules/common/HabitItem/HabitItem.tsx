@@ -1,26 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import {
-  DraggableProvidedDraggableProps,
-  DraggableProvidedDragHandleProps,
-} from "lib/DragNDrop";
 
-export type HabitItemProps = {
+type HabitItemProps = {
   done?: boolean;
-  label: string;
   onClick?: (e: React.SyntheticEvent) => void;
-  innerRef?: (element?: HTMLElement | null | undefined) => any;
   children: React.ReactNode;
-} & Partial<DraggableProvidedDraggableProps> &
-  Partial<DraggableProvidedDragHandleProps>;
-
-export type HabitItemIconProps = {
-  $isDone?: boolean;
-  size?: string;
-  $position?: "left" | "right";
 };
 
-const HabitItemFlex = styled.div`
+const HabitItemInner = styled.div`
   display: flex;
   align-items: center;
   height: 100%;
@@ -28,7 +15,7 @@ const HabitItemFlex = styled.div`
   padding: 0 1rem;
 `;
 
-const StyledHabitItem = styled.div<{ done: boolean | undefined }>`
+const HabitItemContainer = styled.div<{ done: boolean | undefined }>`
   display: flex;
   width: 100%;
   height: 64px;
@@ -39,6 +26,7 @@ const StyledHabitItem = styled.div<{ done: boolean | undefined }>`
   border: 2px solid;
   border-color: ${(props) =>
     props.done ? props.theme.color.success : props.theme.color.border};
+  transition: border-color 200ms ease, color 200ms ease;
 
   &:last-child {
     margin-bottom: 0;
@@ -47,16 +35,13 @@ const StyledHabitItem = styled.div<{ done: boolean | undefined }>`
 
 const HabitItem: React.FC<HabitItemProps> = ({
   done,
-  label,
   onClick,
-  innerRef,
   children,
-  ...props
 }: HabitItemProps) => {
   return (
-    <StyledHabitItem onClick={onClick} ref={innerRef} done={done} {...props}>
-      <HabitItemFlex>{children}</HabitItemFlex>
-    </StyledHabitItem>
+    <HabitItemContainer onClick={onClick} done={done}>
+      <HabitItemInner>{children}</HabitItemInner>
+    </HabitItemContainer>
   );
 };
 

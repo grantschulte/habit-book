@@ -7,10 +7,10 @@ export interface HistoryDay {
   id: string;
   date: string;
   name: string;
-  habits: HabitEvent[];
+  habits: HabitDayEvent[];
 }
 
-export interface HabitEvent {
+export interface HabitDayEvent {
   id: string;
   date: string;
   name: string;
@@ -32,16 +32,14 @@ const Container = styled.div`
   overflow-x: scroll;
   background-color: ${({ theme }) => theme.color.backgroundAlt};
   padding: 2px;
-  /* border: 2px solid; */
   border-color: ${(props) => props.theme.color.border};
-  /* border-radius: ${(props) => props.theme.borderRadii[4]}; */
 `;
 
 const Table = styled.table`
   width: 100%;
   border: none;
   border-collapse: collapse;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   color: ${({ theme }) => theme.color.text};
 `;
 
