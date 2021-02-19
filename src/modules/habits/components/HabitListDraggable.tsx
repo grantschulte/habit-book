@@ -68,13 +68,7 @@ const HabitListDraggable: React.FC = () => {
 
     const h: Habit = allHabits[source.index];
 
-    dispatch(
-      reorderHabits({
-        source: source.index,
-        destination: destination.index,
-        habit: h,
-      })
-    );
+    dispatch(reorderHabits(h, source.index, destination.index));
   };
 
   if (!allHabits.length) {

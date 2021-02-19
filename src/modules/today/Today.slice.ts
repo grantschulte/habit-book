@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppThunk } from "app/store";
+import { LOCAL_STORAGE_SORT_ORDER_KEY } from "config/constants";
 import dayjs from "dayjs";
+import ls from "hooks/useLocalStorage";
 import { HabitEvent, RequestStatus } from "types";
 
 interface TodayState {
@@ -42,6 +44,15 @@ const todaySlice = createSlice({
       state.status = "failed";
       state.error = action.payload.error;
     },
+    setOrder: (
+      state,
+      action: PayloadAction<{ order: { [prop: string]: number } }>
+    ) => {
+      const { order } = action.payload;
+      state.allHabitEvents.sort(
+        (a, b) => order[a.habit.id] - order[b.habit.id]
+      );
+    },
     toggleHabitEventSuccess: (
       state,
       action: PayloadAction<{ habitEvent: HabitEvent }>
@@ -57,12 +68,32 @@ const todaySlice = createSlice({
 });
 
 export const {
-  toggleHabitEventSuccess,
   getHabitEventsStart,
   getHabitEventsSuccess,
   getHabitEventsFailure,
+  setOrder,
+  toggleHabitEventSuccess,
 } = todaySlice.actions;
 export default todaySlice.reducer;
+
+export const initOrder = (): AppThunk => {
+  return (dispatch, getState) => {
+    let { allHabits } = getState().habits;
+    let sortOrderString = ls().getItem(LOCAL_STORAGE_SORT_ORDER_KEY);
+    let o: { [prop: string]: number } = {};
+
+    if (!sortOrderString) {
+      allHabits.forEach((h, i) => {
+        o[h.id] = i;
+      });
+    }
+
+    let sortOrder: { [prop: string]: number } = sortOrderString
+      ? JSON.parse(sortOrderString)
+      : o;
+    dispatch(setOrder({ order: sortOrder }));
+  };
+};
 
 export const fetchHabitEvents = (): AppThunk => {
   return async (dispatch, getState) => {
@@ -94,6 +125,7 @@ export const fetchHabitEvents = (): AppThunk => {
     }
 
     dispatch(getHabitEventsSuccess({ habitEvents }));
+    dispatch(initOrder());
   };
 };
 

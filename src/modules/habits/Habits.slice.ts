@@ -1,7 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppThunk } from "app/store";
-import { REQUEST_DATE_FORMAT } from "config/constants";
+import {
+  LOCAL_STORAGE_SORT_ORDER_KEY,
+  REQUEST_DATE_FORMAT,
+} from "config/constants";
+import ls from "hooks/useLocalStorage";
 import dayjs from "modules/common/Date";
+import { setOrder as setHabitEventsOrder } from "modules/today/Today.slice";
 import { Habit, HabitEvent, RequestStatus } from "types";
 
 interface RequestState {
@@ -12,19 +17,21 @@ interface RequestState {
 type HabitsState = {
   habitsById: Record<string, Habit>;
   allHabits: Habit[];
+  order: { [prop: string]: number };
 } & RequestState;
 
-interface ReorderPayload {
-  source: number;
-  destination: number;
-  habit: Habit;
-}
+// interface ReorderPayload {
+//   source: number;
+//   destination: number;
+//   habit: Habit;
+// }
 
 const initialState = {
   habitsById: {},
   allHabits: [],
   status: "idle",
   error: null,
+  order: {},
 } as HabitsState;
 
 const fetchFailure = (
@@ -76,15 +83,17 @@ const habits = createSlice({
       const { habits } = action.payload;
       state.status = "success";
       state.allHabits = habits;
-      habits.forEach((h) => {
+      habits.forEach((h, i) => {
         state.habitsById[h.id] = h;
       });
     },
     getHabitsFailure: fetchFailure,
-    reorderHabits: (state, action: PayloadAction<ReorderPayload>) => {
-      const { source, destination, habit } = action.payload;
-      state.allHabits.splice(source, 1);
-      state.allHabits.splice(destination, 0, habit);
+    setOrder: (
+      state,
+      action: PayloadAction<{ order: { [prop: string]: number } }>
+    ) => {
+      const { order } = action.payload;
+      state.allHabits.sort((a, b) => order[a.id] - order[b.id]);
     },
     updateHabit: (state, action: PayloadAction<{ habit: HabitEvent }>) => {
       state.allHabits.find((h) => h.id === action.payload.habit.id);
@@ -105,11 +114,60 @@ export const {
   getHabitsStart,
   getHabitsSuccess,
   getHabitsFailure,
-  reorderHabits,
+  setOrder,
+  // reorderHabits,
   updateHabit,
 } = habits.actions;
 
 export default habits.reducer;
+
+export const reorderHabits = (
+  habit: Habit,
+  source: number,
+  destination: number
+): AppThunk => {
+  return (dispatch, getState) => {
+    const { allHabits } = getState().habits;
+    const orderArray = [...allHabits];
+    orderArray.splice(source, 1);
+    orderArray.splice(destination, 0, habit);
+    let o: { [prop: string]: number } = {};
+    orderArray.forEach((h, i) => {
+      o[h.id] = i;
+    });
+    dispatch(setOrderInStorage(o));
+  };
+};
+
+export const setOrderInStorage = (order: {
+  [prop: string]: number;
+}): AppThunk => {
+  return (dispatch) => {
+    let newSortOrder = JSON.stringify(order);
+    ls().setItem(LOCAL_STORAGE_SORT_ORDER_KEY, newSortOrder);
+    dispatch(setOrder({ order }));
+    dispatch(setHabitEventsOrder({ order }));
+  };
+};
+
+export const initOrder = (habits: Habit[]): AppThunk => {
+  return (dispatch) => {
+    let sortOrderString = ls().getItem(LOCAL_STORAGE_SORT_ORDER_KEY);
+    let o: { [prop: string]: number } = {};
+
+    if (!sortOrderString) {
+      habits.forEach((h, i) => {
+        o[h.id] = i;
+      });
+    }
+
+    let sortOrder: { [prop: string]: number } = sortOrderString
+      ? JSON.parse(sortOrderString)
+      : o;
+    dispatch(setOrder({ order: sortOrder }));
+    dispatch(setHabitEventsOrder({ order: sortOrder }));
+  };
+};
 
 export const fetchHabits = (): AppThunk => {
   return async (dispatch, getState) => {
@@ -136,6 +194,7 @@ export const fetchHabits = (): AppThunk => {
     }
 
     dispatch(getHabitsSuccess({ habits }));
+    dispatch(initOrder(habits));
   };
 };
 
@@ -181,11 +240,14 @@ export const fetchEditHabit = (id: string, name: string): AppThunk => {
 
     let habit;
 
+    const date = dayjs().format(REQUEST_DATE_FORMAT);
+
     try {
       const res = await fetch(`http://localhost:8080/api/v1/habits/${id}`, {
         method: "PUT",
         body: JSON.stringify({
           name,
+          date,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -213,11 +275,14 @@ export const fetchMakeHabitInactive = (id: string): AppThunk => {
 
     let habit;
 
+    const date = dayjs().format(REQUEST_DATE_FORMAT);
+
     try {
       const res = await fetch(`http://localhost:8080/api/v1/habits/${id}`, {
         method: "PUT",
         body: JSON.stringify({
           active: false,
+          date,
         }),
         headers: {
           "Content-Type": "application/json",
