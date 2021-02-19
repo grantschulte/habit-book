@@ -156,6 +156,7 @@ export const fetchAddHabit = (name: string): AppThunk => {
           name,
         }),
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       });
