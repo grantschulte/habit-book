@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppThunk } from "app/store";
-import useLocalStorage from "hooks/useLocalStorage";
+import localStorage from "utils/local-storage";
 
 const DEFAULT_THEME = "light";
 const LOCAL_STORAGE_THEME_KEY = "theme";
@@ -31,7 +31,7 @@ export default themeSlice.reducer;
 
 export const getThemeFromStorage = (): AppThunk => {
   return (dispatch) => {
-    const { getItem } = useLocalStorage();
+    const { getItem } = localStorage();
     const theme = getItem(LOCAL_STORAGE_THEME_KEY) || DEFAULT_THEME;
     dispatch(setTheme({ currentTheme: theme }));
   };
@@ -39,7 +39,7 @@ export const getThemeFromStorage = (): AppThunk => {
 
 export const setThemeInStorage = (theme: string): AppThunk => {
   return (dispatch) => {
-    const { setItem } = useLocalStorage();
+    const { setItem } = localStorage();
     setItem(LOCAL_STORAGE_THEME_KEY, theme);
     dispatch(setTheme({ currentTheme: theme }));
   };

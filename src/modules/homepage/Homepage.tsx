@@ -1,4 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
+import routes from "config/routes";
 import { Col, Row } from "lib/Grid";
 import Button from "modules/common/Button";
 import Heading from "modules/common/Heading";
@@ -11,7 +12,10 @@ const Homepage = () => {
   const { loginWithRedirect } = useAuth0();
 
   const handleSignInClick = () => {
-    loginWithRedirect();
+    loginWithRedirect({
+      prompt: "login",
+      returnTo: routes.today.path,
+    });
   };
 
   return (

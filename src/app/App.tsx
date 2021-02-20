@@ -1,3 +1,4 @@
+import Token from "app/Token";
 import withProviders from "hocs/withProviders";
 import ScrollToTop from "hooks/ScrollToTop";
 import { getThemeFromStorage } from "modules/settings/ThemeSelector/ThemeSelector.slice";
@@ -20,11 +21,13 @@ const App: React.FC = () => {
 
   return (
     <Providers>
-      <Theme>
-        <ScrollToTop />
-        <GlobalStyle />
-        <Routes />
-      </Theme>
+      <Token>
+        <Theme>
+          <ScrollToTop />
+          <GlobalStyle />
+          <Routes />
+        </Theme>
+      </Token>
     </Providers>
   );
 };

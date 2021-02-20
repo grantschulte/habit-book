@@ -1,16 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { getHabitEvents, updateHabitEvent } from "api";
 import { AppThunk } from "app/store";
 import { LOCAL_STORAGE_SORT_ORDER_KEY } from "config/constants";
 import dayjs from "dayjs";
-import ls from "hooks/useLocalStorage";
-import { HabitEvent, RequestStatus } from "types";
+import { HabitEvent, RequestState } from "types";
+import ls from "utils/local-storage";
 
-interface TodayState {
+type TodayState = {
   allHabitEvents: HabitEvent[];
   habitEventsById: Record<string, HabitEvent>;
-  status: RequestStatus;
-  error: Error | string | null;
-}
+} & RequestState;
 
 let initialState = {
   allHabitEvents: [],
@@ -58,6 +57,7 @@ const todaySlice = createSlice({
       action: PayloadAction<{ habitEvent: HabitEvent }>
     ) => {
       const { habitEvent } = action.payload;
+      state.status = "success";
       const he = state.allHabitEvents.find((he) => he.id === habitEvent.id);
       if (he) {
         he.done = habitEvent.done;
@@ -105,14 +105,7 @@ export const fetchHabitEvents = (): AppThunk => {
     let habitEvents;
 
     try {
-      const res = await fetch(
-        `http://localhost:8080/api/v1/habit-events?date=${date}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await getHabitEvents({ date }, token);
       habitEvents = await res.json();
 
       if (habitEvents.error) {
@@ -136,16 +129,7 @@ export const fetchToggleHabitEvent = (id: string): AppThunk => {
     let habitEvent;
 
     try {
-      const res = await fetch(
-        `http://localhost:8080/api/v1/habit-events/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await updateHabitEvent({ id }, token);
       habitEvent = await res.json();
     } catch (error) {
       console.log(error);

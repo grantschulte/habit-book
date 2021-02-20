@@ -21,6 +21,7 @@ const WithAuthProvider = <P extends object>(
       scope={process.env.REACT_APP_AUTH0_SCOPE}
       redirectUri={AUTH0_REDIRECT_URI}
       onRedirectCallback={onRedirectCallback}
+      useRefreshTokens
     >
       <WrappedComponent {...(props as P)} />
     </Auth0Provider>

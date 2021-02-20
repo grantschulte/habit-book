@@ -7,10 +7,7 @@ import {
 import { BiCheck, BiEdit, BiTrash } from "lib/Icons";
 import { HabitLabel } from "modules/common/HabitItem/HabitLabel";
 import Input from "modules/common/Input";
-import {
-  fetchMakeHabitInactive,
-  fetchEditHabit,
-} from "modules/habits/Habits.slice";
+import { fetchEditHabit } from "modules/habits/Habits.slice";
 import React, { ChangeEvent, KeyboardEvent, useReducer } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
@@ -99,7 +96,11 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
   );
 
   const handleSaveEditHabit = () => {
-    dispatch(fetchEditHabit(habit.id, state.editInputValue));
+    dispatch(
+      fetchEditHabit(habit.id, {
+        name: state.editInputValue,
+      })
+    );
     dispatchInlineEdit(inlineEditReset());
   };
 
@@ -120,7 +121,11 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
   };
 
   const handleDeleteItem = () => {
-    dispatch(fetchMakeHabitInactive(habit.id));
+    dispatch(
+      fetchEditHabit(habit.id, {
+        active: false,
+      })
+    );
   };
 
   return (

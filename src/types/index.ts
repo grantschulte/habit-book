@@ -7,6 +7,11 @@ export type RequestError = {
   message: string;
 };
 
+export interface RequestState {
+  status: RequestStatus;
+  error: Error | string | null;
+}
+
 // Habit
 
 export type Habit = {

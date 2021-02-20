@@ -11,6 +11,7 @@ const SignOutRow = () => {
   const handleSignOut = () => {
     logout({ returnTo: `${window.location.origin}${routes.homepage.path}` });
   };
+
   return (
     <Row>
       <Col xs>

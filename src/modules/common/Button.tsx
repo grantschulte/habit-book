@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { percentageColor } from "utils/css.utils";
+import { percentageColor } from "utils/css";
 import InputCombo from "modules/common/InputCombo";
 
 type ButtonSizes = "sm" | "md" | "lg";
