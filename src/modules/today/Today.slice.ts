@@ -13,25 +13,28 @@ import {
   ResponsePayload,
   RequestState,
   ResponseErrorState,
+  RequestStatus,
 } from "types";
 import ls from "utils/local-storage";
 
 type TodayState = {
   allHabitEvents: HabitEvent[];
   habitEventsById: Record<string, HabitEvent>;
+  stale: boolean;
 } & RequestState;
 
 let initialState = {
   allHabitEvents: [],
   habitEventsById: {},
   status: "idle",
+  stale: false,
 } as TodayState;
 
 const fetchFailure = (
   state: TodayState,
   action: PayloadAction<ResponseErrorState>
 ) => {
-  state.status = "failed";
+  state.status = RequestStatus.Failed;
   state.error = action.payload.error;
 };
 
@@ -40,18 +43,19 @@ const todaySlice = createSlice({
   initialState,
   reducers: {
     getHabitEventsStart: (state: TodayState) => {
-      state.status = "fetching";
+      state.status = RequestStatus.Fetching;
     },
     getHabitEventsSuccess: (
       state,
       action: PayloadAction<ResponsePayload<HabitEvent[]>>
     ) => {
       const { data } = action.payload;
-      state.status = "success";
+      state.status = RequestStatus.Success;
       state.allHabitEvents = data;
       data.forEach((h) => {
         state.habitEventsById[h.id] = h;
       });
+      state.stale = false;
     },
     getHabitEventsFailure: fetchFailure,
     setOrder: (state, action: PayloadAction<{ order: HabitOrder }>) => {
@@ -66,12 +70,15 @@ const todaySlice = createSlice({
       action: PayloadAction<ResponsePayload<HabitEvent>>
     ) => {
       const { data } = action.payload;
-      state.status = "success";
+      state.status = RequestStatus.Success;
       const he = state.allHabitEvents.find((he) => he.id === data.id);
       if (he) {
         he.done = data.done;
       }
       state.habitEventsById[data.id].done = data.done;
+    },
+    setStale: (state, action: PayloadAction<{ stale: boolean }>) => {
+      state.stale = action.payload.stale;
     },
   },
 });
@@ -81,6 +88,7 @@ export const {
   getHabitEventsSuccess,
   getHabitEventsFailure,
   setOrder,
+  setStale,
   toggleHabitEventFailure,
   toggleHabitEventSuccess,
 } = todaySlice.actions;

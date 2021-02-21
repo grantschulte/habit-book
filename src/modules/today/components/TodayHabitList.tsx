@@ -22,20 +22,18 @@ const TodayHabitList: React.FC<TodayHabitListProps> = ({ habits }) => {
 
   return (
     <div>
-      {habits.map((h) => {
-        return h.habit.active ? (
-          <HabitItem
-            done={h.done}
-            key={h.id.toString()}
-            onClick={() => {
-              toggleHabitEvent(h.id);
-            }}
-          >
-            <HabitLabel $isDone={h.done}>{h.habit.name}</HabitLabel>
-            <DoneIcon $isDone={h.done} size="1.5rem" />
-          </HabitItem>
-        ) : null;
-      })}
+      {habits.map((h) => (
+        <HabitItem
+          done={h.done}
+          key={h.id.toString()}
+          onClick={() => {
+            toggleHabitEvent(h.id);
+          }}
+        >
+          <HabitLabel $isDone={h.done}>{h.habit.name}</HabitLabel>
+          <DoneIcon $isDone={h.done} size="1.5rem" />
+        </HabitItem>
+      ))}
     </div>
   );
 };

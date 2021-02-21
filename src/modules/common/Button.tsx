@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { CSSProperties } from "styled-components";
 import { percentageColor } from "utils/css";
 import InputCombo from "modules/common/InputCombo";
 
@@ -29,6 +29,7 @@ export type ButtonProps = {
   href?: string;
   fullWidth?: boolean;
   onClick?: (e: React.SyntheticEvent) => void;
+  style?: CSSProperties;
 };
 
 export type StyledButtonProps = {

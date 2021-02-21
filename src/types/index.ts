@@ -1,6 +1,17 @@
 // Request
 
-export type RequestStatus = "idle" | "fetching" | "success" | "failed";
+export enum RequestStatus {
+  Failed = "failed",
+  Fetching = "fetching",
+  Idle = "idle",
+  Success = "success",
+}
+
+export enum ResponseError {
+  BadRequest = "Bad Request",
+  Unauthorized = "Unauthorized",
+  InternalServerError = "Internal Server Error",
+}
 
 export interface ResponseErrorState {
   error?: string | null;
@@ -13,12 +24,6 @@ export type RequestState = {
 export type ResponsePayload<T> = {
   data: T;
 } & ResponseErrorState;
-
-export enum ResponseError {
-  BadRequest = "Bad Request",
-  Unauthorized = "Unauthorized",
-  InternalServerError = "Internal Server Error",
-}
 
 // Habit
 

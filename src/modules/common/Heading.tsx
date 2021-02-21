@@ -6,9 +6,10 @@ type HeadingProps = {
   styleAs?: HeadingLevel;
   as: HeadingLevel;
   children?: React.ReactChild;
+  noMargin?: boolean;
 };
 
-const StyledHeading = styled.h1`
+const StyledHeading = styled.h1<HeadingProps>`
   font-family: ${(props) => props.theme.font.heading};
   margin-top: 0;
 
@@ -30,6 +31,8 @@ const StyledHeading = styled.h1`
   &.h6 {
     font-size: 0.7rem;
   }
+
+  ${(props) => (props.noMargin ? "margin-bottom: 0" : null)};
 `;
 
 const Heading = ({
@@ -37,9 +40,15 @@ const Heading = ({
   as,
   children,
   style,
+  noMargin,
 }: HeadingProps & React.HTMLProps<HTMLHeadingElement>) => {
   return (
-    <StyledHeading as={as} className={styleAs} style={style}>
+    <StyledHeading
+      as={as}
+      className={styleAs}
+      style={style}
+      noMargin={noMargin}
+    >
       {children}
     </StyledHeading>
   );

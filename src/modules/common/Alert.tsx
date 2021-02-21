@@ -3,10 +3,10 @@ import { BiCheckCircle, BiError, BiErrorCircle, BiInfoCircle } from "lib/Icons";
 import styled from "styled-components";
 
 export enum AlertType {
-  "Error" = "error",
-  "Success" = "success",
-  "Warning" = "warning",
-  "Info" = "info",
+  Error = "error",
+  Success = "success",
+  Warning = "warning",
+  Info = "info",
 }
 
 export interface AlertProps {
@@ -26,6 +26,7 @@ export const AlertContainer = styled.div<{ type: AlertType }>`
   display: flex;
   align-items: flex-start;
   font-size: 1rem;
+  line-height: 1.25rem;
   color: ${(props) => props.theme.color[props.type]};
   margin-bottom: 1rem;
   border: 2px solid;

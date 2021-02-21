@@ -7,13 +7,17 @@ import {
   REQUEST_DATE_FORMAT,
 } from "config/constants";
 import dayjs from "modules/common/Date";
-import { setOrder as setHabitEventsOrder } from "modules/today/Today.slice";
+import {
+  setOrder as setHabitEventsOrder,
+  setStale,
+} from "modules/today/Today.slice";
 import {
   Habit,
   HabitOrder,
+  RequestState,
+  RequestStatus,
   ResponseErrorState,
   ResponsePayload,
-  RequestState,
 } from "types";
 import ls from "utils/local-storage";
 
@@ -21,6 +25,7 @@ type HabitsState = {
   habitsById: Record<string, Habit>;
   allHabits: Habit[];
   order: HabitOrder;
+  stale: boolean;
 } & RequestState;
 
 const initialState = {
@@ -29,18 +34,19 @@ const initialState = {
   status: "idle",
   error: null,
   order: {},
+  stale: false,
 } as HabitsState;
 
 const fetchFailure = (
   state: HabitsState,
   action: PayloadAction<ResponseErrorState>
 ) => {
-  state.status = "failed";
+  state.status = RequestStatus.Failed;
   state.error = action.payload.error;
 };
 
 const fetchStart = (state: HabitsState) => {
-  state.status = "fetching";
+  state.status = RequestStatus.Fetching;
 };
 
 const habits = createSlice({
@@ -51,7 +57,7 @@ const habits = createSlice({
     addHabitStart: fetchStart,
     addHabitSuccess: (state, action: PayloadAction<ResponsePayload<Habit>>) => {
       const { data } = action.payload;
-      state.status = "success";
+      state.status = RequestStatus.Success;
       state.allHabits.push(data);
       state.habitsById[data.id] = data;
     },
@@ -62,7 +68,7 @@ const habits = createSlice({
       action: PayloadAction<ResponsePayload<Habit>>
     ) => {
       const { data } = action.payload;
-      state.status = "success";
+      state.status = RequestStatus.Success;
 
       const index = state.allHabits.findIndex((h) => h.id === data.id);
 
@@ -85,7 +91,7 @@ const habits = createSlice({
       action: PayloadAction<ResponsePayload<Habit[]>>
     ) => {
       const { data } = action.payload;
-      state.status = "success";
+      state.status = RequestStatus.Success;
       state.allHabits = data;
       data.forEach((h) => {
         state.habitsById[h.id] = h;
@@ -95,6 +101,9 @@ const habits = createSlice({
     setOrder: (state, action: PayloadAction<{ order: HabitOrder }>) => {
       const { order } = action.payload;
       state.allHabits.sort((a, b) => order[a.id] - order[b.id]);
+    },
+    setStale: (state, action: PayloadAction<{ stale: boolean }>) => {
+      state.stale = action.payload.stale;
     },
   },
 });
@@ -199,6 +208,7 @@ export const fetchAddHabit = (name: string, token: string): AppThunk => {
     }
 
     dispatch(addHabitSuccess({ data: habit }));
+    dispatch(setStale({ stale: true }));
   };
 };
 
@@ -231,5 +241,6 @@ export const fetchEditHabit = (
     }
 
     dispatch(editHabitSuccess({ data: habit }));
+    dispatch(setStale({ stale: true }));
   };
 };

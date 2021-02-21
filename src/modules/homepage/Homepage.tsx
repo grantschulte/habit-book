@@ -3,15 +3,18 @@ import routes from "config/routes";
 import { Col, Row } from "lib/Grid";
 import Button from "modules/common/Button";
 import Heading from "modules/common/Heading";
+import LoadingIcon from "modules/common/LoadingIcon";
 import Page from "modules/common/Page";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { ThemeContext } from "styled-components";
 
 const Homepage = () => {
   const theme = useContext(ThemeContext);
   const { loginWithRedirect } = useAuth0();
+  const [loading, setLoading] = useState(false);
 
   const handleSignInClick = () => {
+    setLoading(true);
     loginWithRedirect({
       prompt: "login",
       returnTo: routes.today.path,
@@ -33,6 +36,9 @@ const Homepage = () => {
             }}
           >
             <Button onClick={handleSignInClick}>
+              {loading && (
+                <LoadingIcon size="1.25rem" style={{ marginRight: "0.5rem" }} />
+              )}
               Create Account / Sign In
             </Button>
           </div>

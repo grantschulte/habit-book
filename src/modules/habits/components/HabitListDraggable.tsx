@@ -10,7 +10,7 @@ import HabitListDraggableEmptyState from "modules/habits/components/HabitListDra
 import HabitListDraggableSkeleton from "modules/habits/HabitListDraggableSkeleton";
 import React, { useCallback } from "react";
 import styled from "styled-components";
-import { Habit } from "types";
+import { Habit, RequestStatus } from "types";
 import DraggableItem from "./DraggableItem/DraggableItem";
 
 const DraggableItemsContainer = styled.div`
@@ -36,11 +36,11 @@ const HabitListDraggable: React.FC = () => {
     [reorder]
   );
 
-  if (status === "fetching") {
+  if (status === RequestStatus.Fetching) {
     return <HabitListDraggableSkeleton />;
   }
 
-  if (status === "success" && allHabits.length === 0) {
+  if (status === RequestStatus.Success && allHabits.length === 0) {
     return <HabitListDraggableEmptyState />;
   }
 

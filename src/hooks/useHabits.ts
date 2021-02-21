@@ -3,10 +3,15 @@ import useToken from "hooks/useToken";
 import { fetchHabits } from "modules/habits/Habits.slice";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { RequestStatus } from "types";
 
 const useHabits = () => {
   const dispatch = useDispatch();
   const habits = useSelector((state: RootState) => state.habits);
+  const shouldFetch = useSelector(
+    (state: RootState) =>
+      state.habits.status === RequestStatus.Idle || state.habits.stale
+  );
   const { getToken } = useToken();
 
   useEffect(() => {
@@ -15,8 +20,10 @@ const useHabits = () => {
       dispatch(fetchHabits(token));
     };
 
-    initHabits();
-  }, [dispatch, getToken]);
+    if (shouldFetch) {
+      initHabits();
+    }
+  }, [dispatch, getToken, shouldFetch]);
 
   return {
     ...habits,
