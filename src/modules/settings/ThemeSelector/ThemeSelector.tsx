@@ -1,19 +1,20 @@
-import { RootState } from "app/rootReducer";
 import allThemes from "config/theme";
+import useThemeSelector from "hooks/useThemeSelector";
 import { Col, Row } from "lib/Grid";
 import Label from "modules/common/Form/Label";
 import ThemePreview from "modules/settings/ThemeSelector/ThemePreview";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useTheme } from "styled-components";
-import { setThemeInStorage } from "./ThemeSelector.slice";
 
 interface IThemeSelectorProps {}
 
 const ThemeSelector: React.FC<IThemeSelectorProps> = () => {
   const theme = useTheme();
-  const dispatch = useDispatch();
-  const { currentTheme } = useSelector((state: RootState) => state.themes);
+  const { currentTheme, setTheme } = useThemeSelector();
+
+  const handleClick = (themeName: string) => {
+    setTheme(themeName);
+  };
 
   return (
     <Row
@@ -30,7 +31,7 @@ const ThemeSelector: React.FC<IThemeSelectorProps> = () => {
                 <ThemePreview
                   theme={t}
                   active={t.name === currentTheme}
-                  onClick={() => dispatch(setThemeInStorage(t.name))}
+                  onClick={() => handleClick(t.name)}
                 />
               </Col>
             );

@@ -5,6 +5,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { HabitEvent } from "types";
 import DoneIcon from "./DoneIcon";
+import useToken from "hooks/useToken";
 
 interface TodayHabitListProps {
   habits: HabitEvent[];
@@ -12,6 +13,12 @@ interface TodayHabitListProps {
 
 const TodayHabitList: React.FC<TodayHabitListProps> = ({ habits }) => {
   const dispatch = useDispatch();
+  const { getToken } = useToken();
+
+  const toggleHabitEvent = async (id: string) => {
+    const token = await getToken();
+    dispatch(fetchToggleHabitEvent(id, token));
+  };
 
   return (
     <div>
@@ -21,7 +28,7 @@ const TodayHabitList: React.FC<TodayHabitListProps> = ({ habits }) => {
             done={h.done}
             key={h.id.toString()}
             onClick={() => {
-              dispatch(fetchToggleHabitEvent(h.id));
+              toggleHabitEvent(h.id);
             }}
           >
             <HabitLabel $isDone={h.done}>{h.habit.name}</HabitLabel>

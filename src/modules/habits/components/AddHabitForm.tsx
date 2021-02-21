@@ -1,24 +1,27 @@
-import { RootState } from "app/rootReducer";
+import useAddHabit from "hooks/useAddHabit";
+import { Alert } from "modules/common/Alert";
 import Button from "modules/common/Button";
 import Input from "modules/common/Input";
 import InputCombo from "modules/common/InputCombo";
-import {
-  updateInput,
-  validateForm,
-} from "modules/habits/components/AddHabitForm.slice";
+import { updateInput } from "modules/habits/components/AddHabitForm.slice";
 import React, { ChangeEvent } from "react";
 import { BiPlus } from "react-icons/bi";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import styled from "styled-components";
+
+const AlertContainer = styled.div`
+  margin-top: 1rem;
+`;
 
 const AddHabitForm = () => {
   const dispatch = useDispatch();
-  const { input } = useSelector((state: RootState) => state.addHabit);
+  const { input, message, validateForm } = useAddHabit();
 
   const handleAddHabit = () => {
     if (!input) {
       return;
     }
-    dispatch(validateForm(input));
+    validateForm(input);
   };
 
   const handleAddHabitInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -32,17 +35,29 @@ const AddHabitForm = () => {
   };
 
   return (
-    <InputCombo style={{ marginBottom: "0.5rem" }} size="lg">
-      <Input
-        onKeyUp={handleAddHabitKeyUp}
-        onInput={handleAddHabitInput}
-        value={input}
-        placeholder="Add Habit"
-      />
-      <Button buttonType="primary" onClick={handleAddHabit}>
-        <BiPlus size="1.75rem" />
-      </Button>
-    </InputCombo>
+    <>
+      <InputCombo style={{ marginBottom: "0.5rem" }} size="lg">
+        <Input
+          onKeyUp={handleAddHabitKeyUp}
+          onInput={handleAddHabitInput}
+          value={input}
+          placeholder="Add Habit"
+        />
+        <Button buttonType="primary" onClick={handleAddHabit}>
+          <BiPlus size="1.75rem" />
+        </Button>
+      </InputCombo>
+
+      {message && (
+        <AlertContainer>
+          <Alert
+            type={message.type}
+            message={message.message}
+            title={message.title}
+          />
+        </AlertContainer>
+      )}
+    </>
   );
 };
 

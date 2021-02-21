@@ -3,6 +3,7 @@ import {
   API_HABIT_EVENTS_PATH,
   API_URL,
 } from "config/constants";
+import { ResponseError } from "types";
 
 interface FetchOptions {
   url: string;
@@ -10,6 +11,12 @@ interface FetchOptions {
   body?: any;
   token: string | null;
 }
+
+/*
+ * Make Fetch
+ *
+ *
+ */
 
 const makeFetch = ({ url, method = "GET", body, token }: FetchOptions) => {
   return fetch(url, {
@@ -19,7 +26,27 @@ const makeFetch = ({ url, method = "GET", body, token }: FetchOptions) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  });
+  }).then(handleErrors);
+};
+
+/*
+ * Handle Errors
+ *
+ *
+ */
+
+const handleErrors = async (res: Response) => {
+  const json = await res.json();
+
+  if (json.error) {
+    throw Error(json.error);
+  }
+
+  if (!res.ok) {
+    throw Error(ResponseError.BadRequest);
+  }
+
+  return json;
 };
 
 /*

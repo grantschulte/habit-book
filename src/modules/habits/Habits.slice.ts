@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { addHabit, getHabits, updateHabit } from "api";
+import { setAppError } from "app/App.slice";
 import { AppThunk } from "app/store";
 import {
   LOCAL_STORAGE_SORT_ORDER_KEY,
@@ -7,13 +8,19 @@ import {
 } from "config/constants";
 import dayjs from "modules/common/Date";
 import { setOrder as setHabitEventsOrder } from "modules/today/Today.slice";
-import { Habit, RequestState } from "types";
+import {
+  Habit,
+  HabitOrder,
+  ResponseErrorState,
+  ResponsePayload,
+  RequestState,
+} from "types";
 import ls from "utils/local-storage";
 
 type HabitsState = {
   habitsById: Record<string, Habit>;
   allHabits: Habit[];
-  order: { [prop: string]: number };
+  order: HabitOrder;
 } & RequestState;
 
 const initialState = {
@@ -26,7 +33,7 @@ const initialState = {
 
 const fetchFailure = (
   state: HabitsState,
-  action: PayloadAction<{ error: string }>
+  action: PayloadAction<ResponseErrorState>
 ) => {
   state.status = "failed";
   state.error = action.payload.error;
@@ -42,47 +49,50 @@ const habits = createSlice({
   reducers: {
     addHabitFailure: fetchFailure,
     addHabitStart: fetchStart,
-    addHabitSuccess: (state, action: PayloadAction<{ habit: Habit }>) => {
-      const { habit } = action.payload;
+    addHabitSuccess: (state, action: PayloadAction<ResponsePayload<Habit>>) => {
+      const { data } = action.payload;
       state.status = "success";
-      state.allHabits.push(habit);
-      state.habitsById[habit.id] = habit;
+      state.allHabits.push(data);
+      state.habitsById[data.id] = data;
     },
     editHabitFailure: fetchFailure,
     editHabitStart: fetchStart,
-    editHabitSuccess: (state, action: PayloadAction<{ habit: Habit }>) => {
-      const { habit } = action.payload;
+    editHabitSuccess: (
+      state,
+      action: PayloadAction<ResponsePayload<Habit>>
+    ) => {
+      const { data } = action.payload;
       state.status = "success";
 
-      const index = state.allHabits.findIndex((h) => h.id === habit.id);
+      const index = state.allHabits.findIndex((h) => h.id === data.id);
 
       if (index === -1) {
         return;
       }
 
-      if (!habit.active) {
+      if (!data.active) {
         state.allHabits.splice(index, 1);
-        delete state.habitsById[habit.id];
+        delete state.habitsById[data.id];
         return;
       }
 
-      state.allHabits[index].name = habit.name;
-      state.habitsById[habit.id].name = habit.name;
+      state.allHabits[index].name = data.name;
+      state.habitsById[data.id].name = data.name;
     },
     getHabitsStart: fetchStart,
-    getHabitsSuccess: (state, action: PayloadAction<{ habits: Habit[] }>) => {
-      const { habits } = action.payload;
+    getHabitsSuccess: (
+      state,
+      action: PayloadAction<ResponsePayload<Habit[]>>
+    ) => {
+      const { data } = action.payload;
       state.status = "success";
-      state.allHabits = habits;
-      habits.forEach((h, i) => {
+      state.allHabits = data;
+      data.forEach((h) => {
         state.habitsById[h.id] = h;
       });
     },
     getHabitsFailure: fetchFailure,
-    setOrder: (
-      state,
-      action: PayloadAction<{ order: { [prop: string]: number } }>
-    ) => {
+    setOrder: (state, action: PayloadAction<{ order: HabitOrder }>) => {
       const { order } = action.payload;
       state.allHabits.sort((a, b) => order[a.id] - order[b.id]);
     },
@@ -114,7 +124,7 @@ export const reorderHabits = (
     const orderArray = [...allHabits];
     orderArray.splice(source, 1);
     orderArray.splice(destination, 0, habit);
-    let o: { [prop: string]: number } = {};
+    let o: HabitOrder = {};
     orderArray.forEach((h, i) => {
       o[h.id] = i;
     });
@@ -136,7 +146,7 @@ export const setOrderInStorage = (order: {
 export const initOrder = (habits: Habit[]): AppThunk => {
   return (dispatch) => {
     let sortOrderString = ls().getItem(LOCAL_STORAGE_SORT_ORDER_KEY);
-    let o: { [prop: string]: number } = {};
+    let o: HabitOrder = {};
 
     if (!sortOrderString) {
       habits.forEach((h, i) => {
@@ -144,7 +154,7 @@ export const initOrder = (habits: Habit[]): AppThunk => {
       });
     }
 
-    let sortOrder: { [prop: string]: number } = sortOrderString
+    let sortOrder: HabitOrder = sortOrderString
       ? JSON.parse(sortOrderString)
       : o;
     dispatch(setOrder({ order: sortOrder }));
@@ -152,79 +162,62 @@ export const initOrder = (habits: Habit[]): AppThunk => {
   };
 };
 
-export const fetchHabits = (): AppThunk => {
-  return async (dispatch, getState) => {
-    const { token } = getState().app;
+export const fetchHabits = (token: string): AppThunk => {
+  return async (dispatch) => {
     dispatch(getHabitsStart());
-
     let habits;
 
     try {
-      const res = await getHabits(token);
-      habits = await res.json();
-
-      if (habits.error) {
-        dispatch(getHabitsFailure({ error: "error" }));
-        return;
-      }
+      habits = await getHabits(token);
     } catch (error) {
-      dispatch(getHabitsFailure(error.toString()));
+      dispatch(setAppError({ error: error.message }));
       return;
     }
 
-    dispatch(getHabitsSuccess({ habits }));
+    dispatch(getHabitsSuccess({ data: habits }));
     dispatch(initOrder(habits));
   };
 };
 
-export const fetchAddHabit = (name: string): AppThunk => {
-  return async (dispatch, getState) => {
-    const { token } = getState().app;
+export const fetchAddHabit = (name: string, token: string): AppThunk => {
+  return async (dispatch) => {
     dispatch(addHabitStart());
-
+    const date = dayjs().format(REQUEST_DATE_FORMAT);
     let habit;
 
-    const date = dayjs().format(REQUEST_DATE_FORMAT);
-
     try {
-      const res = await addHabit(
+      habit = await addHabit(
         {
           date,
           name,
         },
         token
       );
-      habit = await res.json();
-
-      if (!habit || habit.error) {
-        dispatch(addHabitFailure({ error: "error" }));
-        return;
-      }
     } catch (error) {
-      dispatch(addHabitFailure(error.toString()));
+      dispatch(setAppError({ error: error.message }));
       return;
     }
 
-    dispatch(addHabitSuccess({ habit }));
+    dispatch(addHabitSuccess({ data: habit }));
   };
 };
 
+export interface FetchEditHabitParams {
+  name?: string;
+  active?: boolean;
+}
+
 export const fetchEditHabit = (
   id: string,
-  params: {
-    name?: string;
-    active?: boolean;
-  }
+  params: FetchEditHabitParams,
+  token: string
 ): AppThunk => {
   return async (dispatch, getState) => {
-    const { token } = getState().app;
-
+    const date = dayjs().format(REQUEST_DATE_FORMAT);
     let habit;
 
-    const date = dayjs().format(REQUEST_DATE_FORMAT);
-
     try {
-      const res = await updateHabit(
+      habit = await updateHabit(
         {
           date,
           ...params,
@@ -232,17 +225,11 @@ export const fetchEditHabit = (
         id,
         token
       );
-      habit = await res.json();
-
-      if (!habit || habit.error) {
-        dispatch(editHabitFailure({ error: "error" }));
-        return;
-      }
     } catch (error) {
-      console.log(error);
+      dispatch(setAppError({ error: error.message }));
       return;
     }
 
-    dispatch(editHabitSuccess({ habit }));
+    dispatch(editHabitSuccess({ data: habit }));
   };
 };

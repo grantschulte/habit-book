@@ -1,9 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { getHabitEvents, updateHabitEvent } from "api";
+import { setAppError } from "app/App.slice";
 import { AppThunk } from "app/store";
-import { LOCAL_STORAGE_SORT_ORDER_KEY } from "config/constants";
+import {
+  LOCAL_STORAGE_SORT_ORDER_KEY,
+  REQUEST_DATE_FORMAT,
+} from "config/constants";
 import dayjs from "dayjs";
-import { HabitEvent, RequestState } from "types";
+import {
+  HabitEvent,
+  HabitOrder,
+  ResponsePayload,
+  RequestState,
+  ResponseErrorState,
+} from "types";
 import ls from "utils/local-storage";
 
 type TodayState = {
@@ -15,8 +25,15 @@ let initialState = {
   allHabitEvents: [],
   habitEventsById: {},
   status: "idle",
-  error: null,
 } as TodayState;
+
+const fetchFailure = (
+  state: TodayState,
+  action: PayloadAction<ResponseErrorState>
+) => {
+  state.status = "failed";
+  state.error = action.payload.error;
+};
 
 const todaySlice = createSlice({
   name: "today",
@@ -27,42 +44,34 @@ const todaySlice = createSlice({
     },
     getHabitEventsSuccess: (
       state,
-      action: PayloadAction<{ habitEvents: HabitEvent[] }>
+      action: PayloadAction<ResponsePayload<HabitEvent[]>>
     ) => {
-      const { habitEvents } = action.payload;
+      const { data } = action.payload;
       state.status = "success";
-      state.allHabitEvents = habitEvents;
-      habitEvents.forEach((h) => {
+      state.allHabitEvents = data;
+      data.forEach((h) => {
         state.habitEventsById[h.id] = h;
       });
     },
-    getHabitEventsFailure: (
-      state: TodayState,
-      action: PayloadAction<{ error: string }>
-    ) => {
-      state.status = "failed";
-      state.error = action.payload.error;
-    },
-    setOrder: (
-      state,
-      action: PayloadAction<{ order: { [prop: string]: number } }>
-    ) => {
+    getHabitEventsFailure: fetchFailure,
+    setOrder: (state, action: PayloadAction<{ order: HabitOrder }>) => {
       const { order } = action.payload;
       state.allHabitEvents.sort(
         (a, b) => order[a.habit.id] - order[b.habit.id]
       );
     },
+    toggleHabitEventFailure: fetchFailure,
     toggleHabitEventSuccess: (
       state,
-      action: PayloadAction<{ habitEvent: HabitEvent }>
+      action: PayloadAction<ResponsePayload<HabitEvent>>
     ) => {
-      const { habitEvent } = action.payload;
+      const { data } = action.payload;
       state.status = "success";
-      const he = state.allHabitEvents.find((he) => he.id === habitEvent.id);
+      const he = state.allHabitEvents.find((he) => he.id === data.id);
       if (he) {
-        he.done = habitEvent.done;
+        he.done = data.done;
       }
-      state.habitEventsById[habitEvent.id].done = habitEvent.done;
+      state.habitEventsById[data.id].done = data.done;
     },
   },
 });
@@ -72,6 +81,7 @@ export const {
   getHabitEventsSuccess,
   getHabitEventsFailure,
   setOrder,
+  toggleHabitEventFailure,
   toggleHabitEventSuccess,
 } = todaySlice.actions;
 export default todaySlice.reducer;
@@ -80,7 +90,7 @@ export const initOrder = (): AppThunk => {
   return (dispatch, getState) => {
     let { allHabits } = getState().habits;
     let sortOrderString = ls().getItem(LOCAL_STORAGE_SORT_ORDER_KEY);
-    let o: { [prop: string]: number } = {};
+    let o: HabitOrder = {};
 
     if (!sortOrderString) {
       allHabits.forEach((h, i) => {
@@ -88,54 +98,42 @@ export const initOrder = (): AppThunk => {
       });
     }
 
-    let sortOrder: { [prop: string]: number } = sortOrderString
+    let sortOrder: HabitOrder = sortOrderString
       ? JSON.parse(sortOrderString)
       : o;
     dispatch(setOrder({ order: sortOrder }));
   };
 };
 
-export const fetchHabitEvents = (): AppThunk => {
-  return async (dispatch, getState) => {
-    const { token } = getState().app;
+export const fetchHabitEvents = (token: string): AppThunk => {
+  return async (dispatch) => {
     dispatch(getHabitEventsStart());
-
-    const date = dayjs().format("YYYY-MM-DD");
-
+    const date = dayjs().format(REQUEST_DATE_FORMAT);
     let habitEvents;
 
     try {
-      const res = await getHabitEvents({ date }, token);
-      habitEvents = await res.json();
-
-      if (habitEvents.error) {
-        dispatch(getHabitEventsFailure({ error: "error" }));
-        return;
-      }
+      habitEvents = await getHabitEvents({ date }, token);
     } catch (error) {
-      dispatch(getHabitEventsFailure(error.toString()));
+      dispatch(setAppError({ error: error.message }));
       return;
     }
 
-    dispatch(getHabitEventsSuccess({ habitEvents }));
+    dispatch(getHabitEventsSuccess({ data: habitEvents }));
     dispatch(initOrder());
   };
 };
 
-export const fetchToggleHabitEvent = (id: string): AppThunk => {
-  return async (dispatch, getState) => {
-    const { token } = getState().app;
-
+export const fetchToggleHabitEvent = (id: string, token: string): AppThunk => {
+  return async (dispatch) => {
     let habitEvent;
 
     try {
-      const res = await updateHabitEvent({ id }, token);
-      habitEvent = await res.json();
+      habitEvent = await updateHabitEvent({ id }, token);
     } catch (error) {
-      console.log(error);
+      dispatch(setAppError({ error: error.message }));
       return;
     }
 
-    dispatch(toggleHabitEventSuccess({ habitEvent }));
+    dispatch(toggleHabitEventSuccess({ data: habitEvent }));
   };
 };

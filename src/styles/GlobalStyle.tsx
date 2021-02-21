@@ -4,6 +4,10 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
+
+  :root {
+    --page-padding: clamp(1.5rem, 5vw, 2rem) clamp(1rem, 5vw, 1.5rem);
+  }
   
   html,
   body {
@@ -20,6 +24,8 @@ const GlobalStyle = createGlobalStyle`
   h1, h2, h3, h4, h5, h6 {
     margin-top: 0;
   }
+
+  
 `;
 
 export default GlobalStyle;

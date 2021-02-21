@@ -22,7 +22,7 @@ const ICON_MAP = {
   warning: BiError,
 };
 
-const AlertContainer = styled.div<{ type: AlertType }>`
+export const AlertContainer = styled.div<{ type: AlertType }>`
   display: flex;
   align-items: flex-start;
   font-size: 1rem;

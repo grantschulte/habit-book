@@ -2,14 +2,22 @@
 
 export type RequestStatus = "idle" | "fetching" | "success" | "failed";
 
-export type RequestError = {
-  error: string;
-  message: string;
-};
+export interface ResponseErrorState {
+  error?: string | null;
+}
 
-export interface RequestState {
+export type RequestState = {
   status: RequestStatus;
-  error: Error | string | null;
+} & ResponseErrorState;
+
+export type ResponsePayload<T> = {
+  data: T;
+} & ResponseErrorState;
+
+export enum ResponseError {
+  BadRequest = "Bad Request",
+  Unauthorized = "Unauthorized",
+  InternalServerError = "Internal Server Error",
 }
 
 // Habit
@@ -27,4 +35,8 @@ export interface HabitEvent {
   date: string;
   done: boolean;
   habit: Habit;
+}
+
+export interface HabitOrder {
+  [prop: string]: number;
 }

@@ -1,9 +1,9 @@
+import routes from "config/routes";
+import AppError from "modules/common/Layout/AppError";
+import Logo from "modules/common/Logo";
 import React from "react";
 import styled from "styled-components";
-
-import Logo from "modules/common/Logo";
 import Menu from "./Menu/Menu";
-import routes from "config/routes";
 
 const Grid = styled.div`
   display: grid;
@@ -40,10 +40,11 @@ const LayoutUser = ({ children }: { children?: React.ReactNode }) => {
   return (
     <Grid>
       <LogoContainer>
-        <Logo to={routes.today.path}>Streaksta</Logo>
+        <Logo to={routes.today.path}>Habit Book</Logo>
       </LogoContainer>
       <Menu />
       <Main>{children}</Main>
+      <AppError />
     </Grid>
   );
 };

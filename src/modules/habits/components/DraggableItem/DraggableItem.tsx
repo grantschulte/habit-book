@@ -1,3 +1,4 @@
+import useEditHabit from "hooks/useEditHabit";
 import {
   Draggable,
   DraggableProvided,
@@ -7,9 +8,7 @@ import {
 import { BiCheck, BiEdit, BiTrash } from "lib/Icons";
 import { HabitLabel } from "modules/common/HabitItem/HabitLabel";
 import Input from "modules/common/Input";
-import { fetchEditHabit } from "modules/habits/Habits.slice";
 import React, { ChangeEvent, KeyboardEvent, useReducer } from "react";
-import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Habit } from "types";
 import DraggableIcon from "../DraggableIcon";
@@ -89,18 +88,16 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
   habit,
   index,
 }: DraggableItemProps) => {
-  const dispatch = useDispatch();
+  const editHabit = useEditHabit();
   const [state, dispatchInlineEdit] = useReducer(
     draggableItemsReducer,
     initDraggableItemState
   );
 
   const handleSaveEditHabit = () => {
-    dispatch(
-      fetchEditHabit(habit.id, {
-        name: state.editInputValue,
-      })
-    );
+    editHabit(habit.id, {
+      name: state.editInputValue,
+    });
     dispatchInlineEdit(inlineEditReset());
   };
 
@@ -121,11 +118,9 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
   };
 
   const handleDeleteItem = () => {
-    dispatch(
-      fetchEditHabit(habit.id, {
-        active: false,
-      })
-    );
+    editHabit(habit.id, {
+      active: false,
+    });
   };
 
   return (

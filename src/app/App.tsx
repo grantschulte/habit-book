@@ -1,9 +1,7 @@
-import Token from "app/Token";
 import withProviders from "hocs/withProviders";
 import ScrollToTop from "hooks/ScrollToTop";
-import { getThemeFromStorage } from "modules/settings/ThemeSelector/ThemeSelector.slice";
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import useThemeSelector from "hooks/useThemeSelector";
+import React from "react";
 import GlobalStyle from "styles/GlobalStyle";
 import Routes from "./Routes";
 import Theme from "./Theme";
@@ -13,21 +11,15 @@ const Providers: React.FC = withProviders(
 );
 
 const App: React.FC = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getThemeFromStorage());
-  }, [dispatch]);
+  useThemeSelector();
 
   return (
     <Providers>
-      <Token>
-        <Theme>
-          <ScrollToTop />
-          <GlobalStyle />
-          <Routes />
-        </Theme>
-      </Token>
+      <Theme>
+        <ScrollToTop />
+        <GlobalStyle />
+        <Routes />
+      </Theme>
     </Providers>
   );
 };
