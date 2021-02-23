@@ -1,34 +1,35 @@
+import { getHabitEvents } from "api";
+import { setAppError } from "app/App.slice";
 import { RootState } from "app/rootReducer";
-import useToken from "hooks/useToken";
-import { fetchHabitEvents } from "modules/today/Today.slice";
-import { useEffect } from "react";
+import { REQUEST_DATE_FORMAT } from "config/constants";
+import dayjs from "modules/common/Date";
+import { useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
-import { RequestStatus } from "types";
+import { HabitEvent } from "types";
+import { orderHabitEvents } from "utils/habit-order";
 
 const useHabitEvents = () => {
+  const token = useSelector((state: RootState) => state.app.token);
   const dispatch = useDispatch();
-  const { getToken } = useToken();
-  const today = useSelector((state: RootState) => state.today);
-  const shouldFetch = useSelector(
-    (state: RootState) =>
-      state.today.status === RequestStatus.Idle || state.today.stale
-  );
-  const activeHabitEvents = useSelector((state: RootState) =>
-    state.today.allHabitEvents.filter((he) => he.habit.active)
-  );
+  const date = dayjs().format(REQUEST_DATE_FORMAT);
 
-  useEffect(() => {
-    const init = async () => {
-      const token = await getToken();
-      dispatch(fetchHabitEvents(token));
-    };
-
-    if (shouldFetch) {
-      init();
+  return useQuery(
+    ["habitEvents", date, token],
+    () => {
+      return getHabitEvents({ date }, token);
+    },
+    {
+      refetchOnWindowFocus: true,
+      notifyOnChangeProps: ["data", "error"],
+      select: (data) => {
+        const ordered: HabitEvent[] = orderHabitEvents(data);
+        return ordered.filter((he) => he.habit.active);
+      },
+      onError: (error: Error) => {
+        dispatch(setAppError({ error: error.message }));
+      },
     }
-  }, [dispatch, getToken, shouldFetch]);
-
-  return { ...today, activeHabitEvents };
+  );
 };
 
 export default useHabitEvents;

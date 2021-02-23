@@ -1,7 +1,11 @@
+import { RootState } from "app/rootReducer";
+import { REQUEST_DATE_FORMAT } from "config/constants";
 import dayjs from "dayjs";
 import Heading from "modules/common/Heading";
 import React from "react";
 import { BiRefresh } from "react-icons/bi";
+import { useQueryClient } from "react-query";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 const HeadingContainer = styled.div`
@@ -27,16 +31,18 @@ interface TodayHeadingProps {
 }
 
 const TodayHeading: React.FC<TodayHeadingProps> = ({ showRefresh }) => {
-  const date = dayjs();
-
+  const headline = dayjs().format("dddd, MMMM D");
+  const queryClient = useQueryClient();
+  const token = useSelector((state: RootState) => state.app.token);
+  const date = dayjs().format(REQUEST_DATE_FORMAT);
   const handleRefresh = () => {
-    window.location.reload();
+    queryClient.invalidateQueries(["habitEvents", date, token]);
   };
 
   return (
     <HeadingContainer>
       <Heading as="h1" styleAs="h2" noMargin>
-        {date.format("dddd, MMMM D")}
+        {headline}
       </Heading>
       {showRefresh && <RefreshIcon onClick={handleRefresh} />}
     </HeadingContainer>

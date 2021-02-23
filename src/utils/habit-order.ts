@@ -1,11 +1,10 @@
 import { LOCAL_STORAGE_SORT_ORDER_KEY } from "config/constants";
 import { DraggableLocation } from "react-beautiful-dnd";
-import { Habit, HabitOrder } from "types";
+import { Habit, HabitEvent, HabitOrder } from "types";
 import ls from "./local-storage";
 
 export const orderHabits = (habits: Habit[]) => {
   const orderString = ls().getItem(LOCAL_STORAGE_SORT_ORDER_KEY);
-
   let orderObject: HabitOrder = {};
 
   if (!orderString) {
@@ -15,8 +14,15 @@ export const orderHabits = (habits: Habit[]) => {
   }
 
   const sortOrder = orderString ? JSON.parse(orderString) : orderObject;
-
   return habits.sort((a, b) => sortOrder[a.id] - sortOrder[b.id]);
+};
+
+export const orderHabitEvents = (habitEvents: HabitEvent[]) => {
+  const orderString = ls().getItem(LOCAL_STORAGE_SORT_ORDER_KEY);
+  const sortOrder = orderString ? JSON.parse(orderString) : {};
+  return habitEvents.sort(
+    (a, b) => sortOrder[a.habit.id] - sortOrder[b.habit.id]
+  );
 };
 
 export const setOrder = (
@@ -34,9 +40,6 @@ export const setOrder = (
   ) {
     return;
   }
-
-  // const h: Habit = allHabits[source.index];
-  // dispatch(reorderHabits(h, source.index, destination.index));
 
   const habit: Habit = habits[source.index];
   const orderArray = [...habits];

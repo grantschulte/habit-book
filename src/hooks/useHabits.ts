@@ -17,6 +17,7 @@ const useHabits = () => {
     {
       refetchOnWindowFocus: false,
       notifyOnChangeProps: ["data", "error"],
+      staleTime: 1000 * 60 * 60 * 24,
       select: (data) => {
         return orderHabits(data);
       },

@@ -1,7 +1,12 @@
+import { RootState } from "app/rootReducer";
+import { REQUEST_DATE_FORMAT } from "config/constants";
 import routes from "config/routes";
 import Button, { StyledButton } from "modules/common/Button";
+import dayjs from "modules/common/Date";
 import React from "react";
 import { BiPlus, BiRefresh } from "react-icons/bi";
+import { useQueryClient } from "react-query";
+import { useSelector } from "react-redux";
 import styled, { useTheme } from "styled-components";
 
 const EmptyStateContainer = styled.div`
@@ -37,8 +42,11 @@ interface TodayEmptyStateProps {
 
 const TodayEmptyState: React.FC<TodayEmptyStateProps> = ({ showRefresh }) => {
   const theme = useTheme();
+  const queryClient = useQueryClient();
+  const token = useSelector((state: RootState) => state.app.token);
+  const date = dayjs().format(REQUEST_DATE_FORMAT);
   const reload = () => {
-    window.location.reload();
+    queryClient.invalidateQueries(["habitEvents", date, token]);
   };
 
   return (

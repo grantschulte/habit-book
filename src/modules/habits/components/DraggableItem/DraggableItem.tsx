@@ -88,15 +88,16 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
   habit,
   index,
 }: DraggableItemProps) => {
-  const editHabit = useEditHabit();
+  const { mutate } = useEditHabit();
   const [state, dispatchInlineEdit] = useReducer(
     draggableItemsReducer,
     initDraggableItemState
   );
 
   const handleSaveEditHabit = () => {
-    editHabit(habit.id, {
+    mutate({
       name: state.editInputValue,
+      id: habit.id,
     });
     dispatchInlineEdit(inlineEditReset());
   };
@@ -118,8 +119,9 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
   };
 
   const handleDeleteItem = () => {
-    editHabit(habit.id, {
+    mutate({
       active: false,
+      id: habit.id,
     });
   };
 

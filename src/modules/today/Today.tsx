@@ -8,19 +8,19 @@ import TodayEmptyState from "modules/today/TodayEmptyState";
 import StatusBar from "modules/today/TodayListStatusBar";
 import TodaySkeleton from "modules/today/TodaySkeleton";
 import React, { useEffect, useState } from "react";
-import { RequestStatus } from "types";
+import { HabitEvent } from "types";
 import TodayHabitList from "./components/TodayHabitList";
 
 const Today: React.FC = () => {
-  const { activeHabitEvents, status } = useHabitEvents();
+  const { data, isLoading, isSuccess } = useHabitEvents();
   const [alert, setAlert] = useState(false);
-  const statusBarWidth = getStatusBarWidth(activeHabitEvents);
+  const statusBarWidth = getStatusBarWidth(data);
   const showRefresh = true;
 
   useEffect(() => {
-    const allDone = activeHabitEvents.every((h) => h.done);
+    const allDone = data ? data.every((h: HabitEvent) => h.done) : false;
     setAlert(allDone);
-  }, [activeHabitEvents]);
+  }, [data]);
 
   return (
     <Page>
@@ -28,14 +28,13 @@ const Today: React.FC = () => {
         <Col xs sm={12} md={8} lg={6}>
           <TodayHeading showRefresh={showRefresh} />
 
-          {status === RequestStatus.Fetching && <TodaySkeleton />}
+          {isLoading && <TodaySkeleton />}
 
-          {status === RequestStatus.Success &&
-            activeHabitEvents.length === 0 && (
-              <TodayEmptyState showRefresh={showRefresh} />
-            )}
+          {isSuccess && !data?.length && (
+            <TodayEmptyState showRefresh={showRefresh} />
+          )}
 
-          {status === RequestStatus.Success && activeHabitEvents.length > 0 && (
+          {isSuccess && data && data.length > 0 && (
             <>
               <StatusBar width={statusBarWidth} />
               {alert && (
@@ -44,7 +43,7 @@ const Today: React.FC = () => {
                   title="All done!"
                 />
               )}
-              <TodayHabitList habits={activeHabitEvents} />
+              <TodayHabitList habits={data} />
             </>
           )}
         </Col>

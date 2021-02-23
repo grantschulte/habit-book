@@ -3,12 +3,12 @@ import { AlertProps } from "modules/common/Alert";
 
 interface AddHabitFormState {
   input: string;
-  message: AlertProps | null;
+  alert: AlertProps | null;
 }
 
 const initialState = {
   input: "",
-  message: null,
+  alert: null,
 } as AddHabitFormState;
 
 const addHabitForm = createSlice({
@@ -20,15 +20,10 @@ const addHabitForm = createSlice({
     },
     resetForm(state) {
       state.input = "";
-      state.message = null;
+      state.alert = null;
     },
-    setAlert(state, action: PayloadAction<AlertProps>) {
-      const { type, title, message } = action.payload;
-      state.message = {
-        type,
-        message,
-        title,
-      };
+    setAlert(state, action: PayloadAction<{ alert: AlertProps }>) {
+      state.alert = action.payload.alert;
     },
   },
 });

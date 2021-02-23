@@ -8,13 +8,7 @@ import GlobalStyle from "styles/GlobalStyle";
 import Routes from "./Routes";
 import Theme from "./Theme";
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 1000 * 60 * 60 * 24,
-    },
-  },
-});
+const queryClient = new QueryClient();
 
 const Providers: React.FC = withProviders(
   ({ children }: { children: React.ReactNode }) => <>{children}</>

@@ -1,6 +1,8 @@
 import { HabitEvent } from "types";
 
-const getStatusBarWidth = (habitEvents: HabitEvent[]) => {
+const getStatusBarWidth = (habitEvents: HabitEvent[] | undefined) => {
+  if (!habitEvents) return "0%";
+
   const doneCount = habitEvents.reduce((a, b) => {
     return b.done ? a + 1 : a;
   }, 0);

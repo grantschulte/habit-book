@@ -5,10 +5,6 @@ import dayjs from "modules/common/Date";
 import { useQuery } from "react-query";
 import { useSelector } from "react-redux";
 
-const queryOpts = {
-  refetchOnWindowFocus: true,
-};
-
 const useStats = () => {
   const token = useSelector((state: RootState) => state.app.token);
   const date = dayjs();
@@ -16,11 +12,14 @@ const useStats = () => {
   const begin = date.subtract(7, "day").format(REQUEST_DATE_FORMAT);
 
   return useQuery(
-    ["stats", begin, end, token],
+    ["reportCard", begin, end, token],
     () => {
       return getStats({ begin, end }, token);
     },
-    queryOpts
+    {
+      refetchOnWindowFocus: false,
+      staleTime: 1000 * 60 * 60 * 24,
+    }
   );
 };
 
