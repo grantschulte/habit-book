@@ -1,17 +1,29 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { useCallback } from "react";
+import { useState, useEffect } from "react";
 
 const useToken = () => {
   const { getAccessTokenSilently } = useAuth0();
+  const [token, setToken] = useState<string | null>(null);
 
-  const getToken = useCallback(async () => {
-    return getAccessTokenSilently({
+  useEffect(() => {
+    const getToken = async () => {
+      const accessToken = await getAccessTokenSilently({
+        audience: process.env.REACT_APP_AUTH0_AUDIENCE,
+        scope: process.env.REACT_APP_AUTH0_SCOPE,
+      });
+      setToken(accessToken);
+    };
+    getToken();
+  });
+
+  const getToken = async () => {
+    return await getAccessTokenSilently({
       audience: process.env.REACT_APP_AUTH0_AUDIENCE,
       scope: process.env.REACT_APP_AUTH0_SCOPE,
     });
-  }, [getAccessTokenSilently]);
+  };
 
-  return { getToken };
+  return { token, getToken };
 };
 
 export default useToken;

@@ -1,4 +1,3 @@
-import useDrag from "hooks/useDrag";
 import useHabits from "hooks/useHabits";
 import {
   DragDropContext,
@@ -10,7 +9,8 @@ import HabitListDraggableEmptyState from "modules/habits/components/HabitListDra
 import HabitListDraggableSkeleton from "modules/habits/HabitListDraggableSkeleton";
 import React, { useCallback } from "react";
 import styled from "styled-components";
-import { Habit, RequestStatus } from "types";
+import { Habit } from "types";
+import { orderHabits, setOrder } from "utils/habit-order";
 import DraggableItem from "./DraggableItem/DraggableItem";
 
 const DraggableItemsContainer = styled.div`
@@ -19,28 +19,29 @@ const DraggableItemsContainer = styled.div`
   border-radius: ${(props) => props.theme.borderRadii[4]};
 `;
 
-const renderItems = (habits: Habit[]) => {
-  return habits.map((habit, index) => {
+const renderItems = (habits: Habit[] | undefined) => {
+  if (!habits) return null;
+  const orderedHabits = orderHabits(habits);
+  return orderedHabits.map((habit, index) => {
     return <DraggableItem habit={habit} index={index} key={habit.id} />;
   });
 };
 
 const HabitListDraggable: React.FC = () => {
-  const { allHabits, status } = useHabits();
-  const { reorder } = useDrag();
+  const { data, isLoading, isError } = useHabits();
 
   const onDragEnd = useCallback(
     ({ destination, source }: DropResult) => {
-      reorder(destination, source);
+      setOrder(destination, source, data);
     },
-    [reorder]
+    [data]
   );
 
-  if (status === RequestStatus.Fetching) {
+  if (isLoading) {
     return <HabitListDraggableSkeleton />;
   }
 
-  if (status === RequestStatus.Success && allHabits.length === 0) {
+  if (isError) {
     return <HabitListDraggableEmptyState />;
   }
 
@@ -53,7 +54,7 @@ const HabitListDraggable: React.FC = () => {
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
-              <div>{renderItems(allHabits)}</div>
+              <div>{renderItems(data)}</div>
               {provided.placeholder}
             </DraggableItemsContainer>
           )}

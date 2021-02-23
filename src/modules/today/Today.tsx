@@ -13,10 +13,8 @@ import TodayHabitList from "./components/TodayHabitList";
 
 const Today: React.FC = () => {
   const { activeHabitEvents, status } = useHabitEvents();
-  // const { allHabits } = useSelector((state: RootState) => state.habits);
   const [alert, setAlert] = useState(false);
   const statusBarWidth = getStatusBarWidth(activeHabitEvents);
-  // const showRefresh = activeHabitEvents.length === 0 && allHabits.length > 0;
   const showRefresh = true;
 
   useEffect(() => {

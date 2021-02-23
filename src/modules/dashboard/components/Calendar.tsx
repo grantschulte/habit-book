@@ -1,6 +1,14 @@
 import React from "react";
 import { ResponsiveCalendar, CalendarSvgProps } from "lib/Calendar";
-import { useTheme } from "styled-components";
+import styled, { useTheme } from "styled-components";
+
+const CalendarContainer = styled.div`
+  height: 240px;
+
+  @media screen and (max-width: 768px) {
+    height: 800px;
+  }
+`;
 
 const Calendar: React.FC<CalendarSvgProps> = ({
   data,

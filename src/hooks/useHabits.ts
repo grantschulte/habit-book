@@ -1,33 +1,30 @@
+import { getHabits } from "api";
+import { setAppError } from "app/App.slice";
 import { RootState } from "app/rootReducer";
-import useToken from "hooks/useToken";
-import { fetchHabits } from "modules/habits/Habits.slice";
-import { useEffect } from "react";
+import { useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
-import { RequestStatus } from "types";
+import { orderHabits } from "utils/habit-order";
 
 const useHabits = () => {
+  const token = useSelector((state: RootState) => state.app.token);
   const dispatch = useDispatch();
-  const habits = useSelector((state: RootState) => state.habits);
-  const shouldFetch = useSelector(
-    (state: RootState) =>
-      state.habits.status === RequestStatus.Idle || state.habits.stale
-  );
-  const { getToken } = useToken();
 
-  useEffect(() => {
-    const initHabits = async () => {
-      const token = await getToken();
-      dispatch(fetchHabits(token));
-    };
-
-    if (shouldFetch) {
-      initHabits();
+  return useQuery(
+    ["habits", token],
+    () => {
+      return getHabits(token);
+    },
+    {
+      refetchOnWindowFocus: false,
+      notifyOnChangeProps: ["data", "error"],
+      select: (data) => {
+        return orderHabits(data);
+      },
+      onError: (error: Error) => {
+        dispatch(setAppError({ error: error.message }));
+      },
     }
-  }, [dispatch, getToken, shouldFetch]);
-
-  return {
-    ...habits,
-  };
+  );
 };
 
 export default useHabits;

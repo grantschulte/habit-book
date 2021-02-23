@@ -1,10 +1,20 @@
+import Token from "app/Token";
 import withProviders from "hocs/withProviders";
 import ScrollToTop from "hooks/ScrollToTop";
 import useThemeSelector from "hooks/useThemeSelector";
 import React from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
 import GlobalStyle from "styles/GlobalStyle";
 import Routes from "./Routes";
 import Theme from "./Theme";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 60 * 24,
+    },
+  },
+});
 
 const Providers: React.FC = withProviders(
   ({ children }: { children: React.ReactNode }) => <>{children}</>
@@ -15,11 +25,15 @@ const App: React.FC = () => {
 
   return (
     <Providers>
-      <Theme>
-        <ScrollToTop />
-        <GlobalStyle />
-        <Routes />
-      </Theme>
+      <Token>
+        <QueryClientProvider client={queryClient}>
+          <Theme>
+            <ScrollToTop />
+            <GlobalStyle />
+            <Routes />
+          </Theme>
+        </QueryClientProvider>
+      </Token>
     </Providers>
   );
 };

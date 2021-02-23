@@ -57,7 +57,7 @@ const TodayEmptyState: React.FC<TodayEmptyStateProps> = ({ showRefresh }) => {
           Add Habits
         </Button>
         {showRefresh && (
-          <Button size="md" as="a" href={routes.habits.path} onClick={reload}>
+          <Button size="md" onClick={reload}>
             <BiRefresh
               style={{ marginRight: theme.spacing[2] }}
               size="1.25rem"

@@ -1,30 +1,16 @@
+import useStats from "hooks/useStats";
+import { Col, Row } from "lib/Grid";
+import Heading from "modules/common/Heading";
+import Page from "modules/common/Page";
 import React from "react";
 import styled from "styled-components";
-import Heading from "modules/common/Heading";
-import { Col, Row } from "lib/Grid";
-import Calendar from "./components/Calendar";
-import Page from "modules/common/Page";
-import useMediaQuery from "hooks/useMediaQuery";
-import useCalendar from "hooks/useCalendar";
-import HistoryTable from "modules/dashboard/components/HistoryTable";
-import useHabitHistory from "hooks/useHabitHistory";
-
-const CalendarContainer = styled.div`
-  height: 240px;
-
-  @media screen and (max-width: 768px) {
-    height: 800px;
-  }
-`;
 
 const Section = styled.div`
   margin-bottom: ${({ theme }) => theme.spacing[8]};
 `;
 
 const DashboardPage: React.FC = () => {
-  const mqlMatch = useMediaQuery("(max-width: 768px)");
-  const { cal, data, direction } = useCalendar(mqlMatch);
-  const habitHistory = useHabitHistory();
+  const { data, isLoading, isSuccess } = useStats();
 
   return (
     <Page>
@@ -34,27 +20,9 @@ const DashboardPage: React.FC = () => {
             Dashboard
           </Heading>
 
-          {/* <Section>
-            <Heading as="h3">Streaks</Heading>
-          </Section> */}
+          {isLoading && <div>Stats Loading...</div>}
 
-          <Section>
-            <Heading as="h3">Report Card</Heading>
-            <HistoryTable data={habitHistory} />
-          </Section>
-
-          <Section>
-            <Heading as="h3">History</Heading>
-            <CalendarContainer>
-              <Calendar
-                key={cal.from}
-                data={data}
-                to={cal.to}
-                from={cal.from}
-                direction={direction}
-              />
-            </CalendarContainer>
-          </Section>
+          {isSuccess ? <Section>{data.events.toString()}</Section> : null}
         </Col>
       </Row>
     </Page>
