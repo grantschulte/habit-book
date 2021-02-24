@@ -47,11 +47,11 @@ const ReportCardTable: React.FC<ReportCardTableProps> = ({ stats }) => {
         <Table items={habits.length}>
           <thead>
             <tr>
-              <th>&nbsp;</th>
+              <TH>&nbsp;</TH>
               {habits.map((h) => (
                 <TH key={h.name}>{h.name}</TH>
               ))}
-              <th>Score</th>
+              <TH>Score</TH>
             </tr>
           </thead>
           <tbody>

@@ -7,7 +7,6 @@ import StatsTable from "modules/dashboard/components/ReportCardTable/ReportCardT
 import Score from "modules/dashboard/components/Score";
 import React from "react";
 import styled, { useTheme } from "styled-components";
-import { Compiler } from "webpack";
 
 const Section = styled.div`
   /* margin-bottom: ${({ theme }) => theme.spacing[4]}; */

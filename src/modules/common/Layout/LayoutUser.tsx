@@ -1,11 +1,13 @@
 import routes from "config/routes";
+import useToken from "hooks/useToken";
 import AppError from "modules/common/Layout/AppError";
+import LayoutUserSkeleton from "modules/common/Layout/LayoutUserSkeleton";
 import Logo from "modules/common/Logo";
 import React from "react";
 import styled from "styled-components";
 import Menu from "./Menu/Menu";
 
-const Grid = styled.div`
+export const Grid = styled.div`
   display: grid;
   grid-template-columns: minmax(240px, 1fr) 8fr;
   grid-template-rows: 0.5fr 8fr 60px;
@@ -37,6 +39,12 @@ const LogoContainer = styled.div`
 `;
 
 const LayoutUser = ({ children }: { children?: React.ReactNode }) => {
+  const token = useToken();
+
+  if (!token) {
+    return <LayoutUserSkeleton />;
+  }
+
   return (
     <Grid>
       <LogoContainer>

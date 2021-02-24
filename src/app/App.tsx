@@ -1,4 +1,3 @@
-import Token from "app/Token";
 import withProviders from "hocs/withProviders";
 import ScrollToTop from "hooks/ScrollToTop";
 import useThemeSelector from "hooks/useThemeSelector";
@@ -19,15 +18,13 @@ const App: React.FC = () => {
 
   return (
     <Providers>
-      <Token>
-        <QueryClientProvider client={queryClient}>
-          <Theme>
-            <ScrollToTop />
-            <GlobalStyle />
-            <Routes />
-          </Theme>
-        </QueryClientProvider>
-      </Token>
+      <QueryClientProvider client={queryClient}>
+        <Theme>
+          <ScrollToTop />
+          <GlobalStyle />
+          <Routes />
+        </Theme>
+      </QueryClientProvider>
     </Providers>
   );
 };

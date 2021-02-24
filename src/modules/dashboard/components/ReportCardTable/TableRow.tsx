@@ -14,6 +14,9 @@ const TR = styled.tr`
 const TD = styled.td`
   padding: var(--cell-padding);
   vertical-align: middle;
+  border: 1px solid ${(props) => props.theme.color.background};
+  text-overflow: ellipsis;
+  overflow: hidden;
 
   &:first-child {
     text-align: left;

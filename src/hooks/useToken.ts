@@ -1,9 +1,13 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { useState, useEffect } from "react";
+import { setUserToken } from "app/App.slice";
+import { RootState } from "app/rootReducer";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const useToken = () => {
   const { getAccessTokenSilently } = useAuth0();
-  const [token, setToken] = useState<string | null>(null);
+  const dispatch = useDispatch();
+  const token = useSelector((state: RootState) => state.app.token);
 
   useEffect(() => {
     const getToken = async () => {
@@ -11,19 +15,12 @@ const useToken = () => {
         audience: process.env.REACT_APP_AUTH0_AUDIENCE,
         scope: process.env.REACT_APP_AUTH0_SCOPE,
       });
-      setToken(accessToken);
+      dispatch(setUserToken({ token: accessToken }));
     };
     getToken();
   });
 
-  const getToken = async () => {
-    return await getAccessTokenSilently({
-      audience: process.env.REACT_APP_AUTH0_AUDIENCE,
-      scope: process.env.REACT_APP_AUTH0_SCOPE,
-    });
-  };
-
-  return { token, getToken };
+  return token;
 };
 
 export default useToken;

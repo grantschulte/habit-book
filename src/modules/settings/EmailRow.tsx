@@ -17,7 +17,7 @@ const EmailRow = ({ user }: { user: User }) => {
     >
       <Col xs>
         <Label
-          value="Update Email"
+          value="Email"
           htmlFor="settings-email"
           style={{ marginBottom: theme.spacing[4] }}
         >
