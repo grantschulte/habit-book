@@ -5,6 +5,7 @@ import Page from "modules/common/Page";
 import Skeleton from "modules/common/Skeleton";
 import StatsTable from "modules/dashboard/components/ReportCardTable/ReportCardTable";
 import Score from "modules/dashboard/components/Score";
+import Streaks from "modules/dashboard/components/Streaks";
 import React from "react";
 import styled, { useTheme } from "styled-components";
 
@@ -16,6 +17,8 @@ const Card = styled.div`
   border: 2px solid ${(props) => props.theme.color.backgroundAlt};
   padding: 1rem;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 
 const DashboardPage: React.FC = () => {
@@ -47,6 +50,7 @@ const DashboardPage: React.FC = () => {
                   >
                     <Card>
                       <Heading as="h4">Streaks</Heading>
+                      <Streaks />
                     </Card>
                   </Col>
                   <Col

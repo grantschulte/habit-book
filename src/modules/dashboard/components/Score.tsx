@@ -7,7 +7,8 @@ const Score = styled.div.attrs<{ score: string }>((props) => ({
   font-weight: bold;
   text-align: center;
   color: ${(props) => props.theme.color.secondary};
-  height: 20vw;
+  min-height: 20vw;
+  flex-grow: 1;
   display: flex;
   align-items: center;
   justify-content: center;
