@@ -6,5 +6,6 @@ export const API_URL = `${process.env.REACT_APP_API_URL}/api/v1`;
 export const API_HABITS_PATH = "habits";
 export const API_HABIT_EVENTS_PATH = "habit-events";
 export const API_STATS_PATH = "stats";
+export const API_STREAKS_PATH = "stats/streaks";
 
 export const DEFAULT_THEME = "light";

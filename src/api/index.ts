@@ -2,6 +2,7 @@ import {
   API_HABITS_PATH,
   API_HABIT_EVENTS_PATH,
   API_STATS_PATH,
+  API_STREAKS_PATH,
   API_URL,
 } from "config/constants";
 import { ResponseError } from "types";
@@ -161,7 +162,7 @@ export const updateHabitEvent = (
 };
 
 /*
- * Update Habit Event
+ * Get Stats
  *
  *
  */
@@ -176,6 +177,28 @@ export const getStats = (
   token: string | null
 ) => {
   const url = `${API_URL}/${API_STATS_PATH}?begin=${begin}&end=${end}`;
+  return makeFetch({
+    url,
+    token,
+  });
+};
+
+/*
+ * Get Streaks
+ *
+ *
+ */
+
+interface GetStreaksParams {
+  begin: string;
+  end: string;
+}
+
+export const getStreaks = (
+  { begin, end }: GetStreaksParams,
+  token: string | null
+) => {
+  const url = `${API_URL}/${API_STREAKS_PATH}?begin=${begin}&end=${end}`;
   return makeFetch({
     url,
     token,

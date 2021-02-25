@@ -31,6 +31,7 @@ const useHabitEvents = () => {
       },
       onSuccess: () => {
         queryClient.invalidateQueries("stats");
+        queryClient.invalidateQueries("streaks");
       },
     }
   );

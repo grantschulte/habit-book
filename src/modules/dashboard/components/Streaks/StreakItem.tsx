@@ -1,13 +1,9 @@
+import { StatsStreakItem } from "hooks/useStreaks";
 import React from "react";
 import styled from "styled-components";
 
-export interface IStreakItem {
-  streak: number;
-  habit: string;
-}
-
 interface StreakItemProps {
-  item: IStreakItem;
+  item: StatsStreakItem;
 }
 
 const StyledStreakItem = styled.div`
@@ -46,7 +42,7 @@ const StreakItem: React.FC<StreakItemProps> = ({ item }) => {
   return (
     <StyledStreakItem>
       <StreakHeading>
-        <span>🔥{item.habit}</span>
+        <span>🔥{item.name}</span>
         <span>{item.streak} days</span>
       </StreakHeading>
       <StreakTickContainer>{ticks}</StreakTickContainer>
