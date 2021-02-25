@@ -1,42 +1,72 @@
-import StreakItem from "modules/dashboard/components/Streaks/StreakItem";
+import routes from "config/routes";
+import Button from "modules/common/Button";
+import StreakItem, {
+  IStreakItem,
+} from "modules/dashboard/components/Streaks/StreakItem";
 import React from "react";
+import { BiCheck } from "react-icons/bi";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
-interface StreaksProps {}
-
-const mockItems = [
+const mockItems: IStreakItem[] = [
   {
-    level: 3,
+    streak: 20,
     habit: "Meditation",
   },
   {
-    level: 5,
+    streak: 5,
     habit: "Pushups",
   },
   {
-    level: 1,
-    habit: "Cooking",
+    streak: 30,
+    habit: "Code",
+  },
+  {
+    streak: 9,
+    habit: "Spin",
   },
 ];
 
-const Streaks: React.FC<StreaksProps> = () => {
-  const streakItems = mockItems.sort((a, b) => b.level - a.level);
-  // let streakItems: IStreakItem[] = [];
+const StreaksContainer = styled.div`
+  max-height: 300px;
 
-  if (!streakItems.length) {
+  p {
+    margin: 0;
+    margin-bottom: 1rem;
+    line-height: 1.25;
+    font-size: 0.875rem;
+    color: ${(props) => props.theme.color.grey[800]};
+    font-style: italic;
+  }
+`;
+
+const Streaks = () => {
+  const streakItems: IStreakItem[] = mockItems.sort(
+    (a, b) => b.streak - a.streak
+  );
+
+  if (streakItems.length) {
     return (
-      <div>
-        Streaks are consecutive days of completing a habit. Make a streak and
-        watch yourself change.
-      </div>
+      <StreaksContainer>
+        <p>
+          A streak is when you complete habits on consecutive days. Making
+          streaks is key to forming long lasting habits.
+        </p>
+        <Button size="sm" as="a" href={routes.today.path} fullWidth>
+          <BiCheck size="1.25rem" style={{ marginRight: "0.5rem" }} />
+          Log Habit
+        </Button>
+        <Link to={routes.today.path}>Log Habit</Link>
+      </StreaksContainer>
     );
   }
 
   return (
-    <div>
+    <StreaksContainer>
       {streakItems.map((item) => (
-        <StreakItem item={item} key={`${item.habit}-${item.level}`} />
+        <StreakItem item={item} key={`${item.habit}-${item.streak}`} />
       ))}
-    </div>
+    </StreaksContainer>
   );
 };
 

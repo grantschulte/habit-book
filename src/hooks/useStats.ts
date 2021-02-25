@@ -12,7 +12,7 @@ const useStats = () => {
   const begin = date.subtract(7, "day").format(REQUEST_DATE_FORMAT);
 
   return useQuery(
-    ["reportCard", begin, end, token],
+    ["stats", begin, end, token],
     () => {
       return getStats({ begin, end }, token);
     },
