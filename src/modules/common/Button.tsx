@@ -1,7 +1,8 @@
 import React from "react";
-import styled, { CSSProperties } from "styled-components";
+import styled, { css, CSSProperties } from "styled-components";
 import { percentageColor } from "utils/css";
 import InputCombo from "modules/common/InputCombo";
+import { Link } from "react-router-dom";
 
 type ButtonSizes = "xs" | "sm" | "md" | "lg";
 type ButtonType = "primary" | "secondary";
@@ -13,20 +14,20 @@ type ButtonSizesConfig = {
 };
 
 const BUTTON_PADDING: ButtonSizesConfig = {
-  xs: "0.55rem",
+  xs: "0.2rem 0.35rem",
   sm: "0.65rem 0.85rem",
   md: "0.85rem 1rem",
   lg: "1rem 1.5rem",
 };
 const BUTTON_FONT_SIZE: ButtonSizesConfig = {
-  xs: "0.85rem",
+  xs: "0.75rem",
   sm: "0.85rem",
   md: "1.10rem",
   lg: "1.25rem",
 };
 
 export type ButtonProps = {
-  as?: "button" | "a";
+  as?: "button" | "a" | "link";
   primary?: boolean;
   secondary?: boolean;
   size?: ButtonSizes;
@@ -43,7 +44,7 @@ export type StyledButtonProps = {
   fullWidth?: boolean;
 };
 
-export const StyledButton = styled.button<StyledButtonProps>`
+const buttonStyles = css<StyledButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -99,11 +100,35 @@ export const StyledButton = styled.button<StyledButtonProps>`
   }
 `;
 
-const Button: React.FC<ButtonProps> = ({ primary, secondary, ...props }) => {
+export const StyledButton = styled.button<StyledButtonProps>`
+  ${buttonStyles};
+`;
+
+export const StyledButtonAsLink = styled(Link)<StyledButtonProps>`
+  ${buttonStyles};
+`;
+
+const Button: React.FC<ButtonProps> = ({
+  primary,
+  secondary,
+  as = "button",
+  href = "",
+  ...props
+}) => {
   const buttonType = secondary ? "secondary" : "primary";
 
+  if (as === "link") {
+    return (
+      <StyledButtonAsLink
+        buttonType={buttonType}
+        {...props}
+        to={href}
+      ></StyledButtonAsLink>
+    );
+  }
+
   return (
-    <StyledButton buttonType={buttonType} {...props}>
+    <StyledButton buttonType={buttonType} as={as} {...props}>
       {props.children}
     </StyledButton>
   );

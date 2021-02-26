@@ -1,6 +1,7 @@
 import routes from "config/routes";
 import useToken from "hooks/useToken";
 import { BiCheck } from "lib/Icons";
+import { useLocation } from "lib/Router";
 import Button from "modules/common/Button";
 import AppError from "modules/common/Layout/AppError";
 import LayoutUserSkeleton from "modules/common/Layout/LayoutUserSkeleton";
@@ -34,7 +35,8 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem clamp(1rem, 5vw, 1.5rem);
+  padding: 0 clamp(1rem, 5vw, 1.5rem);
+  height: 64px;
   grid-row: 1 / 2;
   grid-column: 1 / 3;
   color: ${(props) => props.theme.color.text};
@@ -44,6 +46,7 @@ const Header = styled.div`
 const LayoutUser = ({ children }: { children?: React.ReactNode }) => {
   const token = useToken();
   const theme = useTheme();
+  const location = useLocation();
 
   if (!token) {
     return <LayoutUserSkeleton />;
@@ -53,10 +56,12 @@ const LayoutUser = ({ children }: { children?: React.ReactNode }) => {
     <Grid>
       <Header>
         <Logo to={routes.today.path}>Habit Book</Logo>
-        <Button secondary size="xs" href={routes.today.path}>
-          <BiCheck size="1.25rem" style={{ marginRight: theme.spacing[2] }} />
-          Log Habit
-        </Button>
+        {location.pathname !== routes.today.path && (
+          <Button secondary size="xs" href={routes.today.path} as="link">
+            <BiCheck size="1.25rem" style={{ marginRight: theme.spacing[1] }} />
+            Log Habit
+          </Button>
+        )}
       </Header>
       <Menu />
       <Main>{children}</Main>

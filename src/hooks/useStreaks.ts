@@ -16,7 +16,7 @@ export interface StatsStreakItem {
 
 const useStreaks = () => {
   const token = useSelector((state: RootState) => state.app.token);
-  const date = dayjs().subtract(1, "day");
+  const date = dayjs();
   const begin = date.subtract(3, "month").format(REQUEST_DATE_FORMAT);
   const end = date.format(REQUEST_DATE_FORMAT);
 

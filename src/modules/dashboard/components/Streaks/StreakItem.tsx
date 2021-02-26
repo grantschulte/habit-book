@@ -39,11 +39,15 @@ const StreakItem: React.FC<StreakItemProps> = ({ item }) => {
     ticks.push(<StreakTick />);
   }
 
+  const streakText = item.streak > 1 ? "days" : "day";
+
   return (
     <StyledStreakItem>
       <StreakHeading>
         <span>🔥{item.name}</span>
-        <span>{item.streak} days</span>
+        <span>
+          {item.streak} {streakText}
+        </span>
       </StreakHeading>
       <StreakTickContainer>{ticks}</StreakTickContainer>
     </StyledStreakItem>

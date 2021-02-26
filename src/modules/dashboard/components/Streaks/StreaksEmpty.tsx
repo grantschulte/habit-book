@@ -26,7 +26,7 @@ const StreaksEmptyState = () => {
         A streak is when you complete habits on consecutive days. Making streaks
         is key to forming long lasting habits.
       </p>
-      <Button size="sm" as="a" href={routes.today.path} fullWidth>
+      <Button size="sm" as="link" href={routes.today.path} fullWidth>
         <BiCheck size="1.25rem" style={{ marginRight: theme.spacing[2] }} />
         Log Habit
       </Button>

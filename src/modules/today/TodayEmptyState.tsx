@@ -57,7 +57,7 @@ const TodayEmptyState: React.FC<TodayEmptyStateProps> = ({ showRefresh }) => {
       <ButtonContainer>
         <Button
           size="md"
-          as="a"
+          as="link"
           href={routes.habits.path}
           style={{ marginRight: theme.spacing[4] }}
         >

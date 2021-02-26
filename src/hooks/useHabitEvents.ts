@@ -3,18 +3,15 @@ import { setAppError } from "app/App.slice";
 import { RootState } from "app/rootReducer";
 import { REQUEST_DATE_FORMAT } from "config/constants";
 import dayjs from "modules/common/Date";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { HabitEvent } from "types";
 import { orderHabitEvents } from "utils/habit-order";
 
 const useHabitEvents = () => {
-  const queryClient = useQueryClient();
   const token = useSelector((state: RootState) => state.app.token);
   const dispatch = useDispatch();
   const date = dayjs().format(REQUEST_DATE_FORMAT);
-
-  console.log(queryClient.getQueryCache());
 
   return useQuery(
     ["habitEvents", date, token],
