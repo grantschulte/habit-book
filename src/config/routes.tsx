@@ -80,7 +80,7 @@ const routes: RouteConfig = {
   },
   settings: {
     name: "settings",
-    path: "/settings",
+    path: "/account",
     title: "Settings",
     component: routeComponents.Settings,
     layout: routeComponents.LayoutUser,

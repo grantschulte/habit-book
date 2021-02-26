@@ -14,7 +14,8 @@ const useHabitEventUpdate = () => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries("habitEvents");
-        queryClient.invalidateQueries("reportCard");
+        queryClient.invalidateQueries("stats");
+        queryClient.invalidateQueries("streaks");
       },
     }
   );

@@ -3,20 +3,23 @@ import styled, { CSSProperties } from "styled-components";
 import { percentageColor } from "utils/css";
 import InputCombo from "modules/common/InputCombo";
 
-type ButtonSizes = "sm" | "md" | "lg";
-type ButtonType = "primary" | "secondary" | "primary";
+type ButtonSizes = "xs" | "sm" | "md" | "lg";
+type ButtonType = "primary" | "secondary";
 type ButtonSizesConfig = {
+  xs: string;
   sm: string;
   md: string;
   lg: string;
 };
 
 const BUTTON_PADDING: ButtonSizesConfig = {
+  xs: "0.55rem",
   sm: "0.65rem 0.85rem",
   md: "0.85rem 1rem",
   lg: "1rem 1.5rem",
 };
 const BUTTON_FONT_SIZE: ButtonSizesConfig = {
+  xs: "0.85rem",
   sm: "0.85rem",
   md: "1.10rem",
   lg: "1.25rem",
@@ -24,7 +27,8 @@ const BUTTON_FONT_SIZE: ButtonSizesConfig = {
 
 export type ButtonProps = {
   as?: "button" | "a";
-  buttonType?: ButtonType;
+  primary?: boolean;
+  secondary?: boolean;
   size?: ButtonSizes;
   href?: string;
   fullWidth?: boolean;
@@ -95,10 +99,9 @@ export const StyledButton = styled.button<StyledButtonProps>`
   }
 `;
 
-const Button: React.FC<ButtonProps> = ({
-  buttonType = "primary",
-  ...props
-}) => {
+const Button: React.FC<ButtonProps> = ({ primary, secondary, ...props }) => {
+  const buttonType = secondary ? "secondary" : "primary";
+
   return (
     <StyledButton buttonType={buttonType} {...props}>
       {props.children}

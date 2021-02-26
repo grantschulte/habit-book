@@ -12,7 +12,7 @@ const StreaksContainer = styled.div`
 const Streaks = () => {
   const { data, isLoading, isSuccess } = useStreaks();
 
-  if (isLoading || !data.length) {
+  if (isLoading) {
     return <StreaksSkeleton />;
   }
 

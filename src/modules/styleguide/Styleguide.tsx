@@ -57,35 +57,35 @@ const Styleguide: React.FC = () => {
           </div>
 
           <div style={{ marginBottom: "1rem" }}>
-            <Button size="sm" buttonType="secondary" as="a" href="/">
+            <Button size="sm" secondary as="a" href="/">
               Click Me
             </Button>
           </div>
           <div style={{ marginBottom: "1rem" }}>
-            <Button size="md" buttonType="secondary">
+            <Button size="md" secondary>
               Click Me
             </Button>
           </div>
           <div style={{ marginBottom: "1rem" }}>
-            <Button size="lg" buttonType="secondary">
+            <Button size="lg" secondary>
               Click Me
             </Button>
           </div>
 
           <div style={{ marginBottom: "1rem" }}>
-            <Button size="sm" buttonType="primary">
+            <Button size="sm">
               <Icon component={BiMouse} />
               Click Me
             </Button>
           </div>
           <div style={{ marginBottom: "1rem" }}>
-            <Button size="md" buttonType="primary">
+            <Button size="md">
               <Icon component={BiMouse} />
               Click Me
             </Button>
           </div>
           <div style={{ marginBottom: "1rem" }}>
-            <Button size="lg" buttonType="primary">
+            <Button size="lg">
               <Icon component={BiMouse} />
               Click Me
             </Button>
@@ -113,7 +113,7 @@ const Styleguide: React.FC = () => {
             <Label htmlFor="ice" value="Input Combo">
               <InputCombo>
                 <Input id="ice" type="text" />
-                <Button buttonType="secondary">Submit</Button>
+                <Button secondary>Submit</Button>
               </InputCombo>
             </Label>
           </div>

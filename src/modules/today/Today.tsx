@@ -1,3 +1,4 @@
+import { RootState } from "app/rootReducer";
 import useHabitEvents from "hooks/useHabitEvents";
 import { Col, Row } from "lib/Grid";
 import { InfoAlert } from "modules/common/Alert";
@@ -8,14 +9,19 @@ import TodayEmptyState from "modules/today/TodayEmptyState";
 import StatusBar from "modules/today/TodayListStatusBar";
 import TodaySkeleton from "modules/today/TodaySkeleton";
 import React, { useEffect, useState } from "react";
-import { HabitEvent } from "types";
+import { useQueryClient } from "react-query";
+import { useSelector } from "react-redux";
+import { Habit, HabitEvent } from "types";
 import TodayHabitList from "./components/TodayHabitList";
 
 const Today: React.FC = () => {
+  const queryClient = useQueryClient();
+  const token = useSelector((state: RootState) => state.app.token);
   const { data, isLoading, isSuccess } = useHabitEvents();
   const [alert, setAlert] = useState(false);
+  const habits: Habit[] = queryClient.getQueryData(["habits", token]) || [];
   const statusBarWidth = getStatusBarWidth(data);
-  const showRefresh = true;
+  const showRefresh = habits.length > 0;
 
   useEffect(() => {
     const allDone = data ? data.every((h: HabitEvent) => h.done) : false;

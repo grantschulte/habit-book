@@ -19,7 +19,7 @@ const SignOutRow = () => {
     <Row>
       <Col xs>
         <Label value="Sign Out">
-          <Button buttonType="primary" size="sm" onClick={handleSignOut}>
+          <Button size="sm" onClick={handleSignOut}>
             {loading && (
               <LoadingIcon size="1.25rem" style={{ marginRight: "0.5rem" }} />
             )}

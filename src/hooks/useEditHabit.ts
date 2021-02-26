@@ -32,7 +32,8 @@ const useEditHabit = () => {
       onSuccess: () => {
         queryClient.invalidateQueries("habits");
         queryClient.invalidateQueries("habitEvents");
-        queryClient.invalidateQueries("reportCard");
+        queryClient.invalidateQueries("stats");
+        queryClient.invalidateQueries("streaks");
       },
     }
   );

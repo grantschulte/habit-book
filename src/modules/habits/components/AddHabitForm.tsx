@@ -62,7 +62,7 @@ const AddHabitForm = () => {
           value={input}
           placeholder="Add Habit"
         />
-        <Button buttonType="primary" onClick={handleAddHabit}>
+        <Button onClick={handleAddHabit}>
           <BiPlus size="1.75rem" />
         </Button>
       </InputCombo>

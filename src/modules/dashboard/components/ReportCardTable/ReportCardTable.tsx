@@ -38,8 +38,26 @@ const Table = styled.table<{ items: number }>`
   background-color: ${(props) => props.theme.color.backgroundAlt};
 `;
 
+const TableEmptyState = styled.p`
+  margin: 0;
+  margin-bottom: 1rem;
+  line-height: 1.25;
+  font-size: 0.875rem;
+  color: ${(props) => props.theme.color.grey[800]};
+  font-style: italic;
+`;
+
 const ReportCardTable: React.FC<ReportCardTableProps> = ({ stats }) => {
   const { days, habits } = stats;
+
+  if (days.length === 0) {
+    return (
+      <TableEmptyState>
+        Your 7-day habit history will show up here when you create and complete
+        habits.
+      </TableEmptyState>
+    );
+  }
 
   return (
     <TableContainer>

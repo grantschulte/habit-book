@@ -2,8 +2,7 @@ import routes from "config/routes";
 import Button from "modules/common/Button";
 import React from "react";
 import { BiCheck } from "react-icons/bi";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 
 const StreaksContainer = styled.div`
   max-height: 300px;
@@ -19,6 +18,8 @@ const StreaksContainer = styled.div`
 `;
 
 const StreaksEmptyState = () => {
+  const theme = useTheme();
+
   return (
     <StreaksContainer>
       <p>
@@ -26,10 +27,9 @@ const StreaksEmptyState = () => {
         is key to forming long lasting habits.
       </p>
       <Button size="sm" as="a" href={routes.today.path} fullWidth>
-        <BiCheck size="1.25rem" style={{ marginRight: "0.5rem" }} />
+        <BiCheck size="1.25rem" style={{ marginRight: theme.spacing[2] }} />
         Log Habit
       </Button>
-      <Link to={routes.today.path}>Log Habit</Link>
     </StreaksContainer>
   );
 };

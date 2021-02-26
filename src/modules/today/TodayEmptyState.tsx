@@ -52,7 +52,7 @@ const TodayEmptyState: React.FC<TodayEmptyStateProps> = ({ showRefresh }) => {
   return (
     <EmptyStateContainer>
       <div style={{ marginBottom: theme.spacing[4] }}>
-        You don't have any habits for today.
+        You don't have any habits to complete today.
       </div>
       <ButtonContainer>
         <Button

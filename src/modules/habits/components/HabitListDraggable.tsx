@@ -28,7 +28,7 @@ const renderItems = (habits: Habit[] | undefined) => {
 };
 
 const HabitListDraggable: React.FC = () => {
-  const { data, isLoading, isError } = useHabits();
+  const { data, isLoading, isSuccess } = useHabits();
 
   const onDragEnd = useCallback(
     ({ destination, source }: DropResult) => {
@@ -41,7 +41,7 @@ const HabitListDraggable: React.FC = () => {
     return <HabitListDraggableSkeleton />;
   }
 
-  if (isError) {
+  if (isSuccess && data?.length === 0) {
     return <HabitListDraggableEmptyState />;
   }
 

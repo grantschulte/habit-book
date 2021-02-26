@@ -4,7 +4,7 @@ import { AppState, Auth0Provider } from "@auth0/auth0-react";
 import routes from "config/routes";
 
 export const history = createBrowserHistory();
-const AUTH0_REDIRECT_URI = `${window.location.origin}${routes.homepage.path}`;
+const AUTH0_REDIRECT_URI = `${window.location.origin}${routes.today.path}`;
 
 const WithAuthProvider = <P extends object>(
   WrappedComponent: React.FunctionComponent<P>

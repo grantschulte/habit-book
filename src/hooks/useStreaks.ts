@@ -33,7 +33,6 @@ const useStreaks = () => {
     },
     {
       refetchOnWindowFocus: false,
-      refetchOnMount: false,
       staleTime: 1000 * 60 * 60 * 24,
     }
   );

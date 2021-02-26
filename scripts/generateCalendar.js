@@ -5,8 +5,6 @@ const generateData = (day, data = []) => {
   const formatted = day.format("YYYY-MM-DD");
   data.push(generateDay(formatted));
 
-  console.log(formatted);
-
   if (formatted === "2021-12-31") {
     return data;
   }

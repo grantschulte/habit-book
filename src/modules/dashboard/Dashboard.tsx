@@ -3,7 +3,7 @@ import { Col, Row } from "lib/Grid";
 import Heading from "modules/common/Heading";
 import Page from "modules/common/Page";
 import Skeleton from "modules/common/Skeleton";
-import StatsTable from "modules/dashboard/components/ReportCardTable/ReportCardTable";
+import ReportCardTable from "modules/dashboard/components/ReportCardTable/ReportCardTable";
 import Score from "modules/dashboard/components/Score";
 import Streaks from "modules/dashboard/components/Streaks";
 import React from "react";
@@ -66,12 +66,14 @@ const DashboardPage: React.FC = () => {
                 </Row>
               </Section>
 
-              <Section style={{ marginBottom: theme.spacing[4] }}>
-                <Card>
-                  <Heading as="h4">Report Card</Heading>
-                  <StatsTable stats={data} />
-                </Card>
-              </Section>
+              {data && (
+                <Section style={{ marginBottom: theme.spacing[4] }}>
+                  <Card>
+                    <Heading as="h4">Report Card</Heading>
+                    <ReportCardTable stats={data} />
+                  </Card>
+                </Section>
+              )}
             </>
           ) : null}
         </Col>

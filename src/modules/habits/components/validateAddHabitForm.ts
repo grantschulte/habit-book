@@ -6,8 +6,6 @@ const validateAddHabitForm = (input: string, habits: Habit[]) => {
     (h) => h.name.toLowerCase() === input.toLowerCase()
   );
 
-  console.log(habits);
-
   if (exists) {
     return {
       isValid: false,

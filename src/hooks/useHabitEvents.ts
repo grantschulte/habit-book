@@ -14,6 +14,8 @@ const useHabitEvents = () => {
   const dispatch = useDispatch();
   const date = dayjs().format(REQUEST_DATE_FORMAT);
 
+  console.log(queryClient.getQueryCache());
+
   return useQuery(
     ["habitEvents", date, token],
     () => {
@@ -28,10 +30,6 @@ const useHabitEvents = () => {
       },
       onError: (error: Error) => {
         dispatch(setAppError({ error: error.message }));
-      },
-      onSuccess: () => {
-        queryClient.invalidateQueries("stats");
-        queryClient.invalidateQueries("streaks");
       },
     }
   );
