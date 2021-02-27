@@ -6,6 +6,7 @@ import LoadingIcon from "modules/common/LoadingIcon";
 import Page from "modules/common/Page";
 import React, { useContext, useState } from "react";
 import { ThemeContext } from "styled-components";
+import content from "config/content.json";
 
 const Homepage = () => {
   const theme = useContext(ThemeContext);
@@ -24,7 +25,7 @@ const Homepage = () => {
       <Row center="xs" middle="xs" style={{ height: "100%" }}>
         <Col xs sm={8} md={6} lg={4}>
           <Heading as="h1" style={{ textAlign: "center" }}>
-            HabitBook
+            {content.habitBook}
           </Heading>
           <div
             style={{
@@ -37,7 +38,7 @@ const Homepage = () => {
               {loading && (
                 <LoadingIcon size="1.25rem" style={{ marginRight: "0.5rem" }} />
               )}
-              Create Account / Sign In
+              {content.createAccountSignIn}
             </Button>
           </div>
         </Col>

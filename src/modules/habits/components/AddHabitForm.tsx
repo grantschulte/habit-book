@@ -15,6 +15,7 @@ import { useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Habit } from "types";
+import content from "config/content.json";
 
 const AlertContainer = styled.div`
   margin-top: 1rem;
@@ -60,7 +61,7 @@ const AddHabitForm = () => {
           onKeyUp={handleAddHabitKeyUp}
           onInput={handleAddHabitInput}
           value={input}
-          placeholder="Add Habit"
+          placeholder={content.addHabit}
         />
         <Button onClick={handleAddHabit}>
           <BiPlus size="1.75rem" />

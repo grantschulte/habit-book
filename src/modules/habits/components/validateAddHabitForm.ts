@@ -1,5 +1,6 @@
 import { AlertType } from "modules/common/Alert";
 import { Habit } from "types";
+import content from "config/content.json";
 
 const validateAddHabitForm = (input: string, habits: Habit[]) => {
   const exists = habits.find(
@@ -11,8 +12,8 @@ const validateAddHabitForm = (input: string, habits: Habit[]) => {
       isValid: false,
       alert: {
         type: AlertType.Error,
-        title: "Duplicate habit found",
-        message: "Only one habit of the same type can be added.",
+        title: content.duplicateHabitFound,
+        message: content.duplicateHabitFoundMessage,
       },
     };
   }
@@ -22,9 +23,8 @@ const validateAddHabitForm = (input: string, habits: Habit[]) => {
       isValid: false,
       alert: {
         type: AlertType.Error,
-        title: "You can't have more than five habits...",
-        message:
-          "Research suggests you are more likely to achieve attainable goals. If you want to add another habit, delete one first.",
+        title: content.habitMaxReached,
+        message: content.habitMaxReachedMessage,
       },
     };
   }

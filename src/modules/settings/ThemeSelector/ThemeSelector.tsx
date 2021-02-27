@@ -1,3 +1,4 @@
+import content from "config/content.json";
 import allThemes from "config/theme";
 import useThemeSelector from "hooks/useThemeSelector";
 import { Col, Row } from "lib/Grid";
@@ -23,7 +24,7 @@ const ThemeSelector: React.FC<IThemeSelectorProps> = () => {
       }}
     >
       <Col xs>
-        <Label value="Theme" />
+        <Label value={content.theme} />
         <Row>
           {Object.values(allThemes).map((t) => {
             return (

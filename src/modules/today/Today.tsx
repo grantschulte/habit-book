@@ -13,6 +13,7 @@ import { useQueryClient } from "react-query";
 import { useSelector } from "react-redux";
 import { Habit, HabitEvent } from "types";
 import TodayHabitList from "./components/TodayHabitList";
+import content from "config/content.json";
 
 const Today: React.FC = () => {
   const queryClient = useQueryClient();
@@ -45,8 +46,8 @@ const Today: React.FC = () => {
               <StatusBar width={statusBarWidth} />
               {alert && (
                 <InfoAlert
-                  message="Congratulations. You've completed all of your habits today. See you tomorrow."
-                  title="All done!"
+                  message={content.habitsCompleted}
+                  title={content.allDone}
                 />
               )}
               <TodayHabitList habits={data} />

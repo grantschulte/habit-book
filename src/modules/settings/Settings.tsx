@@ -1,4 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
+import content from "config/content.json";
 import { Col, Row } from "lib/Grid";
 import Heading from "modules/common/Heading";
 import Page from "modules/common/Page";
@@ -20,7 +21,7 @@ const Settings = () => {
       <Row>
         <Col xs sm={12} md={8} lg={6}>
           <Heading as="h1" styleAs="h2">
-            Account Settings
+            {content.accountSettings}
           </Heading>
         </Col>
       </Row>
@@ -28,7 +29,7 @@ const Settings = () => {
       <Row>
         <Col xs sm={12} md={8} lg={6}>
           <Section>
-            <Heading as="h3">General</Heading>
+            <Heading as="h3">{content.general}</Heading>
             <EmailRow user={user} />
             <ThemeSelector />
             <SignOutRow />

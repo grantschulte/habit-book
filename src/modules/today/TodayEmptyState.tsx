@@ -8,6 +8,7 @@ import { BiPlus, BiRefresh } from "react-icons/bi";
 import { useQueryClient } from "react-query";
 import { useSelector } from "react-redux";
 import styled, { useTheme } from "styled-components";
+import content from "config/content.json";
 
 const EmptyStateContainer = styled.div`
   padding: 1rem;
@@ -52,7 +53,7 @@ const TodayEmptyState: React.FC<TodayEmptyStateProps> = ({ showRefresh }) => {
   return (
     <EmptyStateContainer>
       <div style={{ marginBottom: theme.spacing[4] }}>
-        You don't have any habits to complete today.
+        {content.todayNoHabits}
       </div>
       <ButtonContainer>
         <Button
@@ -62,7 +63,7 @@ const TodayEmptyState: React.FC<TodayEmptyStateProps> = ({ showRefresh }) => {
           style={{ marginRight: theme.spacing[4] }}
         >
           <BiPlus style={{ marginRight: theme.spacing[2] }} size="1.25rem" />
-          Add Habits
+          {content.addHabits}
         </Button>
         {showRefresh && (
           <Button size="md" onClick={reload}>
@@ -70,7 +71,7 @@ const TodayEmptyState: React.FC<TodayEmptyStateProps> = ({ showRefresh }) => {
               style={{ marginRight: theme.spacing[2] }}
               size="1.25rem"
             />
-            Use Existing Habits
+            {content.todayUseExisting}
           </Button>
         )}
       </ButtonContainer>

@@ -3,6 +3,7 @@ import Button from "modules/common/Button";
 import React from "react";
 import { BiCheck } from "react-icons/bi";
 import styled, { useTheme } from "styled-components";
+import content from "config/content.json";
 
 const StreaksContainer = styled.div`
   max-height: 300px;
@@ -22,13 +23,10 @@ const StreaksEmptyState = () => {
 
   return (
     <StreaksContainer>
-      <p>
-        A streak is when you complete habits on consecutive days. Making streaks
-        is key to forming long lasting habits.
-      </p>
+      <p>{content.streakDefinition}</p>
       <Button size="sm" as="link" href={routes.today.path} fullWidth>
         <BiCheck size="1.25rem" style={{ marginRight: theme.spacing[2] }} />
-        Log Habit
+        {content.logHabit}
       </Button>
     </StreaksContainer>
   );

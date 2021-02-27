@@ -8,6 +8,7 @@ import Score from "modules/dashboard/components/Score";
 import Streaks from "modules/dashboard/components/Streaks";
 import React from "react";
 import styled, { useTheme } from "styled-components";
+import content from "config/content.json";
 
 const Section = styled.div`
   /* margin-bottom: ${({ theme }) => theme.spacing[4]}; */
@@ -30,7 +31,7 @@ const DashboardPage: React.FC = () => {
       <Row>
         <Col xs sm={12} md={10} lg={8}>
           <Heading as="h1" styleAs="h2">
-            Dashboard
+            {content.dashboard}
           </Heading>
 
           {isLoading && (
@@ -49,7 +50,7 @@ const DashboardPage: React.FC = () => {
                     style={{ marginBottom: theme.spacing[4] }}
                   >
                     <Card>
-                      <Heading as="h4">Streaks</Heading>
+                      <Heading as="h4">{content.streaks}</Heading>
                       <Streaks />
                     </Card>
                   </Col>
@@ -59,7 +60,7 @@ const DashboardPage: React.FC = () => {
                     style={{ marginBottom: theme.spacing[4] }}
                   >
                     <Card>
-                      <Heading as="h4">Score</Heading>
+                      <Heading as="h4">{content.score}</Heading>
                       <Score score={data.score} />
                     </Card>
                   </Col>
@@ -69,7 +70,7 @@ const DashboardPage: React.FC = () => {
               {data && (
                 <Section style={{ marginBottom: theme.spacing[4] }}>
                   <Card>
-                    <Heading as="h4">Report Card</Heading>
+                    <Heading as="h4">{content.reportCard}</Heading>
                     <ReportCardTable stats={data} />
                   </Card>
                 </Section>

@@ -5,6 +5,7 @@ import Button from "modules/common/Button";
 import Label from "modules/common/Form/Label";
 import LoadingIcon from "modules/common/LoadingIcon";
 import React, { useState } from "react";
+import content from "config/content.json";
 
 const SignOutRow = () => {
   const { logout } = useAuth0();
@@ -23,7 +24,7 @@ const SignOutRow = () => {
             {loading && (
               <LoadingIcon size="1.25rem" style={{ marginRight: "0.5rem" }} />
             )}
-            Click to sign out
+            {content.signOut}
           </Button>
         </Label>
       </Col>

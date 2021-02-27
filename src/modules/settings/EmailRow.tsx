@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
-import { ThemeContext } from "styled-components";
+import { User } from "@auth0/auth0-react/dist/auth-state";
 import { Col, Row } from "lib/Grid";
-import Button from "modules/common/Button";
 import Label from "modules/common/Form/Label";
 import Input from "modules/common/Input";
-import { User } from "@auth0/auth0-react/dist/auth-state";
+import React, { useContext } from "react";
+import { ThemeContext } from "styled-components";
+import content from "config/content.json";
 
 const EmailRow = ({ user }: { user: User }) => {
   const theme = useContext(ThemeContext);
@@ -17,7 +17,7 @@ const EmailRow = ({ user }: { user: User }) => {
     >
       <Col xs>
         <Label
-          value="Email"
+          value={content.email}
           htmlFor="settings-email"
           style={{ marginBottom: theme.spacing[4] }}
         >
