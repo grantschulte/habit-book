@@ -13,7 +13,7 @@ const SignOutRow = () => {
   const handleSignOut = () => {
     setLoading(true);
     logout({
-      returnTo: `${window.location.origin}${process.env.HOMEPAGE_URL}`,
+      returnTo: `${window.location.origin}${process.env.REACT_APP_HOMEPAGE_URL}`,
     });
   };
 
