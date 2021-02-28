@@ -27,3 +27,5 @@ yarn-error.log*
 
 /coverage-ts
 /src/data
+# Local Netlify folder
+.netlify
