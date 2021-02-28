@@ -1,4 +1,5 @@
 import { addHabit } from "api";
+import { setAppError } from "app/App.slice";
 import { RootState } from "app/rootReducer";
 import { REQUEST_DATE_FORMAT } from "config/constants";
 import dayjs from "dayjs";
@@ -29,6 +30,9 @@ const useAddHabit = () => {
         queryClient.invalidateQueries("stats");
         queryClient.invalidateQueries("streaks");
         dispatch(resetForm());
+      },
+      onError: (error: Error) => {
+        dispatch(setAppError({ error }));
       },
     }
   );

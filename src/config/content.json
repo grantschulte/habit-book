@@ -10,13 +10,16 @@
   "duplicateHabitFound": "Duplicate habit found",
   "duplicateHabitFoundMessage": "Only one habit of the same type can be added.",
   "email": "Email",
+  "errorGeneric": "Something went wrong.",
+  "errorGenericMessage": "Something is wrong and we're not quite sure what it is. Please refresh the page or check back later.",
   "general": "General",
   "habits": "Habits",
-  "habitBook": "Habit Book",
+  "habitBook": "✅ Habit Book",
   "habitListEmpty": "Add a habit, and get to work.",
   "habitMaxReached": "You can't have more than five habits...",
   "habitMaxReachedMessage": "Research suggests you are more likely to achieve attainable goals. If you want to add another habit, delete one first.",
   "logHabit": "Log Habit",
+  "refresh": "Refresh",
   "reportCard": "Report Card",
   "score": "Score",
   "settings": "Settings",
@@ -27,5 +30,8 @@
   "today": "Today",
   "todayHabitsCompleted": "Congratulations. You've completed all of your habits today. See you tomorrow.",
   "todayNoHabits": "You don't have any habits to complete today.",
-  "todayUseExisting": "Use Existing Habits"
+  "todayUseExisting": "Use Existing Habits",
+  "tryAgain": "Try again",
+  "unauthorized": "Unauthorized",
+  "unauthorizedMessage": "We're having trouble recognizing you. Try signing out and back in."
 }

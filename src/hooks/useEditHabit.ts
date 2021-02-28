@@ -1,9 +1,10 @@
 import { updateHabit } from "api";
+import { setAppError } from "app/App.slice";
 import { RootState } from "app/rootReducer";
 import { REQUEST_DATE_FORMAT } from "config/constants";
 import dayjs from "dayjs";
 import { useMutation, useQueryClient } from "react-query";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 interface EditHabitMutationParams {
   name?: string;
@@ -12,6 +13,7 @@ interface EditHabitMutationParams {
 }
 
 const useEditHabit = () => {
+  const dispatch = useDispatch();
   const token = useSelector((state: RootState) => state.app.token);
   const queryClient = useQueryClient();
   const date = dayjs().format(REQUEST_DATE_FORMAT);
@@ -34,6 +36,9 @@ const useEditHabit = () => {
         queryClient.invalidateQueries("habitEvents");
         queryClient.invalidateQueries("stats");
         queryClient.invalidateQueries("streaks");
+      },
+      onError: (error: Error) => {
+        dispatch(setAppError({ error }));
       },
     }
   );

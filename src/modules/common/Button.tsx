@@ -39,7 +39,7 @@ export type ButtonProps = {
 
 export type StyledButtonProps = {
   size?: ButtonSizes;
-  buttonType: ButtonType;
+  $buttonType: ButtonType;
   href?: string;
   fullWidth?: boolean;
 };
@@ -53,24 +53,25 @@ const buttonStyles = css<StyledButtonProps>`
     props.size ? BUTTON_FONT_SIZE[props.size] : BUTTON_FONT_SIZE.md};
   text-decoration: none;
   color: ${(props) =>
-    props.buttonType
-      ? props.theme.color.button[props.buttonType].text
+    props.$buttonType
+      ? props.theme.color.button[props.$buttonType].text
       : props.theme.color.white};
   background-color: ${(props) =>
-    props.buttonType
-      ? props.theme.color.button[props.buttonType].background
+    props.$buttonType
+      ? props.theme.color.button[props.$buttonType].background
       : props.theme.color.primary};
   padding: ${(props) =>
     props.size ? BUTTON_PADDING[props.size] : BUTTON_PADDING.md};
   width: ${(props) => (props.fullWidth ? "100%" : "fit-content")};
   border: 2px solid;
-  border-color: ${(props) => props.theme.color.button[props.buttonType].border};
+  border-color: ${(props) =>
+    props.theme.color.button[props.$buttonType].border};
 
   &:hover {
     background-color: ${(props) =>
-      props.buttonType
+      props.$buttonType
         ? percentageColor(
-            props.theme.color.button[props.buttonType].background,
+            props.theme.color.button[props.$buttonType].background,
             5
           )
         : percentageColor(props.theme.color.primary, 5)};
@@ -78,9 +79,9 @@ const buttonStyles = css<StyledButtonProps>`
 
   &:active {
     background-color: ${(props) =>
-      props.buttonType
+      props.$buttonType
         ? percentageColor(
-            props.theme.color.button[props.buttonType].background,
+            props.theme.color.button[props.$buttonType].background,
             -5
           )
         : percentageColor(props.theme.color.primary, -5)};
@@ -88,7 +89,7 @@ const buttonStyles = css<StyledButtonProps>`
 
   &:focus {
     outline: 2px solid
-      ${(props) => props.theme.color.button[props.buttonType].outline};
+      ${(props) => props.theme.color.button[props.$buttonType].outline};
   }
 
   ${InputCombo} & {
@@ -120,7 +121,7 @@ const Button: React.FC<ButtonProps> = ({
   if (as === "link") {
     return (
       <StyledButtonAsLink
-        buttonType={buttonType}
+        $buttonType={buttonType}
         {...props}
         to={href}
       ></StyledButtonAsLink>
@@ -128,7 +129,7 @@ const Button: React.FC<ButtonProps> = ({
   }
 
   return (
-    <StyledButton buttonType={buttonType} as={as} {...props}>
+    <StyledButton $buttonType={buttonType} as={as} {...props}>
       {props.children}
     </StyledButton>
   );

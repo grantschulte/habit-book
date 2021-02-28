@@ -1,7 +1,9 @@
 import withProviders from "hocs/withProviders";
 import ScrollToTop from "hooks/ScrollToTop";
 import useThemeSelector from "hooks/useThemeSelector";
+import { ErrorFallback } from "modules/common/Layout/AppError";
 import React from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import { QueryClient, QueryClientProvider } from "react-query";
 import GlobalStyle from "styles/GlobalStyle";
 import Routes from "./Routes";
@@ -18,13 +20,15 @@ const App: React.FC = () => {
 
   return (
     <Providers>
-      <QueryClientProvider client={queryClient}>
-        <Theme>
-          <ScrollToTop />
-          <GlobalStyle />
-          <Routes />
-        </Theme>
-      </QueryClientProvider>
+      <Theme>
+        <GlobalStyle />
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <QueryClientProvider client={queryClient}>
+            <ScrollToTop />
+            <Routes />
+          </QueryClientProvider>
+        </ErrorBoundary>
+      </Theme>
     </Providers>
   );
 };

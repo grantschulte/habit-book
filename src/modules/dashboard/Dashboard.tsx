@@ -23,8 +23,12 @@ const Card = styled.div`
 `;
 
 const DashboardPage: React.FC = () => {
-  const { data, isLoading, isSuccess } = useStats();
+  const { data, isLoading, isSuccess, isError, error } = useStats();
   const theme = useTheme();
+
+  if (isError) {
+    throw error;
+  }
 
   return (
     <Page>

@@ -1,22 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { HabitOrder } from "types";
-import makeAppError from "utils/errors";
 
 interface AppState {
   token: string | null;
-  error: {
-    type: string | null;
-    message: string | null;
-  };
+  error: Error | null;
   order: HabitOrder;
 }
 
 const initialState = {
   token: null,
-  error: {
-    type: null,
-    message: null,
-  },
+  error: null,
   order: {},
 } as AppState;
 
@@ -27,8 +20,8 @@ const appSlice = createSlice({
     setUserToken(state, action: PayloadAction<{ token: string }>) {
       state.token = action.payload.token;
     },
-    setAppError(state, action: PayloadAction<{ error: string }>) {
-      state.error = makeAppError(action.payload.error);
+    setAppError(state, action: PayloadAction<{ error: Error | null }>) {
+      state.error = action.payload.error;
     },
     resetAppError(state) {
       state.error = initialState.error;

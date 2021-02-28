@@ -46,7 +46,7 @@ const Today: React.FC = () => {
               <StatusBar width={statusBarWidth} />
               {alert && (
                 <InfoAlert
-                  message={content.habitsCompleted}
+                  message={content.todayHabitsCompleted}
                   title={content.allDone}
                 />
               )}

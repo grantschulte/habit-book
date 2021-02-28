@@ -22,7 +22,7 @@ const useHabits = () => {
         return orderHabits(data);
       },
       onError: (error: Error) => {
-        dispatch(setAppError({ error: error.message }));
+        dispatch(setAppError({ error }));
       },
     }
   );

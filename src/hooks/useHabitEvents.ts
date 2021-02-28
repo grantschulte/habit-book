@@ -26,7 +26,7 @@ const useHabitEvents = () => {
         return ordered.filter((he) => he.habit.active);
       },
       onError: (error: Error) => {
-        dispatch(setAppError({ error: error.message }));
+        dispatch(setAppError({ error }));
       },
     }
   );

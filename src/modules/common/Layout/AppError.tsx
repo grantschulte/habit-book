@@ -1,14 +1,17 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { resetAppError } from "app/App.slice";
 import { RootState } from "app/rootReducer";
+import content from "config/content.json";
 import Button from "modules/common/Button";
 import Heading from "modules/common/Heading";
 import React from "react";
+import { FallbackProps } from "react-error-boundary";
 import { BiError, BiExit, BiRefresh } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { ResponseError } from "types";
 
-export const ErrorContainer = styled.div`
+const ErrorContainer = styled.div`
   position: absolute;
   height: 100vh;
   width: 100%;
@@ -19,7 +22,7 @@ export const ErrorContainer = styled.div`
   justify-content: center;
 `;
 
-const Backdrop = styled.div`
+const ErrorBackdrop = styled.div`
   position: absolute;
   height: 100%;
   width: 100%;
@@ -30,7 +33,7 @@ const Backdrop = styled.div`
   z-index: 0;
 `;
 
-const ErrorMessage = styled.div`
+const ErrorMessageModal = styled.div`
   width: 100%;
   max-width: 800px;
   margin: var(--page-padding);
@@ -59,10 +62,9 @@ const ErrorIcon = styled(BiError).attrs((props) => ({
   margin-bottom: 1rem;
 `;
 
-const AppError = () => {
+const AppErrorShared: React.FC<{ error: string }> = ({ error }) => {
   const dispatch = useDispatch();
   const { logout } = useAuth0();
-  const error = useSelector((state: RootState) => state.app.error);
 
   const handleRefresh = () => {
     dispatch(resetAppError());
@@ -74,33 +76,42 @@ const AppError = () => {
     logout();
   };
 
-  if (!error.type) {
-    return null;
-  }
-
   return (
     <ErrorContainer>
-      <Backdrop />
-      <ErrorMessage>
+      <ErrorBackdrop />
+      <ErrorMessageModal>
         <ErrorIcon />
         <Heading as="h3" style={{ textAlign: "center" }}>
-          {error.type}
+          {content.errorGeneric}
         </Heading>
-        <p>{error.message}</p>
-        {error.type === "Unauthorized" ? (
-          <Button onClick={handleLogout}>
-            <BiExit size="1.5rem" style={{ marginRight: "0.5rem" }} />
-            Log out
-          </Button>
+        {error === ResponseError.Unauthorized ? (
+          <>
+            <p>{content.unauthorizedMessage}</p>
+            <Button onClick={handleLogout}>
+              <BiExit size="1.5rem" style={{ marginRight: "0.5rem" }} />
+              {content.signOut}
+            </Button>
+          </>
         ) : (
-          <Button onClick={handleRefresh}>
-            <BiRefresh size="1.5rem" style={{ marginRight: "0.5rem" }} />
-            Refresh
-          </Button>
+          <>
+            <p>{content.errorGenericMessage}</p>
+            <Button onClick={handleRefresh}>
+              <BiRefresh size="1.5rem" style={{ marginRight: "0.5rem" }} />
+              {content.refresh}
+            </Button>
+          </>
         )}
-      </ErrorMessage>
+      </ErrorMessageModal>
     </ErrorContainer>
   );
 };
 
-export default AppError;
+export const AppError: React.FC = () => {
+  const error = useSelector((state: RootState) => state.app.error);
+  if (!error) return null;
+  return <AppErrorShared error={error.message} />;
+};
+
+export const ErrorFallback: React.FC<FallbackProps> = ({ error }) => {
+  return <AppErrorShared error={error.message} />;
+};

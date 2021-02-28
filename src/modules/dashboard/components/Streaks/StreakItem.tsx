@@ -36,7 +36,9 @@ const StreakItem: React.FC<StreakItemProps> = ({ item }) => {
   const ticks = [];
 
   for (let x = 0; x < item.streak; x++) {
-    ticks.push(<StreakTick />);
+    ticks.push(
+      <StreakTick key={`${item.name.toLocaleLowerCase}-streak-tick-${x}`} />
+    );
   }
 
   const streakText = item.streak > 1 ? "days" : "day";

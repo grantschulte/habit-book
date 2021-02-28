@@ -3,12 +3,13 @@ import useToken from "hooks/useToken";
 import { BiCheck } from "lib/Icons";
 import { useLocation } from "lib/Router";
 import Button from "modules/common/Button";
-import AppError from "modules/common/Layout/AppError";
+import { AppError } from "modules/common/Layout/AppError";
 import LayoutUserSkeleton from "modules/common/Layout/LayoutUserSkeleton";
 import Logo from "modules/common/Logo";
 import React from "react";
 import styled, { useTheme } from "styled-components";
 import Menu from "./Menu/Menu";
+import content from "config/content.json";
 
 export const Grid = styled.div`
   display: grid;
@@ -55,11 +56,11 @@ const LayoutUser = ({ children }: { children?: React.ReactNode }) => {
   return (
     <Grid>
       <Header>
-        <Logo to={routes.today.path}>Habit Book</Logo>
+        <Logo to={routes.today.path}>{content.habitBook}</Logo>
         {location.pathname !== routes.today.path && (
           <Button secondary size="xs" href={routes.today.path} as="link">
             <BiCheck size="1.25rem" style={{ marginRight: theme.spacing[1] }} />
-            Log Habit
+            {content.logHabit}
           </Button>
         )}
       </Header>

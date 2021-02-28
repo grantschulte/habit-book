@@ -1,30 +1,27 @@
 import { ResponseError } from "types";
+import content from "config/content.json";
 
 const makeAppError = (error: string) => {
   switch (error) {
     case ResponseError.Unauthorized:
       return {
         type: error,
-        message:
-          "We don't recognize you. Please refresh our memory by logging out and back in.",
+        message: content.unauthorizedMessage,
       };
     case ResponseError.BadRequest:
       return {
         type: error,
-        message:
-          "Something is wrong and we're not quite sure what it is. Please refresh the page or check back later.",
+        message: content.errorGenericMessage,
       };
     case ResponseError.InternalServerError:
       return {
         type: error,
-        message:
-          "Something is wrong and we're not quite sure what it is. Please refresh the page or check back later.",
+        message: content.errorGenericMessage,
       };
     default:
       return {
         type: error,
-        message:
-          "Something is wrong and we're not quite sure what it is. Please refresh the page or check back later.",
+        message: content.errorGenericMessage,
       };
   }
 };

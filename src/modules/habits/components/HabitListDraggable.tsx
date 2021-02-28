@@ -28,7 +28,11 @@ const renderItems = (habits: Habit[] | undefined) => {
 };
 
 const HabitListDraggable: React.FC = () => {
-  const { data, isLoading, isSuccess } = useHabits();
+  const { data, isLoading, isSuccess, isError, error } = useHabits();
+
+  if (isError) {
+    throw error;
+  }
 
   const onDragEnd = useCallback(
     ({ destination, source }: DropResult) => {
