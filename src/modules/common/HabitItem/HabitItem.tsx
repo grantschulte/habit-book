@@ -52,7 +52,7 @@ const HabitItem: React.FC<HabitItemProps> = ({
           {habitEvent.habit.name}
         </HabitLabel>
         {isLoading ? (
-          <LoadingIcon size="1.25rem" style={{ marginRight: "0.5rem" }} />
+          <LoadingIcon size="1.25rem" />
         ) : (
           <DoneIcon $isDone={habitEvent.done} size="1.5rem" />
         )}

@@ -20,7 +20,7 @@ const StyledHeading = styled.h1<HeadingProps>`
     font-size: clamp(1.25rem, 3vw, 2rem);
   }
   &.h3 {
-    font-size: clamp(1rem, 3vw, 1.5rem);
+    font-size: clamp(1rem, 3vw, 1.25rem);
   }
   &.h4 {
     font-size: 1rem;

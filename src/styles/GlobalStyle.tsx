@@ -24,6 +24,25 @@ const GlobalStyle = createGlobalStyle`
   h1, h2, h3, h4, h5, h6 {
     margin-top: 0;
   }
+
+  h1 {
+    font-size: clamp(1.5rem, 3vw, 3rem);
+  }
+  h2 {
+    font-size: clamp(1.25rem, 3vw, 2rem);
+  }
+  h3 {
+    font-size: clamp(1rem, 3vw, 1.25rem);
+  }
+  h4 {
+    font-size: 1rem;
+  }
+  h5 {
+    font-size: 0.8rem;
+  }
+  h6 {
+    font-size: 0.7rem;
+  }
 `;
 
 export default GlobalStyle;

@@ -5,7 +5,7 @@
   "addHabits": "Add Habits",
   "allDone": "All done",
   "createAccount": "Create Account",
-  "createAccountSignIn": "Create Account / Sign In",
+  "createAccountSignIn": "Create / Sign In",
   "dashboard": "Dashboard",
   "duplicateHabitFound": "Duplicate habit found",
   "duplicateHabitFoundMessage": "Only one habit of the same type can be added.",

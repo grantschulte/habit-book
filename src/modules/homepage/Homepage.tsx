@@ -7,6 +7,7 @@ import Page from "modules/common/Page";
 import React, { useContext, useState } from "react";
 import { ThemeContext } from "styled-components";
 import content from "config/content.json";
+import { BiUser } from "lib/Icons";
 
 const Homepage = () => {
   const theme = useContext(ThemeContext);
@@ -38,6 +39,7 @@ const Homepage = () => {
               {loading && (
                 <LoadingIcon size="1.25rem" style={{ marginRight: "0.5rem" }} />
               )}
+              <BiUser size="1.25rem" style={{ marginRight: "0.5rem" }} />
               {content.createAccountSignIn}
             </Button>
           </div>
