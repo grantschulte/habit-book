@@ -1,4 +1,5 @@
 import { RootState } from "app/rootReducer";
+import content from "config/content.json";
 import useHabitEvents from "hooks/useHabitEvents";
 import { Col, Row } from "lib/Grid";
 import { InfoAlert } from "modules/common/Alert";
@@ -13,7 +14,6 @@ import { useQueryClient } from "react-query";
 import { useSelector } from "react-redux";
 import { Habit, HabitEvent } from "types";
 import TodayHabitList from "./components/TodayHabitList";
-import content from "config/content.json";
 
 const Today: React.FC = () => {
   const queryClient = useQueryClient();
@@ -50,7 +50,7 @@ const Today: React.FC = () => {
                   title={content.allDone}
                 />
               )}
-              <TodayHabitList habits={data} />
+              <TodayHabitList habitEvents={data} />
             </>
           )}
         </Col>
