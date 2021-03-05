@@ -44,7 +44,6 @@ const Homepage = () => {
             </Button>
           </div>
         </Col>
-        <Col></Col>
       </Row>
     </Page>
   );

@@ -7,9 +7,10 @@ const useA2HS = () => {
   useEffect(() => {
     window.addEventListener("beforeinstallprompt", (promptEvent: any) => {
       promptEvent.preventDefault();
-      promptEvent.prompt();
       console.log("enabled");
       setEnabled(true);
+
+      promptEvent.prompt();
       promptEvent.userChoice.then((choice: { outcome: string }) => {
         if (choice.outcome === "accepted") {
           setOutcome("accepted");
