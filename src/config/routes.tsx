@@ -22,13 +22,6 @@ const routes: RouteConfig = {
     component: routeComponents.Dashboard,
     layout: routeComponents.LayoutUser,
   },
-  download: {
-    name: "download",
-    path: "/download",
-    title: "Download",
-    component: routeComponents.Download,
-    layout: routeComponents.DefaultLayout,
-  },
   habits: {
     name: "habits",
     path: "/habits",
