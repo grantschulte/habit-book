@@ -8,11 +8,13 @@ import NotFound from "modules/NotFound";
 import Settings from "modules/settings/Settings";
 import Styleguide from "modules/styleguide";
 import Today from "modules/today";
+import Download from "modules/download/Download";
 
 const routeComponents = {
   LayoutUser: withAuthenticationRequired(LayoutUser),
   DefaultLayout,
   Dashboard,
+  Download,
   Habits,
   Homepage,
   NotFound,

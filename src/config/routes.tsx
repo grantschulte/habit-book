@@ -15,40 +15,19 @@ export type RouteConfig = {
 };
 
 const routes: RouteConfig = {
-  // accountCreate: {
-  //   name: "account-create",
-  //   path: "/account/create",
-  //   title: "Create Account",
-  //   component: AccountCreate,
-  //   layout: DefaultLayout,
-  // },
-  // accountForgotPassword: {
-  //   name: "account-forgot-password",
-  //   path: "/account/forgot-password",
-  //   title: "Forgot Password",
-  //   component: ForgotPassword,
-  //   layout: DefaultLayout,
-  // },
-  // accountResetPassword: {
-  //   name: "account-reset-password",
-  //   path: "/account/reset-password",
-  //   title: "Reset Password",
-  //   component: ResetPassword,
-  //   layout: DefaultLayout,
-  // },
-  // accountSignIn: {
-  //   name: "account-sign-in",
-  //   path: "/account/sign-in",
-  //   title: "Sign In",
-  //   component: AccountSignIn,
-  //   layout: DefaultLayout,
-  // },
   dashboard: {
     name: "dashboard",
     path: "/dashboard",
     title: "Dashboard",
     component: routeComponents.Dashboard,
     layout: routeComponents.LayoutUser,
+  },
+  download: {
+    name: "download",
+    path: "/download",
+    title: "Download",
+    component: routeComponents.Download,
+    layout: routeComponents.DefaultLayout,
   },
   habits: {
     name: "habits",

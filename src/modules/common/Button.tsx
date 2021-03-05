@@ -35,6 +35,7 @@ export type ButtonProps = {
   fullWidth?: boolean;
   onClick?: (e: React.SyntheticEvent) => void;
   style?: CSSProperties;
+  ref?: React.RefObject<HTMLButtonElement>;
 };
 
 export type StyledButtonProps = {
@@ -114,6 +115,7 @@ const Button: React.FC<ButtonProps> = ({
   secondary,
   as = "button",
   href = "",
+  ref,
   ...props
 }) => {
   const buttonType = secondary ? "secondary" : "primary";

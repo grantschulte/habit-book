@@ -10,7 +10,7 @@ const TodayHabitList: React.FC<TodayHabitListProps> = ({ habitEvents }) => {
   return (
     <div>
       {habitEvents.map((he) => (
-        <HabitItem habitEvent={he}></HabitItem>
+        <HabitItem habitEvent={he} key={he.id} />
       ))}
     </div>
   );
