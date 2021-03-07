@@ -15,7 +15,9 @@ const sizes = {
   xxl: "6rem",
 };
 
-const Skeleton = styled.div<SkeletonProps>`
+const Skeleton = styled.div.attrs({
+  "data-testid": "skeleton",
+})<SkeletonProps>`
   position: relative;
   overflow: hidden;
   background-color: ${(props) =>
