@@ -136,6 +136,7 @@ const DraggableItem: React.FC<DraggableItemProps> = ({
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           innerRef={provided.innerRef}
+          data-testid="draggable-habit-item"
         >
           {state.showEditInput === habit.id ? (
             <>
