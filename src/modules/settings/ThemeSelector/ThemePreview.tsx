@@ -24,14 +24,18 @@ const ThemePreview = ({
   theme,
   active,
   onClick,
+  isSystemTheme,
 }: {
   theme: DefaultTheme;
   active: boolean;
-  onClick: (e: React.SyntheticEvent) => void;
+  onClick?: (e: React.SyntheticEvent) => void;
+  isSystemTheme?: boolean;
 }) => {
   return (
     <StyledThemePreview theme={theme} active={active} onClick={onClick}>
-      <div style={{ marginBottom: theme.spacing[2] }}>{theme.name}</div>
+      <div style={{ marginBottom: theme.spacing[2] }}>
+        {isSystemTheme ? "system" : theme.name}
+      </div>
       <ThemeBox
         color={theme.color.backgroundAlt}
         height="20px"

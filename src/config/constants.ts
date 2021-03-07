@@ -8,4 +8,4 @@ export const API_HABIT_EVENTS_PATH = "habit-events";
 export const API_STATS_PATH = "stats";
 export const API_STREAKS_PATH = "stats/streaks";
 
-export const DEFAULT_THEME = "light";
+export const DEFAULT_THEME = "system";
