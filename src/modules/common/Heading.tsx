@@ -10,7 +10,6 @@ type HeadingProps = {
 };
 
 const StyledHeading = styled.h1<HeadingProps>`
-  font-family: var(--font-family);
   margin-top: 0;
 
   &.h1 {
