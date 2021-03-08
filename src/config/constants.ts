@@ -1,6 +1,7 @@
 export const REQUEST_DATE_FORMAT = "YYYY-MM-DD";
 export const LOCAL_STORAGE_SORT_ORDER_KEY = "habitbook_order";
 export const LOCAL_STORAGE_THEME = "habitbook_theme";
+export const LOCAL_STORAGE_FONT_STACK = "habitbook_font";
 
 export const API_URL = `${process.env.REACT_APP_API_URL}/api/v1`;
 export const API_HABITS_PATH = "habits";

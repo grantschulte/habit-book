@@ -7,7 +7,7 @@ const GlobalStyle = createGlobalStyle`
 
   :root {
     --page-padding: clamp(1.5rem, 5vw, 2rem) clamp(1rem, 5vw, 1.5rem);
-    --font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
+    --font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;
   }
   
   html,

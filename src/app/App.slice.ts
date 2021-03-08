@@ -13,7 +13,7 @@ const initialState = {
   token: null,
   error: null,
   order: {},
-  fontStack: "mono",
+  fontStack: "sans",
 } as AppState;
 
 const appSlice = createSlice({

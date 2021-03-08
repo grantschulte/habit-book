@@ -30,7 +30,6 @@ const Settings = () => {
       <Row>
         <Col xs sm={12} md={8} lg={6}>
           <Section>
-            <Heading as="h3">{content.general}</Heading>
             <EmailRow user={user} />
             <ThemeSelector />
             <FontSelector />

@@ -25,7 +25,7 @@ const SignOutRow = () => {
             {loading && (
               <LoadingIcon size="1.25rem" style={{ marginRight: "0.5rem" }} />
             )}
-            {content.signOut}
+            {content.clickToSignOut}
           </Button>
         </Label>
       </Col>
