@@ -49,7 +49,7 @@ const buttonStyles = css<StyledButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: ${(props) => props.theme.font.heading};
+  font-family: var(--font-family);
   font-size: ${(props) =>
     props.size ? BUTTON_FONT_SIZE[props.size] : BUTTON_FONT_SIZE.md};
   text-decoration: none;

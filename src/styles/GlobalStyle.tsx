@@ -7,6 +7,7 @@ const GlobalStyle = createGlobalStyle`
 
   :root {
     --page-padding: clamp(1.5rem, 5vw, 2rem) clamp(1rem, 5vw, 1.5rem);
+    --font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
   }
   
   html,
@@ -14,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     font-size: 16px;
-    font-family: ${(props) => props.theme.font.body};
+    font-family: var(--font-family);
     color: ${(props) => props.theme.color.text};
     background: ${(props) => props.theme.color.background};
     transition: color 200ms;

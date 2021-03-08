@@ -10,6 +10,7 @@
   "duplicateHabitFound": "Duplicate habit found",
   "duplicateHabitFoundMessage": "Only one habit of the same type can be added.",
   "email": "Email",
+  "font": "Font",
   "errorGeneric": "Something went wrong.",
   "errorGenericMessage": "Something is wrong and we're not quite sure what it is. Please refresh the page or check back later.",
   "general": "General",

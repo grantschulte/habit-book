@@ -81,6 +81,9 @@ declare module "styled-components" {
       body: string;
       heading: string;
       display: string;
+      mono: string;
+      sans: string;
+      serif: string;
     };
     fontWeight: {
       100: number;

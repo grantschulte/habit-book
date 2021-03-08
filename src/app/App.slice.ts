@@ -1,16 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { FontStack } from "modules/settings/FontSelector/FontSelector";
 import { HabitOrder } from "types";
 
 interface AppState {
   token: string | null;
   error: Error | null;
   order: HabitOrder;
+  fontStack: FontStack;
 }
 
 const initialState = {
   token: null,
   error: null,
   order: {},
+  fontStack: "sans",
 } as AppState;
 
 const appSlice = createSlice({
@@ -29,6 +32,9 @@ const appSlice = createSlice({
     setHabitOrder(state, action: PayloadAction<{ order: HabitOrder }>) {
       state.order = action.payload.order;
     },
+    setFontStack(state, action: PayloadAction<{ fontStack: FontStack }>) {
+      state.fontStack = action.payload.fontStack;
+    },
   },
 });
 
@@ -37,5 +43,6 @@ export const {
   setAppError,
   resetAppError,
   setHabitOrder,
+  setFontStack,
 } = appSlice.actions;
 export default appSlice.reducer;

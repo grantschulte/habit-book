@@ -46,7 +46,7 @@ const StreakItem: React.FC<StreakItemProps> = ({ item }) => {
   return (
     <StyledStreakItem>
       <StreakHeading>
-        <span>🔥{item.name}</span>
+        <span>🔥 {item.name}</span>
         <span>
           {item.streak} {streakText}
         </span>

@@ -19,7 +19,7 @@ const Input = styled.input.attrs((props) => ({
   width: 100%;
   padding: 0 0.75rem;
   font-size: 1rem;
-  font-family: ${(props) => props.theme.font.body};
+  font-family: var(--font-family);
   color: ${(props) => props.theme.color.text};
   ${border};
 

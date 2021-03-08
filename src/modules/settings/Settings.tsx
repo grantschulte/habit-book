@@ -4,6 +4,7 @@ import { Col, Row } from "lib/Grid";
 import Heading from "modules/common/Heading";
 import Page from "modules/common/Page";
 import EmailRow from "modules/settings/EmailRow";
+import FontSelector from "modules/settings/FontSelector/FontSelector";
 import SignOutRow from "modules/settings/SignOutRow";
 import ThemeSelector from "modules/settings/ThemeSelector/ThemeSelector";
 import React from "react";
@@ -32,6 +33,7 @@ const Settings = () => {
             <Heading as="h3">{content.general}</Heading>
             <EmailRow user={user} />
             <ThemeSelector />
+            <FontSelector />
             <SignOutRow />
           </Section>
         </Col>

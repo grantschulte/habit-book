@@ -4,7 +4,7 @@ import { Link } from "lib/Router";
 const Logo = styled(Link)`
   font-size: 1.5rem;
   font-weight: bold;
-  font-family: ${(props) => props.theme.font.display};
+  font-family: var(--font-family);
   color: var(--primary-color);
   text-decoration: none;
 `;

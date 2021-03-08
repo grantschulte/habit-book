@@ -34,7 +34,7 @@ const Calendar: React.FC<CalendarSvgProps> = ({
       ]}
       theme={{
         fontSize: 12,
-        fontFamily: theme.font.body,
+        fontFamily: theme.font.sans,
         textColor: theme.color.text,
         labels: {
           text: {
