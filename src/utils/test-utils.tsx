@@ -3,6 +3,8 @@ import { render as rtlRender } from "@testing-library/react";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import reducer from "app/rootReducer";
+import { ThemeProvider } from "styled-components";
+import theme from "config/theme";
 
 function render(
   ui: any,
@@ -13,7 +15,11 @@ function render(
   }: any = {}
 ) {
   function Wrapper({ children }: { children: React.ReactNode }) {
-    return <Provider store={store}>{children}</Provider>;
+    return (
+      <Provider store={store}>
+        <ThemeProvider theme={theme["light"]}>{children}</ThemeProvider>
+      </Provider>
+    );
   }
   return rtlRender(ui, { wrapper: Wrapper, ...renderOptions });
 }
