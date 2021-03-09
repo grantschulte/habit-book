@@ -121,6 +121,7 @@
     "typescript-coverage-report": "^0.4.0"
   },
   "jest": {
+    "automock": true,
     "roots": [
       "<rootDir>/src"
     ],

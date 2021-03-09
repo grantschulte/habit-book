@@ -1,8 +1,6 @@
 import content from "config/content.json";
-import theme from "config/theme";
 import HabitList from "modules/habits/components/HabitListDraggable";
 import React from "react";
-import { ThemeProvider } from "styled-components";
 import { render, screen } from "utils/test-utils";
 
 // const queryClient = new QueryClient();
@@ -17,11 +15,7 @@ describe("Habits", () => {
       data: [],
     }));
 
-    render(
-      <ThemeProvider theme={theme["light"]}>
-        <HabitList />
-      </ThemeProvider>
-    );
+    render(<HabitList />);
     expect(screen.getByText(content.habitListEmpty)).toBeInTheDocument();
   });
 
@@ -30,11 +24,7 @@ describe("Habits", () => {
       isLoading: true,
     }));
 
-    render(
-      <ThemeProvider theme={theme["light"]}>
-        <HabitList />
-      </ThemeProvider>
-    );
+    render(<HabitList />);
 
     expect(screen.getAllByTestId("skeleton")).toHaveLength(5);
   });
@@ -61,11 +51,7 @@ describe("Habits", () => {
       mutate: () => null,
     }));
 
-    render(
-      <ThemeProvider theme={theme["light"]}>
-        <HabitList />
-      </ThemeProvider>
-    );
+    render(<HabitList />);
 
     expect(screen.getAllByTestId("draggable-habit-item")).toHaveLength(2);
   });
