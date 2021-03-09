@@ -1,11 +1,8 @@
-import { setFontStack } from "app/App.slice";
-import { LOCAL_STORAGE_FONT_STACK } from "config/constants";
 import content from "config/content.json";
-import * as localStorage from "local-storage";
+import useFontSelector from "hooks/useFontSelector";
 import Label from "modules/common/Form/Label";
 import FontItem from "modules/settings/FontSelector/FontItem";
-import React, { useCallback, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 import { Col, Row } from "react-styled-flexboxgrid";
 import { useTheme } from "styled-components";
 
@@ -15,37 +12,7 @@ const fontStacks: FontStack[] = ["mono", "sans", "serif"];
 
 const FontSelector = () => {
   const theme = useTheme();
-  const dispatch = useDispatch();
-
-  const setCSSVars = useCallback(
-    (fontStack: FontStack) => {
-      const root = document.documentElement;
-      root.style.setProperty(
-        "--font-family",
-        theme.font[fontStack as keyof typeof theme.font]
-      );
-    },
-    [theme]
-  );
-
-  useEffect(() => {
-    const fontStackFromStorage: FontStack = localStorage.get(
-      LOCAL_STORAGE_FONT_STACK
-    );
-    if (fontStackFromStorage) {
-      setCSSVars(fontStackFromStorage);
-      dispatch(setFontStack({ fontStack: fontStackFromStorage }));
-    }
-  }, [dispatch, setCSSVars]);
-
-  const onUpdate = useCallback(
-    (fontStack: FontStack) => {
-      setCSSVars(fontStack);
-      localStorage.set(LOCAL_STORAGE_FONT_STACK, fontStack);
-      dispatch(setFontStack({ fontStack }));
-    },
-    [dispatch, setCSSVars]
-  );
+  const { onUpdate } = useFontSelector();
 
   return (
     <Row

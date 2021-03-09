@@ -10,6 +10,7 @@ import React from "react";
 import styled, { useTheme } from "styled-components";
 import Menu from "./Menu/Menu";
 import content from "config/content.json";
+import useFontSelector from "hooks/useFontSelector";
 
 export const Grid = styled.div`
   display: grid;
@@ -48,6 +49,7 @@ const LayoutUser = ({ children }: { children?: React.ReactNode }) => {
   const token = useToken();
   const theme = useTheme();
   const location = useLocation();
+  useFontSelector();
 
   if (!token) {
     return <LayoutUserSkeleton />;
