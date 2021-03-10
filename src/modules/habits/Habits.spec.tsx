@@ -2,15 +2,13 @@ import content from "config/content.json";
 import HabitList from "modules/habits/components/HabitListDraggable";
 import React from "react";
 import { render, screen } from "utils/test-utils";
-
-// const queryClient = new QueryClient();
+import { useQuery, useMutation } from "react-query";
 
 jest.mock("react-query");
-const rq = require("react-query");
 
 describe("Habits", () => {
   test("displays empty state when there are no habits", () => {
-    rq.useQuery.mockImplementation(() => ({
+    (useQuery as jest.Mock).mockImplementation(() => ({
       isSuccess: true,
       data: [],
     }));
@@ -20,17 +18,16 @@ describe("Habits", () => {
   });
 
   test("displays skeleton state when loading", () => {
-    rq.useQuery.mockImplementation(() => ({
+    (useQuery as jest.Mock).mockImplementation(() => ({
       isLoading: true,
     }));
 
     render(<HabitList />);
-
     expect(screen.getAllByTestId("skeleton")).toHaveLength(5);
   });
 
   test("displays habit list", () => {
-    rq.useQuery.mockImplementation(() => ({
+    (useQuery as jest.Mock).mockImplementation(() => ({
       isLoading: false,
       isSuccess: true,
       data: [
@@ -47,12 +44,11 @@ describe("Habits", () => {
       ],
     }));
 
-    rq.useMutation.mockImplementation(() => ({
+    (useMutation as jest.Mock).mockImplementation(() => ({
       mutate: () => null,
     }));
 
     render(<HabitList />);
-
     expect(screen.getAllByTestId("draggable-habit-item")).toHaveLength(2);
   });
 });

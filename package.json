@@ -96,6 +96,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
+    "test:cov": "npm run test -- --coverage",
     "ts-coverage": "typescript-coverage-report"
   },
   "browserslist": {
@@ -121,13 +122,15 @@
     "typescript-coverage-report": "^0.4.0"
   },
   "jest": {
-    "automock": true,
     "roots": [
       "<rootDir>/src"
     ],
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
       "!src/**/*.d.ts"
+    ],
+    "coverageReporters": [
+      "text"
     ],
     "setupFiles": [
       "react-app-polyfill/jsdom"

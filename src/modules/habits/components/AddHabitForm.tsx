@@ -1,4 +1,5 @@
 import { RootState } from "app/rootReducer";
+import content from "config/content.json";
 import useAddHabit from "hooks/useAddHabit";
 import { Alert } from "modules/common/Alert";
 import Button from "modules/common/Button";
@@ -15,7 +16,6 @@ import { useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Habit } from "types";
-import content from "config/content.json";
 
 const AlertContainer = styled.div`
   margin-top: 1rem;
