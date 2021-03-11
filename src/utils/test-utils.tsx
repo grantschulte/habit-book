@@ -5,6 +5,8 @@ import { Provider } from "react-redux";
 import reducer from "app/rootReducer";
 import { ThemeProvider } from "styled-components";
 import theme from "config/theme";
+import { history } from "hocs/withAuthProvider";
+import { Router } from "lib/Router";
 
 function render(
   ui: any,
@@ -17,7 +19,9 @@ function render(
   function Wrapper({ children }: { children: React.ReactNode }) {
     return (
       <Provider store={store}>
-        <ThemeProvider theme={theme["light"]}>{children}</ThemeProvider>
+        <Router history={history}>
+          <ThemeProvider theme={theme["light"]}>{children}</ThemeProvider>
+        </Router>
       </Provider>
     );
   }
