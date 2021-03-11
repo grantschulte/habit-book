@@ -1,5 +1,4 @@
 import useHabitEventUpdate from "hooks/useEditHabitEvent";
-import { HabitLabel } from "modules/common/HabitItem/HabitLabel";
 import LoadingIcon from "modules/common/LoadingIcon";
 import DoneIcon from "modules/today/components/DoneIcon";
 import React from "react";
@@ -36,6 +35,15 @@ const HabitItemContainer = styled.div<{ done: boolean | undefined }>`
   }
 `;
 
+export const HabitLabel = styled.div<{
+  $isDone?: boolean;
+  contentEditable?: boolean;
+}>`
+  flex-grow: 1;
+  font-weight: bold;
+  font-size: 1rem;
+`;
+
 const HabitItem: React.FC<HabitItemProps> = ({
   habitEvent,
 }: HabitItemProps) => {
@@ -46,15 +54,23 @@ const HabitItem: React.FC<HabitItemProps> = ({
   };
 
   return (
-    <HabitItemContainer onClick={toggleHabitEvent} done={habitEvent.done}>
+    <HabitItemContainer
+      onClick={toggleHabitEvent}
+      done={habitEvent.done}
+      data-testid="habit-item-container"
+    >
       <HabitItemInner>
         <HabitLabel $isDone={habitEvent.done}>
           {habitEvent.habit.name}
         </HabitLabel>
         {isLoading ? (
-          <LoadingIcon size="1.25rem" />
+          <LoadingIcon size="1.25rem" data-testid="habit-item-loading-icon" />
         ) : (
-          <DoneIcon $isDone={habitEvent.done} size="1.5rem" />
+          <DoneIcon
+            $isDone={habitEvent.done}
+            size="1.5rem"
+            data-testid="habit-item-done-icon"
+          />
         )}
       </HabitItemInner>
     </HabitItemContainer>

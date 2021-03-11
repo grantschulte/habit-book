@@ -22,8 +22,8 @@ const BarInner = styled.div<{ width: string }>`
 
 const StatusBar: React.FC<{ width: string }> = ({ width }) => {
   return (
-    <StyledStatusBar>
-      <BarInner width={width} />
+    <StyledStatusBar data-testid="today-status-bar">
+      <BarInner width={width} data-testid="today-status-bar-inner" />
     </StyledStatusBar>
   );
 };

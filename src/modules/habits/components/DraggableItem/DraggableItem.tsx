@@ -6,7 +6,6 @@ import {
   DraggableProvidedDragHandleProps,
 } from "lib/DragNDrop";
 import { BiCheck, BiEdit, BiTrash } from "lib/Icons";
-import { HabitLabel } from "modules/common/HabitItem/HabitLabel";
 import Input from "modules/common/Input";
 import React, { ChangeEvent, KeyboardEvent, useReducer } from "react";
 import styled from "styled-components";
@@ -49,6 +48,15 @@ const HabitItemDraggableContainer = styled.div`
   &:last-child {
     margin-bottom: 0;
   }
+`;
+
+export const HabitLabel = styled.div<{
+  $isDone?: boolean;
+  contentEditable?: boolean;
+}>`
+  flex-grow: 1;
+  font-weight: bold;
+  font-size: 1rem;
 `;
 
 const HabitItemDraggable: React.FC<HabitItemProps> = ({

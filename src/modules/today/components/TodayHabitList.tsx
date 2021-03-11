@@ -1,4 +1,4 @@
-import HabitItem from "modules/common/HabitItem/HabitItem";
+import HabitItem from "./HabitItem";
 import React from "react";
 import { HabitEvent } from "types";
 

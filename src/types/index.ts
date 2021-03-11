@@ -30,7 +30,6 @@ export type ResponsePayload<T> = {
 export type Habit = {
   id: string;
   name: string;
-  done: boolean;
   active: boolean;
   order?: number;
 };
