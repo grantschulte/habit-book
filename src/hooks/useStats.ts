@@ -11,7 +11,7 @@ const useStats = () => {
   const token = useSelector((state: RootState) => state.app.token);
   const date = dayjs();
   const end = date.format(REQUEST_DATE_FORMAT);
-  const begin = date.subtract(7, "day").format(REQUEST_DATE_FORMAT);
+  const begin = date.subtract(6, "day").format(REQUEST_DATE_FORMAT);
 
   return useQuery(
     ["stats", begin, end, token],
