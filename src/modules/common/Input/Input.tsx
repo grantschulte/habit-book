@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import InputCombo from "modules/common/InputCombo";
-import { border } from "styles/mixins";
 
 export type InputType = "text" | "password" | "email";
 
@@ -20,7 +19,9 @@ const Input = styled.input.attrs((props) => ({
   padding: 0 0.75rem;
   font-size: 1rem;
   color: ${(props) => props.theme.color.text};
-  ${border};
+  border: ${({ theme }) =>
+    `${theme.borderWidth[2]} ${theme.borderWeight.solid} ${theme.color.border}`};
+  border-radius: ${(props) => props.theme.borderRadii[4]};
 
   &:focus,
   &:active {
@@ -34,6 +35,8 @@ const Input = styled.input.attrs((props) => ({
   ${InputCombo} & {
     height: 100%;
     border-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
   }
 `;
 

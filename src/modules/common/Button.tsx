@@ -66,6 +66,7 @@ const buttonStyles = css<StyledButtonProps>`
   border: 2px solid;
   border-color: ${(props) =>
     props.theme.color.button[props.$buttonType].border};
+  border-radius: ${(props) => props.theme.borderRadii[3]};
 
   &:hover {
     background-color: ${(props) =>
@@ -98,6 +99,9 @@ const buttonStyles = css<StyledButtonProps>`
     padding: 0 1rem;
     font-size: 1em;
     flex-shrink: 0;
+    border-radius: ${(props) => props.theme.borderRadii[4]};
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
   }
 `;
 

@@ -11,6 +11,7 @@ const StyledThemePreview = styled.div<{
   border: 2px solid
     ${(props) =>
       props.active ? props.theme.color.secondary : props.theme.color.border};
+  border-radius: ${(props) => props.theme.borderRadii[4]};
   margin-bottom: 1rem;
 `;
 

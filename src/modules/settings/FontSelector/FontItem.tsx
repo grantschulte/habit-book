@@ -11,6 +11,7 @@ const StyledFontItem = styled.div<{ active?: boolean; fontStack: FontStack }>`
   border: 2px solid
     ${(props) =>
       props.active ? props.theme.color.secondary : props.theme.color.border};
+  border-radius: ${(props) => props.theme.borderRadii[4]};
   margin-bottom: 1rem;
   font-family: ${(props) => props.theme.font[props.fontStack]};
 `;

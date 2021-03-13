@@ -16,6 +16,7 @@ const Section = styled.div`
 
 const Card = styled.div`
   border: 2px solid ${(props) => props.theme.color.backgroundAlt};
+  border-radius: ${(props) => props.theme.borderRadii[4]};
   padding: 1rem;
   height: 100%;
   display: flex;

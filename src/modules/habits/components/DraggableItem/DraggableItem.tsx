@@ -43,6 +43,7 @@ const HabitItemDraggableContainer = styled.div`
   color: ${(props) => props.theme.color.text};
   border: 2px solid;
   border-color: ${(props) => props.theme.color.border};
+  border-radius: ${(props) => props.theme.borderRadii[4]};
   transition: border-color 200ms ease, color 200ms ease;
 
   &:last-child {
@@ -50,7 +51,7 @@ const HabitItemDraggableContainer = styled.div`
   }
 `;
 
-export const HabitLabel = styled.div<{
+const HabitLabel = styled.div<{
   $isDone?: boolean;
   contentEditable?: boolean;
 }>`

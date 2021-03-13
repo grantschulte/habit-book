@@ -8,6 +8,7 @@ const StyledStatusBar = styled.div`
   width: 100%;
   overflow: hidden;
   background-color: ${(props) => props.theme.color.backgroundAlt};
+  border-radius: ${(props) => props.theme.borderRadii[4]};
 `;
 
 const BarInner = styled.div<{ width: string }>`

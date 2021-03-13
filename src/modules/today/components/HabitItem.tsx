@@ -28,6 +28,7 @@ const HabitItemContainer = styled.div<{ done: boolean | undefined }>`
   border: 2px solid;
   border-color: ${(props) =>
     props.done ? props.theme.color.success : props.theme.color.border};
+  border-radius: ${(props) => props.theme.borderRadii[4]};
   transition: border-color 200ms ease, color 200ms ease;
 
   &:last-child {
@@ -35,7 +36,7 @@ const HabitItemContainer = styled.div<{ done: boolean | undefined }>`
   }
 `;
 
-export const HabitLabel = styled.div<{
+const HabitLabel = styled.div<{
   $isDone?: boolean;
   contentEditable?: boolean;
 }>`
