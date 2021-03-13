@@ -6,7 +6,7 @@ export enum AlertType {
   Error = "error",
   Success = "success",
   Warning = "warning",
-  Info = "info",
+  Info = "info"
 }
 
 export interface AlertProps {
@@ -19,7 +19,7 @@ const ICON_MAP = {
   error: BiErrorCircle,
   info: BiInfoCircle,
   success: BiCheckCircle,
-  warning: BiError,
+  warning: BiError
 };
 
 export const AlertContainer = styled.div<{ type: AlertType }>`
@@ -31,6 +31,7 @@ export const AlertContainer = styled.div<{ type: AlertType }>`
   margin-bottom: 1rem;
   border: 2px solid;
   border-color: ${(props) => props.theme.color[props.type]};
+  border-radius: ${(props) => props.theme.borderRadii[4]};
   padding: ${(props) => {
     return `${props.theme.spacing[3]}  ${props.theme.spacing[3]}`;
   }};
@@ -53,7 +54,7 @@ const StyledAlertBody = styled.div`
 export const Alert: React.FC<AlertProps> = ({
   type,
   title,
-  message,
+  message
 }: AlertProps) => {
   const Icon = ICON_MAP[type];
 
@@ -70,20 +71,20 @@ export const Alert: React.FC<AlertProps> = ({
 
 export const WarningAlert = styled(Alert).attrs({
   type: AlertType.Warning,
-  Icon: BiError,
+  Icon: BiError
 })``;
 
 export const SuccessAlert = styled(Alert).attrs({
   type: AlertType.Success,
-  Icon: BiCheckCircle,
+  Icon: BiCheckCircle
 })``;
 
 export const ErrorAlert = styled(Alert).attrs({
   type: AlertType.Error,
-  Icon: BiErrorCircle,
+  Icon: BiErrorCircle
 })``;
 
 export const InfoAlert = styled(Alert).attrs({
   type: AlertType.Info,
-  Icon: BiInfoCircle,
+  Icon: BiInfoCircle
 })``;

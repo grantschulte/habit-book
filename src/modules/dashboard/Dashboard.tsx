@@ -10,9 +10,7 @@ import React from "react";
 import styled, { useTheme } from "styled-components";
 import content from "config/content.json";
 
-const Section = styled.div`
-  /* margin-bottom: ${({ theme }) => theme.spacing[4]}; */
-`;
+const Section = styled.div``;
 
 const Card = styled.div`
   border: 2px solid ${(props) => props.theme.color.backgroundAlt};
@@ -23,7 +21,7 @@ const Card = styled.div`
   flex-direction: column;
 `;
 
-const DashboardPage: React.FC = () => {
+function DashboardPage() {
   const { data, isLoading, isSuccess, isError, error } = useStats();
   const theme = useTheme();
 
@@ -86,6 +84,6 @@ const DashboardPage: React.FC = () => {
       </Row>
     </Page>
   );
-};
+}
 
 export default DashboardPage;
