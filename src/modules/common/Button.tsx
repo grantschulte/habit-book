@@ -15,15 +15,15 @@ type ButtonSizesConfig = {
 
 const BUTTON_PADDING: ButtonSizesConfig = {
   xs: "0.2rem 0.35rem",
-  sm: "0.65rem 0.85rem",
+  sm: "0.5rem 0.65rem",
   md: "0.85rem 1rem",
-  lg: "1rem 1.5rem",
+  lg: "1rem 1.5rem"
 };
 const BUTTON_FONT_SIZE: ButtonSizesConfig = {
   xs: "0.75rem",
   sm: "0.85rem",
   md: "1.10rem",
-  lg: "1.25rem",
+  lg: "1.25rem"
 };
 
 export type ButtonProps = {
