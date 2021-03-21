@@ -8,14 +8,21 @@ import React, { useContext, useState } from "react";
 import { ThemeContext } from "styled-components";
 import content from "config/content.json";
 import { BiUser } from "lib/Icons";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "app/rootReducer";
+import { resetAppError } from "app/App.slice";
+import { WarningAlert } from "modules/common/Alert";
 
 const Homepage = () => {
   const theme = useContext(ThemeContext);
   const { loginWithRedirect } = useAuth0();
+  const dispatch = useDispatch();
+  const error = useSelector((state: RootState) => state.app.error);
   const [loading, setLoading] = useState(false);
 
   const handleSignInClick = () => {
     setLoading(true);
+    dispatch(resetAppError());
     loginWithRedirect({
       prompt: "login",
     });
@@ -25,9 +32,18 @@ const Homepage = () => {
     <Page>
       <Row center="xs" middle="xs" style={{ height: "100%" }}>
         <Col xs sm={8} md={6} lg={4}>
+          {error ? (
+            <WarningAlert
+              title={content.signOutMessageTitle}
+              message={content.signOutMessage}
+              style={{ marginBottom: "2rem" }}
+            />
+          ) : null}
+
           <Heading as="h1" style={{ textAlign: "center" }}>
             {content.habitBook}
           </Heading>
+
           <div
             style={{
               marginTop: theme.spacing[4],

@@ -9,7 +9,13 @@ import GlobalStyle from "styles/GlobalStyle";
 import Routes from "./Routes";
 import Theme from "./Theme";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+    },
+  },
+});
 
 const Providers: React.FC = withProviders(
   ({ children }: { children: React.ReactNode }) => <>{children}</>

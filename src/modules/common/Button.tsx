@@ -17,13 +17,13 @@ const BUTTON_PADDING: ButtonSizesConfig = {
   xs: "0.2rem 0.35rem",
   sm: "0.5rem 0.65rem",
   md: "0.85rem 1rem",
-  lg: "1rem 1.5rem"
+  lg: "1rem 1.5rem",
 };
 const BUTTON_FONT_SIZE: ButtonSizesConfig = {
   xs: "0.75rem",
   sm: "0.85rem",
   md: "1.10rem",
-  lg: "1.25rem"
+  lg: "1.25rem",
 };
 
 export type ButtonProps = {
@@ -42,7 +42,7 @@ export type StyledButtonProps = {
   size?: ButtonSizes;
   $buttonType: ButtonType;
   href?: string;
-  fullWidth?: boolean;
+  $fullWidth?: boolean;
 };
 
 const buttonStyles = css<StyledButtonProps>`
@@ -62,7 +62,7 @@ const buttonStyles = css<StyledButtonProps>`
       : props.theme.color.primary};
   padding: ${(props) =>
     props.size ? BUTTON_PADDING[props.size] : BUTTON_PADDING.md};
-  width: ${(props) => (props.fullWidth ? "100%" : "fit-content")};
+  width: ${(props) => (props.$fullWidth ? "100%" : "fit-content")};
   border: 2px solid;
   border-color: ${(props) =>
     props.theme.color.button[props.$buttonType].border};
@@ -118,6 +118,7 @@ const Button: React.FC<ButtonProps> = ({
   secondary,
   as = "button",
   href = "",
+  fullWidth,
   ref,
   ...props
 }) => {
@@ -134,7 +135,12 @@ const Button: React.FC<ButtonProps> = ({
   }
 
   return (
-    <StyledButton $buttonType={buttonType} as={as} {...props}>
+    <StyledButton
+      $buttonType={buttonType}
+      as={as}
+      $fullWidth={fullWidth}
+      {...props}
+    >
       {props.children}
     </StyledButton>
   );

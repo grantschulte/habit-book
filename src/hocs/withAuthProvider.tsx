@@ -22,6 +22,7 @@ const WithAuthProvider = <P extends object>(
       redirectUri={AUTH0_REDIRECT_URI}
       onRedirectCallback={onRedirectCallback}
       useRefreshTokens
+      cacheLocation="localstorage"
     >
       <WrappedComponent {...(props as P)} />
     </Auth0Provider>

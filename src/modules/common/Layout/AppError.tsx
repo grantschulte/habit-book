@@ -66,6 +66,11 @@ const AppErrorShared: React.FC<{ error: string }> = ({ error }) => {
   const dispatch = useDispatch();
   const { logout } = useAuth0();
 
+  if (error === ResponseError.Unauthorized) {
+    logout();
+    return null;
+  }
+
   const handleRefresh = () => {
     dispatch(resetAppError());
     window.location.reload();

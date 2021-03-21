@@ -26,6 +26,8 @@
   "score": "Score",
   "settings": "Settings",
   "signOut": "Sign Out",
+  "signOutMessageTitle": "We had to sign you out",
+  "signOutMessage": "Please sign in again to continue your self improvement quest.",
   "streaks": "Streaks",
   "streakDefinition": "A streak is when you complete habits on consecutive days. Making streaks is key to forming long lasting habits.",
   "theme": "Theme",
